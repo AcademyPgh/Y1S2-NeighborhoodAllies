@@ -14,5 +14,7 @@ namespace ImpactMap.Models
         public DbSet<Report> reports { get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<Metric> metrics { get; set; }
+
+        public System.Data.Entity.DbSet<ImpactMap.Models.User> Users { get; set; }
     }
 }

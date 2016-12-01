@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ImpactMap.Models.Investment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.entityFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.entityTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projectFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projectTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isInKind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.volunteerHours)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.entityFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.entityTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isInKind)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.volunteerHours)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

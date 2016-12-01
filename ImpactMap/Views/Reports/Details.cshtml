@@ -1,0 +1,42 @@
+﻿@model ImpactMap.Models.Report
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.projectID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projectID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.completed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.completed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reportText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reportText)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
