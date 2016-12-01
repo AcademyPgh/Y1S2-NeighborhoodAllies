@@ -315,6 +315,15 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Entities\Create_Edit.cshtml" />
+    <Content Include="Views\Projects\Create_Edit.cshtml" />
+    <Content Include="Views\Projects\Display_All.cshtml" />
+    <Content Include="Views\Projects\Display_Single.cshtml" />
+    <Content Include="Views\Entities\Display_All.cshtml" />
+    <Content Include="Views\Entities\Display_Single.cshtml" />
+    <Content Include="Views\Categories\Create_Edit.cshtml" />
+    <Content Include="Views\Investments\Display_All.cshtml" />
+    <Content Include="Views\Investments\Display_Single.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
