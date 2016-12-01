@@ -11,5 +11,6 @@ namespace ImpactMap.Models
         public int projectID { get; set; }
         public bool completed { get; set; }
         public string reportText { get; set; }
+        public DateTime dueDate { get; set; }
     }
 }
