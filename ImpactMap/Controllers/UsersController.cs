@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ImpactMap.Controllers
 {
     public class UsersController : Controller
     {
-        private ImpactMapDBContext db = new ImpactMapDBContext();
+        private ImpactMapDbContext db = new ImpactMapDbContext();
 
         // GET: Users
         public ActionResult Index()
@@ -122,6 +123,34 @@ namespace ImpactMap.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [NonAction]
+        public int UserID()
+        {
+            Guid userGuid;
+            if (Guid.TryParse(User.Identity.GetUserId(), out userGuid))
+            {
+                var user = db.Users.Where(u => u.userModelGuid == userGuid).SingleOrDefault();
+                if (user == null)
+                {
+                    // valid guid but no user in the table? that means a user should be created!
+                    User newUser = new Models.User();
+                    newUser.userModelGuid = userGuid;
+                    newUser.userModelName = User.Identity.Name;
+                    db.Users.Add(newUser);
+                    db.SaveChanges();
+                    return newUser.ID;
+                }
+                else
+                {
+                    return user.ID;
+                }
+            }
+            else
+            {
+                return 1; // default user, will be impossible to hit once I turn on authentication (supposedly)
+            }
         }
     }
 }

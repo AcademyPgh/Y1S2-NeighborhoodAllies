@@ -8,6 +8,7 @@ namespace ImpactMap.Models
     public class User
     {
         public int ID { get; set; }
-        public Guid userGuid { get; set; }
+        public Guid userModelGuid { get; set; }
+        public string userModelName { get; set; }
     }
 }

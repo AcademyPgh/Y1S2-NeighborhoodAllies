@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ImpactMap.Models
 {
-    public class ImpactMapDBContext : DbContext
+    public class ImpactMapDbContext : DbContext
     {
         public DbSet<Entity> entities { get; set; }
         public DbSet<Project> projects { get; set; }
