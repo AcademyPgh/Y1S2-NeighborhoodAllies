@@ -15,8 +15,10 @@ namespace ImpactMap.Models
         public string address2 { get; set; }
         public string city { get; set; }
         public string state { get; set; }
+        public string zip { get; set; }
         public string lat { get; set; }
         public string lng { get; set; }
         public virtual List<User> users { get; set; }
+        public string entityType { get; set; }
     }
 }

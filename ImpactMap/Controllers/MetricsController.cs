@@ -12,7 +12,7 @@ namespace ImpactMap.Controllers
 {
     public class MetricsController : Controller
     {
-        private ImpactMapDBContext db = new ImpactMapDBContext();
+        private ImpactMapDbContext db = new ImpactMapDbContext();
 
         // GET: Metrics
         public ActionResult Index()
