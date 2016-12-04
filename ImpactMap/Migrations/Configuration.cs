@@ -83,6 +83,28 @@ namespace ImpactMap.Migrations
                     entityType = "recipient"
                 });
 
+            context.projects.AddOrUpdate(p => p.ID,
+                new Project
+                {
+                    ID = 1,
+                    name = "New Doggo Brushes",
+                    entityID = "1",
+                    description = "Making sure our doggos have nice new brushes for their hairs ;)",
+                    investmentIn = null,
+                    investmentOut = null,
+                    //metrics = { ID = 1, ID = 3, ID = 7 },
+                    isPassThrough = false,
+                },
+                new Project
+                {
+                    ID = 2,
+                    name = "Freshen Up Hay",
+                    entityID = "2",
+                    description = "Getting fresh hay for our doggos to roll around in! ;)",
+                    investmentIn = null,
+                    investmentOut = null,
+                    isPassThrough = false,
+                });
         }
     }
 }
