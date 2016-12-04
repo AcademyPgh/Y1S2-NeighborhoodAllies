@@ -9,10 +9,10 @@ namespace ImpactMap.Models
     {
         public int ID { get; set; }
         public string name { get; set; }
-        public int entityID { get; set; }
+        public string entityID { get; set; }
         public string description { get; set; }
-        public int investmentIn { get; set; }
-        public int investmentOut { get; set; }
+        public string investmentIn { get; set; }
+        public string investmentOut { get; set; }
         public bool isPassThrough { get; set; }
         public virtual List<Metric> metrics { get; set; }
     }

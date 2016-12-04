@@ -9,6 +9,6 @@ namespace ImpactMap.Models
     {
         public int ID { get; set; }
         public int categoryID { get; set; }
-        public string value { get; set; }
+        public string name { get; set; }
     }
 }
