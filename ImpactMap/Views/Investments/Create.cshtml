@@ -33,8 +33,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.entityTo_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.entityTo_ID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.entityTo_ID, "", new { @class = "text-danger" })
+                <select name="entity_ID">
+                    @foreach (var entity in Model.Entities)
+                {
+                        <option value=@entity.ID>@entity.name</option>
+
+                    }
+                </select>
+
             </div>
         </div>
 
