@@ -38,7 +38,11 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
-            return View();
+            InvestmentViewModel ivm = new InvestmentViewModel();
+            ivm.Projects = db.projects.ToList();
+            ivm.Entities = db.entities.ToList();
+            ivm.Investment = new Models.Investment();
+            return View(ivm);
         }
 
         // POST: Investments/Create
@@ -46,10 +50,12 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID)
         {
             if (ModelState.IsValid)
             {
+                investment.entityTo = db.entities.Find(entityTo_ID);
+                investment.projectTo = db.projects.Find(projectTo_ID);
                 db.investments.Add(investment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -124,4 +130,13 @@ namespace ImpactMap.Controllers
             base.Dispose(disposing);
         }
     }
+
+    public class InvestmentViewModel
+    {
+        public List<Project> Projects { get; set; }
+        public List<Entity> Entities { get; set; }
+        public Investment Investment { get; set; }
+    }
+
 }
+
