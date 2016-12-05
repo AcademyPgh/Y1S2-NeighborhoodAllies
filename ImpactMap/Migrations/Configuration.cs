@@ -38,7 +38,7 @@ namespace ImpactMap.Migrations
                     zip = "",
                     lat = "",
                     lng = "",
-                    entityType = "recipient"
+                    //entityType = "recipient"
                 },
                 new Entity
                 {
@@ -52,7 +52,7 @@ namespace ImpactMap.Migrations
                     zip = "",
                     lat = "",
                     lng = "",
-                    entityType = "recipient"
+                    //entityType = "recipient"
                 },
                 new Entity
                 {
@@ -66,7 +66,7 @@ namespace ImpactMap.Migrations
                     zip = "",
                     lat = "",
                     lng = "",
-                    entityType = "donor"
+                    //entityType = "donor"
                 },
                 new Entity
                 {
@@ -80,7 +80,7 @@ namespace ImpactMap.Migrations
                     zip = "",
                     lat = "",
                     lng = "",
-                    entityType = "recipient"
+                    //entityType = "recipient"
                 });
 
             context.projects.AddOrUpdate(p => p.ID,

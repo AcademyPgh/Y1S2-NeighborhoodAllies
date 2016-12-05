@@ -7,6 +7,7 @@ namespace ImpactMap.Models
 {
     public class ProjectMetricResult
     {
+        public int ID { get; set; }
         public int projectID { get; set; }
         public int metricID { get; set; }
         public string metricValue { get; set; }
