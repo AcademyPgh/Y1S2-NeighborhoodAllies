@@ -38,10 +38,10 @@ namespace ImpactMap.Controllers
         // GET: Projects/Create
         public ActionResult Create()
         {
-            NewViewModel nvm = new NewViewModel();
-            nvm.Project = new Models.Project();
-            nvm.Entities = db.entities.ToList();
-            return View(nvm);
+            ProjectViewModel pvm = new ProjectViewModel();
+            pvm.Project = new Models.Project();
+            pvm.Entities = db.entities.ToList();
+            return View(pvm);
         }
 
         // POST: Projects/Create
@@ -129,7 +129,7 @@ namespace ImpactMap.Controllers
         }
     }
 
-    public class NewViewModel
+    public class ProjectViewModel
     {
         public Project Project { get; set; }
         public List<Entity> Entities { get; set; }

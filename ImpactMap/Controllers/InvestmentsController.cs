@@ -38,7 +38,11 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
-            return View();
+            InvestmentViewModel ivm = new InvestmentViewModel();
+            ivm.Projects = db.projects.ToList();
+            ivm.Entities = db.entities.ToList();
+            ivm.Investment = new Models.Investment();
+            return View(ivm);
         }
 
         // POST: Investments/Create
@@ -124,4 +128,13 @@ namespace ImpactMap.Controllers
             base.Dispose(disposing);
         }
     }
+
+    public class InvestmentViewModel
+    {
+        public List<Project> Projects { get; set; }
+        public List<Entity> Entities { get; set; }
+        public Investment Investment { get; set; }
+    }
+
 }
+
