@@ -35,7 +35,12 @@
         <th>
             @Html.DisplayNameFor(model => model.projectTo_ID)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categories)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -63,6 +68,18 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.projectTo_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @foreach (var category in item.categories)
+            {
+                @Html.DisplayFor(model => category.name) 
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
