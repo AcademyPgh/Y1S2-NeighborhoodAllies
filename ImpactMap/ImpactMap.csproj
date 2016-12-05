@@ -197,11 +197,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\Dashboard.cs" />
     <Compile Include="Controllers\EntitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MetricResultController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -209,25 +209,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612041922556_Whatever.cs" />
-    <Compile Include="Migrations\201612041922556_Whatever.Designer.cs">
-      <DependentUpon>201612041922556_Whatever.cs</DependentUpon>
+    <Compile Include="Migrations\201612051830469_Initial.cs" />
+    <Compile Include="Migrations\201612051830469_Initial.Designer.cs">
+      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612051522293_Hello.cs" />
-    <Compile Include="Migrations\201612051522293_Hello.Designer.cs">
-      <DependentUpon>201612051522293_Hello.cs</DependentUpon>
+    <Compile Include="Migrations\201612051834016_Initial1.cs" />
+    <Compile Include="Migrations\201612051834016_Initial1.Designer.cs">
+      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612051912474_InvestmentDescription.cs" />
+    <Compile Include="Migrations\201612051912474_InvestmentDescription.Designer.cs">
+      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612051928349_MetricResult.cs" />
+    <Compile Include="Migrations\201612051928349_MetricResult.Designer.cs">
+      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Models\DataAccessLayer.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Investment.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metric.cs" />
+    <Compile Include="Models\MetricResult.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ProjectMetricResult.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,6 +312,11 @@
     <Content Include="Views\Entities\Details.cshtml" />
     <Content Include="Views\Entities\Edit.cshtml" />
     <Content Include="Views\Entities\Index.cshtml" />
+    <Content Include="Views\Investments\Create.cshtml" />
+    <Content Include="Views\Investments\Delete.cshtml" />
+    <Content Include="Views\Investments\Details.cshtml" />
+    <Content Include="Views\Investments\Edit.cshtml" />
+    <Content Include="Views\Investments\Index.cshtml" />
     <Content Include="Views\Metrics\Create.cshtml" />
     <Content Include="Views\Metrics\Delete.cshtml" />
     <Content Include="Views\Metrics\Details.cshtml" />
@@ -313,11 +327,6 @@
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
-    <Content Include="Views\Investments\Create.cshtml" />
-    <Content Include="Views\Investments\Delete.cshtml" />
-    <Content Include="Views\Investments\Details.cshtml" />
-    <Content Include="Views\Investments\Edit.cshtml" />
-    <Content Include="Views\Investments\Index.cshtml" />
     <Content Include="Views\Reports\Create.cshtml" />
     <Content Include="Views\Reports\Delete.cshtml" />
     <Content Include="Views\Reports\Details.cshtml" />
@@ -328,24 +337,11 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Entities\Create_Edit.cshtml" />
-    <Content Include="Views\Projects\Create_Edit.cshtml" />
-    <Content Include="Views\Projects\Display_All.cshtml" />
-    <Content Include="Views\Projects\Display_Single.cshtml" />
-    <Content Include="Views\Entities\Display_All.cshtml" />
-    <Content Include="Views\Entities\Display_Single.cshtml" />
-    <Content Include="Views\Categories\Create_Edit.cshtml" />
-    <Content Include="Views\Investments\Display_All.cshtml" />
-    <Content Include="Views\Investments\Display_Single.cshtml" />
-    <Content Include="Views\Dashboard\Create.cshtml" />
-    <Content Include="Views\Dashboard\Delete.cshtml" />
-    <Content Include="Views\Dashboard\Details.cshtml" />
-    <Content Include="Views\Dashboard\Edit.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MetricResult\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -356,11 +352,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612041922556_Whatever.resx">
-      <DependentUpon>201612041922556_Whatever.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612051830469_Initial.resx">
+      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051522293_Hello.resx">
-      <DependentUpon>201612051522293_Hello.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612051834016_Initial1.resx">
+      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051912474_InvestmentDescription.resx">
+      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051928349_MetricResult.resx">
+      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,16 +15,10 @@
             @Html.DisplayNameFor(model => model.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityFrom)
+            @Html.DisplayNameFor(model => model.entityFrom_ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.projectFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.projectTo)
+            @Html.DisplayNameFor(model => model.entityTo_ID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.date)
@@ -35,6 +29,12 @@
         <th>
             @Html.DisplayNameFor(model => model.volunteerHours)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projectFrom_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projectTo_ID)
+        </th>
         <th></th>
     </tr>
 
@@ -44,16 +44,10 @@
             @Html.DisplayFor(modelItem => item.amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.entityFrom)
+            @Html.DisplayFor(modelItem => item.entityFrom_ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.entityTo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.projectFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.projectTo)
+            @Html.DisplayFor(modelItem => item.entityTo_ID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.date)
@@ -63,6 +57,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.volunteerHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectFrom_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectTo_ID)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

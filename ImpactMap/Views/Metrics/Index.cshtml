@@ -15,7 +15,10 @@
             @Html.DisplayNameFor(model => model.categoryID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.value)
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
         </th>
         <th></th>
     </tr>
@@ -26,7 +29,10 @@
             @Html.DisplayFor(modelItem => item.categoryID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.value)
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

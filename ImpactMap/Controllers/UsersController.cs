@@ -7,28 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
-using Microsoft.AspNet.Identity;
 
 namespace ImpactMap.Controllers
 {
-    public class UsersController : Controller
+    public class usersController : Controller
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
-        // GET: Users
+        // GET: users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.users.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: users/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -36,22 +35,22 @@ namespace ImpactMap.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
+        // GET: users/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,userGuid")] User user)
+        public ActionResult Create([Bind(Include = "ID,userModelGuid,userModelName")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -59,14 +58,14 @@ namespace ImpactMap.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
+        // GET: users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -74,12 +73,12 @@ namespace ImpactMap.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
+        // POST: users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,userGuid")] User user)
+        public ActionResult Edit([Bind(Include = "ID,userModelGuid,userModelName")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -90,14 +89,14 @@ namespace ImpactMap.Controllers
             return View(user);
         }
 
-        // GET: Users/Delete/5
+        // GET: users/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -105,13 +104,13 @@ namespace ImpactMap.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
+        // POST: users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            User user = db.users.Find(id);
+            db.users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -123,34 +122,6 @@ namespace ImpactMap.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        [NonAction]
-        public int UserID()
-        {
-            Guid userGuid;
-            if (Guid.TryParse(User.Identity.GetUserId(), out userGuid))
-            {
-                var user = db.Users.Where(u => u.userModelGuid == userGuid).SingleOrDefault();
-                if (user == null)
-                {
-                    // valid guid but no user in the table? that means a user should be created!
-                    User newUser = new Models.User();
-                    newUser.userModelGuid = userGuid;
-                    newUser.userModelName = User.Identity.Name;
-                    db.Users.Add(newUser);
-                    db.SaveChanges();
-                    return newUser.ID;
-                }
-                else
-                {
-                    return user.ID;
-                }
-            }
-            else
-            {
-                return 1; // default user, will be impossible to hit once I turn on authentication (supposedly)
-            }
         }
     }
 }

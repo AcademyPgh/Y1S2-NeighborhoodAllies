@@ -7,13 +7,13 @@ namespace ImpactMap.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Whatever : IMigrationMetadata
+    public sealed partial class MetricResult : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Whatever));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MetricResult));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612041922556_Whatever"; }
+            get { return "201612051928349_MetricResult"; }
         }
         
         string IMigrationMetadata.Source

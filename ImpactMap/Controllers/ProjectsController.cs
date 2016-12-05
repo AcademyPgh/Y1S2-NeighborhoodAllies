@@ -38,7 +38,10 @@ namespace ImpactMap.Controllers
         // GET: Projects/Create
         public ActionResult Create()
         {
-            return View();
+            NewViewModel nvm = new NewViewModel();
+            nvm.Project = new Models.Project();
+            nvm.Entities = db.entities.ToList();
+            return View(nvm);
         }
 
         // POST: Projects/Create
@@ -46,10 +49,11 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name,entityID,description,investmentIn,investmentOut,isPassThrough")] Project project)
+        public ActionResult Create([Bind(Include = "ID,name,description")] Project project, int entity_ID)
         {
             if (ModelState.IsValid)
             {
+                project.entity = db.entities.Find(entity_ID);
                 db.projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +82,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,name,entityID,description,investmentIn,investmentOut,isPassThrough")] Project project)
+        public ActionResult Edit([Bind(Include = "ID,name,description")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -124,4 +128,11 @@ namespace ImpactMap.Controllers
             base.Dispose(disposing);
         }
     }
+
+    public class NewViewModel
+    {
+        public Project Project { get; set; }
+        public List<Entity> Entities { get; set; }
+    }
+
 }
