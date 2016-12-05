@@ -19,5 +19,8 @@ namespace ImpactMap.Models
         public string lat { get; set; }
         public string lng { get; set; }
         public virtual List<User> users { get; set; }
+        public virtual List<Project> projects { get; set; }
+        public virtual List<Investment> investmentsIn { get; set; }
+        public virtual List<Investment> investmentsOut { get; set; }
     }
 }

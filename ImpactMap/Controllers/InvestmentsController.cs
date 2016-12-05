@@ -46,7 +46,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom,entityTo,projectFrom,projectTo,date,isInKind,volunteerHours")] Investment investment)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom,entityTo,projectFrom,projectTo,date,isInKind,volunteerHours")] Investment investment)
+        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment)
         {
             if (ModelState.IsValid)
             {

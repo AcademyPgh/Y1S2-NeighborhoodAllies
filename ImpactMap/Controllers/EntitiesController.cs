@@ -46,7 +46,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name,description,address1,address2,city,state,lat,lng")] Entity entity)
+        public ActionResult Create([Bind(Include = "ID,name,description,address1,address2,city,state,zip,lat,lng")] Entity entity)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,name,description,address1,address2,city,state,lat,lng")] Entity entity)
+        public ActionResult Edit([Bind(Include = "ID,name,description,address1,address2,city,state,zip,lat,lng")] Entity entity)
         {
             if (ModelState.IsValid)
             {

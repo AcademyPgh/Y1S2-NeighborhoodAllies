@@ -9,7 +9,5 @@ namespace ImpactMap.Models
     {
         public int ID { get; set; }
         public string name { get; set; }
-        public int entityID { get; set; }
-        public virtual List<Metric> metrics { get; set; }
     }
 }

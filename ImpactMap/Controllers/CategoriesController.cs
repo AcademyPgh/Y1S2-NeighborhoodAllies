@@ -46,7 +46,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name,entityID")] Category category)
+        public ActionResult Create([Bind(Include = "ID,name")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,name,entityID")] Category category)
+        public ActionResult Edit([Bind(Include = "ID,name")] Category category)
         {
             if (ModelState.IsValid)
             {
