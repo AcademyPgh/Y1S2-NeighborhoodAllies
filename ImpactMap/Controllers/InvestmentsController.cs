@@ -38,11 +38,14 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
+            Utils.Utility userUtil = new Utils.Utility();
             InvestmentViewModel ivm = new InvestmentViewModel();
-            ivm.Projects = db.projects.ToList();
+            
             ivm.Entities = db.entities.ToList();
             ivm.Investment = new Models.Investment();
             ivm.Categories = db.categories.ToList();
+            ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+            ivm.Projects = (db.projects.Where(i => i.entity == ivm.Investment.entityFrom).ToList());
             return View(ivm);
         }
 
@@ -65,7 +68,6 @@ namespace ImpactMap.Controllers
                 {
                     investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
                 }
-
                 //Uses UserID() from Utils/Utility.cs
                 investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
                 db.investments.Add(investment);
