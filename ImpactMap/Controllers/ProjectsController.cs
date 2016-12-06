@@ -53,7 +53,8 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
-                project.entity = db.entities.Find(entity_ID);
+                Utils.Utility userUtil = new Utils.Utility();
+                project.entity = db.users.Find(userUtil.UserID(User)).entity;
                 db.projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
