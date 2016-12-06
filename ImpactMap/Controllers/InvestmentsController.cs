@@ -45,6 +45,7 @@ namespace ImpactMap.Controllers
             return View(ivm);
         }
 
+
         // POST: Investments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -54,8 +55,11 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
+                Utils.Utility userUtil = new Utils.Utility();
                 investment.entityTo = db.entities.Find(entityTo_ID);
                 investment.projectTo = db.projects.Find(projectTo_ID);
+                //Uses UserID() from Utils/Utility.cs
+                investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
                 db.investments.Add(investment);
                 db.SaveChanges();
                 return RedirectToAction("Index");

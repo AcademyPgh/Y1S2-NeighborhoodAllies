@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ImpactMap.Controllers
 {
@@ -50,7 +51,11 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
+                Utils.Utility userUtil = new Utils.Utility();
+                var user = db.users.Find(userUtil.UserID(User));
                 db.entities.Add(entity);
+                db.SaveChanges();
+                user.entity = entity;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -123,5 +128,14 @@ namespace ImpactMap.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+
+    }
+    public class EntityViewModel
+    {
+        public List<Project> Projects { get; set; }
+        public List<Entity> Entities { get; set; }
+        public Investment Investment { get; set; }
     }
 }

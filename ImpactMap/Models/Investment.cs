@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -14,8 +15,10 @@ namespace ImpactMap.Models
         public int? entityFrom_ID { get; set; }
         public int? entityTo_ID { get; set; }
         [Display(Name = "Donor")]
+        [ForeignKey("entityFrom_ID")]
         public virtual Entity entityFrom { get; set; }
         [Display(Name = "Recipient")]
+        [ForeignKey("entityTo_ID")]
         public virtual Entity entityTo { get; set; }
         [Display(Name = "Investment Date")]
         public DateTime date { get; set; }
