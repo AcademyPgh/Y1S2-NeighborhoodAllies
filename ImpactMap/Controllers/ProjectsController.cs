@@ -49,7 +49,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name,description")] Project project, int entity_ID)
+        public ActionResult Create([Bind(Include = "ID,name,description")] Project project)
         {
             if (ModelState.IsValid)
             {
