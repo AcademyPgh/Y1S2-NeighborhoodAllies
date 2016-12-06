@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201612061719325_InvestmentDbCheck.Designer.cs">
       <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061813237_DbFix.cs" />
+    <Compile Include="Migrations\201612061813237_DbFix.Designer.cs">
+      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -392,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612061719325_InvestmentDbCheck.resx">
       <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061813237_DbFix.resx">
+      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
