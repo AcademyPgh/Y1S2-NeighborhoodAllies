@@ -225,6 +225,18 @@
     <Compile Include="Migrations\201612051928349_MetricResult.Designer.cs">
       <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061447481_FixApplicationDb.cs" />
+    <Compile Include="Migrations\201612061447481_FixApplicationDb.Designer.cs">
+      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612061537340_UsersTableUpdated.cs" />
+    <Compile Include="Migrations\201612061537340_UsersTableUpdated.Designer.cs">
+      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612061551532_IdentityModelFK.cs" />
+    <Compile Include="Migrations\201612061551532_IdentityModelFK.Designer.cs">
+      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -241,6 +253,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -363,6 +376,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612051928349_MetricResult.resx">
       <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061447481_FixApplicationDb.resx">
+      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061537340_UsersTableUpdated.resx">
+      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061551532_IdentityModelFK.resx">
+      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

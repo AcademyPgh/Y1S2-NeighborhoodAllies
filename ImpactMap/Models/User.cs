@@ -10,5 +10,6 @@ namespace ImpactMap.Models
         public int ID { get; set; }
         public Guid userModelGuid { get; set; }
         public string userModelName { get; set; }
+        public virtual Entity entity { get; set; }
     }
 }
