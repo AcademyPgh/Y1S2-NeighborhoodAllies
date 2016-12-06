@@ -84,10 +84,10 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group hideFormField" id="VolunteerContainer">
             @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Investment.volunteerHours, new {htmlAttributes = new { @type = "number", @step="1", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -146,8 +146,8 @@
                 success: function (data) {
                     $('#CatList').html('<ul>');
                     data.map(function (category) {
-                        $('#CatList').append('<li id="cat' + category.Id + '" data-id=' + category.Id + '><span id="catspan' + category.Id + '"></span>' + category.Name + '</li>');
-                        $('#cat' + category.Id).click(function () { toggle_category(category.Id); });
+                        $('#CatList').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '"></span>' + category.name + '</li>');
+                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
                     });
                     $('#CatList').append('</ul>');
                 }
@@ -158,10 +158,10 @@
             // if it is not there
             // add the hidden input element
             // add the checkmark to the category
-            if (!$('#catspan' + id).hasClass('fa fa-times')) {
+            if (!$('#catspan' + id).hasClass('fa fa-check')) {
                 selectedCategories.push(id);
                 $('#categories').val(selectedCategories.toString());
-                $('#catspan' + id).addClass('fa fa-times');
+                $('#catspan' + id).addClass('fa fa-check');
             }
             else {
 
@@ -172,15 +172,33 @@
                 selectedCategories.splice(i, 1);
                 $('#categories').val(selectedCategories.toString());
                 $('#catadd' + id).remove();
-                $('#catspan' + id).removeClass('fa fa-times');
+                $('#catspan' + id).removeClass('fa fa-check');
 
             }
+        }
+
+
+
+
+        function addVolunteerHours() {
+            $('#Investment_isInKind').click(function () {
+                if ($('#VolunteerContainer').hasClass('hideFormField')) {
+                    $('#VolunteerContainer').removeClass('hideFormField')
+                    $('#VolunteerContainer').addClass('showFormField')
+                }
+                else {
+                    $('#VolunteerContainer').removeClass('showFormField')
+                    $('#VolunteerContainer').addClass('hideFormField')
+                }
+            });
         }
 
         function initialize()
         {
             load_categories();
+            addVolunteerHours();
         }
 
         $(initialize);
     </script>
+ }
