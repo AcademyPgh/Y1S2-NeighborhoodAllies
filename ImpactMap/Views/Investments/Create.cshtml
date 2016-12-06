@@ -37,17 +37,33 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="ID">
-                    @foreach (var category in Model.Projects)
+      
+                    @foreach (var category in Model.Categories)
                     {
-                        <option value=@category.ID>@category.name</option>
+                        <input type="checkbox" value="@category.ID" />@category.name
                     }
-                </select>
+            </div>
+        </div>*@
+
+
+
+        <div class="form-group">
+            @*I put the following line in - it is not the same as John's*@
+            @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="CatList"></div>
+                <input name="categories" id="categories" type="hidden" />
             </div>
         </div>
+
+
+
+
+
+        @*************************************@
 
 
         <div class="form-group">
@@ -115,3 +131,56 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+       selectedCategories = [];
+
+        function load_categories() {
+            $.ajax({
+                url: '/public/categories',
+                type: 'GET',
+                success: function (data) {
+                    $('#CatList').html('<ul>');
+                    data.map(function (category) {
+                        $('#CatList').append('<li id="cat' + category.Id + '" data-id=' + category.Id + '><span id="catspan' + category.Id + '"></span>' + category.Name + '</li>');
+                        $('#cat' + category.Id).click(function () { toggle_category(category.Id); });
+                    });
+                    $('#CatList').append('</ul>');
+                }
+            })
+        }
+
+        function toggle_category(id) {
+            // if it is not there
+            // add the hidden input element
+            // add the checkmark to the category
+            if (!$('#catspan' + id).hasClass('fa fa-times')) {
+                selectedCategories.push(id);
+                $('#categories').val(selectedCategories.toString());
+                $('#catspan' + id).addClass('fa fa-times');
+            }
+            else {
+
+                // if it is there
+                // remove the hidden input element
+                // remove the checkmark on the category
+                var i = selectedCategories.indexOf(id);
+                selectedCategories.splice(i, 1);
+                $('#categories').val(selectedCategories.toString());
+                $('#catadd' + id).remove();
+                $('#catspan' + id).removeClass('fa fa-times');
+
+            }
+        }
+
+        function initialize()
+        {
+            load_categories();
+        }
+
+        $(initialize);
+    </script>

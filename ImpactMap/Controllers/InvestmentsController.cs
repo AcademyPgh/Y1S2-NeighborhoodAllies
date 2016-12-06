@@ -42,6 +42,7 @@ namespace ImpactMap.Controllers
             ivm.Projects = db.projects.ToList();
             ivm.Entities = db.entities.ToList();
             ivm.Investment = new Models.Investment();
+            ivm.Categories = db.categories.ToList();
             return View(ivm);
         }
 
@@ -58,7 +59,7 @@ namespace ImpactMap.Controllers
                 Utils.Utility userUtil = new Utils.Utility();
                 investment.entityTo = db.entities.Find(entityTo_ID);
                 investment.projectTo = db.projects.Find(projectTo_ID);
-                investment.categories = db.categories.Find(category_ID);
+                //investment.categories = db.categories.Find(category_ID);
                 //Uses UserID() from Utils/Utility.cs
                 investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
                 db.investments.Add(investment);
@@ -141,6 +142,7 @@ namespace ImpactMap.Controllers
         public List<Project> Projects { get; set; }
         public List<Entity> Entities { get; set; }
         public Investment Investment { get; set; }
+        public List<Category> Categories { get; set; }
     }
 
 }
