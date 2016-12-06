@@ -21,7 +21,7 @@ namespace ImpactMap.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ImpactMapDbContext", throwIfV1Schema: false)
         {
         }
 
