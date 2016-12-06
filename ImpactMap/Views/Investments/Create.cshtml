@@ -18,22 +18,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.entityFrom_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="entityFrom_ID">
-                    @foreach (var entity in Model.Entities)
-                    {
-                        <option value="@entity.ID">@entity.name</option>
-                    }
-                </select>
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -51,7 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,10 +63,17 @@
             </div>
         </div>
 
+
+        <!--TODO - Needs to populate only projects from the signed in entity-->
         <div class="form-group">
-            @Html.LabelFor(model => model.Investment.projectFrom_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.projectFrom_ID, new { htmlAttributes = new { @class = "form-control" } })
+                <select name="projectFrom_ID">
+                    @foreach (var project in Model.Projects)
+                    {
+                        <option value=@project.ID>@project.name</option>
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
             </div>
         </div>

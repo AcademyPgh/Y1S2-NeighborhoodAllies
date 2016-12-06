@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201612061551532_IdentityModelFK.Designer.cs">
       <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.cs" />
+    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.Designer.cs">
+      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -385,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612061551532_IdentityModelFK.resx">
       <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061719325_InvestmentDbCheck.resx">
+      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

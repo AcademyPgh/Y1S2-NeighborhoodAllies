@@ -10,7 +10,7 @@ namespace ImpactMap.Models
     public class Investment
     {
         public int ID { get; set; }
-        [Display(Name = "Amount")]
+        [Display(Name = "Value of Grant")]
         public string amount { get; set; }
         public int? entityFrom_ID { get; set; }
         public int? entityTo_ID { get; set; }
