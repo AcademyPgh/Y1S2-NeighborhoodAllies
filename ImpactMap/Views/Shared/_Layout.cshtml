@@ -4,8 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .showFormField{
+            display:block;
+        }
+
+        .hideFormField{
+            display:none;
+        }
+
+        
+     /* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
+     #map {
+         height: 100vh;
+     }
+     /* Optional: Makes the sample page fill the window. */
+     html, body {
+         height: 100%;
+         margin: 0;
+         padding: 0;
+     }
+
+    </style>
 
 </head>
 <body>
