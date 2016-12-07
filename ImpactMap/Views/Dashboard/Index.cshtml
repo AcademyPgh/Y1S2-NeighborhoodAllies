@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImpactMap.Controllers.DashboardViewModel>
+﻿@model ImpactMap.Models.DashboardViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.projectTo.report)
         </th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Investment)
     {
     <tr>
         <td>
