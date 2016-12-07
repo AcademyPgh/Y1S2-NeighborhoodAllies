@@ -120,6 +120,16 @@ namespace ImpactMap.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //It's my understanding that this ID is Investments.entityOut.ID which is chosen in the dropdown...
+        //How are we sending it to this action? Should there be an ajax post function on change?
+        public ActionResult GetProjectsOut(int ID)
+        {
+            Entity recipient = db.entities.Find(ID);
+            List<Project> projectList = recipient.projects.ToList();
+            return Json(projectList, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -45,7 +45,7 @@ namespace ImpactMap.Controllers
             ivm.Investment = new Models.Investment();
             ivm.Categories = db.categories.ToList();
             ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
-            ivm.Projects = (db.projects.Where(i => i.entity == ivm.Investment.entityFrom).ToList());
+            ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
             return View(ivm);
         }
 

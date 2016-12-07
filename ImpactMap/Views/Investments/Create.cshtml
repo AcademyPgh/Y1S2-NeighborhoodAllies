@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="entityTo_ID">
+                <select name="entityTo_ID" id="recipientSelect">
                     @foreach (var entity in Model.Entities)
                     {
                         <option value=@entity.ID>@entity.name</option>
@@ -36,19 +36,6 @@
 
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-      
-                    @foreach (var category in Model.Categories)
-                    {
-                        <input type="checkbox" value="@category.ID" />@category.name
-                    }
-            </div>
-        </div>*@
-
-
 
         <div class="form-group">
             @*I put the following line in - it is not the same as John's*@
@@ -87,7 +74,7 @@
         <div class="form-group hideFormField" id="VolunteerContainer">
             @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.volunteerHours, new {htmlAttributes = new { @type = "number", @step="1", @class = "form-control" } })
+                @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -110,12 +97,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="projectTo_ID">
-                    @foreach (var project in Model.Projects)
-                    {
-                        <option value=@project.ID>@project.name</option>
-                    }
-                </select>
+                <select name="projectTo_ID" id="ProjectToDropdown"></select>
             </div>
         </div>
 
@@ -137,8 +119,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-       selectedCategories = [];
 
+        selectedCategories = [];
         function load_categories() {
             $.ajax({
                 url: '/public/categories',
@@ -177,9 +159,7 @@
             }
         }
 
-
-
-
+        //Cause the Volunteer Hours input box to show if In Kind checkbox is checked
         function addVolunteerHours() {
             $('#Investment_isInKind').click(function () {
                 if ($('#VolunteerContainer').hasClass('hideFormField')) {
@@ -193,12 +173,42 @@
             });
         }
 
-        function initialize()
-        {
+        $('#recipientSelect').change(updateProjectsOut);
+
+        //messing around with an ajax post
+        function sendRecipientID() {
+            $.ajax({
+                url: '/Entities/GetProjectsOut/',
+                type: 'post',
+                success: function () {
+                    var ID = $('#recipientSelect').html();
+                //The part where it would send ID to Entities/GetProjectsOut
+                }
+            });
+        };
+
+        //at this moment getting an error 500 internal server error
+        function updateProjectsOut() {
+            $.ajax({
+                url: '/Entities/GetProjectsOut/',
+                type: 'get',
+                success: function (data) {
+                    var html = '';
+                    data.map(function (projectMap) {
+                        //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
+                        html += '<option value=' + projectMap.ID + '>' + projectMap.name + '</option>'
+                    });
+                    $('#ProjectToDropdown').html(html);
+                }
+            });
+        };
+
+        function initialize() {
             load_categories();
             addVolunteerHours();
+            updateProjectsOut();
         }
 
         $(initialize);
     </script>
- }
+}
