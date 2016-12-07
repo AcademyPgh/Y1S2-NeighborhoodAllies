@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImpactMap.Models.Investment>
+﻿@model IEnumerable<ImpactMap.Controllers.DashboardViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -14,13 +14,13 @@
             @Html.DisplayNameFor(model => model.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
+            @Html.DisplayNameFor(model => model.entityTo.name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.categories)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectTo.report.name)
+            @Html.DisplayNameFor(model => model.projectTo.report)
         </th>
     </tr>
     @foreach (var item in Model)
@@ -33,13 +33,13 @@
             @Html.DisplayFor(modelItem => item.amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.entityTo_ID)
+            @Html.DisplayFor(modelItem => item.entityTo.name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.categories)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.projectTo.report.name)
+            @Html.DisplayFor(modelItem => item.projectTo.report)
         </td>
     </tr>
     }
