@@ -16,4 +16,10 @@ namespace ImpactMap.Models
             return View(db.investments.ToList());
         }
     }
+
+    public class DashboardViewModel
+    {
+        public List<Project> Projects { get; set; }
+        public List<Investment> Investment { get; set; }
+    }
 }
