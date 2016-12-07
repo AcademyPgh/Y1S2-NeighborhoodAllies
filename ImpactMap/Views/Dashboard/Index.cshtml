@@ -8,22 +8,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.Investment.date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayNameFor(model => model.Investment.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo.name)
+            @Html.DisplayNameFor(model => model.Investment.entityTo.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.categories)
+            @Html.DisplayNameFor(model => model.Investment.categories)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectTo.report)
+            @Html.DisplayNameFor(model => model.Investment.projectTo.report)
         </th>
     </tr>
-    @foreach (var item in Model.Investment)
+    @foreach (var item in Model.Investments)
     {
     <tr>
         <td>
