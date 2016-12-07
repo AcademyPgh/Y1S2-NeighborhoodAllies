@@ -38,16 +38,12 @@
         </div>
 
         <div class="form-group">
-            @*I put the following line in - it is not the same as John's*@
             @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div id="CatList"></div>
                 <input name="categories" id="categories" type="hidden" />
             </div>
         </div>
-
-
-
 
 
         @*************************************@
@@ -85,6 +81,7 @@
             @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select name="projectFrom_ID">
+                    <option value="0">No Project Selected</option>
                     @foreach (var project in Model.Projects)
                     {
                         <option value=@project.ID>@project.name</option>
@@ -97,7 +94,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="projectTo_ID" id="ProjectToDropdown"></select>
+                <select name="projectTo_ID" id="ProjectToDropdown">
+                </select>
             </div>
         </div>
 
@@ -178,14 +176,12 @@
         
 
    
-
-        //at this moment getting an error 500 internal server error
         function updateProjectsOut() {
             $.ajax({
                 url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
                 type: 'get',
                 success: function (data) {
-                    var html = '';
+                    var html = ' <option value="0">No Project Selected</option>';
                     data.map(function (project) {
                         //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
                         html += '<option value=' + project.ID + '>' + project.name + '</option>'
