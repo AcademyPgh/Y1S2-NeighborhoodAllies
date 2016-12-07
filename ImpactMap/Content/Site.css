@@ -1,6 +1,10 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 100%;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,11 +13,88 @@
     padding-right: 15px;
 }
 
+/*most buttons*/
+button {
+
+		font-family: 'Fjalla One', sans-serif;
+		font-size: 26pt;
+		font-weight: 400;
+		line-height: 100%;
+		color: #fff;
+		text-align: center;
+		background-color: #0C7D8B;
+
+		text-decoration: none;
+		position: relative;
+		display: block;
+		width: 100px;
+		padding:10px;
+		margin: 0 auto;
+		border-radius: 5px;
+	}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
     white-space: normal;
+}
+
+h1{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 500;
+	font-size:24pt;
+}
+
+h2{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 400;
+	font-size:16pt;
+}
+
+h3{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 300;
+	font-size:12pt;
+}
+
+.icons{
+    display: inline;
+    font-size: 30px;
+}
+
+/*label for input inside input box/line*/
+inputWLabel {
+		border-radius: 3px;
+		background-color: #E7F2D3;
+		
+		color: #0C7D8B;
+		font-family: 'Fjalla One', sans-serif;
+		font-size: 14pt;
+		line-height: 100%;
+		width:150px;
+		padding:10px;
+
+		text-align: center;
+		position: relative;
+		display: block;
+		margin: 0 auto;
+		/*Pull in CSS for designed text box*/ 
+	}
+
+/*exclamation icon*/
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/*fil-o icon*/
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+/*primarily used for buttons, but any non-text right align*/
+.rightAlignObject{
+    position: static;
+    object-position: right;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -22,3 +103,4 @@ select,
 textarea {
     max-width: 280px;
 }
+
