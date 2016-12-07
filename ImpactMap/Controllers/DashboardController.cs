@@ -20,6 +20,7 @@ namespace ImpactMap.Models
     public class DashboardViewModel
     {
         public List<Project> Projects { get; set; }
-        public List<Investment> Investment { get; set; }
+        public List<Investment> Investments { get; set; }
+        public Investment Investment { get; set; }
     }
 }
