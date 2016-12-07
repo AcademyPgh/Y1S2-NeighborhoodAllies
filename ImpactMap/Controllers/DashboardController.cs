@@ -13,7 +13,8 @@ namespace ImpactMap.Models
         // GET: Investments
         public ActionResult Index()
         {
-            return View(db.investments.ToList());
+            DashboardViewModel dvm = new DashboardViewModel();
+            return View(dvm);
         }
     }
 
