@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -127,7 +128,12 @@ namespace ImpactMap.Controllers
         {
             Entity recipient = db.entities.Find(ID);
             List<Project> projectList = recipient.projects.ToList();
-            return Json(projectList, JsonRequestBehavior.AllowGet);
+            var result = JsonConvert.SerializeObject(projectList, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
         }
 
         protected override void Dispose(bool disposing)

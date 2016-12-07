@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="entityTo_ID" id="recipientSelect">
+                <select name="entityTo_ID" id="ProjectToDropdown">
                     @foreach (var entity in Model.Entities)
                     {
                         <option value=@entity.ID>@entity.name</option>
@@ -173,35 +173,28 @@
             });
         }
 
-        $('#recipientSelect').change(updateProjectsOut);
+        
 
-        //messing around with an ajax post
-        function sendRecipientID() {
-            $.ajax({
-                url: '/Entities/GetProjectsOut/',
-                type: 'post',
-                success: function () {
-                    var ID = $('#recipientSelect').html();
-                //The part where it would send ID to Entities/GetProjectsOut
-                }
-            });
-        };
+   
 
         //at this moment getting an error 500 internal server error
         function updateProjectsOut() {
             $.ajax({
-                url: '/Entities/GetProjectsOut/',
+                url: '/Entities/GetProjectsOut/' + $('#EntityToDropdown').val() + '/',
                 type: 'get',
                 success: function (data) {
                     var html = '';
-                    data.map(function (projectMap) {
+                    data.map(function (project) {
                         //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
-                        html += '<option value=' + projectMap.ID + '>' + projectMap.name + '</option>'
+                        html += '<option value=' + project.ID + '>' + project.name + '</option>'
+                        
                     });
                     $('#ProjectToDropdown').html(html);
                 }
             });
         };
+
+        $('#EntityToDropdown').change(updateProjectsOut);
 
         function initialize() {
             load_categories();
