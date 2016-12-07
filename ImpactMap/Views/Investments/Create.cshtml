@@ -142,7 +142,9 @@
             // add the checkmark to the category
             if (!$('#catspan' + id).hasClass('fa fa-check')) {
                 selectedCategories.push(id);
+                
                 $('#categories').val(selectedCategories.toString());
+                console.log($('#categories').val())
                 $('#catspan' + id).addClass('fa fa-check');
             }
             else {

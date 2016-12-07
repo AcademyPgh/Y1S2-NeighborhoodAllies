@@ -55,7 +55,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int category_ID, string selectedCategories)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, string categories)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace ImpactMap.Controllers
                 investment.projectTo = db.projects.Find(projectTo_ID);
 
                 investment.categories = new List<Category>();
-                foreach (var id in selectedCategories.Split(','))
+                foreach (var id in categories.Split(','))
                 {
                     investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
                 }
