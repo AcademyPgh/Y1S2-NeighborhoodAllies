@@ -35,6 +35,7 @@ namespace ImpactMap.Models
         [Display(Name = "Project From:")]
         public virtual Project projectFrom { get; set; }
         [Display(Name = "Investment Description")]
+        [DataType(DataType.MultilineText)]
         public string description { get; set; }
     }
 }

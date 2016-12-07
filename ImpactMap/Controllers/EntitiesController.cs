@@ -136,6 +136,18 @@ namespace ImpactMap.Controllers
             return Content(result, "application/json");
         }
 
+        public string GetAddress(int ID)
+        {
+            Entity addressHaver = db.entities.Find(ID);
+            string address1 = addressHaver.address1;
+            string address2 = addressHaver.address2;
+            string city = addressHaver.city;
+            string state = addressHaver.state;
+            string zip = addressHaver.zip;
+            string FullAddress = address1 + "+" + address2 + "+" + city + "+" + state + "+" + zip;
+            return FullAddress;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -45,8 +45,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        @*************************************@
+
+        
 
 
         <div class="form-group">
@@ -126,7 +134,7 @@
                 success: function (data) {
                     $('#CatList').html('<ul>');
                     data.map(function (category) {
-                        $('#CatList').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '"></span>' + category.name + '</li>');
+                        $('#CatList').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
                         $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
                     });
                     $('#CatList').append('</ul>');
@@ -138,12 +146,13 @@
             // if it is not there
             // add the hidden input element
             // add the checkmark to the category
-            if (!$('#catspan' + id).hasClass('fa fa-check')) {
+            if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
                 selectedCategories.push(id);
                 
                 $('#categories').val(selectedCategories.toString());
                 console.log($('#categories').val())
-                $('#catspan' + id).addClass('fa fa-check');
+                $('#catspan' + id).removeClass('fa fa-square-o');
+                $('#catspan' + id).addClass('fa fa-check-square-o');
             }
             else {
 
@@ -154,7 +163,8 @@
                 selectedCategories.splice(i, 1);
                 $('#categories').val(selectedCategories.toString());
                 $('#catadd' + id).remove();
-                $('#catspan' + id).removeClass('fa fa-check');
+                $('#catspan' + id).removeClass('fa fa-check-square-o');
+                $('#catspan' + id).addClass('fa fa-square-o');
 
             }
         }
