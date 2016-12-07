@@ -201,6 +201,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\MetricResultController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -365,6 +366,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Map\" />
     <Folder Include="Views\MetricResult\" />
     <Folder Include="Views\Public\" />
   </ItemGroup>
