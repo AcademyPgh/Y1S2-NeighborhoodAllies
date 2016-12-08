@@ -18,6 +18,12 @@
 
 @Html.Partial("_Map")
 
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
 <script>
     function getRegister() {
         $.ajax({
@@ -38,4 +44,6 @@
             }
         });
     }
+
+
 </script>
