@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImpactMap.Models.Investment>
+﻿@model ImpactMap.Controllers.InvestmentViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,39 +12,40 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayNameFor(model => model.Investment.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityFrom)
+            @Html.DisplayNameFor(model => model.Investment.entityFrom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo)
+            @Html.DisplayNameFor(model => model.Investment.entityTo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.Investment.date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.isInKind)
+            @Html.DisplayNameFor(model => model.Investment.isInKind)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.volunteerHours)
+            @Html.DisplayNameFor(model => model.Investment.volunteerHours)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectFrom)
+            @Html.DisplayNameFor(model => model.Investment.projectFrom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectTo)
+            @Html.DisplayNameFor(model => model.Investment.projectTo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.Investment.description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.categories)
+            @Html.DisplayNameFor(model => model.Investment.categories)
         </th>
 
     </tr>
-
-@foreach (var item in Model) {
+    
+    
+@foreach (var item in Model.) {
     <tr>
         <td>
             $@Html.DisplayFor(modelItem => item.amount)
@@ -83,11 +84,31 @@
             </ul>
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }
 
 </table>
+
+<script>
+
+       
+    function InvestmentsOut() {
+        $.ajax({
+            url: '/Investments/UserInvestments/' + @{Model.Investment.entityFrom.ID} + '/',
+            type: 'get',
+            success: function (data) {
+                var html = ' <option value="0">No Project Selected</option>';
+                data.map(function (project) {
+                    //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
+                    html += '<option value=' + project.ID + '>' + project.name + '</option>'
+
+                });
+                $('#ProjectToDropdown').html(html);
+            }
+        })
+    };
+</script>
