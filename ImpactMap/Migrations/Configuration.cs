@@ -9,7 +9,7 @@ namespace ImpactMap.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ImpactMap.Models.ApplicationDbContext context)
