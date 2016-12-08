@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Investments List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityFrom_ID)
+            @Html.DisplayNameFor(model => model.entityFrom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
+            @Html.DisplayNameFor(model => model.entityTo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.date)
@@ -30,10 +30,10 @@
             @Html.DisplayNameFor(model => model.volunteerHours)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectFrom_ID)
+            @Html.DisplayNameFor(model => model.projectFrom)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectTo_ID)
+            @Html.DisplayNameFor(model => model.projectTo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.description)
@@ -47,13 +47,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.amount)
+            $@Html.DisplayFor(modelItem => item.amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.entityFrom_ID)
+            @Html.DisplayFor(modelItem => item.entityFrom.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.entityTo_ID)
+            @Html.DisplayFor(modelItem => item.entityTo.name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.date)
@@ -65,22 +65,22 @@
             @Html.DisplayFor(modelItem => item.volunteerHours)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.projectFrom_ID)
+            @Html.DisplayFor(modelItem => item.projectFrom.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.projectTo_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
+            @Html.DisplayFor(modelItem => item.projectTo.name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
+            <ul>
             @foreach (var category in item.categories)
             {
-                @Html.DisplayFor(model => category.name) 
+                //@Html.DisplayFor(model => category.name) 
+                <li>@category.name</li>    
             }
+            </ul>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

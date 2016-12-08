@@ -16,10 +16,10 @@ namespace ImpactMap.Models
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
         public string description { get; set; }
-        [Display(Name = "Investment In")]
-        public virtual Investment investmentIn { get; set; }
-        [Display(Name = "Investment Out")]
-        public virtual Investment investmentOut { get; set; }
+        [Display(Name = "Investments In")]
+        public virtual List<Investment> investmentsIn { get; set; }
+        [Display(Name = "Investments Out")]
+        public virtual List<Investment> investmentsOut { get; set; }
         [Display(Name = "Report")]
         public virtual Report report { get; set; }
     }

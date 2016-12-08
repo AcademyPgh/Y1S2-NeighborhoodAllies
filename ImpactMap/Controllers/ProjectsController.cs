@@ -63,6 +63,8 @@ namespace ImpactMap.Controllers
             return View(project);
         }
 
+
+
         // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -134,6 +136,7 @@ namespace ImpactMap.Controllers
     {
         public Project Project { get; set; }
         public List<Entity> Entities { get; set; }
+        public List<Investment> Investments { get; set; }
     }
 
 }
