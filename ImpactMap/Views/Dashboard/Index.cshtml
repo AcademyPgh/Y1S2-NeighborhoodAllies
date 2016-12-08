@@ -4,7 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1>Dashboard</h1>
+
+@if (Model.Investments != null)
+{
+<h2>Investments Sent</h2>
 <table class="table">
     <tr>
         <th>
@@ -24,9 +28,7 @@
         </th>
     </tr>
 
-    @if (Model.Investments != null)
-    {
-        foreach (var item in Model.Investments)
+        @foreach (var item in Model.Investments)
         {
         <tr>
             <td>
@@ -48,47 +50,56 @@
         }
     }
     </table>
-
-@*I commented all of this out because investmentIn and investmentOut are now lists and it was breaking stuff while I was doing other stuff ;)*@
-    @*<table class="table">
+}
+@if (Model.Projects != null)
+{
+    <h2>My Projects</h2>
+    <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Project.investmentIn.date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project.investmentIn.amount)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project.investmentIn.entityFrom.name)
+                @Html.DisplayNameFor(model => model.Investment.date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project.report)
+                Donating @Html.DisplayNameFor(model => model.Investment.entityFrom.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.projectTo.report)
             </th>
         </tr>
-        @if (Model.Investments != null)
-        {
-            foreach (var item in Model.Projects)
+            @foreach (var item in Model.Projects)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.investmentIn.date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.investmentIn.amount)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.investmentIn.entityFrom.name)
+                        @foreach (var thing in item.investmentsIn)
+                        {
+                            @Html.DisplayFor(modelItem => thing.date)
+                        }
+                    </td>
+                    <td>
+                        @foreach (var thing in item.investmentsIn)
+                        {
+                            @Html.DisplayFor(modelItem => thing.entityFrom.name)
+                        }                
+                    </td>
+                    <td>
+                        @foreach (var thing in item.investmentsIn)
+                        {
+                            @Html.DisplayFor(modelItem => thing.amount)
+                        }                    
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.report)
                     </td>
                 </tr>
             }
-        }
-        </table>*@
+    </table>
+    }
