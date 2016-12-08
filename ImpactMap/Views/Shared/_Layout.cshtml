@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,16 +30,34 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <footer>
+        <div class="row">
+            <!--<div class="col-md-4">
+            </div>-->
+
+            <div class="col-md-6 col-md-offset-4">
+                <br>
+                <img class="img-responsive" src="~/Content/Images/NeighborhoodAllies_textonly.svg" />
+                <br>
+            </div>
+
+            <div class="col-md-2">
+                <div style="text-align: center;">
+                    <br>
+                    <p class="footerText">
+                        Software created by
+                    </p>
+                    <img class="academylogo" src="~/Content/Images/Academy_pgh.png" />
+                </div>
+            </div>
+    </footer>
 </body>
 </html>

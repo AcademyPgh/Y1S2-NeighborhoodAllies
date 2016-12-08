@@ -7,10 +7,17 @@
 
 }
 
+.academylogo{
+    width: 50px; 
+    height:50px;
+}
+
+.account {
+    background-image: url(/Content/Images/loginbg.jpg);
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 /*most buttons*/
@@ -40,6 +47,21 @@ button {
     white-space: normal;
 }
 
+	footer {
+		text-align:center;
+		margin:auto;
+		background-color: #92C337;
+		padding: 15px
+
+	}
+
+	.footerText {
+		text-align: center;
+		color: #0C7D8B;
+		font-family: 'Fjalla One', sans-serif;
+		font-size:8pt;
+	}
+
 h1{
     font-family: 'Fjalla One', sans-serif;
 	color: #0C7D8B;
@@ -66,6 +88,12 @@ h3{
     font-size: 30px;
 }
 
+/*exclamation icon*/
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/*fil-o icon*/
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 /*label for input inside input box/line*/
 inputWLabel {
 		border-radius: 3px;
@@ -85,11 +113,13 @@ inputWLabel {
 		/*Pull in CSS for designed text box*/ 
 	}
 
-/*exclamation icon*/
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-/*fil-o icon*/
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+.logincontainer {
+    position: static;
+    padding: 15px;
+    margin-left: 20px;
+    width: 300px;
+    height:350px;
+    background-color: rgba(146,195,55,0.85);
 
 /*primarily used for buttons, but any non-text right align*/
 .rightAlignObject{

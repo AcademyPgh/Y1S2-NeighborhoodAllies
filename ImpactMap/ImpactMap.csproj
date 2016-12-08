@@ -260,8 +260,11 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Academy_pgh.png" />
+    <Content Include="Content\Images\NeighborhoodAllies_textonly.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\loginbg.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
