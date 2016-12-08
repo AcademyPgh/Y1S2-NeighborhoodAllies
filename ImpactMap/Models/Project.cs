@@ -18,6 +18,7 @@ namespace ImpactMap.Models
         public string description { get; set; }
         public virtual Investment investmentIn { get; set; }
         public virtual Investment investmentOut { get; set; }
+        [Display(Name = "Report")]
         public virtual Report report { get; set; }
     }
 }

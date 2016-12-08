@@ -10,6 +10,7 @@ namespace ImpactMap.Models
     public class Report
     {
         public int ID { get; set; }
+        [Display(Name = "Report")]
         public string name { get; set; }
         [Required]
         public virtual Project project { get; set; }

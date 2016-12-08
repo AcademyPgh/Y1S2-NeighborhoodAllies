@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImpactMap.Models.Investment>
+﻿@model ImpactMap.Models.DashboardViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -8,38 +8,86 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.Investment.date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayNameFor(model => model.Investment.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
+            @Html.DisplayNameFor(model => model.Investment.entityTo.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.categories)
+            @Html.DisplayNameFor(model => model.Investment.categories)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.projectTo.report.name)
+            @Html.DisplayNameFor(model => model.Investment.projectTo.report)
         </th>
     </tr>
-    @foreach (var item in Model)
+
+    @if (Model.Investments != null)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.entityTo_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.categories)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.projectTo.report.name)
-        </td>
-    </tr>
+        foreach (var item in Model.Investments)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.entityTo.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.projectTo.report)
+            </td>
+        </tr>
+        }
     }
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.investmentIn.date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.investmentIn.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.investmentIn.entityFrom.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.report)
+            </th>
+        </tr>
+        @if (Model.Investments != null)
+        {
+            foreach (var item in Model.Projects)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.investmentIn.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.investmentIn.amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.investmentIn.entityFrom.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.report)
+                    </td>
+                </tr>
+            }
+        }
+        </table>
