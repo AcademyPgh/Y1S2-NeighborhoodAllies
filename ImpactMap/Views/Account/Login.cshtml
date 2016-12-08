@@ -9,7 +9,7 @@
     <div class="logincontainer">
         <div class="row">          
             <div class="col-md-10">
-                <h2>Welcome Back</h2>
+                <h2 style="color:#92C337;">Welcome Back</h2>
                 <section id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-default" />
+                            <input type="submit" value="Log in" class="btn btn-default button" />
                         </div>
                     </div>
                     <p>
