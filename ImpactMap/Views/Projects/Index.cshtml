@@ -61,10 +61,8 @@
             <td>
                 No reports lol ;)
             </td>
-            @*<td>
-                @{  int reportIDint = item.report.ID;
-                    int? reportIDnullableInt = reportIDint;
-                    if (reportIDnullableInt != null)
+            <td>
+                @{  if (item.report != null)
                     {
                         string reportID = Convert.ToString(item.report.ID);
 
@@ -75,7 +73,7 @@
                         <span>No report available.</span>
                     }
                 }
-            </td>*@
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |
