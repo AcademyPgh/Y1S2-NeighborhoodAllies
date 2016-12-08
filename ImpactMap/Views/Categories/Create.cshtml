@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Controllers.CategoryViewModel
+﻿,,@model ImpactMap.Controllers.CategoryViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -78,6 +78,8 @@
 
         $('#addMetric').click(addMetrics);
 
+
+        //TODO This does not work
         $(document).ready(function () {
             $(window).keydown(function (event) {
                 if (event.keyCode == 13) {
