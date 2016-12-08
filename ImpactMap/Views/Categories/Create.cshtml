@@ -55,7 +55,7 @@
 
         //This Works
         function addMetrics() {
-            if($('#metrics').val() != ""){
+            if ($('#metrics').val() != "") {
                 newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
                 $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '">' + $('#metrics').val() + '<i class="fa fa-minus-circle" aria-hidden="true"></i></span><br>');//Adds the new metric to the display
                 $('#metrics').val("");//Clears the value of the input box to accept a new metric
@@ -84,24 +84,20 @@
             $(window).keydown(function (event) {
                 if (event.keyCode == 13) {
                     event.preventDefault();
-                    enterMetric()
+                    $('#metrics').keypress(function (e) {
+                        var key = e.which;
+                        if (key == 13)  // the enter key code
 
+                        {
+                            addMetrics();
+                        }
 
-                }
-            });
-        });
+                    });
 
-
-        function enterMetric() {
-            $('#metrics').keypress(function (e) {
-                var key = e.which;
-                if (key == 13)  // the enter key code
-
-                {
-                    addMetrics();
                 }
             })
-        }
-
+        })
+    
+    
     </script>
 }
