@@ -13,6 +13,17 @@ namespace ImpactMap.Models
         // GET: Investments
         public ActionResult Index()
         {
+            //Utils.Utility userUtil = new Utils.Utility();
+            //project.entity = db.users.Find(userUtil.UserID(User)).entity;
+
+            //Utils.Utility userUtil = new Utils.Utility();
+            //var user = db.users.Find(userUtil.UserID(User));
+            //db.entities.Add(entity);
+            //db.SaveChanges();
+            //user.entity = entity;
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
+
             DashboardViewModel dvm = new DashboardViewModel();
             return View(dvm);
         }
