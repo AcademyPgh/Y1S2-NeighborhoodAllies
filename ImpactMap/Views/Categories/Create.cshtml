@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Controllers.CategoryViewModel
+﻿,,@model ImpactMap.Controllers.CategoryViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -78,6 +78,8 @@
 
         $('#addMetric').click(addMetrics);
 
+
+        //TODO This does not work
         $(document).ready(function () {
             $(window).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -100,39 +102,6 @@
                 }
             })
         }
-
-
-        //TODO - Need to remove the following
-         //************************************************************************************
-
-
-            function toggle_metric(id) {
-                // if it is not there
-                // add the hidden input element
-                // add the checkmark to the category
-                if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
-                    selectedCategories.push(id);
-
-                    $('#categories').val(selectedCategories.toString());
-                    console.log($('#categories').val())
-                    $('#catspan' + id).removeClass('fa fa-square-o');
-                    $('#catspan' + id).addClass('fa fa-check-square-o');
-                }
-                else {
-
-                    // if it is there
-                    // remove the hidden input element
-                    // remove the checkmark on the category
-                    var i = selectedCategories.indexOf(id);
-                    selectedCategories.splice(i, 1);
-                    $('#categories').val(selectedCategories.toString());
-                    $('#catadd' + id).remove();
-                    $('#catspan' + id).removeClass('fa fa-check-square-o');
-                    $('#catspan' + id).addClass('fa fa-square-o');
-
-                }
-            }
-
 
     </script>
 }

@@ -211,46 +211,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612051830469_Initial.cs" />
-    <Compile Include="Migrations\201612051830469_Initial.Designer.cs">
-      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051834016_Initial1.cs" />
-    <Compile Include="Migrations\201612051834016_Initial1.Designer.cs">
-      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051912474_InvestmentDescription.cs" />
-    <Compile Include="Migrations\201612051912474_InvestmentDescription.Designer.cs">
-      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051928349_MetricResult.cs" />
-    <Compile Include="Migrations\201612051928349_MetricResult.Designer.cs">
-      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061447481_FixApplicationDb.cs" />
-    <Compile Include="Migrations\201612061447481_FixApplicationDb.Designer.cs">
-      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061537340_UsersTableUpdated.cs" />
-    <Compile Include="Migrations\201612061537340_UsersTableUpdated.Designer.cs">
-      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061551532_IdentityModelFK.cs" />
-    <Compile Include="Migrations\201612061551532_IdentityModelFK.Designer.cs">
-      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.cs" />
-    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.Designer.cs">
-      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061813237_DbFix.cs" />
-    <Compile Include="Migrations\201612061813237_DbFix.Designer.cs">
-      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612080221462_InvestmentsInOut.cs" />
-    <Compile Include="Migrations\201612080221462_InvestmentsInOut.Designer.cs">
-      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -381,38 +341,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612051830469_Initial.resx">
-      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051834016_Initial1.resx">
-      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051912474_InvestmentDescription.resx">
-      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051928349_MetricResult.resx">
-      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061447481_FixApplicationDb.resx">
-      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061537340_UsersTableUpdated.resx">
-      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061551532_IdentityModelFK.resx">
-      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061719325_InvestmentDbCheck.resx">
-      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061813237_DbFix.resx">
-      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612080221462_InvestmentsInOut.resx">
-      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
