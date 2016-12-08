@@ -4,12 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<br />
-<br />
-<br />
 <h1>Dashboard</h1>
 
-<dt class="dl-horizontal">
+<div class="addpadding">
+    <dt class="dl-horizontal">
     <dt>
         @Html.DisplayNameFor(model => model.Entity.name)
     </dt>
@@ -74,15 +72,19 @@
         @Html.DisplayFor(model => model.Entity.lat)
     </dd>
 
-@Html.ActionLink("Edit", "Edit", "Entity", "Entity", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", "Entity", "Entity", new { @class = "btn btn-primary" })
 
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Entity.ID })*@
 
+</div>
+
     <h2>Investments Sent</h2>
 
-@Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "btn btn-primary" })
+<div class="addpadding">
 
-@Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "btn btn-primary" })
 
     <table class="table">
         <tr>
@@ -132,12 +134,15 @@
             }
         }
     </table>
-
+</div>
     <h2>My Projects</h2>
 
-@Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "btn btn-primary" })
+<div class="addpadding">
 
-@Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "btn btn-primary" })
 
     <table class="table">
         <tr>
@@ -193,3 +198,4 @@
             }
         }
     </table>
+</div>
