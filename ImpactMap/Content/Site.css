@@ -1,19 +1,198 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 100%;
+}
+
+a {
+    color:aliceblue;
+}
+
+.academylogo{
+    width: 50px; 
+    height:50px;
+}
+
+.account {
+    background-image: url(/Content/Images/loginbg.jpg);
+}
+
+.addpadding{
+    padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    min-height:350px;
 }
 
+/*most buttons*/
+button {
+
+		font-family: 'Fjalla One', sans-serif;
+		font-size: 26pt;
+		font-weight: 400;
+		line-height: 100%;
+		color: #fff;
+		text-align: center;
+		background-color: #0C7D8B;
+
+		text-decoration: none;
+		position: relative;
+		display: block;
+		width: 100px;
+		padding:10px;
+		margin: 0 auto;
+		border-radius: 5px;
+	}
+
+/*styles map*/
+.controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
 /* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+   will truncate terms that are too long to fit in the left column */
 .dl-horizontal dt {
     white-space: normal;
+}
+
+	footer {
+		text-align:center;
+		margin:auto;
+		background-color: #92C337;
+		padding: 15px
+
+	}
+
+	.footerText {
+		text-align: center;
+		color: #0C7D8B;
+		font-family: 'Fjalla One', sans-serif;
+		font-size:8pt;
+	}
+
+h1{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 500;
+	font-size:24pt;
+    padding-left:20px;
+}
+
+h2{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 400;
+	font-size:16pt;
+    padding-left:20px;
+}
+
+h3{
+    font-family: 'Fjalla One', sans-serif;
+	color: #0C7D8B;
+	font-weight: 300;
+	font-size:12pt;
+    padding-left:20px;
+}
+
+h4{
+    font-family: 'Open Sans', sans-serif;
+    color:darkgray;
+    font-weight:200;
+    font-size: 12pt;
+    padding-left:20px
+}
+
+.header{
+    margin:auto;
+	background-color: #92C337;
+	padding: 15px;
+    min-height:150px;
+    height:auto;
+}
+
+.hideFormField {
+    display: none;
+}
+
+.icons{
+    display: inline;
+    font-size: 30px;
+}
+
+ #map {
+            height: 100vh;
+      }
+
+/*exclamation icon*/
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/*fil-o icon*/
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+/*label for input inside input box/line*/
+inputWLabel {
+		border-radius: 3px;
+		background-color: #E7F2D3;
+		
+		color: #0C7D8B;
+		font-family: 'Fjalla One', sans-serif;
+		font-size: 14pt;
+		line-height: 100%;
+		width:150px;
+		padding:10px;
+
+		text-align: center;
+		position: relative;
+		display: block;
+		margin: 0 auto;
+		/*Pull in CSS for designed text box*/ 
+	}
+
+.logincontainer {
+    position: static;
+    padding: 15px;
+    margin-left: 20px;
+    width: 300px;
+    height: 350px;
+    background-color: rgba(12, 125, 139, 0.85);
+}
+
+ #pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+    }
+
+ #pac-input:focus {
+   border-color: #4d90fe;
+}
+
+ .pac-container {
+   font-family: Roboto;
+}
+
+/*primarily used for buttons, but any non-text right align*/
+.rightAlignObject{
+    position: static;
+    object-position: right;
+}
+
+.showFormField {
+    display: block;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -22,3 +201,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
