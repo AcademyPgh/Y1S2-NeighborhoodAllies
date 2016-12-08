@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -157,6 +158,20 @@ namespace ImpactMap.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult UserInvestments(int id)
+        {
+            List<Investment> UserInvestments = new List<Investment>();
+            UserInvestments = db.investments.Where(i => i.entityFrom_ID == id).ToList();
+
+            var result = JsonConvert.SerializeObject(UserInvestments, Formatting.None,
+             new JsonSerializerSettings
+             {
+                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+             });
+            return Content(result, "application/json");
+   
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -166,6 +181,7 @@ namespace ImpactMap.Controllers
             base.Dispose(disposing);
         }
     }
+
 
     public class InvestmentViewModel
     {
