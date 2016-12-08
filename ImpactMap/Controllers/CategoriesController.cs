@@ -38,7 +38,13 @@ namespace ImpactMap.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+            Utils.Utility userUtil = new Utils.Utility();
+            CategoryViewModel cvm = new CategoryViewModel();
+             cvm.Entities = db.entities.ToList();
+             cvm.Category = new Models.Category();
+             cvm.Metrics = new Models.Metric();
+
+            return View(cvm);
         }
 
         // POST: Categories/Create
@@ -46,12 +52,24 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name")] Category category)
+        public ActionResult Create([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics)
         {
             if (ModelState.IsValid)
             {
+                Utils.Utility userUtil = new Utils.Utility();
+
                 db.categories.Add(category);
                 db.SaveChanges();
+                var catID = category.ID;
+
+                foreach (var metricName in newMetrics.Split(','))
+                {
+                    metric.name = metricName;
+                    metric.categoryID = catID;
+                    db.metrics.Add(metric);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -129,8 +147,9 @@ namespace ImpactMap.Controllers
 
     public class CategoryViewModel
     {
-        public List<Metric> Metrics { get; set; }
+        public Metric Metrics { get; set; }
         public Category Category { get; set; }
+        public List<Entity> Entities { get; set; }
 
     }
 }
