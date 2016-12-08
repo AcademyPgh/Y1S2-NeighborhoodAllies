@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Project List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,7 +17,18 @@
         <th>
             @Html.DisplayNameFor(model => model.description)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.entity.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.investmentIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.investmentOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -27,6 +38,18 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.entity.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.investmentIn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.investmentOut)
+        </td>
+        <td>
+            This needs to be a link to a report ;)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
