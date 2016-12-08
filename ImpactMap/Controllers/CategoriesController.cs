@@ -124,5 +124,13 @@ namespace ImpactMap.Controllers
             }
             base.Dispose(disposing);
         }
+
+    }
+
+    public class CategoryViewModel
+    {
+        public List<Metric> Metrics { get; set; }
+        public Category Category { get; set; }
+
     }
 }
