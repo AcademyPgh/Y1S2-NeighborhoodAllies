@@ -201,9 +201,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvestmentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\MetricResultController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -241,6 +243,14 @@
     <Compile Include="Migrations\201612061719325_InvestmentDbCheck.Designer.cs">
       <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612061813237_DbFix.cs" />
+    <Compile Include="Migrations\201612061813237_DbFix.Designer.cs">
+      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612080221462_InvestmentsInOut.cs" />
+    <Compile Include="Migrations\201612080221462_InvestmentsInOut.Designer.cs">
+      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -272,6 +282,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\googlemaps.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -355,10 +366,13 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Map\" />
     <Folder Include="Views\MetricResult\" />
+    <Folder Include="Views\Public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -392,6 +406,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612061719325_InvestmentDbCheck.resx">
       <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612061813237_DbFix.resx">
+      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612080221462_InvestmentsInOut.resx">
+      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

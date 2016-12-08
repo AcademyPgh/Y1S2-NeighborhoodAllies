@@ -115,6 +115,7 @@ namespace ImpactMap.Controllers
             return RedirectToAction("Index");
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -123,5 +124,13 @@ namespace ImpactMap.Controllers
             }
             base.Dispose(disposing);
         }
+
+    }
+
+    public class CategoryViewModel
+    {
+        public List<Metric> Metrics { get; set; }
+        public Category Category { get; set; }
+
     }
 }

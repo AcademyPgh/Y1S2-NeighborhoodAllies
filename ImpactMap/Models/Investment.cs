@@ -31,10 +31,13 @@ namespace ImpactMap.Models
         public int? projectFrom_ID { get; set; }
         public int? projectTo_ID { get; set; }
         [Display(Name = "Project To:")]
+        [ForeignKey("projectTo_ID")]
         public virtual Project projectTo { get; set; }
         [Display(Name = "Project From:")]
+        [ForeignKey("projectFrom_ID")]
         public virtual Project projectFrom { get; set; }
         [Display(Name = "Investment Description")]
+        [DataType(DataType.MultilineText)]
         public string description { get; set; }
     }
 }

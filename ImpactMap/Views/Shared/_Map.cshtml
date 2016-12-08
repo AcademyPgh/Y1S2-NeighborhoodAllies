@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div id="map"></div>
+
+<script src="~/Scripts/googlemaps.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJAzfOpO0EYeXNVVnFpEn0m7EZfo7URLM&libraries=places&callback=initialize"
+        async defer></script>
+
+<script>
+    function GetAddress() {
+        $.ajax({
+            url: '/Entities/GetAddress/' + 1 + '/',
+            type: 'get',
+            success: function (data) {
+                console.log("Worked")
+                console.log(data)
+                var html = data;
+
+                $('#pac-input').html(html);
+                console.log($('#pac-input').html());
+            }
+        });
+    }
+</script>

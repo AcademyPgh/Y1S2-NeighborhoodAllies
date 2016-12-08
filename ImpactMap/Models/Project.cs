@@ -10,14 +10,17 @@ namespace ImpactMap.Models
     public class Project
     {
         public int ID { get; set; }
-        [Display(Name = "Project Title")]
+        [Display(Name = "Name")]
         public string name { get; set; }
         public virtual Entity entity { get; set; }
-        [Display(Name = "Project Description")]
+        [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
         public string description { get; set; }
-        public virtual Investment investmentIn { get; set; }
-        public virtual Investment investmentOut { get; set; }
+        [Display(Name = "Investments In")]
+        public virtual List<Investment> investmentsIn { get; set; }
+        [Display(Name = "Investments Out")]
+        public virtual List<Investment> investmentsOut { get; set; }
+        [Display(Name = "Report")]
         public virtual Report report { get; set; }
     }
 }

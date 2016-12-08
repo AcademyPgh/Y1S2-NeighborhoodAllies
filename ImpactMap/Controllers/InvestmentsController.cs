@@ -38,10 +38,16 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
+            Utils.Utility userUtil = new Utils.Utility();
             InvestmentViewModel ivm = new InvestmentViewModel();
-            ivm.Projects = db.projects.ToList();
+            
             ivm.Entities = db.entities.ToList();
             ivm.Investment = new Models.Investment();
+            ivm.Categories = db.categories.ToList();
+            //entityFrom is auto retrieved based on the user that's logged in
+            ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+            //projectsFrom is populated based on entityFrom's projects
+            ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
             return View(ivm);
         }
 
@@ -51,17 +57,43 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories)
         {
             if (ModelState.IsValid)
             {
+                //entityFrom uses UserID() from Utils/Utility.cs to get the entity linked to the currently logged in User
                 Utils.Utility userUtil = new Utils.Utility();
                 investment.entityTo = db.entities.Find(entityTo_ID);
-                investment.projectTo = db.projects.Find(projectTo_ID);
-                //Uses UserID() from Utils/Utility.cs
                 investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+
+                investment.projectTo = db.projects.Find(projectTo_ID);
+                investment.projectFrom = db.projects.Find(projectFrom_ID);
+
+                investment.categories = new List<Category>();
+                foreach (var id in categories.Split(','))
+                {
+                    investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
+                }
+                
                 db.investments.Add(investment);
                 db.SaveChanges();
+
+                if (projectTo_ID != 0)
+                {
+                    Project newProject = new Project();
+                    newProject = db.projects.Find(projectTo_ID);
+                    newProject.investmentsIn.Add(db.investments.Find(investment.ID));
+                    db.SaveChanges();
+                }
+
+                if (projectFrom_ID != 0)
+                {
+                    Project newProject = new Project();
+                    newProject = db.projects.Find(projectFrom_ID);
+                    newProject.investmentsOut.Add(db.investments.Find(investment.ID));
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -140,6 +172,7 @@ namespace ImpactMap.Controllers
         public List<Project> Projects { get; set; }
         public List<Entity> Entities { get; set; }
         public Investment Investment { get; set; }
+        public List<Category> Categories { get; set; }
     }
 
 }

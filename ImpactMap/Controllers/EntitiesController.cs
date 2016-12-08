@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -118,6 +119,33 @@ namespace ImpactMap.Controllers
             db.entities.Remove(entity);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        //It's my understanding that this ID is Investments.entityOut.ID which is chosen in the dropdown...
+        //How are we sending it to this action? Should there be an ajax post function on change?
+        public ActionResult GetProjectsOut(int ID)
+        {
+            Entity recipient = db.entities.Find(ID);
+            List<Project> projectList = recipient.projects.ToList();
+            var result = JsonConvert.SerializeObject(projectList, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
+        }
+
+        public string GetAddress(int ID)
+        {
+            Entity addressHaver = db.entities.Find(ID);
+            string address1 = addressHaver.address1;
+            string address2 = addressHaver.address2;
+            string city = addressHaver.city;
+            string state = addressHaver.state;
+            string zip = addressHaver.zip;
+            string FullAddress = address1 + "+" + address2 + "+" + city + "+" + state + "+" + zip;
+            return FullAddress;
         }
 
         protected override void Dispose(bool disposing)
