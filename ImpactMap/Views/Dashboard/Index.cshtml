@@ -4,56 +4,141 @@
     ViewBag.Title = "Index";
 }
 
+<br />
+<br />
+<br />
 <h1>Dashboard</h1>
 
-@if (Model.Investments != null)
-{
-<h2>Investments Sent</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.entityTo.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.categories)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.projectTo.report)
-        </th>
-    </tr>
+<dt class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.name)
+    </dt>
 
-        @foreach (var item in Model.Investments)
-        {
+    <dd>
+        @Html.DisplayFor(model => model.Entity.name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.description)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.description)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.address1)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.address1)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.address2)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.address2)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.city)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.city)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.state)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.state)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.zip)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.zip)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Entity.lat)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Entity.lat)
+    </dd>
+
+@Html.ActionLink("Edit", "Edit", "Entity", "Entity", new { @class = "btn btn-primary" })
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Entity.ID })*@
+
+    <h2>Investments Sent</h2>
+
+@Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "btn btn-primary" })
+
+@Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "btn btn-primary" })
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.entityTo.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categories)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.projectTo.report)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.entityTo.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.categories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Investment.projectTo.report)
+            </th>
         </tr>
+
+        @if (Model.Investments != null)
+        {
+            foreach (var item in Model.Investments)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.entityTo.name)
+                    </td>
+                    <td>
+                        @foreach (var thing in item.categories)
+                        {
+                            @Html.DisplayFor(modelItem => thing.name)
+                            <br />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.projectTo.report)
+                    </td>
+                </tr>
+            }
         }
-    }
     </table>
-}
-@if (Model.Projects != null)
-{
+
     <h2>My Projects</h2>
+
+@Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "btn btn-primary" })
+
+@Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "btn btn-primary" })
+
     <table class="table">
         <tr>
             <th>
@@ -63,16 +148,21 @@
                 @Html.DisplayNameFor(model => model.Investment.date)
             </th>
             <th>
-                Donating @Html.DisplayNameFor(model => model.Investment.entityFrom.name)
+                Donating @Html.DisplayNameFor(model => model.Investment.entityFrom.name) (s)<br />
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Investment.amount)
+                (s)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Investment.projectTo.report)
             </th>
         </tr>
-            @foreach (var item in Model.Projects)
+
+
+        @if (Model.Projects != null)
+        {
+            foreach (var item in Model.Projects)
             {
                 <tr>
                     <td>
@@ -80,26 +170,26 @@
                     </td>
                     <td>
                         @foreach (var thing in item.investmentsIn)
-                        {
-                            @Html.DisplayFor(modelItem => thing.date)
+                    {
+                            @Html.DisplayFor(modelItem => thing.date)<br />
                         }
                     </td>
                     <td>
                         @foreach (var thing in item.investmentsIn)
-                        {
-                            @Html.DisplayFor(modelItem => thing.entityFrom.name)
-                        }                
+                    {
+                            @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
+                        }
                     </td>
                     <td>
                         @foreach (var thing in item.investmentsIn)
-                        {
-                            @Html.DisplayFor(modelItem => thing.amount)
-                        }                    
+                    {
+                            @Html.DisplayFor(modelItem => thing.amount)<br />
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.report)
                     </td>
                 </tr>
             }
+        }
     </table>
-    }
