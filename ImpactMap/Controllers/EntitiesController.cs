@@ -56,7 +56,7 @@ namespace ImpactMap.Controllers
                 var user = db.users.Find(userUtil.UserID(User));
                 db.entities.Add(entity);
                 db.SaveChanges();
-                //user.entity = entity;
+                user.entity = entity;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
