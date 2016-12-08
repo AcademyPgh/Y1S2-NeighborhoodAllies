@@ -56,10 +56,15 @@
 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.investmentsOut)
-            </td>
-            <td>
-                No reports lol ;)
+                @{
+                    foreach (var investmentOut in item.investmentsOut)
+                    {
+                        @Html.DisplayFor(model => investmentOut.entityFrom.name);
+                        <br />
+                        @Html.DisplayFor(model => investmentOut.amount)
+                        <br />
+                    }
+                }
             </td>
             <td>
                 @{  if (item.report != null)

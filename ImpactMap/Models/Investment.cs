@@ -16,9 +16,11 @@ namespace ImpactMap.Models
         public int? entityTo_ID { get; set; }
         [Display(Name = "Donor")]
         [ForeignKey("entityFrom_ID")]
+        [InverseProperty("investmentsOut")]
         public virtual Entity entityFrom { get; set; }
         [Display(Name = "Recipient")]
         [ForeignKey("entityTo_ID")]
+        [InverseProperty("investmentsIn")]
         public virtual Entity entityTo { get; set; }
         [Display(Name = "Investment Date")]
         public DateTime date { get; set; }
@@ -32,9 +34,11 @@ namespace ImpactMap.Models
         public int? projectTo_ID { get; set; }
         [Display(Name = "Project To:")]
         [ForeignKey("projectTo_ID")]
+        [InverseProperty("investmentsIn")]
         public virtual Project projectTo { get; set; }
         [Display(Name = "Project From:")]
         [ForeignKey("projectFrom_ID")]
+        [InverseProperty("investmentsOut")]
         public virtual Project projectFrom { get; set; }
         [Display(Name = "Investment Description")]
         [DataType(DataType.MultilineText)]
