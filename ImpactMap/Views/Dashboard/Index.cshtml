@@ -75,7 +75,7 @@
             </tr>
 
             @*Displays each investment in the table*@
-            @{foreach (var item in Model.investmentsOut)
+            @{foreach (var item in Model.investmentsOut.Take(5))
                 {
 
                     <tr>
@@ -130,6 +130,9 @@
 
             @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "btn btn-primary" })
 
+    @if (Model.projects.Count != 0)
+    {
+
             <table class="table">
                 <tr>
                     <th>
@@ -152,7 +155,7 @@
 
                 @if (Model.investmentsOut != null)
                 {
-                    foreach (var item in Model.projects)
+                    foreach (var item in Model.projects.Take(5))
                     {
                 <tr>
                     <td>
@@ -193,5 +196,6 @@
                 </tr>
                                         }
                                     }
+
             </table>
         </div>
