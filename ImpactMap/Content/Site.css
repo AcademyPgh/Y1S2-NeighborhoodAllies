@@ -5,7 +5,11 @@
 }
 
 a {
-    color:aliceblue;
+    color: #0C7D8B;
+}
+
+a href{
+    color: #0C7D8B;
 }
 
 .academylogo{
@@ -91,7 +95,7 @@ h2{
     font-family: 'Fjalla One', sans-serif;
 	color: #0C7D8B;
 	font-weight: 400;
-	font-size:16pt;
+	font-size:18pt;
     padding-left:20px;
 }
 
@@ -108,7 +112,7 @@ h4{
     color:darkgray;
     font-weight:200;
     font-size: 12pt;
-    padding-left:20px
+    padding-left:20px;
 }
 
 .header{
@@ -200,6 +204,13 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+th{
+    font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight:300;
+    color: #6f6f6f;
 }
 
 #type-selector {
