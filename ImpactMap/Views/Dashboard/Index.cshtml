@@ -55,7 +55,7 @@
 
     @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "btn btn-primary" })
 
-    @if (Model.investmentsOut != null)
+    @if (Model.investmentsOut.Count != 0)
     {
 
         <table class="table">
