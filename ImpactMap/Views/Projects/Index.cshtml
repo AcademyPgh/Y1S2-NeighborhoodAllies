@@ -1,30 +1,21 @@
 ﻿@model IEnumerable<ImpactMap.Models.Project>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Projects List";
 }
 
-<h2>Project List</h2>
-
-<p>
+<h2>Projects List</h2>
+<br /><br />
+<p class="addpadding">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<br />
+
+<div class="addpadding" style="width:600px;">
+<table class="table addpadding">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.entity.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.investmentsIn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.investmentsOut)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.report)
@@ -32,63 +23,34 @@
     </tr>
 
 
-@if (Model != null)
-{
-   
-    foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.entity.name)
-            </td>
-            <td>
-                @{
-                    foreach (var investmentIn in item.investmentsIn)
-                    {
-                        @Html.DisplayFor(model => investmentIn.entityFrom.name);
-                        <br />
-                        @Html.DisplayFor(model => investmentIn.amount)
-                        <br />
-                    }
-                }
 
-            </td>
-            <td>
-                @{
-                    foreach (var investmentOut in item.investmentsOut)
-                    {
-                        @Html.DisplayFor(model => investmentOut.entityFrom.name);
-                        <br />
-                        @Html.DisplayFor(model => investmentOut.amount)
-                        <br />
-                    }
-                }
-            </td>
-            <td>
-                @{  if (item.report != null)
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>            
+                <td>
+                    @{  if (item.report != null)
                     {
                         string reportID = Convert.ToString(item.report.ID);
 
-                        @Html.ActionLink("Report", reportID, "Details", "Report")
+                @Html.ActionLink("Report", reportID, "Details", "Report")
                     }
                     else
                     {
-                        <span>No report available.</span>
+                <span>No report available.</span>
                     }
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
 
-    }
-}
+                            }
+                        }
+</table>
+</div>

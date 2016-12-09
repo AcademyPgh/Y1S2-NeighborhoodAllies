@@ -32,11 +32,11 @@ namespace ImpactMap.Models
         public virtual List<Category> categories { get; set; }
         public int? projectFrom_ID { get; set; }
         public int? projectTo_ID { get; set; }
-        [Display(Name = "Project To:")]
+        [Display(Name = "Project To")]
         [ForeignKey("projectTo_ID")]
         [InverseProperty("investmentsIn")]
         public virtual Project projectTo { get; set; }
-        [Display(Name = "Project From:")]
+        [Display(Name = "Project From")]
         [ForeignKey("projectFrom_ID")]
         [InverseProperty("investmentsOut")]
         public virtual Project projectFrom { get; set; }
