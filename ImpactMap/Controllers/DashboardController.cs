@@ -15,15 +15,19 @@ namespace ImpactMap.Models
         public ActionResult Index()
         {
 
-            DashboardViewModel dvm = new DashboardViewModel();
-            Utils.Utility userUtil = new Utils.Utility();
-            dvm.investmentsOut = db.users.Find(userUtil.UserID(User)).entity.investmentsOut.ToList();
-            dvm.projects = db.users.Find(userUtil.UserID(User)).entity.projects.ToList();
-            dvm.entity = db.users.Find(userUtil.UserID(User)).entity;
-            dvm.investment = new Investment();
-            dvm.project = new Project();
+            //DashboardViewModel dvm = new DashboardViewModel();
+            //Utils.Utility userUtil = new Utils.Utility();
+            //var currEntity = db.users.Find(userUtil.UserID(User));
+            //dvm.investmentsOut = currEntity.entity.investmentsOut.ToList();
+            //dvm.projects = currEntity.entity.projects.ToList();
+            //dvm.entity = currEntity.entity;
+            //dvm.investment = new Investment();
+            //dvm.project = new Project();
+            Utils.Utility uu = new Utils.Utility();
+            var entity = db.users.Find(uu.UserID(User)).entity;
 
-            return View(dvm);
+
+            return View(entity);
         }
     }
 

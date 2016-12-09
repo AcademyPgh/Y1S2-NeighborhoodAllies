@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Models.DashboardViewModel
+﻿@model ImpactMap.Models.Entity
 
 @{
     ViewBag.Title = "Index";
@@ -9,72 +9,72 @@
 <div class="addpadding">
     <dt class="dl-horizontal">
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.name)
+        @Html.DisplayNameFor(model => model.name)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.name)
+        @Html.DisplayFor(model => model.name)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.description)
+        @Html.DisplayNameFor(model => model.description)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.description)
+        @Html.DisplayFor(model => model.description)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.address1)
+        @Html.DisplayNameFor(model => model.address1)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.address1)
+        @Html.DisplayFor(model => model.address1)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.address2)
+        @Html.DisplayNameFor(model => model.address2)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.address2)
+        @Html.DisplayFor(model => model.address2)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.city)
+        @Html.DisplayNameFor(model => model.city)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.city)
+        @Html.DisplayFor(model => model.city)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.state)
+        @Html.DisplayNameFor(model => model.state)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.state)
+        @Html.DisplayFor(model => model.state)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.zip)
+        @Html.DisplayNameFor(model => model.zip)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.zip)
+        @Html.DisplayFor(model => model.zip)
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.Entity.lat)
+        @Html.DisplayNameFor(model => model.lat)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Entity.lat)
+        @Html.DisplayFor(model => model.lat)
     </dd>
 
     @Html.ActionLink("Edit", "Edit", "Entity", "Entity", new { @class = "btn btn-primary" })
 
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Entity.ID })*@
+    @*@Html.ActionLink("Edit", "Edit", new { id = model.ID })*@
 
 </div>
 
