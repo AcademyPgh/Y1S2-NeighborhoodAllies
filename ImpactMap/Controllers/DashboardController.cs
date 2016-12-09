@@ -16,24 +16,12 @@ namespace ImpactMap.Models
         {
 
             DashboardViewModel dvm = new DashboardViewModel();
-
-            dvm.Investments = db.investments.ToList();
-            dvm.Projects = db.projects.ToList();
-            dvm.Investment = new Investment();
-            dvm.Project = new Project();
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //if (dvm.Entity == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
-
-            //Utils.Utility userUtil = new Utils.Utility();
-            //dvm.Entity = db.users.Find(userUtil.UserID(1)).entity;
+            Utils.Utility userUtil = new Utils.Utility();
+            dvm.investmentsOut = db.users.Find(userUtil.UserID(User)).entity.investmentsOut.ToList();
+            dvm.projects = db.users.Find(userUtil.UserID(User)).entity.projects.ToList();
+            dvm.entity = db.users.Find(userUtil.UserID(User)).entity;
+            dvm.investment = new Investment();
+            dvm.project = new Project();
 
             return View(dvm);
         }
@@ -41,10 +29,10 @@ namespace ImpactMap.Models
 
     public class DashboardViewModel
     {
-        public List<Project> Projects { get; set; }
-        public List<Investment> Investments { get; set; }
-        public Investment Investment { get; set; }
-        public Project Project { get; set; } 
-        public Entity Entity { get; set; }
+        public List<Project> projects { get; set; }
+        public List<Investment> investmentsOut { get; set; }
+        public Investment investment { get; set; }
+        public Project project { get; set; } 
+        public Entity entity { get; set; }
     }
 }
