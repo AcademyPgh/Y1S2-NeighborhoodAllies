@@ -94,7 +94,7 @@ namespace ImpactMap.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(investment);

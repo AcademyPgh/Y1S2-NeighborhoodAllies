@@ -42,7 +42,16 @@ namespace ImpactMap.Controllers
         // GET: Entities/Create
         public ActionResult Create()
         {
-            return View();
+            Utils.Utility userUtil = new Utils.Utility();
+            User user = db.users.Find(userUtil.UserID(User));
+            if (user.entity != null)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: Entities/Create

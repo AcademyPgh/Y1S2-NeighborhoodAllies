@@ -59,7 +59,7 @@ namespace ImpactMap.Controllers
                 project.entity = db.users.Find(userUtil.UserID(User)).entity;
                 db.projects.Add(project);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(project);
