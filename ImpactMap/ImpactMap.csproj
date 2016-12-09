@@ -234,6 +234,8 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ImpactMap.mdf" />
+    <Content Include="App_Data\ImpactMap_log.ldf" />
     <Content Include="Content\Images\Academy_pgh.png" />
     <Content Include="Content\Images\NeighborhoodAllies_textonly.svg" />
     <Content Include="Content\bootstrap.css" />
@@ -336,7 +338,6 @@
     <Content Include="Views\Shared\_Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Map\" />
     <Folder Include="Views\MetricResult\" />
     <Folder Include="Views\Public\" />
