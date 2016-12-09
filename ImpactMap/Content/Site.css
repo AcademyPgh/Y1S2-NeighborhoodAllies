@@ -8,6 +8,10 @@ a {
     color: #0C7D8B;
 }
 
+.loginlink a{
+    color:white;
+}
+
 a href{
     color: #0C7D8B;
 }
@@ -68,9 +72,12 @@ button {
     white-space: normal;
 }
 
+.fa.fa-minus-circle{
+    padding-right:10px;
+}
+
 	footer {
 		text-align: center;
-		margin-top: 20px;
 		background-color: #92C337;
 		padding: 15px
 
@@ -136,11 +143,6 @@ h4{
             height: 100vh;
       }
 
-/*exclamation icon*/
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-/*fil-o icon*/
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 /*label for input inside input box/line*/
 inputWLabel {
@@ -188,6 +190,10 @@ inputWLabel {
  .pac-container {
    font-family: Roboto;
 }
+
+ .removeMetric{
+     line-height: 2em;
+ }
 
 /*primarily used for buttons, but any non-text right align*/
 .rightAlignObject{

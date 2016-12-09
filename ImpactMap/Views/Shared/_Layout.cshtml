@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ImpactMap</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -12,19 +12,16 @@
 </head>
 <body>
     <div class="header">
-        <div class="container">
+        <div class="container">            
             <div class="navbar-header">
+                <img src="~/Content/Images/impact_map.png" style="display:inline-block; max-height:10%; max-width:10%;" />
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ImpactMap", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -36,7 +33,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
     <footer>
         <div class="row">
             <!--<div class="col-md-4">
@@ -47,7 +43,7 @@
                 <img class="img-responsive" src="~/Content/Images/NeighborhoodAllies_textonly.svg" />
                 <br>
             </div>
-            
+
             <div class="col-md-2">
                 <div style="text-align: center;">
                     <br>
@@ -57,6 +53,7 @@
                     <img class="academylogo" src="~/Content/Images/Academy_pgh.png" />
                 </div>
             </div>
+        </div>
     </footer>
 </body>
 </html>
