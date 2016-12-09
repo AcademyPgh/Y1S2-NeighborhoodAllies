@@ -66,7 +66,7 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 user.entity = entity;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(entity);
