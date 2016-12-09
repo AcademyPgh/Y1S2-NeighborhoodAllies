@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>        
+        
+        <dt>
             @Html.DisplayNameFor(model => model.amount)
         </dt>
 
@@ -19,27 +27,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.entityFrom_ID)
+            @Html.DisplayNameFor(model => model.projectFrom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.entityFrom_ID)
+            @Html.DisplayFor(model => model.projectFrom.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
+            @Html.DisplayNameFor(model => model.entityTo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.entityTo_ID)
+            @Html.DisplayFor(model => model.entityTo.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.projectTo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.date)
+            @Html.DisplayFor(model => model.projectTo.name)
         </dd>
 
         <dt>
@@ -58,25 +66,11 @@
             @Html.DisplayFor(model => model.volunteerHours)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectFrom_ID)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.projectFrom_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.projectTo_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.projectTo_ID)
-        </dd>
 
     </dl>
 </div>
-<p>
+<p class="addpadding">
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

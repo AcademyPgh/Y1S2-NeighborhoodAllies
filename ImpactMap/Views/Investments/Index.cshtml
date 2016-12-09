@@ -6,93 +6,75 @@
 
 
 <h2>Investments List</h2>
+<br /><br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.entityFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.entityTo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isInKind)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.volunteerHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.projectFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.projectTo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categories)
-        </th>
+<div class="addpadding" style="max-width:1200px;">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.entityTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.projectTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isInKind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.categories)
+            </th>
 
-    </tr>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            $@Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.entityFrom.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.entityTo.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isInKind)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.volunteerHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.projectFrom.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.projectTo.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            <ul>
-            @foreach (var category in item.categories)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.entityTo.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.projectTo.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isInKind)
+                </td>
+                <td>
+                    <ul style="list-style-type:none;">
+                        @foreach (var category in item.categories)
             {
-                //@Html.DisplayFor(model => category.name) 
-                <li>@category.name</li>    
+                //@Html.DisplayFor(model => category.name)
+                <li>@category.name</li>
             }
-            </ul>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                    </ul>
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id=item.ID })
+                </td>
+            </tr>
+        }
+
 
 </table>
 
 <div>
     @Html.ActionLink("Back to Dashboard", "Index", "Dashboard")
 </div>
+
+    </div>
+

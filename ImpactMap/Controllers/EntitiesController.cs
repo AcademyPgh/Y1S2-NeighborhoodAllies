@@ -9,8 +9,8 @@ using System.Web.Mvc;
 using ImpactMap.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-using Geocoding;
-using Geocoding.Google;
+//using Geocoding;
+//using Geocoding.Google;
 
 namespace ImpactMap.Controllers
 {
@@ -64,10 +64,14 @@ namespace ImpactMap.Controllers
             if (ModelState.IsValid)
             {
                 Utils.Utility userUtil = new Utils.Utility();
-                IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyDOH51wduQKexTyFXGy0tdDqfXw47XIrjA" };
-                IEnumerable<Address> addresses = geocoder.Geocode(entity.address1 + " " + entity.address2 + " " + entity.city + " " + entity.state + " " + entity.zip);
-                entity.lat = Convert.ToString(addresses.First().Coordinates.Latitude);
-                entity.lng = Convert.ToString(addresses.First().Coordinates.Longitude);
+
+                //IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyDOH51wduQKexTyFXGy0tdDqfXw47XIrjA" };
+                //IEnumerable<Address> addresses = geocoder.Geocode(entity.address1 + " " + entity.address2 + " " + entity.city + " " + entity.state + " " + entity.zip);
+                
+              
+                //entity.lat = Convert.ToString(addresses.First().Coordinates.Latitude);
+                //entity.lng = Convert.ToString(addresses.First().Coordinates.Longitude);
+
                 var user = db.users.Find(userUtil.UserID(User));
                 db.entities.Add(entity);
                 db.SaveChanges();
