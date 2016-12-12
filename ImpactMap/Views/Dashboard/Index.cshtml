@@ -4,17 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h1>Dashboard</h1>
 
-<div class="addpadding">
+<span class="addpadding spaceDivs">
     <dt class="dl-horizontal">
 
         <dd>
             @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
         </dd>
 
         <dd>
@@ -26,180 +21,181 @@
         </dd>
 
         <dd>
-            @Html.DisplayFor(model => model.city)
+            @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state)   @Html.DisplayFor(model => model.zip)
         </dd>
-
+        <br />
         <dd>
-            @Html.DisplayFor(model => model.state)
+            @Html.DisplayFor(model => model.description)
         </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.zip)
-        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.lat)
-        </dd>
 
-        @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "button" })
 
         @*@Html.ActionLink("Edit", "Edit", new { id = model.ID })*@
 
-</div>
 
-<h2>Investments Sent</h2>
+</span>
 
-<div class="addpadding">
+<span class="spaceDivs">
+    @*Insert categories header, list, and create new button.*@
+</span>
 
-    @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "btn btn-primary" })
+<span>
+    @*Insert New Report/Requests Icons.*@
+</span>
 
-    @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "btn btn-primary" })
+<div class="spaceDivs">
+    <h2>Investments Sent</h2>
+    <div class="addpadding">
 
-    @if (Model.investmentsOut.Count != 0)
-    {
+        @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
 
-        <table class="table">
-            <tr>
-                <th>
-                    Investment Date
-                </th>
-                <th>
-                    Value
-                </th>
-                <th>
-                    Recipient
-                </th>
-                <th>
-                    Reports
-                </th>
-            </tr>
+        @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "button" })
 
-            @*Displays each investment in the table*@
-            @{foreach (var item in Model.investmentsOut.Take(5))
-                {
+        @if (Model.investmentsOut.Count != 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Investment Date
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                    <th>
+                        Recipient
+                    </th>
+                    <th>
+                        Reports
+                    </th>
+                </tr>
 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.amount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.entityTo.name)
-                        </td>
-                        <td>
-                            @{  if (item.projectTo.report != null)
-                                {
-                                    string reportID = Convert.ToString(item.projectTo.report.ID);
-                                    @Html.ActionLink("Report", reportID, "Details", "Report")
-                                }
-                                else
-                                {
-                                    <span>No report available.</span>
-                                }
-                            }
-                        </td>
-                    </tr>
-                                }
-            }
+                @*Displays each investment in the table*@
+                @{foreach (var item in Model.investmentsOut.Take(5))
+                    {
 
-
-        </table>
-
-                                }
-                                else
-                                {
-                                    <p>You Currently Have No Investments</p>
-                                }
-
-
-
-
-
-
-
-
-</div>
-<h2>My Projects</h2>
-
-<div class="addpadding">
-
-
-    @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "btn btn-primary" })
-
-    @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "btn btn-primary" })
-
-    @if (Model.projects.Count != 0)
-    {
-
-        <table class="table">
-            <tr>
-                <th>
-                    Project Name
-                </th>
-                <th>
-                    Value of Grant
-                </th>
-                <th>
-                    Grant Date
-                </th>
-                <th>
-                    Donor(s)
-                </th>
-                <th>
-                    Report
-                </th>
-            </tr>
-
-
-            @if (Model.investmentsOut != null)
-            {
-                foreach (var item in Model.projects.Take(5))
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-                        <td>
-                            @foreach (var thing in item.investmentsIn)
-                            {
-                                @Html.DisplayFor(modelItem => thing.amount)<br />
-                            }
-                        </td>
-                        <td>
-                            @foreach (var thing in item.investmentsIn)
-                            {
-                                @Html.DisplayFor(modelItem => thing.date)<br />
-                            }
-                        </td>
-                        <td>
-                            @foreach (var thing in item.investmentsIn)
-                            {
-                                @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
-                            }
-                        </td>
-                        <td>
-                            @{  if (item.report != null)
-                                {
-                                    string reportID = Convert.ToString(item.report.ID);
-
-                                    @Html.ActionLink("View", reportID, "Details", "Report")
-                                }
-                                else
-                                {
-                                    //Default create report page right now
-                                    @Html.ActionLink("Create", "Create", "Report")
-                                }
-                            }
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.entityTo.name)
+                            </td>
+                            <td>
+                                @{  if (item.projectTo.report != null)
+                                    {
+                                        string reportID = Convert.ToString(item.projectTo.report.ID);
+                                        @Html.ActionLink("Report", reportID, "Details", "Report")
+                                    }
+                                    else
+                                    {
+                                        <span>No report available.</span>
                                     }
                                 }
-        </table>
-                                }
-                                else
-                                {
-                                    <p>You Currently Have No Projects</p>
-                                }
+                            </td>
+                        </tr>
+                                    }
+                }
+
+
+            </table>
+        }
+        else
+        {
+             <p>You Currently Have No Investments</p>
+        }
+
+
+
+
+
+
+
+
     </div>
+</div>
+<div class="spaceDivs">
+    <h2>My Projects</h2>
+    <div class="addpadding">
+        @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "button" })
+
+        @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "button" })
+
+        @if (Model.projects.Count != 0)
+        {
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Project Name
+                    </th>
+                    <th>
+                        Value of Grant
+                    </th>
+                    <th>
+                        Grant Date
+                    </th>
+                    <th>
+                        Donor(s)
+                    </th>
+                    <th>
+                        Report
+                    </th>
+                </tr>
+
+
+                @if (Model.investmentsOut != null)
+                {
+                    foreach (var item in Model.projects.Take(5))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @foreach (var thing in item.investmentsIn)
+                                {
+                                    @Html.DisplayFor(modelItem => thing.amount)<br />
+                                }
+                            </td>
+                            <td>
+                                @foreach (var thing in item.investmentsIn)
+                                {
+                                    @Html.DisplayFor(modelItem => thing.date)<br />
+                                }
+                            </td>
+                            <td>
+                                @foreach (var thing in item.investmentsIn)
+                                {
+                                    @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
+                                }
+                            </td>
+                            <td>
+                                @{  if (item.report != null)
+                                    {
+                                        string reportID = Convert.ToString(item.report.ID);
+
+                                        @Html.ActionLink("View", reportID, "Details", "Report")
+                                    }
+                                    else
+                                    {
+                                        //Default create report page right now
+                                        @Html.ActionLink("Create", "Create", "Report")
+                                    }
+                                }
+                            </td>
+                        </tr>
+                                    }
+                                }
+            </table>
+         }
+         else
+         {
+            <p>You Currently Have No Projects</p>
+         }
+    </div>
+</div>
