@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImpactMap.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace ImpactMap.Controllers
 {
     public class HomeController : Controller
     {
+        private ImpactMapDbContext db = new ImpactMapDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -17,7 +20,7 @@ namespace ImpactMap.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View(db.entities.ToList());
         }
 
         public ActionResult Contact()
