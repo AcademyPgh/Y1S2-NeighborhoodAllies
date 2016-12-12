@@ -1,11 +1,19 @@
-﻿body {
+﻿a {
+    color: #0C7D8B;
+}
+
+body {
     font-family: 'Open Sans', sans-serif;
     font-size: 10pt;
     line-height: 100%;
 }
 
-a {
-    color: #0C7D8B;
+dd{
+    font-family: 'Open Sans', sans-serif;
+    color:darkgray;
+    font-weight:200;
+    font-size: 12pt;
+    padding-left:20px;
 }
 
 .loginlink a{
@@ -35,22 +43,22 @@ a href{
 }
 
 /*most buttons*/
-button {
+.button {
 
 		font-family: 'Fjalla One', sans-serif;
-		font-size: 26pt;
-		font-weight: 400;
+		font-size: 14pt;
+		font-weight: 200;
 		line-height: 100%;
 		color: #fff;
-		text-align: center;
 		background-color: #0C7D8B;
 
 		text-decoration: none;
 		position: relative;
-		display: block;
-		width: 100px;
+		display: inline-block;
 		padding:10px;
-		margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+		margin-right: 10px;
 		border-radius: 5px;
 	}
 
@@ -70,6 +78,18 @@ button {
    will truncate terms that are too long to fit in the left column */
 .dl-horizontal dt {
     white-space: normal;
+}
+
+.fa-exclamation{
+    color: red;
+    font-size: 50pt;
+    text-align:right;
+}
+
+.fa-file-o{
+    color: #0C7D8B;
+    font-size: 40pt;
+    text-align: right;
 }
 
 .fa.fa-minus-circle{
@@ -204,6 +224,11 @@ inputWLabel {
 
 .showFormField {
     display: block;
+}
+
+.spaceDivs{
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
