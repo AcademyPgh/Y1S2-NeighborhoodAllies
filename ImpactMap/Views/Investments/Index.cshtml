@@ -52,7 +52,15 @@
                     @Html.DisplayFor(modelItem => item.projectTo.name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.isInKind)
+                    @if (item.isInKind)
+                    {
+                        <span>Yes</span>
+                    }
+
+                    else
+                    {
+                        <span>No</span>
+                    }
                 </td>
                 <td>
                     <ul style="list-style-type:none;">
