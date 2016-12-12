@@ -80,6 +80,18 @@ a href{
     white-space: normal;
 }
 
+.fa-exclamation{
+    color: red;
+    font-size: 50pt;
+    text-align:right;
+}
+
+.fa-file-o{
+    color: #0C7D8B;
+    font-size: 40pt;
+    text-align: right;
+}
+
 .fa.fa-minus-circle{
     padding-right:10px;
 }

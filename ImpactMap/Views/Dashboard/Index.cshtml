@@ -28,21 +28,24 @@
             @Html.DisplayFor(model => model.description)
         </dd>
 
-
-
         @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "button" })
-
-        @*@Html.ActionLink("Edit", "Edit", new { id = model.ID })*@
-
-
 </span>
 
-<span class="spaceDivs">
+<span class="addpadding spaceDivs">
     @*Insert categories header, list, and create new button.*@
 </span>
 
-<span>
+<span class="addpadding spaceDivs">
     @*Insert New Report/Requests Icons.*@
+    @*@if ( user.ID has new reports/ report requests)
+                {
+                }
+     else
+                {
+                  <span class
+                }*@
+    <span class="fa fa-exclamation"></span>
+    <span class="fa fa-file-o"></span>
 </span>
 
 <div class="spaceDivs">
@@ -179,12 +182,12 @@
                                     {
                                         string reportID = Convert.ToString(item.report.ID);
 
-                                        @Html.ActionLink("View", reportID, "Details", "Report")
+                                        @Html.ActionLink("View", reportID, "Details", "Reports")
                                     }
                                     else
                                     {
                                         //Default create report page right now
-                                        @Html.ActionLink("Create", "Create", "Report")
+                                        @Html.ActionLink("Create", "Create", "Reports")
                                     }
                                 }
                             </td>
