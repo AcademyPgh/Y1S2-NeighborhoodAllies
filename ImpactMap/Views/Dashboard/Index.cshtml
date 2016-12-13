@@ -3,81 +3,79 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <span style="vertical-align: top;">
-    <span class="spaceDivs dbSpans">
-        <dt class="dl-horizontal">
+        <span class="spaceDivs dbSpans">
+            <dt class="dl-horizontal">
 
-            <dd>
-                @Html.DisplayFor(model => model.name)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.name)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.address1)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.address1)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.address2)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.address2)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state)   @Html.DisplayFor(model => model.zip)
-            </dd>
-            <br />
-            <dd>
-                @Html.DisplayFor(model => model.description)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state)   @Html.DisplayFor(model => model.zip)
+                </dd>
+                <br />
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
 
-            @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "addpadding button" })
-    </span>
+                @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "addpadding button" })
+        </span>
 
-    <span class="spaceDivs dbSpans">
-        <h2>My Investment Tags</h2>
-        <div>
-            @if (Categories.Index != 0)
+        <span class="spaceDivs dbSpans">
+            <h2>My Investment Tags</h2>
+            <div>
+                @if (Categories.Index != 0)
             {
-                <table class="table">
-                    @{foreach (var item in Categories.Index)
+                    <table class="table">
+                        @{foreach (var item in Categories.Index)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                </tr>
                         }
-                    }
-                </table>
+                        }
+                    </table>
             }
             else
             {
-                <p>You Don't Have Any Investment Tags!</p>
+                                <p>You Don't Have Any Investment Tags!</p>
             }
-        </div>
-        @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
+            </div>
+            @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
+        </span>
+    <span class="spaceDivs dbSpans">
+        @*@if ( user.ID has new reports/ report requests)
+                {
+                    <span style="display:block; text-align:right;">
+                        <span class="fa fa-exclamation"></span>
+                        <span class="fa fa-file-o"></span>
+                    </span>
+                }
+            else
+                {
+                    <span style="display:block; text-align:right;">
+                        <span class="fa fa-file-o"></span>
+                     </span>
+                }*@
+        <span style="display:block; text-align:right;">
+            <span class="fa fa-exclamation"></span>
+            <span class="fa fa-file-o"></span>
+        </span>
     </span>
-@*Insert categories header, list, and create new button.*@
 </span>
 
-<span class="spaceDivs dbSpans">
-    @*@if ( user.ID has new reports/ report requests)
-            {
-                <span style="display:block; text-align:right;">
-                    <span class="fa fa-exclamation"></span>
-                    <span class="fa fa-file-o"></span>
-                </span>
-            }
-        else
-            {
-                <span style="display:block; text-align:right;">
-                    <span class="fa fa-file-o"></span>
-                 </span>
-            }*@
-    <span style="display:block; text-align:right;">
-        <span class="fa fa-exclamation"></span>
-        <span class="fa fa-file-o"></span>
-    </span>
-</span>
-</div>
+    
 
 <div class="spaceDivs">
     <h2>Investments Sent</h2>
