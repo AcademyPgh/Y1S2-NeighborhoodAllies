@@ -36,9 +36,13 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Reports/Create
-        public ActionResult Create()
+        public ActionResult Create(int? ID)
         {
-            return View();
+            ViewBag.ID = ID;
+            ReportViewModel rvm = new ReportViewModel();
+            rvm.project = db.projects.Find(ID);
+            //Project currentProject = db.projects.Find(ID);
+            return View(rvm.project.report);
         }
 
         // POST: Reports/Create
@@ -46,10 +50,15 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,project_ID,completed,reportText,dueDate")] Report report)
+        public ActionResult Create([Bind(Include = "ID,completed,reportText,dueDate,project")] Report report, Project project)
         {
             if (ModelState.IsValid)
             {
+                report.ID = ViewBag.ID;
+                Project currentProject = db.projects.Find(ViewBag.ID);
+                currentProject.report = report;
+                report.project = currentProject;
+                //rvm.report = report;
                 db.reports.Add(report);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,5 +132,11 @@ namespace ImpactMap.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public class ReportViewModel
+    {
+        public Project project { get; set; }
+        public Report report { get; set; }
     }
 }

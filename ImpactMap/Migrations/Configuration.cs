@@ -12,7 +12,7 @@ namespace ImpactMap.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ImpactMap.Models.ApplicationDbContext context)
+        protected override void Seed(ImpactMap.Models.ImpactMapDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -26,6 +26,9 @@ namespace ImpactMap.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            
         }
+
+        
     }
 }

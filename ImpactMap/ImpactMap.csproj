@@ -347,6 +347,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_Map.cshtml" />
+    <Content Include="Views\Shared\_MetricsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Map\" />

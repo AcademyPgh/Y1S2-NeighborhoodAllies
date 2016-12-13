@@ -1,0 +1,13 @@
+﻿@model ImpactMap.Models.Project
+
+
+@foreach (var investment in Model.investmentsIn)
+    {
+        foreach (var category in investment.categories)
+        {
+            foreach (var metric in category.metrics)
+            {
+            <span>@metric</span>
+        }
+    }
+}

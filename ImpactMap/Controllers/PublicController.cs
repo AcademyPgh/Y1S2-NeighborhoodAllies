@@ -38,5 +38,10 @@ namespace ImpactMap.Controllers
 
             return Content(result, "application/json");
         }
+
+        public ActionResult getCurrentProject()
+        {
+            return View();
+        }
     }
 }

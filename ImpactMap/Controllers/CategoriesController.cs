@@ -65,7 +65,7 @@ namespace ImpactMap.Controllers
                 foreach (var metricName in newMetrics.Split(','))
                 {
                     metric.name = metricName;
-                    metric.categoryID = catID;
+                    metric.category = category;
                     db.metrics.Add(metric);
                     db.SaveChanges();
                 }
