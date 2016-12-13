@@ -55,22 +55,38 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.isInKind)
+
+            @if (Model.isInKind)
+            {
+               <span>Yes</span>
+            }
+
+            else
+            {
+               <span>No</span>
+            }
+            @*@Html.DisplayFor(model => model.isInKind)*@
         </dd>
+
+        @if (Model.isInKind)
+        {
 
         <dt>
             @Html.DisplayNameFor(model => model.volunteerHours)
         </dt>
 
         <dd>
+            
             @Html.DisplayFor(model => model.volunteerHours)
+            
         </dd>
+        }
 
 
 
     </dl>
 </div>
 <p class="addpadding">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" }) 
+    @Html.ActionLink("Back to List", "Index", "Investments", new { @class = "button" })
 </p>

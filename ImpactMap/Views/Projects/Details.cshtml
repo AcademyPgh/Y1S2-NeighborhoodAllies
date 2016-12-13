@@ -25,10 +25,95 @@
         <dd>
             @Html.DisplayFor(model => model.description)
         </dd>
-
     </dl>
 </div>
+
+
+<h3>Incoming Investments</h3>
+
+@if (Model.investmentsIn.Count != 0)
+{
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Organization</th>
+            <th>Amount</th>
+        </tr>
+
+        @{foreach (var ivi in Model.investmentsIn)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => ivi.date)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => ivi.entityFrom.name)
+                    </td>
+
+                    <td>
+                        $@Html.DisplayFor(modelItem => ivi.amount)
+                    </td>
+
+                </tr>
+
+            }
+        }
+
+    </table>
+            }
+
+            else
+            {
+                <p>This project has no incoming investments</p>
+            }
+
+
+
+
+<h3>Outgoing Investments</h3>
+
+@if (Model.investmentsOut.Count != 0)
+{
+
+<table>
+
+    @{foreach (var ivo in Model.investmentsOut)
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayNameFor(modelItem => ivo.date)
+                </td>
+
+                <td>
+                    @Html.DisplayNameFor(modelItem => ivo.entityTo.name)
+                </td>
+
+                <td>
+                    $@Html.DisplayFor(modelItem => ivo.amount)
+                </td>
+
+            </tr>
+
+        }
+    }
+
+</table>
+        }
+
+        else
+        {
+            <p>This project has no outgoing investments</p>
+        }
+
+
+
+
+
 <p class="addpadding">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
+    @Html.ActionLink("Back to Project List", "Index", "Projects", new { @class = "button" })
 </p>
