@@ -34,7 +34,7 @@
     <span class="spaceDivs dbSpans">
         <h2>My Investment Tags</h2>
         <div>
-            @if (Categories.Index != 0)
+            @if (Model.categories)
             {
                 <table class="table">
                     @{foreach (var item in Categories.Index)
@@ -111,7 +111,7 @@
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.date)
+                        @Html.DisplayFor(modelItem => item.date.ToString("MM/DD/YY"))
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.amount)
