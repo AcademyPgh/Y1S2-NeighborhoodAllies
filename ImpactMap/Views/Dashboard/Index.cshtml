@@ -31,33 +31,33 @@
             @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "addpadding button" })
     </span>
 
-    @*<span class="spaceDivs dbSpans">
+    <span class="spaceDivs dbSpans">
         <h2>My Investment Tags</h2>
         <div>
-            @if (Model.categories)
+            <table class="table">
+                @foreach (var investment in Model.investmentsOut)
+                {
+                    foreach (var category in investment.categories)
+                    {
+                        <tr>
+                            <td>
+                                Html.DisplayFor(modelItem => category.name)
+                            </td>
+                        </tr>
 
-            {
-                <table class="table">
-                    @{foreach (var item in Categories.Index)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                            </tr>
-                        }
                     }
-                </table>
-                        }
-                        else
-                        {
-                            <p>You Don't Have Any Investment Tags!</p>
-                        }
+                }
+            </table>
         </div>
-        @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
+
+        <div class="addpadding">
+            @Html.ActionLink("View Tags", "Index", "Categories", "Categories", new { @class = "button" })
+            @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
+        </div>
     </span>
-    <span class="spaceDivs dbSpans">*@
-        @*@if ( user.ID has new reports/ report requests)
+
+    @*<span class="spaceDivs dbSpans">
+        @if ( user.ID has new reports/ report requests)
                 {
                     <span style="display:block; text-align:right;">
                         <span class="fa fa-exclamation"></span>
@@ -69,12 +69,13 @@
                     <span style="display:block; text-align:right;">
                         <span class="fa fa-file-o"></span>
                      </span>
-                }*@
+                }
+
         <span style="display:block; text-align:right;">
             <span class="fa fa-exclamation"></span>
             <span class="fa fa-file-o"></span>
-        </span>
-    </span>
+        </span>*@
+    @*</span>*@
 </span>
 
 
@@ -106,33 +107,32 @@
                 </tr>
 
                 @*Displays each investment in the table*@
-                @{foreach (var item in Model.investmentsOut.Take(5))
-                    {
+                @foreach (var item in Model.investmentsOut.Take(5))
+                {
 
-                        <tr>
+                    <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.date)
+                                @item.date.ToShortDateString()
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.amount)
+                                <p>$@Html.DisplayFor(modelItem => item.amount)</p>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.entityTo.name)
                             </td>
                             <td>
-                                @{  if (item.projectTo.report != null)
-                                    {
+                                @if (item.projectTo.report != null)
+                                {
                                         string reportID = Convert.ToString(item.projectTo.report.ID);
                                         @Html.ActionLink("Report", reportID, "Details", "Report")
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
                                         <span>No report available.</span>
-                                    }
                                 }
                             </td>
-                        </tr>
-                                    }
+                    </tr>
+                                    
                 }
 
 
@@ -186,13 +186,13 @@
                             <td>
                                 @foreach (var thing in item.investmentsIn)
                                 {
-                                    @Html.DisplayFor(modelItem => thing.amount)<br />
+                                    <p>$@Html.DisplayFor(modelItem => thing.amount)</p><br />
                                 }
                             </td>
                             <td>
                                 @foreach (var thing in item.investmentsIn)
                                 {
-                                    @Html.DisplayFor(modelItem => thing.date)<br />
+                                    @thing.date.ToShortDateString()<br />
                                 }
                             </td>
                             <td>
