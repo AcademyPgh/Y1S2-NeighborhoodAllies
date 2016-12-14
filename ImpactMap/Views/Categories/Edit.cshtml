@@ -23,15 +23,9 @@
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
 
 <div class="addpadding">
-    @Html.ActionLink("Back to List", "Index")
+    <input type="submit" value="Save" class="button" /> | @Html.ActionLink("Back to List", "Index")
 </div>
