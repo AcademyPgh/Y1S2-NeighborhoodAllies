@@ -71,6 +71,7 @@ namespace ImpactMap.Controllers
 
 
                 if (categories != "" && categories != null)
+
                 {
                     investment.categories = new List<Category>();
                     foreach (var id in categories.Split(','))
@@ -78,7 +79,6 @@ namespace ImpactMap.Controllers
                         investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
                     }
                 }
-                
                 db.investments.Add(investment);
                 db.SaveChanges();
 
