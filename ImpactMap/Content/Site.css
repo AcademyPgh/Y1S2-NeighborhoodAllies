@@ -28,6 +28,16 @@ a href{
     height:50px;
 }
 
+.metricName:after {
+    content: ",";
+}
+
+.metricName:after {
+    content: "";
+}
+
+}
+
 .account {
     background-image: url(/Content/Images/loginbg.jpg);
 }
@@ -264,5 +274,13 @@ th{
     font-family: Roboto;
     font-size: 13px;
     font-weight: 300;
+}
+
+span.metricName:after{
+    content:",";
+}
+
+span.metricName:last-of-type:after{
+    content:"";
 }
 

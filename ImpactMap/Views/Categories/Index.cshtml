@@ -21,21 +21,27 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+   <tr>
         <td>
             @item.name
-            @if (item.ID == 5)
+        </td>
+       <td>
+          
+            @if (item.metrics.Count != 0)
             {
+
                 foreach (var metric in item.metrics)
                 {
-                    @metric.name
+                    <span class="metricName">@metric.name</span>
                 }
             }
             else
             {
-                <div>No metrics available.</div>
+              <span>No Metrics Available</span>
             }
         </td>
+    </tr>
+    <tr>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
