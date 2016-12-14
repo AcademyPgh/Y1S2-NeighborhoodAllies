@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Investment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -112,7 +111,7 @@
 
 
 <div>
-    @Html.ActionLink("Back to Dashboard", "Index", "Dashboard")
+    @Html.ActionLink("Back to Dashboard", "Index", "Dashboard", new { @class = "button" });
     <br />
 </div>
 
@@ -187,7 +186,7 @@
                 url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
                 type: 'get',
                 success: function (data) {
-                    var html = ' <option value="0">No Project Selected</option>';
+                    var html = '';
                     data.map(function (project) {
                         //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
                         html += '<option value=' + project.ID + '>' + project.name + '</option>'
