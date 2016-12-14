@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Categories", new { @class = "button" })
 </p>
 <table class="table">
     <tr>
@@ -40,8 +40,7 @@
               <span>No Metrics Available</span>
             }
         </td>
-    </tr>
-    <tr>
+   
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
