@@ -67,13 +67,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="CatList"></div>
-                <input name="categories" id="categories" type="hidden" />
+        @if (Model.Investment.categories != null)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="CatList"></div>
+                    <input name="categories" id="categories" type="hidden" />
+                </div>
             </div>
-        </div>
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })

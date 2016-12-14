@@ -28,7 +28,9 @@ namespace ImpactMap.Models
         [Display(Name = "ZIP Code")]
         public string zip { get; set; }
         [Display(Name = "Latitude")]
+        //[Required(AllowEmptyStrings = true)]
         public string lat { get; set; }
+        //[Required(AllowEmptyStrings = true)]
         [Display(Name = "Longitude")]
         public string lng { get; set; }
         public virtual List<User> users { get; set; }

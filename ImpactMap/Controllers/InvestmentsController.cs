@@ -69,12 +69,14 @@ namespace ImpactMap.Controllers
                 investment.projectTo = db.projects.Find(projectTo_ID);
                 investment.projectFrom = db.projects.Find(projectFrom_ID);
 
-                investment.categories = new List<Category>();
-                foreach (var id in categories.Split(','))
+                if (investment.categories != null)
                 {
-                    investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
+                    investment.categories = new List<Category>();
+                    foreach (var id in categories.Split(','))
+                    {
+                        investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
+                    }
                 }
-                
                 db.investments.Add(investment);
                 db.SaveChanges();
 
