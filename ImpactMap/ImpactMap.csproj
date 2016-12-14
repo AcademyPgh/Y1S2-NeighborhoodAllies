@@ -234,6 +234,13 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\android-chrome-192x192.png" />
+    <Content Include="Content\android-chrome-384x384.png" />
+    <Content Include="Content\apple-touch-icon.png" />
+    <Content Include="Content\browserconfig.xml" />
+    <Content Include="Content\favicon-16x16.png" />
+    <Content Include="Content\favicon-32x32.png" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\Images\Academy_pgh.png" />
     <Content Include="Content\Images\android-chrome-192x192.png" />
     <Content Include="Content\Images\android-chrome-384x384.png" />
@@ -249,6 +256,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\loginbg.jpg" />
     <Content Include="Content\Images\safari-pinned-tab.svg" />
+    <Content Include="Content\mstile-150x150.png" />
+    <Content Include="Content\safari-pinned-tab.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -259,6 +268,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\manifest.json" />
+    <Content Include="Content\manifest.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\googlemaps.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

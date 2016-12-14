@@ -6,7 +6,7 @@
 
 <h2>Create Report</h2>
 
-@using (Html.BeginForm(new { id = "createReportForm" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -76,7 +76,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" id="submitButton" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -96,6 +96,15 @@
 
         var resultTextArray = [];
 
+        $('#submitButton').click(function () {
+            $('.resultTextBox').each(function () {
+                resultTextArray.push($(this).val());
+            })
+            $('#resultTexts').val(resultTextArray.toString());
+            console.log("Hi");
+            $('#createReportForm').submit();
+        });
+
         function resultTextPush() {
             $('.resultTextBox').each(function () {
                 resultTextArray.push($(this).val());
@@ -104,8 +113,7 @@
             console.log(resultTextArray.toString());
         }
 
-        $('#createReportForm').submit(IDpush());
-        $('#createReportForm').submit(resultTextPush());
+        $(IDpush);
     </script>
 
     }

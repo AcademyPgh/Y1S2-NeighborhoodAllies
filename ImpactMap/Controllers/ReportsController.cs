@@ -54,7 +54,7 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
-                int currentMetricResultID;
+                
 
                 string[] resultTextArray = resultTexts.Split(',');
                 int i = 0;

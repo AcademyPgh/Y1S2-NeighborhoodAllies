@@ -44,6 +44,7 @@ namespace ImpactMap.Controllers
         {
             Utils.Utility userUtil = new Utils.Utility();
             User user = db.users.Find(userUtil.UserID(User));
+            
             if (user.entity != null)
             {
                 return RedirectToAction("Index", "Dashboard");
@@ -77,6 +78,18 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 user.entity = entity;
                 db.SaveChanges();
+
+                Project project = new Project();
+                project.name = "General Fund";
+                project.description = "General Pool of Funds - unassigned to a project";
+                project.entity = entity;
+                db.projects.Add(project);
+                db.SaveChanges();
+
+                entity.projects.Add(project);
+                db.SaveChanges();
+
+                
                 return RedirectToAction("Index", "Dashboard");
             }
 
