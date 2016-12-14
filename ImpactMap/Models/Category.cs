@@ -9,7 +9,7 @@ namespace ImpactMap.Models
     public class Category
     {
         public int ID { get; set; }
-        [Display(Name = "Category Name")]
+        [Display(Name = "Tag")]
         public string name { get; set; }
         public virtual List<Metric> metrics { get; set; }
     }
