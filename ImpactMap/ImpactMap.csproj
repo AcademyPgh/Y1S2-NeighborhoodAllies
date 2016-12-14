@@ -234,8 +234,6 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ImpactMap.mdf" />
-    <Content Include="App_Data\ImpactMap_log.ldf" />
     <Content Include="Content\Images\Academy_pgh.png" />
     <Content Include="Content\Images\android-chrome-192x192.png" />
     <Content Include="Content\Images\android-chrome-384x384.png" />
@@ -350,6 +348,7 @@
     <Content Include="Views\Shared\_MetricsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Map\" />
     <Folder Include="Views\MetricResult\" />
     <Folder Include="Views\Public\" />

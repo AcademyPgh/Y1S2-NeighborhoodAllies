@@ -68,6 +68,9 @@ namespace ImpactMap.Controllers
                     metric.categoryID = catID;
                     db.metrics.Add(metric);
                     db.SaveChanges();
+                    Category currentCategory = db.categories.Find(catID);
+                    currentCategory.metrics.Add(metric);
+                    db.SaveChanges();
                 }
 
                 return RedirectToAction("Index");

@@ -38,11 +38,11 @@ namespace ImpactMap.Controllers
         // GET: Reports/Create
         public ActionResult Create(int? ID)
         {
-            ViewBag.ID = ID;
+            
+            //ViewBag.ID = ID;
             ReportViewModel rvm = new ReportViewModel();
             rvm.project = db.projects.Find(ID);
-            //Project currentProject = db.projects.Find(ID);
-            return View(rvm.project.report);
+            return View(rvm);
         }
 
         // POST: Reports/Create
@@ -50,16 +50,28 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,completed,reportText,dueDate,project")] Report report, Project project)
+        public ActionResult Create([Bind(Include = "ID,completed,reportText,dueDate")] Report report, int project_ID, string metricIDs, string resultTexts)
         {
             if (ModelState.IsValid)
             {
-                report.ID = ViewBag.ID;
-                Project currentProject = db.projects.Find(ViewBag.ID);
-                currentProject.report = report;
-                report.project = currentProject;
-                //rvm.report = report;
-                db.reports.Add(report);
+                int currentMetricResultID;
+
+                string[] resultTextArray = resultTexts.Split(',');
+                int i = 0;
+
+                foreach (var metricID in metricIDs.Split(','))
+                {
+                    int mID = Convert.ToInt32(metricID);
+                    MetricResult mr = new MetricResult();
+                    mr.report = report;
+                    mr.metric = db.metrics.Find(mID);
+                    mr.resultText = resultTextArray[i];
+                    i++;
+                    db.metricResults.Add(mr);
+                    db.SaveChanges();                    
+                }
+
+                db.projects.Find(project_ID).report = report;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

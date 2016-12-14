@@ -14,13 +14,27 @@
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.metrics)
+            
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @item.name
+            @if (item.ID == 5)
+            {
+                foreach (var metric in item.metrics)
+                {
+                    @metric.name
+                }
+            }
+            else
+            {
+                <div>No metrics available.</div>
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

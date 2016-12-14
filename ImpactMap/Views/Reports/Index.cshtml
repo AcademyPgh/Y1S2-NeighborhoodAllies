@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ImpactMap.Models.Report>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reports Index";
 }
 
 <h2>Index</h2>
@@ -11,9 +11,6 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.project_ID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.completed)
         </th>
@@ -28,9 +25,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.project_ID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.completed)
         </td>

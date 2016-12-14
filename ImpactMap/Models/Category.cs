@@ -11,6 +11,6 @@ namespace ImpactMap.Models
         public int ID { get; set; }
         [Display(Name = "Category Name")]
         public string name { get; set; }
-        public List<Metric> metrics { get; set; }
+        public virtual List<Metric> metrics { get; set; }
     }
 }

@@ -1,64 +1,76 @@
-﻿@model ImpactMap.Models.Report
+﻿@model ImpactMap.Controllers.ReportViewModel
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Report</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(new { id = "createReportForm" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Report</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
-            </div>
+            <input name="project_ID"
+                   type="hidden"
+                   value="@Model.project.ID" />
         </div>
 
+
         <div class="form-group">
-            @Html.LabelFor(model => model.completed, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.report.completed, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.completed)
-                    @Html.ValidationMessageFor(model => model.completed, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.report.completed)
+                    @Html.ValidationMessageFor(model => model.report.completed, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div>Please include information on the following metrics.</div>
-        
-        @*@foreach (var investment in Model.project.investmentsIn)
+
+       <script>var idArray = []</script>
+
+        @foreach (var investment in Model.project.investmentsIn)
         {
             foreach (var category in investment.categories)
             {
+                <div>Category:  @category.name</div>
                 foreach (var metric in category.metrics)
                 {
-                    <span>@metric</span>
+                    <div>Metric:  @metric.name</div>
+
+                    <script>
+
+                        idArray.push(@metric.ID)
+                    </script>
+
+                    <input type="text" class="resultTextBox" name="resultText" />
                 }
             }
-        }*@
+        }
 
 
+        <input type="hidden" id="metricIDs" name="metricIDs" />
+        <input type="hidden" id="resultTexts" name="resultTexts" />
+        
         <div class="form-group">
-            @Html.LabelFor(model => model.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.reportText, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.reportText, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.report.reportText, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.report.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.dueDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dueDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.report.dueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.report.dueDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -73,3 +85,27 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function IDpush() {
+            $('#metricIDs').val(idArray.toString());
+        }
+
+        var resultTextArray = [];
+
+        function resultTextPush() {
+            $('.resultTextBox').each(function () {
+                resultTextArray.push($(this).val());
+            })
+            $('#resultTexts').val(resultTextArray.toString());
+            console.log(resultTextArray.toString());
+        }
+
+        $('#createReportForm').submit(IDpush());
+        $('#createReportForm').submit(resultTextPush());
+    </script>
+
+    }

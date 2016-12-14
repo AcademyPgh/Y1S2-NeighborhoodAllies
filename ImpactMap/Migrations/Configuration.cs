@@ -12,7 +12,7 @@ namespace ImpactMap.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ImpactMap.Models.ImpactMapDbContext context)
+        protected override void Seed(ImpactMap.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
