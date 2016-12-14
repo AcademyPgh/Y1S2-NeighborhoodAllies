@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Category</h4>
+    <h4>Tag</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,14 +19,28 @@
             @Html.DisplayFor(model => model.name)
         </dd>
 
+        <dt>
+            Metrics
+        </dt>
+
+        <dd>
+            @{ 
+                foreach (var metric in Model.metrics)
+                {
+                    @metric.name
+                }
+            }
+            
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-actions no-color addpadding">
+            <input type="submit" value="Delete" class="button" /> |
+            @Html.ActionLink("Back to Dashboard", "Index", "Dashboard")
         </div>
     }
 </div>
