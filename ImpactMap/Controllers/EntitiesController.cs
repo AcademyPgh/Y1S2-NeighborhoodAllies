@@ -118,9 +118,20 @@ namespace ImpactMap.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,name,description,address1,address2,city,state,zip,lat,lng")] Entity entity)
         {
+            Utils.Utility userUtil = new Utils.Utility();
+
+            IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyDOH51wduQKexTyFXGy0tdDqfXw47XIrjA" };
+            IEnumerable<Address> addresses = geocoder.Geocode(entity.address1 + " " + entity.address2 + " " + entity.city + " " + entity.state + " " + entity.zip);
+
             if (ModelState.IsValid)
             {
+                entity.lat = Convert.ToString(addresses.First().Coordinates.Latitude);
+                entity.lng = Convert.ToString(addresses.First().Coordinates.Longitude);
+
+                var user = db.users.Find(userUtil.UserID(User));
                 db.Entry(entity).State = EntityState.Modified;
+                db.SaveChanges();
+                user.entity = entity;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
