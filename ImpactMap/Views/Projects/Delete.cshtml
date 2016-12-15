@@ -32,9 +32,11 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="addpadding">
+            <input type="submit" value="Delete" class="button" />
+        </div>
+        <div class="addpadding form-actions no-color">
+            @Html.ActionLink("Project List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
         </div>
     }
 </div>

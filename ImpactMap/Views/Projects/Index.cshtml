@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.report)
+            
         </th>
     </tr>
 
@@ -31,20 +31,7 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
-                </td>            
-                <td>
-                    @{  if (item.report != null)
-                    {
-                        string reportID = Convert.ToString(item.report.ID);
-
-                @Html.ActionLink("Report", reportID, "Details", "Report")
-                    }
-                    else
-                    {
-                <span>No report available.</span>
-                    }
-                    }
-                </td>
+                </td>   
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
@@ -54,7 +41,5 @@
                         }
 </table>
 
-    <div>
-        @Html.ActionLink("Back to Dashboard", "Index", "Dashboard", new { @class = "button" })
-    </div>
+        @Html.ActionLink("Dashboard", "Index", "Dashboard")
 </div>
