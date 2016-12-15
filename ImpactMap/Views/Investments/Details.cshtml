@@ -86,7 +86,8 @@
 
     </dl>
 </div>
-<p class="addpadding">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" }) 
-    @Html.ActionLink("Back to List", "Index", "Investments", new { @class = "button" })
-</p>
+<div class="addpadding">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Investment List", "Index", "Investments") | 
+    @Html.ActionLink("Dashboard", "Index", "Dashboard")
+</div>

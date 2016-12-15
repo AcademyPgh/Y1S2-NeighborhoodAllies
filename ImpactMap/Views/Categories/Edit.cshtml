@@ -41,12 +41,18 @@
         </div>
 
         <input name="newMetrics" id="newMetrics" type="hidden" />
-    </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="button" />
+            </div>
+        </div>
 
 
 
             <div class="addpadding">
                 <input type="submit" value="Save" class="button" /> | @Html.ActionLink("Back to List", "Index")
+            </div>
+            <div class="addpadding">
+                @Html.ActionLink("Dashboard", "Index", "Dashboard")
             </div>
 
             @section Scripts {
@@ -104,3 +110,5 @@
                 </script>
             }
                         }
+
+
