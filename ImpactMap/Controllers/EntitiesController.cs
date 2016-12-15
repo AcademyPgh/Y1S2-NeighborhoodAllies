@@ -128,10 +128,7 @@ namespace ImpactMap.Controllers
                 entity.lat = Convert.ToString(addresses.First().Coordinates.Latitude);
                 entity.lng = Convert.ToString(addresses.First().Coordinates.Longitude);
 
-                var user = db.users.Find(userUtil.UserID(User));
                 db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
-                user.entity = entity;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
