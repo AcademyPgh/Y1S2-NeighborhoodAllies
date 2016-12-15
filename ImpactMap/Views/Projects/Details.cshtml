@@ -30,90 +30,97 @@
 
 
 <h3>Incoming Investments</h3>
+<div class="addpadding">
+    @if (Model.investmentsIn.Count != 0)
+    {
 
-@if (Model.investmentsIn.Count != 0)
-{
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                <th>Donor</th>
+                <th>Value</th>
+            </tr>
 
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Organization</th>
-            <th>Amount</th>
-        </tr>
+            @{foreach (var ivi in Model.investmentsIn)
+                {
+                    <tr>
 
-        @{foreach (var ivi in Model.investmentsIn)
-            {
-                <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => ivi.date)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => ivi.date)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => ivi.entityFrom.name)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => ivi.entityFrom.name)
-                    </td>
+                        <td>
+                            $@Html.DisplayFor(modelItem => ivi.amount)
+                        </td>
 
-                    <td>
-                        $@Html.DisplayFor(modelItem => ivi.amount)
-                    </td>
+                    </tr>
 
-                </tr>
-
-            }
-        }
-
-    </table>
+                }
             }
 
-            else
-            {
-                <p>This project has no incoming investments</p>
-            }
+        </table>
+                }
 
+                else
+                {
+                    <p>This project has no incoming investments</p>
+                }
+</div>
 
 
 
 <h3>Outgoing Investments</h3>
+<div class="addpadding">
+    @if (Model.investmentsOut.Count != 0)
+    {
 
-@if (Model.investmentsOut.Count != 0)
-{
+        <table class="table">
 
-<table>
-
-    @{foreach (var ivo in Model.investmentsOut)
-            {
             <tr>
-
-                <td>
-                    @Html.DisplayNameFor(modelItem => ivo.date)
-                </td>
-
-                <td>
-                    @Html.DisplayNameFor(modelItem => ivo.entityTo.name)
-                </td>
-
-                <td>
-                    $@Html.DisplayFor(modelItem => ivo.amount)
-                </td>
-
+                <th>Date</th>
+                <th>Recipient</th>
+                <th>Value</th>
             </tr>
 
-        }
-    }
+            @{foreach (var ivo in Model.investmentsOut)
+                {
+                    <tr>
 
-</table>
-        }
+                        <td>
+                            @Html.DisplayFor(modelItem => ivo.date)
+                        </td>
 
-        else
-        {
-            <p>This project has no outgoing investments</p>
-        }
+                        <td>
+                            @Html.DisplayFor(modelItem => ivo.entityTo.name)
+                        </td>
 
+                        <td>
+                            $@Html.DisplayFor(modelItem => ivo.amount)
+                        </td>
+
+                    </tr>
+
+                }
+            }
+
+        </table>
+                }
+
+                else
+                {
+                    <p>This project has no outgoing investments</p>
+                }
+</div>
 
 
 
 
 <p class="addpadding">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
-    @Html.ActionLink("Back to Project List", "Index", "Projects", new { @class = "button" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) | 
+    @Html.ActionLink("Project List", "Index", "Projects") | 
+    @Html.ActionLink("Dashboard", "Index", "Dashboard")
 </p>

@@ -161,16 +161,7 @@
                         Project Name
                     </th>
                     <th>
-                        Value of Grant
-                    </th>
-                    <th>
-                        Grant Date
-                    </th>
-                    <th>
-                        Donor(s)
-                    </th>
-                    <th>
-                        Report
+                        
                     </th>
                 </tr>
 
@@ -184,45 +175,16 @@
                                 @Html.DisplayFor(modelItem => item.name)
                             </td>
                             <td>
-                                @foreach (var thing in item.investmentsIn)
-                                {
-                                    @Html.DisplayFor(modelItem => thing.amount)<br />
-                                }
-                            </td>
-                            <td>
-                                @foreach (var thing in item.investmentsIn)
-                                {
-                                    @Html.DisplayFor(modelItem => thing.date)<br />
-                                }
-                            </td>
-                            <td>
-                                @foreach (var thing in item.investmentsIn)
-                                {
-                                    @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
-                                }
-                            </td>
-                            <td>
-                                @{  if (item.report != null)
-                                    {
-                                        string reportID = Convert.ToString(item.report.ID);
 
-                                        @Html.ActionLink("View", reportID, "Details", "Reports")
-                                    }
-                                    else
-                                    {
-                                        //Default create report page right now
-                                        @Html.ActionLink("Create Report", "Create", "Reports", new { id = item.ID }, null)
-                                    }
-                                }
                             </td>
                         </tr>
-                                        }
-                                    }
+                    }
+                 }
             </table>
-                                    }
-                                    else
-                                    {
-                                        <p>You Currently Have No Projects</p>
-                                    }
+                 }
+                 else
+                 {
+                    <p>You Currently Have No Projects</p>
+                 }
     </div>
 </div>

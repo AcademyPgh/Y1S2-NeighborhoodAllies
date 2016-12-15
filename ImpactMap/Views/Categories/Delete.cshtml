@@ -27,7 +27,7 @@
             @{ 
                 foreach (var metric in Model.metrics)
                 {
-                    @metric.name
+                    @metric.name<br />
                 }
             }
             
@@ -38,9 +38,12 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
+        <div class="addpadding">
+            <input type="submit" value="Delete" class="button" />
+        </div>
+
         <div class="form-actions no-color addpadding">
-            <input type="submit" value="Delete" class="button" /> |
-            @Html.ActionLink("Back to Dashboard", "Index", "Dashboard")
+            @Html.ActionLink("Dashboard", "Index", "Dashboard")
         </div>
     }
 </div>

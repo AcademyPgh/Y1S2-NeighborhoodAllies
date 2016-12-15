@@ -11,6 +11,15 @@
     <h4>Investment</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.amount)
         </dt>
@@ -20,27 +29,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.entityFrom_ID)
+            @Html.DisplayNameFor(model => model.entityFrom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.entityFrom_ID)
+            @Html.DisplayFor(model => model.entityFrom.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
+            @Html.DisplayNameFor(model => model.projectFrom)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.entityTo_ID)
+            @Html.DisplayFor(model => model.projectFrom.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.entityTo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.date)
+            @Html.DisplayFor(model => model.entityTo.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.projectTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.projectTo.name)
         </dd>
 
         <dt>
@@ -59,30 +76,18 @@
             @Html.DisplayFor(model => model.volunteerHours)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectFrom_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.projectFrom_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.projectTo_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.projectTo_ID)
-        </dd>
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="addpadding">
+            <input type="submit" value="Delete" class="button" />
+        </div>
+
+        <div class="addpadding form-actions no-color">
+            @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
         </div>
     }
 </div>
