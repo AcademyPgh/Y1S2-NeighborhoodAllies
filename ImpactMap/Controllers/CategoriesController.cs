@@ -99,15 +99,73 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics)
+        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                Category cat = db.categories.Find(category.ID);
+                cat.name = category.name;
+
+                AddMetrics(category.ID, metric, metricsToAdd.Split(','));
+                SaveMetrics(category.ID, metricsToRemove.Split(','));
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
             return View(category);
+        }
+
+        private void AddMetrics(int id, Metric metric, string[] newMetrics)
+        {
+           
+            Category currentCategory = db.categories.Find(id);
+            foreach (var newMetric in newMetrics)
+            {
+                metric.name = newMetric;
+                metric.categoryID = id;
+                db.metrics.Add(metric);
+                db.SaveChanges();
+                currentCategory.metrics.Add(metric);
+                db.SaveChanges();
+            }
+        }
+
+        private void SaveMetrics(int id, string[] MetricIDs)
+        {
+            List<int> ids = new List<int>();
+            List<Metric> metricsToRemove = new List<Metric>();
+            foreach (var metricID in MetricIDs)
+            {
+                int i;
+                if(int.TryParse(metricID, out i))
+                {
+                    ids.Add(i);
+                }
+            }
+
+            var category = db.categories.Find(id);
+            foreach (var metric in category.metrics)
+            {
+                if (ids.Contains(metric.ID))
+                {
+                    //Keep it, remove from the ids list
+                    ids.Remove(metric.ID);
+                }
+
+                else
+                {
+                    metricsToRemove.Add(metric);
+                }
+            }
+
+
+            foreach (var met in metricsToRemove)
+            {
+                category.metrics.Remove(met);
+            }
+
+            foreach (var i in ids)
+            {
+                category.metrics.Add(db.metrics.Find(i));
+            }
         }
 
         // GET: Categories/Delete/5

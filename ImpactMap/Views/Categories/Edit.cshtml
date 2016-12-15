@@ -4,14 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Tag</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Tag</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -40,13 +39,9 @@
             </div>
         </div>
 
-        <input name="newMetrics" id="newMetrics" type="hidden" />
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="button" />
-            </div>
-        </div>
-
-
+        <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
+        <input name="metricsToRemove" id="metricsToRemove" type="hidden"/>
+            
 
             <div class="addpadding">
                 <input type="submit" value="Save" class="button" /> | @Html.ActionLink("Back to List", "Index")
@@ -54,37 +49,49 @@
             <div class="addpadding">
                 @Html.ActionLink("Dashboard", "Index", "Dashboard")
             </div>
+            </div>
 
             @section Scripts {
                 @Scripts.Render("~/bundles/jqueryval")
 
                 <script>
-                    newMetrics = [];
+                    metricsToAdd = []; //Metrics to Add - Metrics not changed will not be added to this
+                    metricsToRemove = []; //Metrics to Remove - may include both new and old metrics
 
                     //This Works
                     function addMetrics() {
                         if ($('#metrics').val() != "") {
-                            newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
+                            metricsToAdd.push($('#metrics').val()); //pushes the metric into the metricsToAdd array
                             $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span><br>');//Adds the new metric to the display
                             $('#metrics').val("");//Clears the value of the input box to accept a new metric
-                            $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
+                            $('#metricsToAdd').val(metricsToAdd.toString());//Converts newMetrics array to string and puts it into the hidden input
                             $('.removeMetric').click(function () { removeMetrics(this.id) });
-                            console.log($('#newMetrics').val())
+                            console.log('Added: ' + metricsToAdd.toString());
+                            console.log($('#metricsToAdd').val());
                         }
                     };
 
                     //This works too!
                     function removeMetrics(id) {
-                        var i = newMetrics.indexOf(id); //How do I know which one to remove since there is no id?
-                        newMetrics.splice(i, 1);
-                        $('#newMetrics').val(newMetrics.toString());
+                        if (metricsToAdd.indexOf(id) != -1) {
+                            var i = metricsToAdd.indexOf(id);
+                            metricsToAdd.splice(i, 1);
+                            $('#newMetrics').val(newMetrics.toString());
+                        }
+
+                        else {
+                            metricsToRemove.push(id);
+                            $('#metricsToRemove').val(metricsToRemove.toString());//Converts metricsToRemove array to string and puts it into the hidden input
+                        }
                         $('#' + id).remove();
-                        console.log('Removed:' + newMetrics.toString());
+                        console.log('Removed:' + metricsToRemove.toString());
+                        console.log('Added: ' + metricsToAdd.toString());
                     };
 
 
 
                     $('#addMetric').click(addMetrics);
+                    $('.removeMetric').click(function () { removeMetrics(this.id) });
 
 
                     //TODO This does not work
