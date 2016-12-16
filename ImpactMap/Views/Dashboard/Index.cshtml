@@ -123,7 +123,7 @@
                             <td>
                                 @if (item.projectTo.report != null)
                                 {
-                                        string reportID = Convert.ToString(item.projectTo.report.ID);
+                                    string reportID = Convert.ToString(item.projectTo.report.ID);
                                         @Html.ActionLink("Report", reportID, "Details", "Report")
                                 }
                                 else
@@ -132,16 +132,16 @@
                                 }
                             </td>
                     </tr>
-                                    
+
                 }
 
 
             </table>
-                                    }
-                                    else
-                                    {
+        }
+        else
+        {
                                         <p>You Currently Have No Investments</p>
-                                    }
+        }
 
     </div>
 </div>
@@ -152,9 +152,7 @@
 
         @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "button" })
 
-        @if (Model.projects.Count != 0)
-        {
-
+        @{if (Model.projects.Count != 0)
             <table class="table">
                 <tr>
                     <th>
@@ -164,8 +162,6 @@
                         
                     </th>
                 </tr>
-
-
                 @if (Model.investmentsOut != null)
                 {
                     foreach (var item in Model.projects.Take(5))
@@ -194,20 +190,20 @@
                                 }
                             </td>
                             <td>
-                                @{  if (item.report != null)
-                                    {
-                                        string reportID = Convert.ToString(item.report.ID);
-
-
+                                @if (item.report != null)
+                                {
+                                    string reportID = Convert.ToString(item.report.ID);
+                                }
+                                
                             </td>
-                        </tr>
+                        </tr>   
+                        }
                     }
-                 }
             </table>
-                 }
+    }
                  else
                  {
-                    <p>You Currently Have No Projects</p>
+                    <p>You currently have no projects.</p>
                  }
     </div>
 </div>
