@@ -6,6 +6,8 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+<button id="addButton">Add Line</button>
+<button id="removeButton">Remove Line</button>
 <input id="searchAddressField" />
 <div id="map"></div>
 
@@ -15,7 +17,7 @@
 <script src="~/Scripts/googlemapsNEW.js"></script>
 
 <script>    
-initialize();
+    initialize();
 
     @foreach (var item in Model)
     {
@@ -29,9 +31,12 @@ initialize();
         </text>
     }
 
+    createLine();
+    $('#addButton').click(addLine);
+    $('#removeButton').click(removeLine);
+    //document.getElementById("addButton").onclick(addLine);
 </script>
-    }
-    
+}        
 
 
 
