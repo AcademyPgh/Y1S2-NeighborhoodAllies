@@ -152,7 +152,8 @@
 
         @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "button" })
 
-        @{if (Model.projects.Count != 0)
+        @if (Model.projects.Count != 0)
+        {
             <table class="table">
                 <tr>
                     <th>
@@ -197,13 +198,13 @@
                                 
                             </td>
                         </tr>   
-                        }
                     }
+                }
             </table>
-    }
-                 else
-                 {
+        }
+        else
+        {
                     <p>You currently have no projects.</p>
-                 }
+        }
     </div>
 </div>
