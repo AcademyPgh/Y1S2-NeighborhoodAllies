@@ -15,7 +15,7 @@ namespace ImpactMap.Models
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
         public string description { get; set; }
-        [Display(Name = "Company Logo URL")]
+        [Display(Name = "Company Logo")]
         public string logoURL { get; set; }
         [Display(Name = "Address Line 1")]
         public string address1 { get; set; }

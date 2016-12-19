@@ -118,7 +118,9 @@ namespace ImpactMap.Controllers
 
                 db.SaveChanges();
 
+                return RedirectToAction("Index");
             }
+
             return View(category);
         }
 
