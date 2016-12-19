@@ -129,6 +129,16 @@ a href{
 		font-size:8pt;
 	}
 
+
+    .navbar-brand h1 {
+    display: inline;
+    vertical-align: middle;
+}
+
+    .navbar-brand{
+        max-width:60%;
+    }
+
 h1{
     font-family: 'Fjalla One', sans-serif;
 	color: #0C7D8B;
@@ -164,8 +174,8 @@ h4{
 .header{
     margin:auto;
 	background-color: #92C337;
-	padding: 15px;
-    min-height:150px;
+	/*padding: 15px;
+    min-height:150px;*/
     height:auto;
 }
 
@@ -286,6 +296,12 @@ span.metricName:last-of-type:after{
 
 span.removeMetric{
     display:block;
+}
+
+@media (min-width: 768px) {
+    .navbar-right{
+        padding-top:10px;
+    }
 }
 
 

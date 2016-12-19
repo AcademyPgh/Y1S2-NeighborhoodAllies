@@ -234,21 +234,15 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\android-chrome-192x192.png" />
-    <Content Include="Content\android-chrome-384x384.png" />
-    <Content Include="Content\apple-touch-icon.png" />
+    <Content Include="Content\Images\favicons\android-chrome-192x192.png" />
+    <Content Include="Content\Images\favicons\android-chrome-384x384.png" />
+    <Content Include="Content\Images\favicons\apple-touch-icon.png" />
     <Content Include="Content\browserconfig.xml" />
-    <Content Include="Content\favicon-16x16.png" />
-    <Content Include="Content\favicon-32x32.png" />
-    <Content Include="Content\favicon.ico" />
+    <Content Include="Content\Images\favicons\favicon-16x16.png" />
+    <Content Include="Content\Images\favicons\favicon-32x32.png" />
+    <Content Include="Content\Images\favicons\favicon.ico" />
     <Content Include="Content\Images\Academy_pgh.png" />
-    <Content Include="Content\Images\android-chrome-192x192.png" />
-    <Content Include="Content\Images\android-chrome-384x384.png" />
-    <Content Include="Content\Images\apple-touch-icon.png" />
     <Content Include="Content\Images\browserconfig.xml" />
-    <Content Include="Content\Images\favicon-16x16.png" />
-    <Content Include="Content\Images\favicon-32x32.png" />
-    <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\impact_map.png" />
     <Content Include="Content\Images\mstile-150x150.png" />
     <Content Include="Content\Images\NeighborhoodAllies_textonly.svg" />

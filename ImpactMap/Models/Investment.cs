@@ -23,6 +23,7 @@ namespace ImpactMap.Models
         [InverseProperty("investmentsIn")]
         public virtual Entity entityTo { get; set; }
         [Display(Name = "Investment Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime date { get; set; }
         [Display(Name = "In Kind")]
         public bool isInKind { get; set; }
