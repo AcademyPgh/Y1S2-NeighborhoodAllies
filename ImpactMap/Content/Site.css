@@ -284,3 +284,8 @@ span.metricName:last-of-type:after{
     content:"";
 }
 
+span.removeMetric{
+    display:block;
+}
+
+

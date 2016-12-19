@@ -106,9 +106,18 @@ namespace ImpactMap.Controllers
                 Category cat = db.categories.Find(category.ID);
                 cat.name = category.name;
 
-                AddMetrics(category.ID, metric, metricsToAdd.Split(','));
-                SaveMetrics(category.ID, metricsToRemove.Split(','));
+                if (metricsToAdd != "")
+                {
+                    AddMetrics(category.ID, metric, metricsToAdd.Split(','));
+                }
+
+                if (metricsToRemove != "")
+                {
+                    SaveMetrics(category.ID, metricsToRemove.Split(','));
+                }
+
                 db.SaveChanges();
+
             }
             return View(category);
         }
@@ -123,8 +132,8 @@ namespace ImpactMap.Controllers
                 metric.categoryID = id;
                 db.metrics.Add(metric);
                 db.SaveChanges();
-                currentCategory.metrics.Add(metric);
-                db.SaveChanges();
+                //currentCategory.metrics.Add(metric);
+                //db.SaveChanges();
             }
         }
 
@@ -146,12 +155,6 @@ namespace ImpactMap.Controllers
             {
                 if (ids.Contains(metric.ID))
                 {
-                    //Keep it, remove from the ids list
-                    ids.Remove(metric.ID);
-                }
-
-                else
-                {
                     metricsToRemove.Add(metric);
                 }
             }
@@ -159,13 +162,13 @@ namespace ImpactMap.Controllers
 
             foreach (var met in metricsToRemove)
             {
+
+                db.Entry(met).State = EntityState.Deleted;
                 category.metrics.Remove(met);
+                
             }
 
-            foreach (var i in ids)
-            {
-                category.metrics.Add(db.metrics.Find(i));
-            }
+           
         }
 
         // GET: Categories/Delete/5

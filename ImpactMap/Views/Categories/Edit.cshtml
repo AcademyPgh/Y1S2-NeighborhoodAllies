@@ -29,7 +29,7 @@
                 <div id="displayMetrics">
                     @{foreach (var metric in Model.metrics)
                         {
-                            <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span><br>
+                            <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
                         }
                     }
                 </div>
@@ -62,7 +62,7 @@
                     function addMetrics() {
                         if ($('#metrics').val() != "") {
                             metricsToAdd.push($('#metrics').val()); //pushes the metric into the metricsToAdd array
-                            $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span><br>');//Adds the new metric to the display
+                            $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
                             $('#metrics').val("");//Clears the value of the input box to accept a new metric
                             $('#metricsToAdd').val(metricsToAdd.toString());//Converts newMetrics array to string and puts it into the hidden input
                             $('.removeMetric').click(function () { removeMetrics(this.id) });
@@ -77,11 +77,13 @@
                             var i = metricsToAdd.indexOf(id);
                             metricsToAdd.splice(i, 1);
                             $('#newMetrics').val(newMetrics.toString());
+                            console.log($('#newMetrics').val());
                         }
 
                         else {
                             metricsToRemove.push(id);
                             $('#metricsToRemove').val(metricsToRemove.toString());//Converts metricsToRemove array to string and puts it into the hidden input
+                            console.log($('#metricsToRemove').val());
                         }
                         $('#' + id).remove();
                         console.log('Removed:' + metricsToRemove.toString());
