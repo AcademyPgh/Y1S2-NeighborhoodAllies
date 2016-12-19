@@ -17,7 +17,11 @@ namespace ImpactMap.Controllers
         // GET: Investments
         public ActionResult Index()
         {
-            return View(db.investments.ToList());
+            //return View(db.investments.ToList());
+            Utils.Utility uu = new Utils.Utility();
+            var entity = db.users.Find(uu.UserID(User)).entity;
+
+            return View(entity);
         }
 
         // GET: Investments/Details/5

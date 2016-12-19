@@ -16,8 +16,8 @@
 
         <dd>
             @Html.DisplayFor(model => model.date)
-        </dd>        
-        
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.amount)
         </dt>
@@ -54,16 +54,20 @@
             @Html.DisplayNameFor(model => model.isInKind)
         </dt>
 
+        <dt>
+
+        </dt>
+
         <dd>
 
             @if (Model.isInKind)
             {
-               <span>Yes</span>
+                <span>Yes</span>
             }
 
             else
             {
-               <span>No</span>
+                <span>No</span>
             }
             @*@Html.DisplayFor(model => model.isInKind)*@
         </dd>
@@ -71,16 +75,33 @@
         @if (Model.isInKind)
         {
 
+            <dt>
+                @Html.DisplayNameFor(model => model.volunteerHours)
+            </dt>
+
+            <dd>
+
+                @Html.DisplayFor(model => model.volunteerHours)
+
+            </dd>
+        }
+
         <dt>
-            @Html.DisplayNameFor(model => model.volunteerHours)
+
+            @Html.DisplayNameFor(model => model.categories)
         </dt>
 
+
+
         <dd>
-            
-            @Html.DisplayFor(model => model.volunteerHours)
-            
+            @{foreach (var cat in Model.categories)
+                {
+                    <span class="commaList">@cat.name</span>
+                }
+            }
         </dd>
-        }
+
+
 
 
 
@@ -88,6 +109,6 @@
 </div>
 <div class="addpadding">
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Investment List", "Index", "Investments") | 
+    @Html.ActionLink("Investment List", "Index", "Investments") |
     @Html.ActionLink("Dashboard", "Index", "Dashboard")
 </div>
