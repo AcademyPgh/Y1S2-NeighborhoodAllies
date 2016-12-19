@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImpactMap.Models.Investment>
+﻿@model ImpactMap.Models.Entity
 
 @{
     ViewBag.Title = "Index";
@@ -16,22 +16,28 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.date)
+                @*@Html.DisplayNameFor(model => Model.investmentsOut.date)*@
+                Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.amount)
+                Value of Grant
+                @*@Html.DisplayNameFor(model => model.amount)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.entityTo)
+                Recipient
+                @*@Html.DisplayNameFor(model => model.entityTo)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.projectTo)
+                Project To
+                @*@Html.DisplayNameFor(model => model.projectTo)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.isInKind)
+                In Kind
+                @*@Html.DisplayNameFor(model => model.isInKind)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.categories)
+                Tags
+                @*@Html.DisplayNameFor(model => model.categories)*@
             </th>
             <th>
 
@@ -39,11 +45,11 @@
 
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.investmentsOut)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.date)).ToString("MM/DD/YY"))
+                    @item.date.ToString("MM/dd/yyyy")
                 </td>
                 <td>
                     $@Html.DisplayFor(modelItem => item.amount)

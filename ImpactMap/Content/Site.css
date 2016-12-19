@@ -28,11 +28,11 @@ a href{
     height:50px;
 }
 
-.metricName:after {
+.metricName:after, .commaList:after {
     content: ",";
 }
 
-.metricName:after {
+.metricName:after, .comma:last-of-type:after {
     content: "";
 }
 
