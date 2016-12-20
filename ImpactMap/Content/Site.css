@@ -285,12 +285,30 @@ inputWLabel {
 
 .dashMap{
     margin-top:30px;
+    float:right;
 }
 
 .orgName{
     font-size:24px;
     color:black;
     font-weight:600;
+}
+
+/*.container.dashInvestments{
+    border-bottom: 15px solid #92C337;
+     border-top: 15px solid #92C337;
+}
+
+.container.orgDashInfo{
+    margin-bottom:30px;
+}*/
+
+.dash h2{
+    border-bottom:solid 2px #0C7D8B;
+    /*background:#0C7D8B;
+    color:white;
+    padding-top:15px;*/
+    padding-bottom:15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
