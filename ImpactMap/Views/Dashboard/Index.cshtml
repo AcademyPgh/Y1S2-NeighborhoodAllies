@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Index";
 }
-<span style="vertical-align: top;">
+<div style="vertical-align: top;">
 
-    <span class="spaceDivs dbSpans">
+    <div class="spaceDivs dbSpans">
         <dt class="dl-horizontal">
 
             <dd>
@@ -29,9 +29,9 @@
             </dd>
 
             @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "addpadding button" })
-    </span>
+    </div>
     <div id="map"></div>
-</span>
+</div>
     @*<span class="spaceDivs dbSpans">
         <h2>My Investment Tags</h2>
         <div>
@@ -129,8 +129,8 @@
                             <td>
                                 @if (item.projectTo.report != null)
                                 {
-                                    string reportID = Convert.ToString(item.projectTo.report.ID);
-                                        @Html.ActionLink("Report", reportID, "Details", "Report")
+                                    //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                    @Html.ActionLink("Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
                                 }
                                 else
                                 {
@@ -169,9 +169,7 @@
                         
                     </th>
                 </tr>
-                @if (Model.investmentsOut != null)
-                {
-                    foreach (var item in Model.projects.Take(5))
+                    @{foreach (var item in Model.projects.Take(5))
                     {
                         <tr>
                             <td>
@@ -200,6 +198,7 @@
                                 @if (item.report != null)
                                 {
                                     string reportID = Convert.ToString(item.report.ID);
+
                                 }
                                 
                             </td>
