@@ -9,23 +9,16 @@
 
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.completed)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.completed)
-            </dd>
+            @foreach (var metricResult in Model.metricResults)
+            {
+                <dt>Metric Name: @Html.DisplayFor(model => metricResult.metric.name)</dt>
+                <dd>@Html.DisplayFor(model => metricResult.resultText)</dd>
+            }
             <dt>
                 @Html.DisplayNameFor(model => model.reportText)
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.reportText)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.dueDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.dueDate)
             </dd>
         </dl>
     </div>

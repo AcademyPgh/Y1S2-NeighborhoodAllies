@@ -15,6 +15,7 @@ namespace ImpactMap.Models
         //[Required]
         //public virtual Project project { get; set; }
         public bool completed { get; set; }
+        [Display(Name = "Report Text")]
         public string reportText { get; set; }
         public DateTime dueDate { get; set; }
         public virtual List<MetricResult> metricResults { get; set; }
