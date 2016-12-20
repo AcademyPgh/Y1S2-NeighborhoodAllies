@@ -17,7 +17,17 @@ namespace ImpactMap.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.categories.ToList());
+            Utils.Utility userUtil = new Utils.Utility();
+            List<Investment> userInvestmentsOut = db.users.Find(userUtil.UserID(User)).entity.investmentsOut;
+            List<Category> userCategories = new List<Category>();
+            foreach (var investmentsOut in userInvestmentsOut)
+            {
+                foreach (var category in investmentsOut.categories)
+                {
+                    userCategories.Add(category);
+                }
+            }
+            return View(userCategories);
         }
 
         // GET: Categories/Details/5

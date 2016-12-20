@@ -30,8 +30,9 @@
 
             @Html.ActionLink("Edit", "Edit", "Entity", new { @class = "addpadding button" })
     </span>
-
-    <span class="spaceDivs dbSpans">
+    <div id="map"></div>
+</span>
+    @*<span class="spaceDivs dbSpans">
         <h2>My Investment Tags</h2>
         <div>
             <table class="table">
@@ -54,10 +55,10 @@
         </div>
 
         <div class="addpadding">
-            @Html.ActionLink("View Tags", "Index", "Categories", "Categories", new { @class = "button" })
+            
             @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
         </div>
-    </span>
+    </span>*@
 
     @*<span class="spaceDivs dbSpans">
         @if ( user.ID has new reports/ report requests)
@@ -79,7 +80,7 @@
             <span class="fa fa-file-o"></span>
         </span>*@
     @*</span>*@
-</span>
+
 
 
 
@@ -90,6 +91,8 @@
         @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
 
         @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "button" })
+
+        @Html.ActionLink("View Investment Tags", "Index", "Categories", "Categories", new { @class = "button" })
 
         @if (Model.investmentsOut.Count != 0)
         {
@@ -211,3 +214,47 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4VlRpvKNloHrCwtMLKy_X2UQVhW_8L5Q&callback=initialize">
+    </script>
+    <script src="~/Scripts/googlemapsNEW.js"></script>
+
+    <script>
+
+    initialize();
+
+    @{
+        string userLat = Model.lat;
+        string userLng = Model.lng;
+    }
+
+
+    @{string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip;}
+
+        markerlocation(@Model.ID, "@currentEntityAddress", "@Model.name", "@Model.description");
+
+    @foreach (var item in Model.investmentsOut)
+    {
+        string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
+        <text>
+        console.log("@item.entityTo.name");
+
+        markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
+
+        var path = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
+
+        var line = new google.maps.Polyline({
+            path: path,
+            strokeColor: '#005E1C',
+            strokeOpacity: 1.0,
+            strokeWeight: 3,
+            map: map
+        });
+
+
+        </text>
+    }
+
+    </script>
+}
