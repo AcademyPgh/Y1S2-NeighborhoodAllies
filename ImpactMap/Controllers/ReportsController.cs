@@ -54,7 +54,7 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                report.dueDate = DateTime.Now;
 
                 string[] resultTextArray = resultTexts.Split(',');
                 int i = 0;
