@@ -56,16 +56,12 @@ function markerlocation(organizationid, address, organization, organizationabout
         });        
 
         var contentString =
-        '<div>' +
-            '<div class="parentinfo">' +
-                '<div class="logoholder">' + '<img src=/logos/' + organizationid + '/serve style= "width: 100%">' +
-                '</div>' +
-                '<p class="orgtitle">' + organization + '</p>' +
-                '<p class="aboutlink">' + '<a href=/organizations/' + organizationid + '>' + 'about' + '</a>' + '</p>' +
-            '</div>' +
-            '<div class="descripcontainer">' +
-                '<p class="descripbox">' + organizationabout + '</p>' +
-            '</div>' +
+        '<div class="markercontents">' +
+                //'<div class="logoholder">' + '<img src=/logos/' + organizationid + '/serve style= "width: 100%">' +
+                //'</div>' +
+                '<div class="orgtitle">' + organization + '</div>' +
+                '<div class="aboutlink">' + '<a href=/entities/' + organizationid + '>' + 'Organization Page' + '</a>' + '</div>' +
+                '<div class="descripbox">Description:<br />' + organizationabout + '</div>' +
         '</div>'
         ;
 
@@ -85,10 +81,11 @@ function markerlocation(organizationid, address, organization, organizationabout
 function createLine() {
     console.log("getting called");
     var lol = [{ lat: 40.421572, lng: -79.99410619999999 }, { lat: 40.4369999, lng: -79.9970905 }, { lat: 40.4218834, lng: -79.9939074 }];
+    //var path = []
     var lolly = linepaths.toString();
     console.log(lolly);
     flightPath = new google.maps.Polyline({
-        path: linepaths,
+        path: lol,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
         strokeWeight: 2,
@@ -101,6 +98,7 @@ function createLine() {
 
 function addLine() {
     flightPath.setMap(map);
+    //console.log("addLine called")
 }
 
 function removeLine() {

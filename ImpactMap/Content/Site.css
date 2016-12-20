@@ -2,10 +2,20 @@
     color: #0C7D8B;
 }
 
+.aboutlink {
+    padding: 10px;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 10pt;
     line-height: 100%;
+}
+
+.descripbox {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
 }
 
 dd{
@@ -189,8 +199,8 @@ h4{
 }
 
  #map {
-            height: 100vh;
-
+            height: 60vh;
+            width: 100%;
       }
 
 
@@ -220,6 +230,16 @@ inputWLabel {
     width: 300px;
     height: 350px;
     background-color: rgba(12, 125, 139, 0.85);
+}
+
+.orgtitle {
+   font-family: 'Open Sans', sans-serif;
+   font-size: 14px;
+   padding: 10px;
+   background-color: #92C337;
+   color: white;
+   margin: 1px;
+   border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
 }
 
  #pac-input {
