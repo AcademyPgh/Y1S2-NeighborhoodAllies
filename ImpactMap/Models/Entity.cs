@@ -12,7 +12,7 @@ namespace ImpactMap.Models
         public int ID { get; set; }
         [Display(Name = "Organization")]
         public string name { get; set; }
-        [Display(Name = "Description")]
+        [Display(Name = "Mission/Description")]
         [DataType(DataType.MultilineText)]
         public string description { get; set; }
         [Display(Name = "Company Logo")]
