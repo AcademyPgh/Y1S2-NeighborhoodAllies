@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
 }
 
+<div class="container">
 <h2>Create</h2>
 
 @using (Html.BeginForm())
@@ -47,57 +48,59 @@
     @Html.ActionLink("Dashboard", "Index", "Dashboard")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    </div>
 
-    <script>
-        newMetrics = [];
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-        //This Works
-        function addMetrics() {
-            if ($('#metrics').val() != "") {
-                newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
-                $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span><br>');//Adds the new metric to the display
-                $('#metrics').val("");//Clears the value of the input box to accept a new metric
-                $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
-                $('.removeMetric').click(function () { removeMetrics(this.id) });
-                console.log($('#newMetrics').val())
-            }
-        };
+            <script>
+                newMetrics = [];
 
-        //This works too!
-        function removeMetrics(id) {
-            var i = newMetrics.indexOf(id); //How do I know which one to remove since there is no id?
-            newMetrics.splice(i, 1);
-            $('#newMetrics').val(newMetrics.toString());
-            $('#' + id).remove();
-            console.log('Removed:' + newMetrics.toString());
-        };
+                //This Works
+                function addMetrics() {
+                    if ($('#metrics').val() != "") {
+                        newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
+                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span><br>');//Adds the new metric to the display
+                        $('#metrics').val("");//Clears the value of the input box to accept a new metric
+                        $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
+                        $('.removeMetric').click(function () { removeMetrics(this.id) });
+                        console.log($('#newMetrics').val())
+                    }
+                };
 
-
-
-        $('#addMetric').click(addMetrics);
+                //This works too!
+                function removeMetrics(id) {
+                    var i = newMetrics.indexOf(id); //How do I know which one to remove since there is no id?
+                    newMetrics.splice(i, 1);
+                    $('#newMetrics').val(newMetrics.toString());
+                    $('#' + id).remove();
+                    console.log('Removed:' + newMetrics.toString());
+                };
 
 
-        //TODO This does not work
-        $(document).ready(function () {
-            $(window).keydown(function (event) {
-                if (event.keyCode == 13) {
-                    event.preventDefault();
-                    $('#metrics').keypress(function (e) {
-                        var key = e.which;
-                        if (key == 13)  // the enter key code
 
-                        {
-                            addMetrics();
+                $('#addMetric').click(addMetrics);
+
+
+                //TODO This does not work
+                $(document).ready(function () {
+                    $(window).keydown(function (event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                            $('#metrics').keypress(function (e) {
+                                var key = e.which;
+                                if (key == 13)  // the enter key code
+
+                                {
+                                    addMetrics();
+                                }
+
+                            });
+
                         }
+                    })
+                })
 
-                    });
 
-                }
-            })
-        })
-    
-    
-    </script>
-}
+            </script>
+        }

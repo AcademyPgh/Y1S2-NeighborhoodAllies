@@ -4,44 +4,45 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Tag</h2>
+<div class="container">
+    <h2>Edit Tag</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="displayMetrics">
-                    @{foreach (var metric in Model.metrics)
-                        {
-                            <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
-                        }
-                    }
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                 </div>
-                <label>Enter Metric</label>
-                <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
-                <input name="newMetrics" id="newMetrics" type="hidden" />
             </div>
-        </div>
 
-        <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
-        <input name="metricsToRemove" id="metricsToRemove" type="hidden"/>
-            
+            <div class="form-group">
+                @Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="displayMetrics">
+                        @{foreach (var metric in Model.metrics)
+                            {
+                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
+                            }
+                        }
+                    </div>
+                    <label>Enter Metric</label>
+                    <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                    <input name="newMetrics" id="newMetrics" type="hidden" />
+                </div>
+            </div>
+
+            <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
+            <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
+
 
             <div class="addpadding">
                 <input type="submit" value="Save" class="button" /> | @Html.ActionLink("Back to List", "Index")
@@ -49,7 +50,9 @@
             <div class="addpadding">
                 @Html.ActionLink("Dashboard", "Index", "Dashboard")
             </div>
-            </div>
+        </div>
+        </div>
+       
 
             @section Scripts {
                 @Scripts.Render("~/bundles/jqueryval")
@@ -118,6 +121,6 @@
 
                 </script>
             }
-                        }
+                            }
 
 

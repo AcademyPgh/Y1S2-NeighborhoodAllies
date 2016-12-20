@@ -3,48 +3,50 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="container">
+    <h2>Delete</h2>
 
-<h2>Delete</h2>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Tag</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Tag</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+            <dt>
+                Metrics
+            </dt>
 
-        <dt>
-            Metrics
-        </dt>
+            <dd>
+                @{
+                    foreach (var metric in Model.metrics)
+                    {
 
-        <dd>
-            @{ 
-                foreach (var metric in Model.metrics)
-                {
-
-                    <span class="metricName">@metric.name</span>
+                        <span class="metricName">@metric.name</span>
+                    }
                 }
-            }
-            
-        </dd>
 
-    </dl>
+            </dd>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        </dl>
 
-        <div class="addpadding">
-            <input type="submit" value="Delete" class="button" />
-        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color addpadding">
-            @Html.ActionLink("Dashboard", "Index", "Dashboard")
-        </div>
-    }
-</div>
+            <div class="addpadding">
+                <input type="submit" value="Delete" class="button" />
+            </div>
+
+            <div class="form-actions no-color addpadding">
+                @Html.ActionLink("Dashboard", "Index", "Dashboard")
+            </div>
+        }
+    </div>
+    </div>
