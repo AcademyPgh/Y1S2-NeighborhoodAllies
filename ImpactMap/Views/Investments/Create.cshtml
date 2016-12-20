@@ -5,66 +5,68 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Investment</h2>
+<div class="container">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    <h2>Create Investment</h2>
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>        
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <!---Needs to populate only projects from the signed in entity-->
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="projectFrom_ID">
-                    <option value="0">No Project Selected</option>
-                    @foreach (var project in Model.Projects)
-                    {
-                        <option value=@project.ID>@project.name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="entityTo_ID" id="recipientSelect">
-                    @foreach (var entity in Model.Entities)
-                    {
-                        <option value=@entity.ID>@entity.name</option>
-                    }
-                </select>
-
+            <!---Needs to populate only projects from the signed in entity-->
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select name="projectFrom_ID">
+                        <option value="0">No Project Selected</option>
+                        @foreach (var project in Model.Projects)
+                        {
+                            <option value=@project.ID>@project.name</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="projectTo_ID" id="ProjectToDropdown"></select>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select name="entityTo_ID" id="recipientSelect">
+                        @foreach (var entity in Model.Entities)
+                        {
+                            <option value=@entity.ID>@entity.name</option>
+                        }
+                    </select>
+
+                </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select name="projectTo_ID" id="ProjectToDropdown"></select>
+                </div>
+            </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -74,44 +76,46 @@
                 </div>
             </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Investment.isInKind)
-                    @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Investment.isInKind)
+                        @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group hideFormField" id="VolunteerContainer">
-            @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
+            <div class="form-group hideFormField" id="VolunteerContainer">
+                @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="button" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="button" />
+                </div>
             </div>
+            <br />
         </div>
-        <br />
+    }
+
+
+    <div class="addpadding">
+        @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
     </div>
-}
 
-
-<div class="addpadding">
-    @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
 </div>
 
 

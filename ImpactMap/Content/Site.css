@@ -1,4 +1,8 @@
-﻿a {
+﻿.account {
+    background-image: url(/Content/Images/loginbg.jpg);
+}
+
+a {
     color: #0C7D8B;
 }
 
@@ -46,12 +50,6 @@ a href{
     content: "";
 }
 
-}
-
-.account {
-    background-image: url(/Content/Images/loginbg.jpg);
-}
-
 .addpadding{
     padding-left: 20px;
 }
@@ -59,6 +57,10 @@ a href{
 /* Set padding to keep content from hitting the edges */
 .body-content {
     min-height:350px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 5px;
 }
 
 
@@ -129,7 +131,7 @@ a href{
 		text-align: center;
 		background-color: #92C337;
 		padding: 15px;
-        /*height:175px;*/
+        height:130px;
 	}
 
 	.footerText {
@@ -318,9 +320,17 @@ span.removeMetric{
     display:block;
 }
 
+#CatList ul{
+    list-style:none;
+}
+
 @media (min-width: 768px) {
     .navbar-right{
         padding-top:10px;
+    }
+
+    .form-horizontal .control-label {
+    text-align: left;
     }
 }
 

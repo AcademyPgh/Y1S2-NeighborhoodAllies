@@ -244,6 +244,7 @@
     <Content Include="Content\Images\Academy_pgh.png" />
     <Content Include="Content\Images\browserconfig.xml" />
     <Content Include="Content\Images\impact_map.png" />
+    <Content Include="Content\Images\loginbackground.jpg" />
     <Content Include="Content\Images\mstile-150x150.png" />
     <Content Include="Content\Images\NeighborhoodAllies_textonly.svg" />
     <Content Include="Content\bootstrap.css" />
