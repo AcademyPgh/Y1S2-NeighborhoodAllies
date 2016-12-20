@@ -283,6 +283,16 @@ inputWLabel {
     margin-bottom: 50px;
 }
 
+.dashMap{
+    margin-top:30px;
+}
+
+.orgName{
+    font-size:24px;
+    color:black;
+    font-weight:600;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -321,8 +331,13 @@ span.removeMetric{
     display:block;
 }
 
-#CatList ul{
-    list-style:none;
+#CatList ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+#CatList ul li{
+    padding:5px 0;
 }
 
 @media (min-width: 768px) {
