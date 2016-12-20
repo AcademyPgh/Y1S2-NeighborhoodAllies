@@ -131,13 +131,13 @@
                             <td>
                                 @if (item.projectTo.report != null)
                                 {
-                                    string reportID = Convert.ToString(item.projectTo.report.ID);
-                                    @Html.ActionLink("Report", reportID, "Details", "Report")
-                                }
-                                else
-                                {
-                                    <span>No report available.</span>
-                                }
+                                    //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                    @Html.ActionLink("Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
+                                    }
+                                    else
+                                    {
+                                        <span>No report available.</span>
+                                    }
                             </td>
                         </tr>
 
@@ -202,7 +202,11 @@
                                 <td>
                                     @if (item.report != null)
                                     {
-                                        string reportID = Convert.ToString(item.report.ID);
+                                        @Html.ActionLink("Report", "Details", "Reports", new { id = item.report.ID }, null)
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Create Report", "Create", "Reports", new { id = item.ID }, null)
                                     }
 
                                 </td>
