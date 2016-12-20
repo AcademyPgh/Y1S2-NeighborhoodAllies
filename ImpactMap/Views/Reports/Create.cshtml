@@ -4,116 +4,119 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Report</h2>
+<div class="container">
+    <h2>Create Report</h2>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Report</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <input name="project_ID"
-                   type="hidden"
-                   value="@Model.project.ID" />
-        </div>
+        <div class="form-horizontal">
+            <h4>Report</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <input name="project_ID"
+                       type="hidden"
+                       value="@Model.project.ID" />
+            </div>
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.report.completed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.report.completed)
-                    @Html.ValidationMessageFor(model => model.report.completed, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.report.completed, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.report.completed)
+                        @Html.ValidationMessageFor(model => model.report.completed, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div>Please include information on the following metrics.</div>
+
+            <script>var idArray = []</script>
+
+            @foreach (var investment in Model.project.investmentsIn)
+            {
+                foreach (var category in investment.categories)
+                {
+                    <div>Category:  @category.name</div>
+                    foreach (var metric in category.metrics)
+                    {
+                        <div>Metric:  @metric.name</div>
+
+                        <script>
+
+                            idArray.push(@metric.ID)
+                        </script>
+
+                        <input type="text" class="resultTextBox" name="resultText" />
+                    }
+                }
+            }
+
+
+            <input type="hidden" id="metricIDs" name="metricIDs" />
+            <input type="hidden" id="resultTexts" name="resultTexts" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.report.reportText, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.report.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.report.dueDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.report.dueDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" id="submitButton" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
-
-        <div>Please include information on the following metrics.</div>
-
-       <script>var idArray = []</script>
-
-        @foreach (var investment in Model.project.investmentsIn)
-        {
-            foreach (var category in investment.categories)
-            {
-                <div>Category:  @category.name</div>
-                foreach (var metric in category.metrics)
-                {
-                    <div>Metric:  @metric.name</div>
-
-                    <script>
-
-                        idArray.push(@metric.ID)
-                    </script>
-
-                    <input type="text" class="resultTextBox" name="resultText" />
-                }
-            }
-        }
-
-
-        <input type="hidden" id="metricIDs" name="metricIDs" />
-        <input type="hidden" id="resultTexts" name="resultTexts" />
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.report.reportText, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.report.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.report.dueDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.report.dueDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" id="submitButton" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script>
-        function IDpush() {
-            $('#metricIDs').val(idArray.toString());
-        }
-
-        var resultTextArray = [];
-
-        $('#submitButton').click(function () {
-            $('.resultTextBox').each(function () {
-                resultTextArray.push($(this).val());
-            })
-            $('#resultTexts').val(resultTextArray.toString());
-            console.log("Hi");
-            $('#createReportForm').submit();
-        });
-
-        function resultTextPush() {
-            $('.resultTextBox').each(function () {
-                resultTextArray.push($(this).val());
-            })
-            $('#resultTexts').val(resultTextArray.toString());
-            console.log(resultTextArray.toString());
-        }
-
-        $(IDpush);
-    </script>
-
     }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+
+            <script>
+                function IDpush() {
+                    $('#metricIDs').val(idArray.toString());
+                }
+
+                var resultTextArray = [];
+
+                $('#submitButton').click(function () {
+                    $('.resultTextBox').each(function () {
+                        resultTextArray.push($(this).val());
+                    })
+                    $('#resultTexts').val(resultTextArray.toString());
+                    console.log("Hi");
+                    $('#createReportForm').submit();
+                });
+
+                function resultTextPush() {
+                    $('.resultTextBox').each(function () {
+                        resultTextArray.push($(this).val());
+                    })
+                    $('#resultTexts').val(resultTextArray.toString());
+                    console.log(resultTextArray.toString());
+                }
+
+                $(IDpush);
+            </script>
+
+        }

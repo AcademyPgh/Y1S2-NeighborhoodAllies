@@ -4,42 +4,45 @@
     ViewBag.Title = "Projects List";
 }
 
-<h2>Projects List</h2>
-<br /><br />
-<p class="addpadding">
-    @Html.ActionLink("Create New", "Create")
-</p>
-<br />
+<div class="container">
+    <h2>Projects List</h2>
+    <br /><br />
+    <p class="addpadding">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <br />
 
-<div class="addpadding" style="width:600px;">
-<table class="table addpadding">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            
-        </th>
-    </tr>
-
-
-    @if (Model != null)
-    {
-
-        foreach (var item in Model)
-        {
+    <div class="addpadding" style="width:600px;">
+        <table class="table addpadding">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>   
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+
+                </th>
             </tr>
 
-                            }
-                        }
-</table>
+
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        </td>
+                    </tr>
+
+                }
+            }
+        </table>
 
         @Html.ActionLink("Dashboard", "Index", "Dashboard")
-</div>
+    </div>
+
+    </div>

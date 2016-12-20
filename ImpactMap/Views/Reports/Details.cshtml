@@ -3,48 +3,50 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="container">
+    <h2>Details</h2>
 
-<h2>Details</h2>
+    <div>
+        <h4>Report</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.project_ID)
+            </dt>
 
-<div>
-    <h4>Report</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.project_ID)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.project_ID)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.project_ID)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.completed)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.completed)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.completed)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.completed)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.reportText)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.reportText)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.reportText)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.reportText)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.dueDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dueDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dueDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dueDate)
-        </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    </div>

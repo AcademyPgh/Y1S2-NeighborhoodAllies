@@ -4,111 +4,115 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
 
-<div>
-    <h4>Investment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.date)
-        </dt>
+    <h2>Investment Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
+    <div>
+        <h4>Investment</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.projectFrom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.projectFrom.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.entityTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.entityTo.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.projectTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.projectTo.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isInKind)
-        </dt>
-
-        <dt>
-
-        </dt>
-
-        <dd>
-
-            @if (Model.isInKind)
-            {
-                <span>Yes</span>
-            }
-
-            else
-            {
-                <span>No</span>
-            }
-            @*@Html.DisplayFor(model => model.isInKind)*@
-        </dd>
-
-        @if (Model.isInKind)
-        {
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.volunteerHours)
+                @Html.DisplayNameFor(model => model.amount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.amount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.projectFrom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.projectFrom.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.entityTo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.entityTo.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.projectTo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.projectTo.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.isInKind)
+            </dt>
+
+            <dt>
+
             </dt>
 
             <dd>
 
-                @Html.DisplayFor(model => model.volunteerHours)
-
-            </dd>
-        }
-
-        <dt>
-
-            @Html.DisplayNameFor(model => model.categories)
-        </dt>
-
-
-
-        <dd>
-            @{foreach (var cat in Model.categories)
-                {
-                    <span class="commaList">@cat.name</span>
+                @if (Model.isInKind)
+            {
+                    <span>Yes</span>
                 }
+
+                else
+                {
+                    <span>No</span>
+                }
+                @*@Html.DisplayFor(model => model.isInKind)*@
+            </dd>
+
+            @if (Model.isInKind)
+            {
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.volunteerHours)
+                </dt>
+
+                <dd>
+
+                    @Html.DisplayFor(model => model.volunteerHours)
+
+                </dd>
             }
-        </dd>
+
+            <dt>
+
+                @Html.DisplayNameFor(model => model.categories)
+            </dt>
+
+
+
+            <dd>
+                @{foreach (var cat in Model.categories)
+                    {
+                        <span class="commaList">@cat.name</span>
+                    }
+                }
+            </dd>
 
 
 
 
 
-    </dl>
-</div>
-<div class="addpadding">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Investment List", "Index", "Investments") |
-    @Html.ActionLink("Dashboard", "Index", "Dashboard")
-</div>
+        </dl>
+    </div>
+    <div class="addpadding">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Investment List", "Index", "Investments") |
+        @Html.ActionLink("Dashboard", "Index", "Dashboard")
+    </div>
+
+    </div>

@@ -4,90 +4,92 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <h2>Delete Investment</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Investment</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.amount)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.amount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.amount)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.amount)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.entityFrom)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.entityFrom)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.entityFrom.name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.entityFrom.name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectFrom)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.projectFrom)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.projectFrom.name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.projectFrom.name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.entityTo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.entityTo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.entityTo.name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.entityTo.name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectTo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.projectTo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.projectTo.name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.projectTo.name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isInKind)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.isInKind)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.isInKind)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.isInKind)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.volunteerHours)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.volunteerHours)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.volunteerHours)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.volunteerHours)
+            </dd>
 
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="addpadding">
-            <input type="submit" value="Delete" class="button" />
-        </div>
+            <div class="addpadding">
+                <input type="submit" value="Delete" class="button" />
+            </div>
 
-        <div class="addpadding form-actions no-color">
-            @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
-        </div>
-    }
-</div>
+            <div class="addpadding form-actions no-color">
+                @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
+            </div>
+        }
+    </div>
+    </div>

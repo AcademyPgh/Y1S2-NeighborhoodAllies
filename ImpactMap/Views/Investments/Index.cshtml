@@ -3,96 +3,98 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container">
 
+    <h2>Investments List</h2>
+    <br /><br />
 
-<h2>Investments List</h2>
-<br /><br />
-
-<div class="addpadding" style="max-width:1200px;">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <br />
-    <table class="table">
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => Model.investmentsOut.date)*@
-                Date
-            </th>
-            <th>
-                Value of Grant
-                @*@Html.DisplayNameFor(model => model.amount)*@
-            </th>
-            <th>
-                Recipient
-                @*@Html.DisplayNameFor(model => model.entityTo)*@
-            </th>
-            <th>
-                Project To
-                @*@Html.DisplayNameFor(model => model.projectTo)*@
-            </th>
-            <th>
-                In Kind
-                @*@Html.DisplayNameFor(model => model.isInKind)*@
-            </th>
-            <th>
-                Tags
-                @*@Html.DisplayNameFor(model => model.categories)*@
-            </th>
-            <th>
-
-            </th>
-
-        </tr>
-
-        @foreach (var item in Model.investmentsOut)
-        {
+    <div class="addpadding" style="max-width:1200px;">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <br />
+        <table class="table">
             <tr>
-                <td>
-                    @item.date.ToString("MM/dd/yyyy")
-                </td>
-                <td>
-                    $@Html.DisplayFor(modelItem => item.amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.entityTo.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.projectTo.name)
-                </td>
-                <td>
-                    @if (item.isInKind)
-                    {
-                        <span>Yes</span>
-                    }
+                <th>
+                    @*@Html.DisplayNameFor(model => Model.investmentsOut.date)*@
+                    Date
+                </th>
+                <th>
+                    Value of Grant
+                    @*@Html.DisplayNameFor(model => model.amount)*@
+                </th>
+                <th>
+                    Recipient
+                    @*@Html.DisplayNameFor(model => model.entityTo)*@
+                </th>
+                <th>
+                    Project To
+                    @*@Html.DisplayNameFor(model => model.projectTo)*@
+                </th>
+                <th>
+                    In Kind
+                    @*@Html.DisplayNameFor(model => model.isInKind)*@
+                </th>
+                <th>
+                    Tags
+                    @*@Html.DisplayNameFor(model => model.categories)*@
+                </th>
+                <th>
 
-                    else
-                    {
-                        <span>No</span>
-                    }
-                </td>
-                <td>
-                    <ul style="list-style-type:none;">
-                        @foreach (var category in item.categories)
-            {
-                //@Html.DisplayFor(model => category.name)
-                <li>@category.name</li>
-            }
-                    </ul>
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                </td>
+                </th>
+
             </tr>
-        }
+
+            @foreach (var item in Model.investmentsOut)
+            {
+                <tr>
+                    <td>
+                        @item.date.ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.entityTo.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.projectTo.name)
+                    </td>
+                    <td>
+                        @if (item.isInKind)
+                        {
+                            <span>Yes</span>
+                        }
+
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </td>
+                    <td>
+                        <ul style="list-style-type:none;">
+                            @foreach (var category in item.categories)
+                            {
+                                //@Html.DisplayFor(model => category.name)
+                                <li>@category.name</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    </td>
+                </tr>
+            }
 
 
-</table>
+        </table>
 
-<div>
-    @Html.ActionLink("Dashboard", "Index", "Dashboard")
-</div>
+        <div>
+            @Html.ActionLink("Dashboard", "Index", "Dashboard")
+        </div>
+
+    </div>
 
     </div>
 
