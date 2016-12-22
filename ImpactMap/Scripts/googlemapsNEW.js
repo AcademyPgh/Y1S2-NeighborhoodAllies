@@ -23,6 +23,7 @@ var latlngrcvd;
 var linepaths = [];
 var x = 0;
 var y = 0;
+var map;
 
 
 function initialize() {
@@ -53,7 +54,8 @@ function markerlocation(organizationid, address, organization, organizationabout
             title: organization,
             animation: google.maps.Animation.DROP,
             id: organizationid
-        });        
+        })
+        ;
 
         var contentString =
         '<div class="markercontents">' +
@@ -77,6 +79,12 @@ function markerlocation(organizationid, address, organization, organizationabout
         });
     });
 };
+
+function moveToCenter(lat, lng) {
+    var center = new google.maps.LatLng(lat, lng);
+    map.panTo(center);
+}
+
 
 function createLine() {
     console.log("getting called");
@@ -104,4 +112,3 @@ function addLine() {
 function removeLine() {
     flightPath.setMap(null);
 }
-

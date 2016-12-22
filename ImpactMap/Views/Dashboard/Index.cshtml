@@ -239,12 +239,16 @@
     @{
         string userLat = Model.lat;
         string userLng = Model.lng;
+        
     }
 
+        
 
-    @{string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip;}
+    @{string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip + "+" + Model.lat + "+" + Model.lng;}
 
         markerlocation(@Model.ID, "@currentEntityAddress", "@Model.name", "@Model.description");
+        moveToCenter(@Model.lat, @Model.lng);
+   
 
     @foreach (var item in Model.investmentsOut)
     {
@@ -253,6 +257,7 @@
         console.log("@item.entityTo.name");
 
         markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
+        
 
         var path = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
 
@@ -268,5 +273,6 @@
         </text>
     }
 
+    
     </script>
 }
