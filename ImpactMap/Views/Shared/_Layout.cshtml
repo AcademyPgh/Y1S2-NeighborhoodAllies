@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ImpactMap</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="~/Content/Images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="~/Content/Images/favicons/favicon-32x32.png" sizes="32x32">
@@ -32,7 +32,9 @@
                 </button>
 
                 <div class="navbar-brand">
-                    <img src="~/Content/Images/impact_map.png" style="display:inline-block; max-height:10%; max-width:10%;" />
+                    <a href='@Url.Action("Index","Dashboard")'>
+                        <img src="~/Content/Images/impact_map.png" style="display:inline-block; max-height:10%; max-width:10%;" />
+                    </a>
                     <h1>ImpactMap</h1>
                 </div>
 

@@ -23,7 +23,7 @@ var latlngrcvd;
 var linepaths = [];
 var x = 0;
 var y = 0;
-var map;
+var map; //because the map exists in the global scope, you can use 'map.(optionhere)' in functions after initialize, when it is defined, to do things with map, like in the moveToCenter function
 
 
 function initialize() {
