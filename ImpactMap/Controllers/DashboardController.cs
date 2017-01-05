@@ -24,10 +24,16 @@ namespace ImpactMap.Models
             //dvm.investment = new Investment();
             //dvm.project = new Project();
             Utils.Utility uu = new Utils.Utility();
-            var entity = db.users.Find(uu.UserID(User)).entity;
-
-
-            return View(entity);
+            if (db.users.Find(uu.UserID(User)).entity != null)
+            {
+                var entity = db.users.Find(uu.UserID(User)).entity;
+                return View(entity);
+            }
+            else
+            {
+                return RedirectToAction("Create", "Entities");
+            }
+            
         }
     }
 
