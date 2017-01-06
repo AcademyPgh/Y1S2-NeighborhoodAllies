@@ -358,6 +358,15 @@ span.removeMetric{
     padding:5px 0;
 }
 
+#baseCatList ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+#baseCatList ul li {
+    padding:5px 0;
+}
+
 @media (min-width: 768px) {
     .navbar-right{
         padding-top:10px;
