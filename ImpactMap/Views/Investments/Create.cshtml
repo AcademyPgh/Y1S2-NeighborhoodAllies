@@ -21,6 +21,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
+                    @*<input type="date" value=@DateTime.Now class="form-control" required/>*@
                     @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
                 </div>
@@ -34,7 +35,7 @@
                 </div>
             </div>
 
-
+            @*In Kind checkbox -- when checked it displays the field below for volunteer hours*@
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -95,24 +96,6 @@
                 </div>
             </div>
 
-            @*In Kind checkbox -- when checked it displays the field below for volunteer hours*@
-            <div class="form-group">
-                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Investment.isInKind)
-                        @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            @*Volunteer hours field*@
-            <div class="form-group hideFormField" id="VolunteerContainer">
-                @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
-                </div>
-            </div>
             @*Description input form*@
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -190,27 +173,27 @@
             }
         }
 
+               
 
-        //Cause the Volunteer Hours input box to show if In Kind checkbox is checked
-        function addVolunteerHours() {
-            $('#Investment_isInKind').click(function () {
-                if ($('#VolunteerContainer').hasClass('hideFormField')) {
-                    $('#VolunteerContainer').removeClass('hideFormField')
-                    $('#VolunteerContainer').addClass('showFormField')
-                }
-                else {
-                    $('#VolunteerContainer').removeClass('showFormField')
-                    $('#VolunteerContainer').addClass('hideFormField')
-                }
-            });
-        }
+        ////Cause the Volunteer Hours input box to show if In Kind checkbox is checked
+        //function addVolunteerHours() {
+        //    $('#Investment_isInKind').click(function () {
+        //        if ($('#VolunteerContainer').hasClass('hideFormField')) {
+        //            $('#VolunteerContainer').removeClass('hideFormField')
+        //            $('#VolunteerContainer').addClass('showFormField')
+        //        }
+        //        else {
+        //            $('#VolunteerContainer').removeClass('showFormField')
+        //            $('#VolunteerContainer').addClass('hideFormField')
+        //        }
+        //    });
+        //}
 
         //When the submit button is clicked, it 
         $('#submitButton').click(function () {
             $('#createInvestmentForm').submit();
         });
 
-   
         //This does an ajax call to populate the projectTo dropdown whenever the entityTo dropdown changes
         function updateProjectsOut() {
             $.ajax({
@@ -231,7 +214,6 @@
         //These functions need to run on when the page loads, so they're collected into one function and then run on page load
         function initialize() {
             load_categories();
-            addVolunteerHours();
             updateProjectsOut();
         }
 
