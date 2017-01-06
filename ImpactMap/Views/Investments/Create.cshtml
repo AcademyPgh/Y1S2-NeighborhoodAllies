@@ -33,12 +33,21 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Investment.isInKind)
+                        @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
             <!---Needs to populate only projects from the signed in entity-->
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select name="projectFrom_ID">
-                        <option value="0">No Project Selected</option>
                         @foreach (var project in Model.Projects)
                         {
                             <option value=@project.ID>@project.name</option>
@@ -80,24 +89,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Investment.isInKind)
-                        @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group hideFormField" id="VolunteerContainer">
-                @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
+                      
             <div class="form-group">
                 @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -171,22 +163,7 @@
             }
         }
 
-        //Cause the Volunteer Hours input box to show if In Kind checkbox is checked
-        function addVolunteerHours() {
-            $('#Investment_isInKind').click(function () {
-                if ($('#VolunteerContainer').hasClass('hideFormField')) {
-                    $('#VolunteerContainer').removeClass('hideFormField')
-                    $('#VolunteerContainer').addClass('showFormField')
-                }
-                else {
-                    $('#VolunteerContainer').removeClass('showFormField')
-                    $('#VolunteerContainer').addClass('hideFormField')
-                }
-            });
-        }
-
-        
-
+       
    
         function updateProjectsOut() {
             $.ajax({

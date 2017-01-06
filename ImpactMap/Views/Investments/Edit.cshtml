@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Models.Investment
+﻿@model ImpactMap.Controllers.InvestmentViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -11,120 +11,209 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.amount, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.projectFrom.name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.projectFrom_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.entityTo.name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.entityTo_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.projectTo.name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.projectTo_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.isInKind)
-                        @Html.ValidationMessageFor(model => model.isInKind, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Investment.isInKind)
+                                @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---Needs to populate only projects from the signed in entity-->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="projectFrom_ID">
+                                @foreach (var project in Model.Projects)
+                                {
+                                    <option value=@project.ID>@project.name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="entityTo_ID" id="recipientSelect">
+                                <option value=@Model.Investment.entityTo.ID selected>@Model.Investment.entityTo.name</option>
+                                @foreach (var entity in Model.Entities)
+                                {
+                                    if (entity.ID != Model.Investment.entityTo.ID)
+                                    {
+                                    <option value=@entity.ID>@entity.name</option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="projectTo_ID" id="ProjectToDropdown">
+                                <option value=@Model.Investment.projectTo.ID selected>@Model.Investment.projectTo.name</option>
+                                @foreach (var project in Model.Investment.entityTo.projects)
+                                {
+                                    if (project.ID != Model.Investment.projectTo.ID)
+                                    {
+                                    <option value=@project.ID>@project.name</option>
+                                     }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div id="CatList">
+                                <ul>
+                                    @foreach (var category in Model.Investment.categories)
+                                    {
+                                        if (!Model.Investment.categories.Contains(category))
+                                        {
+                                          <li id='cat'@category.ID data-id=@category.ID><span id='catspan'@category.ID class="fa fa-check-square-o"></span> @category.name</li>
+                                        }
+
+                                        else
+                                        {
+                                            <li id='cat' @category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-square-o"></span> @category.name</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <input name="categories" id="categories" type="hidden" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="button" />
+                        </div>
+                    </div>
+                    <br />
                 </div>
+            }
+
+
+            <div class="addpadding">
+                @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
             </div>
 
-            <div class="form-group hideFormField" id="VolunteerContainer">
-                @Html.LabelFor(model => model.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.volunteerHours, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="button" />
-                </div>
-            </div>
         </div>
     }
 
-    <div class="addpadding">
-        @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
-    </div>
 
-    </div>
+   @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+    <script>
 
-        <script>
+        selectedCategories = [];
+        //function load_categories() {
+        //    $.ajax({
+        //        url: '/public/categories',
+        //        type: 'GET',
+        //        success: function (data) {
+        //            //$('#CatList').html('<ul>');
+        //            data.map(function (category) {
+        //                $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+        //                $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+        //            });
+        //            //$('#CatList').append('</ul>');
+        //        }
+        //    })
+        //}
 
-            //Cause the Volunteer Hours input box to show if In Kind checkbox is checked
-            function addVolunteerHours() {
-                $('#isInKind').click(function () {
-                    if ($('#VolunteerContainer').hasClass('hideFormField')) {
-                        $('#VolunteerContainer').removeClass('hideFormField')
-                        $('#VolunteerContainer').addClass('showFormField')
-                    }
-                    else {
-                        $('#VolunteerContainer').removeClass('showFormField')
-                        $('#VolunteerContainer').addClass('hideFormField')
-                    }
-                });
+        function toggle_category(id) {
+            // if it is not there
+            // add the hidden input element
+            // add the checkmark to the category
+            if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
+                selectedCategories.push(id);
+
+                $('#categories').val(selectedCategories.toString());
+                console.log($('#categories').val())
+                $('#catspan' + id).removeClass('fa fa-square-o');
+                $('#catspan' + id).addClass('fa fa-check-square-o');
             }
+            else {
 
-            function initialize() {
-                addVolunteerHours();
+                // if it is there
+                // remove the hidden input element
+                // remove the checkmark on the category
+                var i = selectedCategories.indexOf(id);
+                selectedCategories.splice(i, 1);
+                $('#categories').val(selectedCategories.toString());
+                $('#catadd' + id).remove();
+                $('#catspan' + id).removeClass('fa fa-check-square-o');
+                $('#catspan' + id).addClass('fa fa-square-o');
+
             }
+        }
 
-            $(initialize);
 
-        </script>
-    }
 
+        function updateProjectsOut() {
+            $.ajax({
+                url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
+                type: 'get',
+                success: function (data) {
+                    var html = '';
+                    data.map(function (project) {
+                        //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
+                        html += '<option value=' + project.ID + '>' + project.name + '</option>'
+
+                    });
+                    $('#ProjectToDropdown').html(html);
+                }
+            });
+        };
+
+        $('#recipientSelect').change(updateProjectsOut);
+
+        function initialize() {
+            load_categories();
+            addVolunteerHours();
+            updateProjectsOut();
+        }
+
+        $(initialize);
+    </script>
+}
 

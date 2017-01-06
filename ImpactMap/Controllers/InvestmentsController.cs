@@ -115,12 +115,23 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Investment investment = db.investments.Find(id);
-            if (investment == null)
+
+            Utils.Utility userUtil = new Utils.Utility();
+            InvestmentViewModel ivm = new InvestmentViewModel();
+
+            ivm.Entities = db.entities.ToList();
+            ivm.Investment = db.investments.Find(id);
+            ivm.Categories = db.categories.ToList();
+            //entityFrom is auto retrieved based on the user that's logged in
+            ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+            //projectsFrom is populated based on entityFrom's projects
+            ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
+
+            if (ivm.Investment == null)
             {
                 return HttpNotFound();
             }
-            return View(investment);
+            return View(ivm);
         }
 
         // POST: Investments/Edit/5
@@ -128,7 +139,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment)
+        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,projectFrom_ID,projectTo_ID")] Investment investment)
         {
             if (ModelState.IsValid)
             {
