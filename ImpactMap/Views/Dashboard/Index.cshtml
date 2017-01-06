@@ -32,58 +32,75 @@
                 </dd>
 
                 @Html.ActionLink("Edit Your Organization", "Edit", "Entity", new { @class = "addpadding button" })
+                
+                @*Notification area*@
+                <div class="dashNotifications">
+                    <h3>Notifications</h3>
+                    <ul>
+                    @{
+                        foreach (var project in Model.projects)
+                        {
+                            if (project.report == null)
+                            {
+                                <li>@project.name needs a report!</li>
+                                @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
+                            }
+                        }
+                    }
+                        </ul>
+                </div>
         </div>
         <div id="map" class="dashMap"></div>
     </div>
-    </div>
-    @*<span class="spaceDivs dbSpans">
-            <h2>My Investment Tags</h2>
-            <div>
-                <table class="table">
-                    @foreach (var investment in Model.investmentsOut)
+</div>
+@*<span class="spaceDivs dbSpans">
+        <h2>My Investment Tags</h2>
+        <div>
+            <table class="table">
+                @foreach (var investment in Model.investmentsOut)
+                {
+                    foreach (var category in investment.categories)
                     {
-                        foreach (var category in investment.categories)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => category.name)
-                                </td>
-                                <td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => category.name)
+                            </td>
+                            <td>
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
 
-                        }
                     }
-                </table>
-            </div>
-
-            <div class="addpadding">
-
-                @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
-            </div>
-        </span>*@
-
-    @*<span class="spaceDivs dbSpans">
-        @if ( user.ID has new reports/ report requests)
-                {
-                    <span style="display:block; text-align:right;">
-                        <span class="fa fa-exclamation"></span>
-                        <span class="fa fa-file-o"></span>
-                    </span>
                 }
-            else
-                {
-                    <span style="display:block; text-align:right;">
-                        <span class="fa fa-file-o"></span>
-                     </span>
-                }
+            </table>
+        </div>
 
-        <span style="display:block; text-align:right;">
-            <span class="fa fa-exclamation"></span>
-            <span class="fa fa-file-o"></span>
-        </span>*@
-    @*</span>*@
+        <div class="addpadding">
+
+            @Html.ActionLink("Create New Tag", "Create", "Categories", "Categories", new { @class = "button" })
+        </div>
+    </span>*@
+
+@*<span class="spaceDivs dbSpans">
+    @if ( user.ID has new reports/ report requests)
+            {
+                <span style="display:block; text-align:right;">
+                    <span class="fa fa-exclamation"></span>
+                    <span class="fa fa-file-o"></span>
+                </span>
+            }
+        else
+            {
+                <span style="display:block; text-align:right;">
+                    <span class="fa fa-file-o"></span>
+                 </span>
+            }
+
+    <span style="display:block; text-align:right;">
+        <span class="fa fa-exclamation"></span>
+        <span class="fa fa-file-o"></span>
+    </span>*@
+@*</span>*@
 
 
 
@@ -97,7 +114,7 @@
             {
                 <h2>Investments Sent - Here you can create and view investments to other organizations.</h2>
             }
-         }
+        }
         <div class="addpadding">
 
             @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
@@ -143,11 +160,11 @@
                                 {
                                     //string reportID = Convert.ToString(item.projectTo.report.ID);
                                     @Html.ActionLink("Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
-                                    }
-                                    else
-                                    {
-                                        <span>No report available.</span>
-                                    }
+                                }
+                                else
+                                {
+                                    <span>No report available.</span>
+                                }
                             </td>
                         </tr>
 
@@ -163,7 +180,7 @@
 
         </div>
     </div>
-    </div>
+</div>
 
 <div class="container dash">
 
@@ -190,12 +207,21 @@
                             Project Name
                         </th>
                         <th>
-
+                            Investor
+                        </th>
+                        <th>
+                            Investment Date
+                        </th>
+                        <th>
+                            Investment Value
+                        </th>
+                        <th>
+                            Report
                         </th>
                     </tr>
                     @{
-                    foreach (var item in Model.projects.Take(5))
-                    {
+                        foreach (var item in Model.projects.Take(5))
+                        {
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.name)
@@ -204,7 +230,7 @@
 
                                     @foreach (var thing in item.investmentsIn)
                                     {
-                                        <p>$@Html.DisplayFor(modelItem => thing.amount)</p><br />
+                                        @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
                                     }
                                 </td>
                                 <td>
@@ -216,7 +242,7 @@
                                 <td>
                                     @foreach (var thing in item.investmentsIn)
                                     {
-                                        @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
+                                        <div class="moneydiv">$@Html.DisplayFor(modelItem => thing.amount)</div><br />
                                     }
                                 </td>
                                 <td>
@@ -234,11 +260,11 @@
                         }
                     }
                 </table>
-            }
-            else
-            {
-                <p>You currently have no projects.</p>
-            }
+                        }
+                        else
+                        {
+                            <p>You currently have no projects.</p>
+                        }
         </div>
     </div>
 </div>
@@ -250,30 +276,30 @@
 
     <script>
 
-    initialize();
+        initialize();
 
-    @{
+        @{
         string userLat = Model.lat;
         string userLng = Model.lng;
-        
+
     }
 
-        
 
-    @{string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip + "+" + Model.lat + "+" + Model.lng;}
+
+        @{string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip + "+" + Model.lat + "+" + Model.lng;}
 
         markerlocation(@Model.ID, "@currentEntityAddress", "@Model.name", "@Model.description");
         moveToCenter(@Model.lat, @Model.lng);
-   
 
-    @foreach (var item in Model.investmentsOut)
+
+        @foreach (var item in Model.investmentsOut)
     {
         string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
         <text>
         console.log("@item.entityTo.name");
 
         markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
-        
+
 
         var path = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
 
@@ -289,6 +315,6 @@
         </text>
     }
 
-    
+
     </script>
 }
