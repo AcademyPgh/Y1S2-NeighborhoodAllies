@@ -9,7 +9,7 @@
 
     <h2>Create Investment</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createInvestmentForm" }))
     {
         @Html.AntiForgeryToken()
 
@@ -68,8 +68,20 @@
                 </div>
             </div>
 
+            @*<div class="form-group">
+                <dd>Base Tags</dd>
+                <div class="col-md-10">
+                    <div id="baseCatList">
+                        <select id="baseCatSelect">
+
+                        </select>
+                    </div>
+                    @Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")
+                </div>
+            </div>*@
+                
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <dd>Investment Tags</dd>
                 <div class="col-md-10">
                     <div id="CatList">
                         <ul>
@@ -77,6 +89,7 @@
                         </ul>
                     </div>
                     <input name="categories" id="categories" type="hidden" />
+                    @Html.ActionLink("Add New Tag", "Create", "Categories")
                 </div>
             </div>
 
@@ -108,7 +121,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="button" />
+                    <input type="button" id="submitButton" value="Create" class="btn btn-default" />
                 </div>
             </div>
             <br />
@@ -131,18 +144,36 @@
         selectedCategories = [];
         function load_categories() {
             $.ajax({
-                url: '/public/categories',
+                url: '/public/usercategories',
                 type: 'GET',
                 success: function (data) {
                     //$('#CatList').html('<ul>');
                     data.map(function (category) {
-                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
-                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                        if (category.isBase == false) {
+                            $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+                            $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                        }
                     });
                     //$('#CatList').append('</ul>');
                 }
             })
         }
+
+        //function load_baseCategories() {
+        //    $.ajax({
+        //        url: '/public/categories',
+        //        type: 'GET',
+        //        success: function (data) {
+        //            //$('#CatList').html('<ul>');
+        //            data.map(function (category) {
+        //                if (category.isBase == true) {
+        //                    $('#baseCatList select').append('<option id="cat' + category.ID + '" value=' + category.ID + '>' + category.name + '</option>')
+        //                }
+        //            });
+        //            //$('#CatList').append('</ul>');
+        //        }
+        //    })
+        //}
 
         function toggle_category(id) {
             // if it is not there
@@ -150,7 +181,10 @@
             // add the checkmark to the category
             if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
                 selectedCategories.push(id);
-                
+                //var found = $.inArray($('#baseCatSelect').val, selectedCategories) > -1;
+                //if (found == false) {
+
+                //}
                 $('#categories').val(selectedCategories.toString());
                 console.log($('#categories').val())
                 $('#catspan' + id).removeClass('fa fa-square-o');
@@ -185,8 +219,10 @@
             });
         }
 
-        
-
+        $('#submitButton').click(function () {
+            selectedCategories.push($('#baseCatSelect').val);
+            $('#createInvestmentForm').submit();
+        });
    
         function updateProjectsOut() {
             $.ajax({
@@ -208,6 +244,7 @@
 
         function initialize() {
             load_categories();
+            load_baseCategories();
             addVolunteerHours();
             updateProjectsOut();
         }

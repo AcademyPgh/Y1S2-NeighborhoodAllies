@@ -353,6 +353,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_Map.cshtml" />
     <Content Include="Views\Shared\_MetricsPartial.cshtml" />
+    <Content Include="Views\Categories\CreateBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

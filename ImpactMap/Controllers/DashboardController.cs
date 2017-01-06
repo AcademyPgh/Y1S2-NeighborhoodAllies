@@ -24,25 +24,29 @@ namespace ImpactMap.Models
             //dvm.investment = new Investment();
             //dvm.project = new Project();
             Utils.Utility uu = new Utils.Utility();
+            List<Category> categoriesList = db.categories.ToList();
+
+            //Redirects to Categories/CreateBase if there are no categories (aka a base category is needed)
+            if (categoriesList.Count < 1)
+            {
+                return RedirectToAction("CreateBase", "Categories");
+            }
+            //Redirects to Dashboard if there is an entity attached to the currently logged in user
             if (db.users.Find(uu.UserID(User)).entity != null)
             {
                 var entity = db.users.Find(uu.UserID(User)).entity;
                 return View(entity);
             }
-            else
-            {
+            //If not, redirect to create an entity
+
                 return RedirectToAction("Create", "Entities");
-            }
+
             
         }
     }
 
     public class DashboardViewModel
     {
-        public List<Project> projects { get; set; }
-        public List<Investment> investmentsOut { get; set; }
-        public Investment investment { get; set; }
-        public Project project { get; set; } 
         public Entity entity { get; set; }
     }
 }

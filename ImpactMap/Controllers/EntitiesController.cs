@@ -89,8 +89,15 @@ namespace ImpactMap.Controllers
                 entity.projects.Add(project);
                 db.SaveChanges();
 
-                
-                return RedirectToAction("Index", "Dashboard");
+                List<Category> categoriesList = db.categories.ToList();
+                if (categoriesList.Count > 0)
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    return RedirectToAction("CreateBase", "Categories");
+                }
             }
 
             return View(entity);

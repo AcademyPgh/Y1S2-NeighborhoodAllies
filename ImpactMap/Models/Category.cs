@@ -12,6 +12,11 @@ namespace ImpactMap.Models
         [Display(Name = "Tag")]
         public string name { get; set; }
         [Display(Name = "Metrics")]
+        public bool isBase { get; set; }
+        //ID of the entity owning a user category, will be null if it's a base category
+        public int? entityID { get; set; }
+        //ID of the base category for a user category, will be null if it's a base category
+        public int? baseID { get; set; }
         public virtual List<Metric> metrics { get; set; }
     }
 }

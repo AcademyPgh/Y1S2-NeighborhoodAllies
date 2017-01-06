@@ -48,7 +48,7 @@ namespace ImpactMap.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            Utils.Utility userUtil = new Utils.Utility();
+            //Utils.Utility userUtil = new Utils.Utility();
             CategoryViewModel cvm = new CategoryViewModel();
              cvm.Entities = db.entities.ToList();
              cvm.Category = new Models.Category();
@@ -62,12 +62,14 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics)
+        public ActionResult Create([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics, int baseID)
         {
             if (ModelState.IsValid)
             {
                 Utils.Utility userUtil = new Utils.Utility();
-
+                category.entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
+                category.isBase = false;
+                category.baseID = baseID;
                 db.categories.Add(category);
                 db.SaveChanges();
                 var catID = category.ID;
@@ -83,7 +85,51 @@ namespace ImpactMap.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
+            }
+
+            return View(category);
+        }
+
+        // GET: Categories/CreateBase
+        public ActionResult CreateBase()
+        {
+            //Utils.Utility userUtil = new Utils.Utility();
+            CategoryViewModel cvm = new CategoryViewModel();
+            cvm.Entities = db.entities.ToList();
+            cvm.Category = new Models.Category();
+            cvm.Metrics = new Models.Metric();
+
+            return View(cvm);
+        }
+
+        // POST: Categories/CreateBase
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateBase([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics)
+        {
+            if (ModelState.IsValid)
+            {
+                //Utils.Utility userUtil = new Utils.Utility();
+                category.isBase = true;
+                db.categories.Add(category);
+                db.SaveChanges();
+                var catID = category.ID;
+
+                foreach (var metricName in newMetrics.Split(','))
+                {
+                    metric.name = metricName;
+                    metric.categoryID = catID;
+                    db.metrics.Add(metric);
+                    db.SaveChanges();
+                    Category currentCategory = db.categories.Find(catID);
+                    currentCategory.metrics.Add(metric);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(category);
