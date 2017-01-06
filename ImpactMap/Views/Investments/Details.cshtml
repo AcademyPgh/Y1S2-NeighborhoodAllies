@@ -29,6 +29,25 @@
             </dd>
 
             <dt>
+                @Html.DisplayNameFor(model => model.isInKind)
+            </dt>
+
+
+            <dd>
+
+                @if (Model.isInKind)
+            {
+                    <span>Yes</span>
+                }
+
+                else
+                {
+                    <span>No</span>
+                }
+                @*@Html.DisplayFor(model => model.isInKind)*@
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.projectFrom)
             </dt>
 
@@ -51,42 +70,6 @@
             <dd>
                 @Html.DisplayFor(model => model.projectTo.name)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.isInKind)
-            </dt>
-
-            <dt>
-
-            </dt>
-
-            <dd>
-
-                @if (Model.isInKind)
-            {
-                    <span>Yes</span>
-                }
-
-                else
-                {
-                    <span>No</span>
-                }
-                @*@Html.DisplayFor(model => model.isInKind)*@
-            </dd>
-
-            @if (Model.isInKind)
-            {
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.volunteerHours)
-                </dt>
-
-                <dd>
-
-                    @Html.DisplayFor(model => model.volunteerHours)
-
-                </dd>
-            }
 
             <dt>
 

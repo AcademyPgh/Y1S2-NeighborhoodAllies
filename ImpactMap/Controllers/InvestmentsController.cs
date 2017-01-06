@@ -50,6 +50,7 @@ namespace ImpactMap.Controllers
             ivm.Entities = db.entities.ToList();
             //new investment because we're creating one
             ivm.Investment = new Models.Investment();
+            //sets the default investment date to the current date
             ivm.Investment.date = DateTime.Now;
             //pulling in all the categories in the system
             ivm.Categories = db.categories.ToList();
