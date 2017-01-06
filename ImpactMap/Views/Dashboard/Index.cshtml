@@ -40,7 +40,7 @@
                     @{
                         foreach (var project in Model.projects)
                         {
-                            if (project.report == null)
+                            if (project.investmentsIn.Count > 0 && project.report == null)
                             {
                                 <li>@project.name needs a report!</li>
                                 @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
