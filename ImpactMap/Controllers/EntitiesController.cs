@@ -64,31 +64,35 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Instantiating userUtil to get the ID of currently logged in user
                 Utils.Utility userUtil = new Utils.Utility();
-
+                
+                //Using geocoder from Google to get latitude and longitude from entity address
                 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyDOH51wduQKexTyFXGy0tdDqfXw47XIrjA" };
                 IEnumerable<Address> addresses = geocoder.Geocode(entity.address1 + " " + entity.address2 + " " + entity.city + " " + entity.state + " " + entity.zip);
-
-
                 entity.lat = Convert.ToString(addresses.First().Coordinates.Latitude);
                 entity.lng = Convert.ToString(addresses.First().Coordinates.Longitude);
-
+                
+                //user is the currently logged in user; attach the entity we're making to the user
                 var user = db.users.Find(userUtil.UserID(User));
                 db.entities.Add(entity);
                 db.SaveChanges();
                 user.entity = entity;
                 db.SaveChanges();
 
+                //Creating a default project each time that an entity is created
                 Project project = new Project();
                 project.name = "General Fund";
                 project.description = "General Pool of Funds - unassigned to a project";
                 project.entity = entity;
                 db.projects.Add(project);
                 db.SaveChanges();
-
+                //Add the project to this entity's list of projects
                 entity.projects.Add(project);
                 db.SaveChanges();
 
+                //Once the entity is created, redirect to the dashboard IF there are categories in the system
+                //If there aren't, that means no base categories exist and the user will be redirected to make one
                 List<Category> categoriesList = db.categories.ToList();
                 if (categoriesList.Count > 0)
                 {

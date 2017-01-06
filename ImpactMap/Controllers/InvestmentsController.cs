@@ -20,7 +20,6 @@ namespace ImpactMap.Controllers
             //return View(db.investments.ToList());
             Utils.Utility uu = new Utils.Utility();
             var entity = db.users.Find(uu.UserID(User)).entity;
-
             return View(entity);
         }
 
@@ -42,13 +41,18 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
+            //Utils.Utility gets the ID of the user that's logged in
             Utils.Utility userUtil = new Utils.Utility();
+            //Uses InvestmentViewModel which is at the bottom of this file
             InvestmentViewModel ivm = new InvestmentViewModel();
             
+            //pulling in all the entities in the system
             ivm.Entities = db.entities.ToList();
+            //new investment because we're creating one
             ivm.Investment = new Models.Investment();
+            //pulling in all the categories in the system
             ivm.Categories = db.categories.ToList();
-            //entityFrom is auto retrieved based on the user that's logged in
+            //entityFrom is retrieved based on the user that's logged in
             ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
             //projectsFrom is populated based on entityFrom's projects
             ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
@@ -65,17 +69,23 @@ namespace ImpactMap.Controllers
         {
             if (ModelState.IsValid)
             {
-                //entityFrom uses UserID() from Utils/Utility.cs to get the entity linked to the currently logged in User
+                //Utils.Utility gets currently logged in user's ID
                 Utils.Utility userUtil = new Utils.Utility();
+
+                //entityTo_ID gets sent in via the forms and then attached to the investment here
                 investment.entityTo = db.entities.Find(entityTo_ID);
+
+                //entityFrom uses UserID() from Utils/Utility.cs to get the entity linked to the currently logged in User
                 investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
 
+                //projectTo_ID and projectFrom_ID get sent in via the forms and then attached to the investment here
                 investment.projectTo = db.projects.Find(projectTo_ID);
                 investment.projectFrom = db.projects.Find(projectFrom_ID);
-
-
+                
+                //"categories" is a comma-separated string of categories sent in via the forms 
+                //(a hidden input, using an ajax call to get the categories from the database)
+                //the string is split into an array, and then each one is added to the new investment's category list
                 if (categories != "" && categories != null)
-
                 {
                     investment.categories = new List<Category>();
                     foreach (var id in categories.Split(','))
@@ -83,9 +93,13 @@ namespace ImpactMap.Controllers
                         investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
                     }
                 }
+
+                //finally we add the investment to the database and save the changes
                 db.investments.Add(investment);
                 db.SaveChanges();
 
+                //These if statements are analogous to if projectTo != null / if projectFrom != null
+                //If the investment has a projectTo, add this investment to that project's investmentsIn list
                 if (projectTo_ID != 0)
                 {
                     Project newProject = new Project();
@@ -93,7 +107,7 @@ namespace ImpactMap.Controllers
                     newProject.investmentsIn.Add(db.investments.Find(investment.ID));
                     db.SaveChanges();
                 }
-
+                //If the investment has a projectFrom, add this investment to that project's investmentsOut list
                 if (projectFrom_ID != 0)
                 {
                     Project newProject = new Project();
@@ -102,9 +116,9 @@ namespace ImpactMap.Controllers
                     db.SaveChanges();
                 }
 
+                //Now redirect to the dashboard
                 return RedirectToAction("Index", "Dashboard");
             }
-
             return View(investment);
         }
 
@@ -175,6 +189,7 @@ namespace ImpactMap.Controllers
         }
     }
 
+    //Investments require all of this stuff, so this view model is brought into the Investments/Create view
     public class InvestmentViewModel
     {
         public List<Project> Projects { get; set; }
