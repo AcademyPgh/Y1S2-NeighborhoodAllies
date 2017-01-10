@@ -22,24 +22,24 @@ body {
     padding-bottom: 5px;
 }
 
-dd{
+dd {
     font-family: 'Open Sans', sans-serif;
-    color:darkgray;
-    font-weight:200;
+    color: darkgray;
+    font-weight: 200;
     font-size: 12pt;
 }
 
-.loginlink a{
-    color:white;
+.loginlink a {
+    color: white;
 }
 
-a href{
+a href {
     color: #0C7D8B;
 }
 
-.academylogo{
-    width: 50px; 
-    height:50px;
+.academylogo {
+    width: 50px;
+    height: 50px;
 }
 
 .metricName:after, .commaList:after {
@@ -55,13 +55,13 @@ a href{
     margin: 0px;
 }
 
-.addpadding{
+.addpadding {
     padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    min-height:350px;
+    min-height: 350px;
 }
 
 .form-horizontal .form-group {
@@ -71,42 +71,40 @@ a href{
 
 /*most buttons*/
 .button {
-
-		font-family: 'Fjalla One', sans-serif;
-		font-size: 14pt;
-		font-weight: 200;
-		line-height: 100%;
-		color: #fff;
-		background-color: #0C7D8B;
-
-		text-decoration: none;
-		position: relative;
-		display: inline-block;
-		padding:10px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-		margin-right: 10px;
-		border-radius: 5px;
-	}
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 14pt;
+    font-weight: 200;
+    line-height: 100%;
+    color: #fff;
+    background-color: #0C7D8B;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
 
 /*styles map*/
 .controls {
-            margin-top: 10px;
-            border: 1px solid transparent;
-            border-radius: 2px 0 0 2px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            height: 32px;
-            outline: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
 
-.dashNotifications{
+.dashNotifications {
     display: inline-block;
 }
 
-.dbSpans{
-    min-height:200px;
+.dbSpans {
+    min-height: 200px;
     width: 32%;
     display: inline-block;
     vertical-align: top;
@@ -120,120 +118,118 @@ a href{
     white-space: normal;
 }
 
-.fa-exclamation{
+.fa-exclamation {
     color: red;
     font-size: 50pt;
     vertical-align: middle;
 }
 
-.fa-file-o{
+.fa-file-o {
     color: #0C7D8B;
     font-size: 40pt;
     vertical-align: middle;
 }
 
-.fa.fa-minus-circle{
-    padding-right:10px;
+.fa.fa-minus-circle {
+    padding-right: 10px;
 }
 
-	footer {
-		text-align: center;
-		background-color: #92C337;
-		padding: 15px;
-        height:130px;
-	}
+footer {
+    text-align: center;
+    background-color: #92C337;
+    padding: 15px;
+    height: 130px;
+}
 
-	.footerText {
-		text-align: center;
-		color: #0C7D8B;
-		font-family: 'Fjalla One', sans-serif;
-		font-size:8pt;
-	}
+.footerText {
+    text-align: center;
+    color: #0C7D8B;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 8pt;
+}
 
 
-    .navbar-brand h1 {
+.navbar-brand h1 {
     display: inline;
     vertical-align: middle;
 }
 
-    .navbar-brand{
-        max-width:60%;
-    }
-
-h1{
-    font-family: 'Fjalla One', sans-serif;
-	color: #0C7D8B;
-	font-weight: 500;
-	font-size:24pt;
-    padding-left:20px;
+.navbar-brand {
+    max-width: 60%;
 }
 
-h2{
+h1 {
     font-family: 'Fjalla One', sans-serif;
-	color: #0C7D8B;
-	font-weight: 400;
-	font-size:18pt;
-    padding-left:20px;
+    color: #0C7D8B;
+    font-weight: 500;
+    font-size: 24pt;
+    padding-left: 20px;
 }
 
-h3{
+h2 {
     font-family: 'Fjalla One', sans-serif;
-	color: #0C7D8B;
-	font-weight: 300;
-	font-size:12pt;
-    padding-left:20px;
+    color: #0C7D8B;
+    font-weight: 400;
+    font-size: 18pt;
+    padding-left: 20px;
 }
 
-h4{
-    font-family: 'Open Sans', sans-serif;
-    color:darkgray;
-    font-weight:200;
+h3 {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 300;
     font-size: 12pt;
-    padding-left:20px;
+    padding-left: 20px;
 }
 
-.header{
-    margin:auto;
-	background-color: #92C337;
-	/*padding: 15px;
+h4 {
+    font-family: 'Open Sans', sans-serif;
+    color: darkgray;
+    font-weight: 200;
+    font-size: 12pt;
+    padding-left: 20px;
+}
+
+.header {
+    margin: auto;
+    background-color: #92C337;
+    /*padding: 15px;
     min-height:150px;*/
-    height:auto;
+    height: auto;
 }
 
 .hideFormField {
     display: none;
 }
 
-.icons{
+.icons {
     display: inline;
     font-size: 30px;
 }
 
- #map {
-            height: 40vh;
-            width: 50%;
-            display: inline-block;
-      }
+#map {
+    height: 40vh;
+    width: 50%;
+    display: inline-block;
+}
 
 
 /*label for input inside input box/line*/
 inputWLabel {
-		border-radius: 3px;
-		background-color: #E7F2D3;
-		
-		color: #0C7D8B;
-		font-family: 'Fjalla One', sans-serif;
-		font-size: 14pt;
-		line-height: 100%;
-		width:150px;
-		padding:10px;
-
-		text-align: center;
-		position: relative;
-		display: block;
-		margin: 0 auto;
-		/*Pull in CSS for designed text box*/ 
-	}
+    border-radius: 3px;
+    background-color: #E7F2D3;
+    color: #0C7D8B;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 14pt;
+    line-height: 100%;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    /*Pull in CSS for designed text box*/
+}
 
 .logincontainer {
     position: static;
@@ -244,17 +240,48 @@ inputWLabel {
     background-color: rgba(12, 125, 139, 0.85);
 }
 
-.orgtitle {
-   font-family: 'Open Sans', sans-serif;
-   font-size: 14px;
-   padding: 10px;
-   background-color: #92C337;
-   color: white;
-   margin: 1px;
-   border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+.noti-content {
+    position: fixed;
+    right: 100px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    top: 47px;
+    width: 250px;
+    display: none;
+    border: 1px solid #9E988B;
 }
 
- #pac-input {
+
+
+#notiContent {
+    max-height: 200px;
+    overflow: auto;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 20px;
+}
+
+.noti-top-arrow {
+    border-color: transparent;
+    border-bottom-color: #F5DEB3;
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    position: absolute;
+    right: 32px;
+    top: -8px;
+}
+
+.orgtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #92C337;
+    color: white;
+    margin: 1px;
+    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+#pac-input {
     background-color: #fff;
     font-family: Roboto;
     font-size: 15px;
@@ -263,22 +290,22 @@ inputWLabel {
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
     width: 300px;
+}
+
+    #pac-input:focus {
+        border-color: #4d90fe;
     }
 
- #pac-input:focus {
-   border-color: #4d90fe;
+.pac-container {
+    font-family: Roboto;
 }
 
- .pac-container {
-   font-family: Roboto;
+.removeMetric {
+    line-height: 2em;
 }
-
- .removeMetric{
-     line-height: 2em;
- }
 
 /*primarily used for buttons, but any non-text right align*/
-.rightAlignObject{
+.rightAlignObject {
     position: static;
     object-position: right;
 }
@@ -287,20 +314,20 @@ inputWLabel {
     display: block;
 }
 
-.spaceDivs{
+.spaceDivs {
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
-.dashMap{
-    margin-top:30px;
-    float:right;
+.dashMap {
+    margin-top: 30px;
+    float: right;
 }
 
-.orgName{
-    font-size:24px;
-    color:black;
-    font-weight:600;
+.orgName {
+    font-size: 24px;
+    color: black;
+    font-weight: 600;
 }
 
 /*.container.dashInvestments{
@@ -312,12 +339,12 @@ inputWLabel {
     margin-bottom:30px;
 }*/
 
-.dash h2{
-    border-bottom:solid 2px #0C7D8B;
+.dash h2 {
+    border-bottom: solid 2px #0C7D8B;
     /*background:#0C7D8B;
     color:white;
     padding-top:15px;*/
-    padding-bottom:15px;
+    padding-bottom: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -327,10 +354,10 @@ textarea {
     max-width: 280px;
 }
 
-th{
+th {
     font-family: "Open Sans",sans-serif;
     font-size: medium;
-    font-weight:300;
+    font-weight: 300;
     color: #6f6f6f;
 }
 
@@ -340,22 +367,22 @@ th{
     padding: 5px 11px 0px 11px;
 }
 
-#type-selector label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
+    #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+span.metricName:after {
+    content: ",";
 }
 
-span.metricName:after{
-    content:",";
+span.metricName:last-of-type:after {
+    content: "";
 }
 
-span.metricName:last-of-type:after{
-    content:"";
-}
-
-span.removeMetric{
-    display:block;
+span.removeMetric {
+    display: block;
 }
 
 #CatList ul {
@@ -363,27 +390,25 @@ span.removeMetric{
     padding-left: 0px;
 }
 
-#CatList ul li{
-    padding:5px 0;
-}
+    #CatList ul li {
+        padding: 5px 0;
+    }
 
 #baseCatList ul {
     list-style: none;
     padding-left: 0px;
 }
 
-#baseCatList ul li {
-    padding:5px 0;
-}
+    #baseCatList ul li {
+        padding: 5px 0;
+    }
 
 @media (min-width: 768px) {
-    .navbar-right{
-        padding-top:10px;
+    .navbar-right {
+        padding-top: 10px;
     }
 
     .form-horizontal .control-label {
-    text-align: left;
+        text-align: left;
     }
 }
-
-

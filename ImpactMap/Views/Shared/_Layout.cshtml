@@ -38,6 +38,24 @@
                     <h1>ImpactMap</h1>
                 </div>
 
+
+                    <span class="noti glyphicon glyphicon-bell" id="bell"><span class="count">&nbsp;</span></span>
+                    <div id="bell-inner" class="hidden-notifications">
+                        <h3>Notifications</h3>
+                        <ul>
+                            @{
+                                foreach (var project in Model.projects)
+                                {
+                                    if (project.investmentsIn.Count > 0 && project.report == null)
+                                    {
+                                        <li>@project.name needs a report!</li>
+                                        @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+
 @*<<<<<<< HEAD
                 @Html.ActionLink("ImpactMap", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
             </div>
@@ -48,7 +66,6 @@
 =======*@
             
             <div class="navbar-collapse collapse">
-
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -86,3 +103,9 @@
     </footer>
 </body>
 </html>
+
+<script>
+    document.getElementById('bell').addEventListener("click", function () {
+        $('#bell-inner').append('<div>lgkd</div>');
+    });
+</script>
