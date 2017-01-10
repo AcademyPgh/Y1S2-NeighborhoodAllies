@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<ImpactMap.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories List";
 }
 
 <div class="container">
 
-    <h2>Index</h2>
+    <h2>@ViewBag.Title</h2>
 
     <p>
         @Html.ActionLink("Create New", "Create", "Categories", new { @class = "button" })
