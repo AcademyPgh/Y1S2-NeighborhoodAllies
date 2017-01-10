@@ -354,6 +354,7 @@
     <Content Include="Views\Shared\_Map.cshtml" />
     <Content Include="Views\Shared\_MetricsPartial.cshtml" />
     <Content Include="Views\Categories\CreateBase.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
