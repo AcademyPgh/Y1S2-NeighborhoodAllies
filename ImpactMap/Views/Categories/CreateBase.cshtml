@@ -1,11 +1,11 @@
 ﻿@model ImpactMap.Controllers.CategoryViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Base Tags";
 }
 
 <div class="container">
-    <h2>Create Base Tag</h2>
+    <h2>@ViewBag.Title</h2>
     <h3>Base tags are broad categories that apply to a wide range of investments.  Please use this form only to create a broad category, such as "Economic Development".  If you are creating a tag that is more specific to your organization, please go back and create a user tag under the most relevant base tag in the system.</h3>
 
     @using (Html.BeginForm())
@@ -13,7 +13,6 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Tag</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">

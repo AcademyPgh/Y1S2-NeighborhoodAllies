@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<ImpactMap.Models.Report>
 
 @{
-    ViewBag.Title = "Reports Index";
+    ViewBag.Title = "Reports List";
 }
 
 <div class="container">
-    <h2>Index</h2>
+    <h2>@ViewBag.Title</h2>
 
     <p>
         @Html.ActionLink("Create New", "Create")

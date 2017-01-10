@@ -1,11 +1,11 @@
 ﻿@model ImpactMap.Controllers.InvestmentViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Investment";
     
 }
 @*Investments create form*@
 <div class="container">
-    <h2>Create Investment</h2>
+    <h2>@ViewBag.Title</h2>
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createInvestmentForm" }))
     {
         @Html.AntiForgeryToken()

@@ -1,18 +1,17 @@
 ﻿@model ImpactMap.Controllers.ReportViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Report";
 }
 
 <div class="container">
-    <h2>Create Report</h2>
+    <h2>@ViewBag.Title</h2>
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Report</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">

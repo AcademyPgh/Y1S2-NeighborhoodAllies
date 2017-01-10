@@ -14,6 +14,14 @@ namespace ImpactMap.Controllers
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
+        private Dictionary<string, string> toolTips = new Dictionary<string, string>()
+            {
+                {"amount", "The value of the investment or the cash-equivalence of the in-kind donation." },
+                {"categories", "The categories and metrics you would like the recipient to report back on." },
+                {"ivmDescription", "A brief description of the investment (if in kind, the nature of the donation can be noted here)"},
+
+            };
+
         // GET: Categories
         public ActionResult Index()
         {
