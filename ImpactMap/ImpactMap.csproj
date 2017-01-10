@@ -208,7 +208,6 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\MetricResultController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
-    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -355,7 +354,6 @@
     <Content Include="Views\Shared\_Map.cshtml" />
     <Content Include="Views\Shared\_MetricsPartial.cshtml" />
     <Content Include="Views\Categories\CreateBase.cshtml" />
-    <Content Include="Views\Shared\_Notification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

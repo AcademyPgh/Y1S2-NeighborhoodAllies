@@ -11,6 +11,8 @@ namespace ImpactMap.Models
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
+
+
         // GET: Investments
         public ActionResult Index()
         {
@@ -23,6 +25,8 @@ namespace ImpactMap.Models
             //dvm.entity = currEntity.entity;
             //dvm.investment = new Investment();
             //dvm.project = new Project();
+
+            ViewBag.Projects = db.projects;
             Utils.Utility uu = new Utils.Utility();
             List<Category> categoriesList = db.categories.ToList();
 
