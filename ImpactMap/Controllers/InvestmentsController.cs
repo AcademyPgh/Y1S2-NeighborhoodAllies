@@ -23,7 +23,7 @@ namespace ImpactMap.Controllers
                 {"projectFrom", "The pool of funds from which the investment was made."},
                 {"entityTo", "The enitity to which the investment was made"},
                 {"projectTo", "The recipients pool of funds into which the investment was made."},
-                {"tags", "The categories and metrics you would like the recipient to report back on." },
+                {"categories", "The categories and metrics you would like the recipient to report back on." },
                 {"ivmDescription", "A brief description of the investment (if in kind, the nature of the donation can be noted here)"},
 
             };
