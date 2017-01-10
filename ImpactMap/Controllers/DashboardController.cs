@@ -26,7 +26,6 @@ namespace ImpactMap.Models
             //dvm.investment = new Investment();
             //dvm.project = new Project();
 
-            ViewBag.Projects = db.projects;
             Utils.Utility uu = new Utils.Utility();
             List<Category> categoriesList = db.categories.ToList();
 

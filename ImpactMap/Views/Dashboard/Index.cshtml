@@ -5,12 +5,34 @@
     //List<ImpactMap.Models.Project> Projects = Model.projects;
 }
 
-
+@*Html.Partial("_Notifications", Model)*@
 
 <div class="container dash">
     <div style="vertical-align: top;">
-
-        <h2>@Model.name Dashboard</h2>
+        <div class="dashHeader">
+            <h2>@Model.name Dashboard</h2>
+            @*Notifications dropdown*@
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    @{
+                        int i = 0;
+                        foreach (var project in Model.projects)
+                        {
+                            if (project.investmentsIn.Count > 0 && project.report == null)
+                            {
+                                <li>@project.name needs a report!</li>
+                                @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
+                                i++;
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
         <div class="spaceDivs dbSpans">
 
             <dt class="dl-horizontal">
@@ -34,25 +56,8 @@
                     @Html.DisplayFor(model => model.description)
                 </dd>
 
-                @Html.ActionLink("Edit Your Organization", "Edit", "Entity", new { @class = "addpadding button" })
-                
-                @*Notification area*@
+                @Html.ActionLink("Edit Your Organization", "Edit", "Entities", new { id = Model.ID }, new { @class = "addpadding button" })
 
-                <div class="dashNotifications">
-                    <h3>Notifications</h3>
-                    <ul>
-                    @{
-                        foreach (var project in Model.projects)
-                        {
-                            if (project.investmentsIn.Count > 0 && project.report == null)
-                            {
-                                <li>@project.name needs a report!</li>
-                                @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
-                            }
-                        }
-                    }
-                        </ul>
-                </div>
         </div>
         <div id="map" class="dashMap"></div>
     </div>

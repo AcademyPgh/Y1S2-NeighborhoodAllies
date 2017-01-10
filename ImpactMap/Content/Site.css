@@ -104,6 +104,19 @@ a href {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
+.dashHeader {
+    border-bottom: solid 2px #0C7D8B;
+
+}
+
+.dash .dashHeader h2 {
+    border: none;
+}
+
+.dashHeader h2, .dashHeader .dropdown {
+    display: inline-block;
+}
+
 .dashNotifications {
     display: inline-block;
 }
