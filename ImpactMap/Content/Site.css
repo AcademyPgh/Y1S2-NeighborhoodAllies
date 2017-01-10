@@ -6,6 +6,11 @@ a {
     color: #0C7D8B;
 }
 
+a:hover {
+    text-decoration: none;
+    color: #7dced3;
+}
+
 .aboutlink {
     padding: 10px;
 }

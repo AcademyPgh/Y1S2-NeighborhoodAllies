@@ -14,9 +14,27 @@ namespace ImpactMap.Controllers
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
+        //This holds the toolTips for Investment Forms
+        private Dictionary<string, string> toolTips = new Dictionary<string, string>()
+            {
+                {"amount", "The value of the investment or the cash-equivalence of the in-kind donation." },
+                {"date", "The date the investment was made"},
+                {"inKind", "Check if the investment was an in kind donation (volunteer hours, services, equipment, etc" },
+                {"projectFrom", "The pool of funds from which the investment was made."},
+                {"entityTo", "The enitity to which the investment was made"},
+                {"projectTo", "The recipients pool of funds into which the investment was made."},
+                {"categories", "The categories and metrics you would like the recipient to report back on." },
+                {"ivmDescription", "A brief description of the investment (if in kind, the nature of the donation can be noted here)"},
+
+            };
+    
+
+        
+
         // GET: Investments
         public ActionResult Index()
         {
+            ViewBag.Tooltips = toolTips;
             //return View(db.investments.ToList());
             Utils.Utility uu = new Utils.Utility();
             var entity = db.users.Find(uu.UserID(User)).entity;
@@ -26,6 +44,7 @@ namespace ImpactMap.Controllers
         // GET: Investments/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,6 +60,7 @@ namespace ImpactMap.Controllers
         // GET: Investments/Create
         public ActionResult Create()
         {
+            ViewBag.Tooltips = toolTips;
             //Utils.Utility gets the ID of the user that's logged in
             Utils.Utility userUtil = new Utils.Utility();
             //Uses InvestmentViewModel which is at the bottom of this file
@@ -127,6 +147,7 @@ namespace ImpactMap.Controllers
         // GET: Investments/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,8 +178,11 @@ namespace ImpactMap.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,projectFrom_ID,projectTo_ID")] Investment investment)
         {
-            if (ModelState.IsValid)
+
+           if (ModelState.IsValid)
             {
+
+               
                 db.Entry(investment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -169,6 +193,7 @@ namespace ImpactMap.Controllers
         // GET: Investments/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

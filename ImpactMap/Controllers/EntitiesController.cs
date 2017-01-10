@@ -18,6 +18,7 @@ namespace ImpactMap.Controllers
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
+
         // GET: Entities
         public ActionResult Index()
         {

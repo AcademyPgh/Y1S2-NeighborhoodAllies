@@ -1,6 +1,7 @@
 ﻿@model ImpactMap.Controllers.InvestmentViewModel
 @{
     ViewBag.Title = "Create";
+    
 }
 @*Investments create form*@
 <div class="container">
@@ -14,7 +15,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*Date field*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["date"] })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
@@ -22,7 +23,7 @@
             </div>
             @*Value field*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["amount"] })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
@@ -31,7 +32,7 @@
 
             @*In Kind checkbox - Marks the donation as inKind*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["inKind"] })
                 <div class="col-md-10">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.Investment.isInKind)
@@ -42,7 +43,7 @@
 
             @*ProjectFrom dropdown populates based on current entity, sent in via the Entities/Create GET action*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["projectFrom"] })
                 <div class="col-md-10">
                     <select name="projectFrom_ID">
                         <option value="0">No Project Selected</option>
@@ -56,7 +57,7 @@
             </div>
             @*EntityTo dropdown -- when this dropdown changes it sends its value to the javascript below to update the projectTo dropdown*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["entityTo"] })
                 <div class="col-md-10">
                     <select name="entityTo_ID" id="recipientSelect">
                         @foreach (var entity in Model.Entities)
@@ -68,14 +69,14 @@
             </div>
             @*ProjectTo dropdown populates based on the EntityTo selected above*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["projectTo"] })
                 <div class="col-md-10">
                     <select name="projectTo_ID" id="ProjectToDropdown"></select>
                 </div>
             </div>
             @*Categories list with checkboxes - populates using an ajax call (load_categories) below*@
             <div class="form-group">
-                <dd>Investment Tags</dd>
+                <dd title=@ViewBag.Tooltips["categories"]>Investment Tags</dd>
                 <div class="col-md-10">
                     <div id="CatList">
                         <ul></ul>
@@ -88,7 +89,7 @@
            
             @*Description input form*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["ivmDescription"] })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
