@@ -58,4 +58,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function setLoginHeight() {
+            $('.logincontainer').height = $(body).height();
+        }
+
+        $(setLoginHeight);
+    </script>
 }
