@@ -1,5 +1,23 @@
-﻿.account {
+﻿
+html {
+  position: relative;
+  height: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
+  margin-bottom: 130px;
+  height:100%;
+}
+
+.checkbox{
+    color:white;
+}
+
+
+.account {
     background-image: url(/Content/Images/loginbg.jpg);
+    min-height:750px;
 }
 
 a {
@@ -11,15 +29,15 @@ a:hover {
     color: #7dced3;
 }
 
+.navbar-nav > li > a:hover{
+    background:transparent;
+    color:white;
+}
+
 .aboutlink {
     padding: 10px;
 }
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 10pt;
-    line-height: 100%;
-}
 
 .descripbox {
     padding-left: 10px;
@@ -153,6 +171,9 @@ a href {
 }
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     background-color: #92C337;
     padding: 15px;
@@ -254,7 +275,7 @@ inputWLabel {
     padding: 15px;
     margin-left: 20px;
     width: 300px;
-    height: 350px;
+    min-height:750px;
     background-color: rgba(12, 125, 139, 0.85);
 }
 
@@ -356,6 +377,9 @@ inputWLabel {
 .container.orgDashInfo{
     margin-bottom:30px;
 }*/
+
+
+
 
 .dash h2 {
     border-bottom: solid 2px #0C7D8B;

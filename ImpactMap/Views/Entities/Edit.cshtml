@@ -77,6 +77,7 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="button" />
+                    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", new { @class = "button btn-default" })
                 </div>
             </div>
         </div>
@@ -85,6 +86,6 @@
 
 
     <div class="addpadding">
-        @Html.ActionLink("Project List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
+       
     </div>
     </div>
