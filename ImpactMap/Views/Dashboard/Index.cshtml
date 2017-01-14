@@ -115,15 +115,9 @@
 
 <div class="container dash">
     <div class="spaceDivs">
-        @{ if (Model.investmentsOut.Count != 0)
-            {
-                <h2>Investments Sent</h2>
-            }
-            else
-            {
-                <h2>Investments Sent - Here you can create and view investments to other organizations.</h2>
-            }
-        }
+       
+                <h2>Investments Sent <i class="fa fa-question-circle" aria-hidden="true" title="Here you can create and view investments to other organizations"></i></h2>
+            
         <div class="addpadding">
 
             @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
@@ -147,6 +141,9 @@
                         </th>
                         <th>
                             Reports
+                        </th>
+                        <th>
+                            Details
                         </th>
                     </tr>
 
@@ -175,6 +172,9 @@
                                     <span>No report available.</span>
                                 }
                             </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Investments", new { id = item.ID }, null)
+                            </td>
                         </tr>
 
                     }
@@ -194,15 +194,10 @@
 <div class="container dash">
 
     <div class="spaceDivs">
-        @{ if (Model.projects.Count > 1)
-            {
-                <h2>Projects</h2>
-            }
-            else
-            {
-                <h2>Projects - Here you can create and view your organization's projects.</h2>
-            }
-        }
+        
+            
+                <h2>Projects <i class="fa fa-question-circle" aria-hidden="true" title="Here you can create and view your organization's projects."></i></h2>
+            
         <div class="addpadding">
             @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "button" })
 
@@ -226,6 +221,9 @@
                         </th>
                         <th>
                             Report
+                        </th>
+                        <th>
+                            Details
                         </th>
                     </tr>
                     @{
@@ -264,6 +262,9 @@
                                         @Html.ActionLink("Create Report", "Create", "Reports", new { id = item.ID }, null)
                                     }
 
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", "Projects", new { id = item.ID }, null)
                                 </td>
                             </tr>
                         }

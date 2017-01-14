@@ -60,10 +60,11 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        function setLoginHeight() {
-            $('.logincontainer').height = $(body).height();
-        }
-
-        $(setLoginHeight);
+        $(document).ready(function () {
+            var bodyHeight = $('body').height();
+            var headerHeight = $('.header').height();
+            var targetHeight = bodyHeight + headerHeight;
+            $(".logincontainer").css({height: targetHeight})
+        });
     </script>
 }
