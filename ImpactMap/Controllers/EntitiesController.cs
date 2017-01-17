@@ -188,6 +188,39 @@ namespace ImpactMap.Controllers
             return Content(result, "application/json");
         }
 
+        //This Action connects to ajax in the header (_Layout.cshtml) to show notifications
+        public ActionResult GetReportNotifs(int ID)
+        {
+            Entity currEntity = db.entities.Find(ID);
+            List<Project> projectList = currEntity.projects.ToList();
+            List<Project> projectsWithoutReports = new List<Project>();
+            foreach (var project in projectList)
+            {
+                if (project.investmentsIn.Count > 0 && project.report == null)
+                {
+                    projectsWithoutReports.Add(project);
+                }
+            }
+            var result = JsonConvert.SerializeObject(projectsWithoutReports, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
+        }
+        //Entity ID is needed to get the projects for the report notifications
+        public ActionResult GetCurrEntity()
+        {
+            Utils.Utility userUtil = new Utils.Utility();
+            Entity currEntity = db.entities.Find(userUtil.UserID(User));
+            var result = JsonConvert.SerializeObject(currEntity, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
+        }
+
         public string GetAddress(int ID)
         {
             Entity addressHaver = db.entities.Find(ID);
