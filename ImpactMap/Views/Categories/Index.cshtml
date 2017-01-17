@@ -24,33 +24,71 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @item.name
-                </td>
-                <td>
+            if (item.isBase == true)
+            {
+                int baseID = item.ID;
+                <tr>
+                    <td>
+                        Base Tag: @item.name
+                    </td>
+                    <td>
 
-                    @if (item.metrics.Count != 0)
+                        @if (item.metrics.Count != 0)
                     {
 
                         foreach (var metric in item.metrics)
                         {
-                            <span class="metricName">@metric.name</span>
+                                <span class="metricName">@metric.name</span>
+                            }
                         }
-                    }
-                    else
-                    {
-                        <span>No Metrics Available</span>
-                    }
-                </td>
+                        else
+                        {
+                            <span>No Metrics Available</span>
+                        }
+                    </td>
 
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+
+                foreach (var subItem in Model)
+                {
+                    if (subItem.baseID == baseID)
+                    {
+                        <tr>
+                            <td>
+                                <span class="glyphicon glyphicon-tag"></span>
+                                @subItem.name
+                            </td>
+                            <td>
+
+                                @if (subItem.metrics.Count != 0)
+                                {
+
+                                    foreach (var metric in subItem.metrics)
+                                    {
+                                        <span class="metricName">@metric.name</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>No Metrics Available</span>
+                                }
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
         }
 
     </table>
-    </div>
+</div>
