@@ -25,18 +25,18 @@ namespace ImpactMap.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            //Utils.Utility userUtil = new Utils.Utility();
-            //int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
-            //List<Category> userCategories = new List<Category>();
-            //foreach (var category in db.categories)
-            //{
-            //    if (category.isBase == true || category.entityID == entityID)
-            //    {
-            //        userCategories.Add(category);
-            //    } 
-            //}
-            List<Category> categories = db.categories.ToList();
-            return View(categories);
+            Utils.Utility userUtil = new Utils.Utility();
+            int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
+            List<Category> userCategories = new List<Category>();
+            foreach (var category in db.categories)
+            {
+                if (category.isBase == true || category.entityID == entityID)
+                {
+                    userCategories.Add(category);
+                }
+            }
+            //List<Category> categories = db.categories.ToList();
+            return View(userCategories);
         }
 
         // GET: Categories/Details/5
@@ -94,7 +94,7 @@ namespace ImpactMap.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index");
             }
 
             return View(category);
@@ -138,7 +138,7 @@ namespace ImpactMap.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index");
             }
 
             return View(category);

@@ -15,18 +15,19 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <dd>Base Tags</dd>
+            <label class="control-label col-md-2">Select Base Tag:</label>
             <div class="col-md-10">
                 <div id="baseCatList">
-                    <select id="baseID" name="baseID"></select>
+                    <select id="baseID" name="baseID"></select><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a base tag to associate your custom user tag with."></i>
+                    @Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")
                 </div>
-                @Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")
             </div>
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Category.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">New Tag</label>
             <div class="col-md-10">
+                <label>Name</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Give your new tag a name."></i>
                 @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
             </div>
@@ -37,7 +38,8 @@
             <div class="col-md-10">
                 <div id="displayMetrics">
                 </div>
-                <label>Enter Metric</label>
+                <label>Enter Metric</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this category. For example, a metric for the category Food Insecurity would be Meals Served."></i>
+                <br />
                 <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
                 <input name="newMetrics" id="newMetrics" type="hidden" />
             </div>
@@ -54,7 +56,7 @@
 }
 
 <div class="addpadding">
-    @Html.ActionLink("Dashboard", "Index", "Dashboard")
+    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard")
 </div>
 
     </div>
@@ -127,6 +129,9 @@
                 })
 
                 $(load_baseCategories);
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
 
             </script>
         }

@@ -402,6 +402,11 @@ th {
     color: #6f6f6f;
 }
 
+.tts {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 #type-selector {
     color: #fff;
     background-color: #4d90fe;
