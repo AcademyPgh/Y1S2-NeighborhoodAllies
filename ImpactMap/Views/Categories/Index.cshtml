@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<ImpactMap.Models.Category>
 
 @{
-    ViewBag.Title = "Categories List";
+    ViewBag.Title = "Tags List";
 }
 
 <div class="container">
 
     <h2>@ViewBag.Title</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create", "Categories", new { @class = "button" })
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -49,8 +46,7 @@
 
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
                     </td>
                 </tr>
 
@@ -91,4 +87,10 @@
         }
 
     </table>
+    <div class="addpadding">
+        @Html.ActionLink("Create New", "Create", "Categories", null, new { @class = "button" })
+    </div>
+    <div class="linkcontainer">
+        @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "link" })
+    </div>
 </div>

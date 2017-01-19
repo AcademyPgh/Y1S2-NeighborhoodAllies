@@ -96,14 +96,9 @@
                                 <ul>
                                     @foreach (var category in Model.Investment.categories)
                                     {
-                                        if (!Model.Investment.categories.Contains(category))
+                                        if (Model.Investment.categories.Contains(category))
                                         {
-                                          <li id='cat'@category.ID data-id=@category.ID><span id='catspan'@category.ID class="fa fa-check-square-o"></span> @category.name</li>
-                                        }
-
-                                        else
-                                        {
-                                            <li id='cat' @category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-square-o"></span> @category.name</li>
+                                          <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan'@category.ID class="fa fa-check-square-o"></span> @category.name</li>
                                         }
                                     }
                                 </ul>
@@ -145,20 +140,52 @@
     <script>
 
         selectedCategories = [];
-        //function load_categories() {
-        //    $.ajax({
-        //        url: '/public/categories',
-        //        type: 'GET',
-        //        success: function (data) {
-        //            //$('#CatList').html('<ul>');
-        //            data.map(function (category) {
-        //                $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
-        //                $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
-        //            });
-        //            //$('#CatList').append('</ul>');
-        //        }
-        //    })
-        //}
+        function load_categories() {
+            $.ajax({
+                url: '/public/categories',
+                type: 'GET',
+                success: function (data) {
+                    //$('#CatList').html('<ul>');
+                    data.map(function (category) {
+                        $('#CatList ul').append('<li class="cats" id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                    });
+                    //$('#CatList').append('</ul>');
+                }
+            })
+        }
+
+        //These are supposed to grab the categories the investment already has, but they aren't working for some reason
+
+        @*function load_old_categories() {
+            $.ajax({
+                url: '/public/currinvestmentcategories/' + @Model.Investment.ID + '/',
+                type: 'GET',
+                success: function (data) {
+                    //$('#CatList').html('<ul>');
+                    data.map(function (category) {
+                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-check-o"></span> ' + category.name + '</li>');
+                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                    });
+                    //$('#CatList').append('</ul>');
+                }
+            })
+        }
+
+        function load_other_categories() {
+            $.ajax({
+                url: '/public/noncurrinvestmentcategories/' + @Model.Investment.ID + '/',
+                type: 'GET',
+                success: function (data) {
+                    //$('#CatList').html('<ul>');
+                    data.map(function (category) {
+                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-check-o"></span> ' + category.name + '</li>');
+                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                    });
+                    //$('#CatList').append('</ul>');
+                }
+            })
+        }*@
 
         function toggle_category(id) {
             // if it is not there
@@ -204,6 +231,10 @@
                 }
             });
         };
+
+        function removeDupliCategory() {
+            var allCats = document.getElementsByClassName("cats")
+        }
 
         $('#recipientSelect').change(updateProjectsOut);
 

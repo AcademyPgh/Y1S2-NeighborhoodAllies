@@ -83,15 +83,18 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                foreach (var metricName in newMetrics.Split(','))
+                if (newMetrics != "")
                 {
-                    metric.name = metricName;
-                    metric.categoryID = catID;
-                    db.metrics.Add(metric);
-                    db.SaveChanges();
-                    Category currentCategory = db.categories.Find(catID);
-                    currentCategory.metrics.Add(metric);
-                    db.SaveChanges();
+                    foreach (var metricName in newMetrics.Split(','))
+                    {
+                        metric.name = metricName;
+                        metric.categoryID = catID;
+                        db.metrics.Add(metric);
+                        db.SaveChanges();
+                        Category currentCategory = db.categories.Find(catID);
+                        currentCategory.metrics.Add(metric);
+                        db.SaveChanges();
+                    }
                 }
 
                 return RedirectToAction("Index");
@@ -127,15 +130,18 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                foreach (var metricName in newMetrics.Split(','))
+                if (newMetrics != "")
                 {
-                    metric.name = metricName;
-                    metric.categoryID = catID;
-                    db.metrics.Add(metric);
-                    db.SaveChanges();
-                    Category currentCategory = db.categories.Find(catID);
-                    currentCategory.metrics.Add(metric);
-                    db.SaveChanges();
+                    foreach (var metricName in newMetrics.Split(','))
+                    {
+                        metric.name = metricName;
+                        metric.categoryID = catID;
+                        db.metrics.Add(metric);
+                        db.SaveChanges();
+                        Category currentCategory = db.categories.Find(catID);
+                        currentCategory.metrics.Add(metric);
+                        db.SaveChanges();
+                    }
                 }
 
                 return RedirectToAction("Index");
