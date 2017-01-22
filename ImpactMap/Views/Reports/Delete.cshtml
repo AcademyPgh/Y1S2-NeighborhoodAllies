@@ -5,11 +5,20 @@
 }
 
 <div class="container">
-    <h2>@ViewBag.Title</h2>
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="subNav">
+            <a href=@Url.Action("Index", "Reports")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
+
+    <hr />
 
     <h3>Are you sure you want to delete this?</h3>
     <div>
-        <hr />
+        
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.project_ID)

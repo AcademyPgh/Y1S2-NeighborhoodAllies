@@ -5,12 +5,21 @@
 }
 
 <div class="container">
-    <h2>@ViewBag.Title</h2>
-    <br /><br />
-    <p class="addpadding">
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <br />
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="subNav">
+
+            <a href=@Url.Action("Index", "Projects")><i class="fa fa-list-alt" aria-hidden="true" title="Projects List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <hr />
+
 
     <div class="addpadding" style="width:600px;">
         <table class="table addpadding">
@@ -43,7 +52,6 @@
             }
         </table>
 
-        @Html.ActionLink("Dashboard", "Index", "Dashboard")
     </div>
 
     </div>

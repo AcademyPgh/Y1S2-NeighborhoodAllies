@@ -6,7 +6,14 @@
 
 <div class="container">
 
-    <h2>@ViewBag.Title</h2>
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="subNav">
+            <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
 
     <table class="table">
         <tr>
@@ -87,10 +94,5 @@
         }
 
     </table>
-    <div class="addpadding">
-        @Html.ActionLink("Create New", "Create", "Categories", null, new { @class = "button" })
-    </div>
-    <div class="linkcontainer">
-        @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "link" })
-    </div>
+   
 </div>

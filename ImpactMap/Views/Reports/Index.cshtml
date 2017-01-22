@@ -5,11 +5,12 @@
 }
 
 <div class="container">
-    <h2>@ViewBag.Title</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    <div class="subNav">
+        <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+    </div>
+
+
     <table class="table">
         <tr>
             <th>

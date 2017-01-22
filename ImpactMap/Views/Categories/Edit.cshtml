@@ -12,7 +12,15 @@
 
 
     <div class="form-horizontal container">
-        <h2>@ViewBag.Title</h2>
+        <div class="pageInfo">
+            <h2>@ViewBag.Title</h2>
+
+            <div class="subNav">
+
+                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+                <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+            </div>
+        </div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -52,9 +60,7 @@
         <div class="addpadding">
             <input type="submit" value="Save" class="button" />
         </div>
-        <div class="linkcontainer">
-            @Html.ActionLink("Return to Tags List", "Index", null, new { @class = "link" })  &bull;  @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "link" })
-        </div>
+       
     </div>
 
 

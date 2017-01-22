@@ -19,7 +19,7 @@ namespace ImpactMap.Controllers
             {
                 {"amount", "The value of the investment or the cash-equivalence of the in-kind donation." },
                 {"date", "The date the investment was made"},
-                {"inKind", "Check if the investment was an in kind donation (volunteer hours, services, equipment, etc" },
+                {"inKind", "Check if the investment was an in kind donation (volunteer hours, services, equipment, etc)" },
                 {"projectFrom", "The pool of funds from which the investment was made."},
                 {"entityTo", "The enitity to which the investment was made"},
                 {"projectTo", "The recipients pool of funds into which the investment was made."},

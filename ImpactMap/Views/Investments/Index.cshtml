@@ -40,7 +40,7 @@
                     @*@Html.DisplayNameFor(model => model.categories)*@
                 </th>
                 <th>
-
+                    Reports
                 </th>
 
             </tr>
@@ -80,9 +80,21 @@
                             }
                         </ul>
                     </td>
+
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) &bull;
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) &bull;
+                        @if (item.projectTo.report != null)
+                        {
+                            //string reportID = Convert.ToString(item.projectTo.report.ID);
+                            @Html.ActionLink("Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
+                        }
+                        else
+                        {
+                            <span>No report available.</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                         @Html.ActionLink("Delete", "Edit", new { id = item.ID })
                     </td>
                 </tr>
