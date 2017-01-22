@@ -38,7 +38,12 @@
                     <h1>ImpactMap</h1>
                 </div>
 
-          
+                <div id="headerNotifs" class="navbar-collapse collapse">
+                    <ul id="headerUl">
+
+                    </ul>
+                </div>            
+
             <div class="navbar-collapse collapse">
 
                 @Html.Partial("_LoginPartial")
@@ -78,3 +83,53 @@
     </footer>
 </body>
 </html>
+<script>
+    function getCurrEntity() {
+        $.ajax({
+            url: '/Entities/GetCurrEntity/',
+            type: 'get',
+            success: function (data) {
+                console.log(data);
+                //data.products.map(function (entity) {
+                //    console.log(entity.ID);
+                //    currEntityID = entity.ID;
+                xxx = data.ID;
+            }
+        });
+                }
+
+
+        function getReportNotifs(currEntityID) {
+            $.ajax({
+                url: '/Entities/GetReportNotifs/' + currEntityID + '/',
+                type: 'get',
+                success: function (data) {
+                    console.log("I should come after 2");
+                    var html = '';
+                    data.map(function (project) {
+                        //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
+                        html += '<li>' + project.name + '</li>'
+                    });
+                    $('#headerUl').html(html);
+                }
+            });
+        };
+
+        
+        //function initialize() {
+            
+        //    //getCurrEntity();
+        //    //var currEntityID = getCurrEntity();
+        //    //getReportNotifs(currEntityID);
+        //    var xxx;
+        //    console.log(xxx)
+        //    console.log("hello????")
+        //    getCurrEntity();
+        //    console.log(xxx);
+        //    getReportNotifs(xxx);
+    //}
+
+        //$(getReportNotifs(currEntityID));
+
+
+</script>

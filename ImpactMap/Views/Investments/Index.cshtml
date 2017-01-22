@@ -81,8 +81,9 @@
                         </ul>
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) &bull;
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) &bull;
+                        @Html.ActionLink("Delete", "Edit", new { id = item.ID })
                     </td>
                 </tr>
             }

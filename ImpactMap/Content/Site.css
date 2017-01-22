@@ -270,6 +270,21 @@ inputWLabel {
     /*Pull in CSS for designed text box*/
 }
 
+.labelz {
+    display: block;
+}
+
+.link {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 400;
+    font-size: 14pt;
+}
+
+.linkcontainer {
+    padding: 20px;
+}
+
 .logincontainer {
     position: static;
     padding: 15px;
@@ -431,6 +446,11 @@ th {
     font-size: medium;
     font-weight: 300;
     color: #6f6f6f;
+}
+
+.tts {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #type-selector {

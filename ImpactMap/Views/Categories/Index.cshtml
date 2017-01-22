@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<ImpactMap.Models.Category>
 
 @{
-    ViewBag.Title = "Categories List";
+    ViewBag.Title = "Tags List";
 }
 
 <div class="container">
 
     <h2>@ViewBag.Title</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create", "Categories", new { @class = "button" })
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -24,33 +21,76 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @item.name
-                </td>
-                <td>
+            if (item.isBase == true)
+            {
+                int baseID = item.ID;
+                <tr>
+                    <td>
+                        Base Tag: @item.name
+                    </td>
+                    <td>
 
-                    @if (item.metrics.Count != 0)
+                        @if (item.metrics.Count != 0)
                     {
 
                         foreach (var metric in item.metrics)
                         {
-                            <span class="metricName">@metric.name</span>
+                                <span class="metricName">@metric.name</span>
+                            }
                         }
-                    }
-                    else
-                    {
-                        <span>No Metrics Available</span>
-                    }
-                </td>
+                        else
+                        {
+                            <span>No Metrics Available</span>
+                        }
+                    </td>
 
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    </td>
+                </tr>
+
+                foreach (var subItem in Model)
+                {
+                    if (subItem.baseID == baseID)
+                    {
+                        <tr>
+                            <td>
+                                <span class="glyphicon glyphicon-tag"></span>
+                                @subItem.name
+                            </td>
+                            <td>
+
+                                @if (subItem.metrics.Count != 0)
+                                {
+
+                                    foreach (var metric in subItem.metrics)
+                                    {
+                                        <span class="metricName">@metric.name</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>No Metrics Available</span>
+                                }
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = subItem.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = subItem.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = subItem.ID })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
         }
 
     </table>
+    <div class="addpadding">
+        @Html.ActionLink("Create New", "Create", "Categories", null, new { @class = "button" })
     </div>
+    <div class="linkcontainer">
+        @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "link" })
+    </div>
+</div>

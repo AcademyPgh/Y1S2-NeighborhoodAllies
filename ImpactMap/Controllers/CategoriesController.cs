@@ -26,15 +26,16 @@ namespace ImpactMap.Controllers
         public ActionResult Index()
         {
             Utils.Utility userUtil = new Utils.Utility();
-            List<Investment> userInvestmentsOut = db.users.Find(userUtil.UserID(User)).entity.investmentsOut;
+            int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
             List<Category> userCategories = new List<Category>();
-            foreach (var investmentsOut in userInvestmentsOut)
+            foreach (var category in db.categories)
             {
-                foreach (var category in investmentsOut.categories)
+                if (category.isBase == true || category.entityID == entityID)
                 {
                     userCategories.Add(category);
                 }
             }
+            //List<Category> categories = db.categories.ToList();
             return View(userCategories);
         }
 
@@ -82,18 +83,21 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                foreach (var metricName in newMetrics.Split(','))
+                if (newMetrics != "")
                 {
-                    metric.name = metricName;
-                    metric.categoryID = catID;
-                    db.metrics.Add(metric);
-                    db.SaveChanges();
-                    Category currentCategory = db.categories.Find(catID);
-                    currentCategory.metrics.Add(metric);
-                    db.SaveChanges();
+                    foreach (var metricName in newMetrics.Split(','))
+                    {
+                        metric.name = metricName;
+                        metric.categoryID = catID;
+                        db.metrics.Add(metric);
+                        db.SaveChanges();
+                        Category currentCategory = db.categories.Find(catID);
+                        currentCategory.metrics.Add(metric);
+                        db.SaveChanges();
+                    }
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index");
             }
 
             return View(category);
@@ -126,18 +130,21 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                foreach (var metricName in newMetrics.Split(','))
+                if (newMetrics != "")
                 {
-                    metric.name = metricName;
-                    metric.categoryID = catID;
-                    db.metrics.Add(metric);
-                    db.SaveChanges();
-                    Category currentCategory = db.categories.Find(catID);
-                    currentCategory.metrics.Add(metric);
-                    db.SaveChanges();
+                    foreach (var metricName in newMetrics.Split(','))
+                    {
+                        metric.name = metricName;
+                        metric.categoryID = catID;
+                        db.metrics.Add(metric);
+                        db.SaveChanges();
+                        Category currentCategory = db.categories.Find(catID);
+                        currentCategory.metrics.Add(metric);
+                        db.SaveChanges();
+                    }
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index");
             }
 
             return View(category);
