@@ -362,10 +362,19 @@ inputWLabel {
     float: right;
 }
 
-.orgName {
+.orgName, .projName {
     font-size: 24px;
     color: black;
     font-weight: 600;
+}
+
+.projInfo dd{
+    margin-left: 0;
+    padding-left: 20px;
+}
+
+.projInfo{
+    margin-bottom: 50px;
 }
 
 /*.container.dashInvestments{
@@ -377,7 +386,21 @@ inputWLabel {
     margin-bottom:30px;
 }*/
 
+.pageInfo{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: flex-end;
 
+}
+
+.pageInfo h2{
+    margin-bottom: 0;
+}
+
+.pageInfo i{
+   margin: 0 5px;
+}
 
 
 .dash h2 {
@@ -388,11 +411,19 @@ inputWLabel {
     padding-bottom: 15px;
 }
 
+form {
+    padding-left: 20px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+textarea{
+    min-height: 200px;
 }
 
 th {
