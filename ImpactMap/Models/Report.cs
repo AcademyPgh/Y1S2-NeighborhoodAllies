@@ -16,6 +16,7 @@ namespace ImpactMap.Models
         //public virtual Project project { get; set; }
         public bool completed { get; set; }
         [Display(Name = "Report Text")]
+        [DataType(DataType.MultilineText)]
         public string reportText { get; set; }
         public DateTime dueDate { get; set; }
         public virtual List<MetricResult> metricResults { get; set; }

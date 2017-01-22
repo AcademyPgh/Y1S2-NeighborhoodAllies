@@ -4,7 +4,15 @@
 }
 
 <div class="container">
-    <h2> @ViewBag.Title</h2>
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="subNav">
+            <a href=@Url.Action("Edit", new { id = Model.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
+            <a href=@Url.Action("Index", "Projects")><i class="fa fa-list-alt" aria-hidden="true" title="Reports List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
     <div>
 
         <hr />
@@ -22,9 +30,5 @@
             </dd>
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-
+    
 </div>

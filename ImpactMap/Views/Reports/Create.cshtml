@@ -9,10 +9,21 @@
         <h2>@ViewBag.Title</h2>
 
         <div class="subNav">
+            <a href=@Url.Action("Edit", new { id = Model.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
             <a href=@Url.Action("Index", "Reports")><i class="fa fa-list-alt" aria-hidden="true" title="Reports List"></i></a>
             <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
         </div>
     </div>
+
+    <dl>
+        <dt>
+
+        </dt>
+
+        <dd>
+
+        </dd>
+    </dl>
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
     {
@@ -28,7 +39,7 @@
             </div>
 
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.report.completed, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -36,7 +47,7 @@
                         @Html.ValidationMessageFor(model => model.report.completed, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             <div>Please include information on the following metrics.</div>
 
@@ -66,27 +77,27 @@
             <input type="hidden" id="resultTexts" name="resultTexts" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label" })
+                
+                    @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control"} })
                     @Html.ValidationMessageFor(model => model.report.reportText, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.report.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.report.dueDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.report.dueDate, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="button" id="submitButton" value="Create" class="btn btn-default" />
+                <div>
+                    <input type="button" id="submitButton" value="Create" class="button btn btn-default" />
                 </div>
             </div>
-        </div>
+      
     }
 
 

@@ -21,12 +21,21 @@
     <hr />
 
 
-    <div class="addpadding" style="width:600px;">
+    <div class="addpadding">
         <table class="table addpadding">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.name)
                 </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+
+                <th>
+                   Report Status
+                </th>
+
                 <th>
 
                 </th>
@@ -41,6 +50,24 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+
+                        <td>
+                            @if (item.report != null)
+                            {
+                                
+                                @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
+                            }
+                            else
+                            {
+                               
+                                @Html.ActionLink("Report Due", "Create", "Reports", new { id = item.ID,  @class="alert" }, null)
+                                <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                            }
                         </td>
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.ID }) |

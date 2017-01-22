@@ -59,16 +59,21 @@ namespace ImpactMap.Controllers
                 string[] resultTextArray = resultTexts.Split(',');
                 int i = 0;
 
-                foreach (var metricID in metricIDs.Split(','))
+
+                if (metricIDs != "")
                 {
-                    int mID = Convert.ToInt32(metricID);
-                    MetricResult mr = new MetricResult();
-                    mr.report = report;
-                    mr.metric = db.metrics.Find(mID);
-                    mr.resultText = resultTextArray[i];
-                    i++;
-                    db.metricResults.Add(mr);
-                    db.SaveChanges();                    
+                    foreach (var metricID in metricIDs.Split(','))
+                    {
+                        int mID = Convert.ToInt32(metricID);
+                        MetricResult mr = new MetricResult();
+                        mr.report = report;
+                        mr.metric = db.metrics.Find(mID);
+                        mr.resultText = resultTextArray[i];
+                        i++;
+                        db.metricResults.Add(mr);
+                        db.SaveChanges();
+                    }
+
                 }
 
                 db.projects.Find(project_ID).report = report;

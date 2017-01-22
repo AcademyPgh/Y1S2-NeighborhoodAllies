@@ -25,119 +25,128 @@
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["date"] })
-                        <div class="col-md-10">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["date"] })
+                            <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
                             @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["amount"] })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control", @title = @ViewBag.Tooltips["amount"] } })
-                            @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["inKind"] })
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Investment.isInKind)
-                                @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger"})
+                        <div class="form-group inlineFormGroup">
+                            <div>
+                                @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["amount"] })
+                                <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["amount"]"></span>
+                                @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control", @title = @ViewBag.Tooltips["amount"] } })
+                                @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
+
                             </div>
-                        </div>
-                    </div>
 
-                    <!---Needs to populate only projects from the signed in entity-->
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["projectFrom"] })
-                        <div class="col-md-10">
-                            <select name="projectFrom_ID">
+                            <div class="inlineElement">
+                                @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["inKind"] })
+                                <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["inKind"]"></span>
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Investment.isInKind)
+                                    @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!---Needs to populate only projects from the signed in entity-->
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["projectFrom"] })
+                            <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectFrom"]"></span>
+                            <select name="projectFrom_ID" class="form-control">
                                 @foreach (var project in Model.Projects)
                                 {
                                     <option value=@project.ID>@project.name</option>
                                 }
                             </select>
                             @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["entityTo"] })
-                        <div class="col-md-10">
-                            <select name="entityTo_ID" id="recipientSelect">
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["entityTo"] })
+                            <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["entityTo"]"></span>
+                            <select name="entityTo_ID" id="recipientSelect" class="form-control">
                                 <option value=@Model.Investment.entityTo.ID selected>@Model.Investment.entityTo.name</option>
                                 @foreach (var entity in Model.Entities)
                                 {
                                     if (entity.ID != Model.Investment.entityTo.ID)
                                     {
-                                    <option value=@entity.ID>@entity.name</option>
+                                        <option value=@entity.ID>@entity.name</option>
                                     }
                                 }
                             </select>
 
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["projectTo"] })
-                        <div class="col-md-10">
-                            <select name="projectTo_ID" id="ProjectToDropdown">
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["projectTo"] })
+                            <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectTo"]"></span>
+                            <select name="projectTo_ID" id="ProjectToDropdown" class="form-control">
                                 <option value=@Model.Investment.projectTo.ID selected>@Model.Investment.projectTo.name</option>
                                 @foreach (var project in Model.Investment.entityTo.projects)
                                 {
                                     if (project.ID != Model.Investment.projectTo.ID)
                                     {
-                                    <option value=@project.ID>@project.name</option>
-                                     }
+                                        <option value=@project.ID>@project.name</option>
+                                    }
                                 }
                             </select>
+
                         </div>
+
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["categories"] })
-                        <div class="col-md-10">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["ivmDescription"] })
+                            <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["ivmDescription"]"></span>
+                            @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["categories"] })
+                            <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
                             <div id="CatList">
                                 <ul>
                                     @foreach (var category in Model.Investment.categories)
                                     {
                                         if (Model.Investment.categories.Contains(category))
                                         {
-                                          <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan'@category.ID class="fa fa-check-square-o"></span> @category.name</li>
+                                            <li class="cats" id='cat' @category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-check-square-o"></span> @category.name</li>
                                         }
                                     }
                                 </ul>
                             </div>
                             <input name="categories" id="categories" type="hidden" />
+
                         </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2", @title = @ViewBag.Tooltips["ivmDescription"] })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+
+                        <div class="form-group">
+
                             <input type="submit" value="Save" class="button" />
+
                         </div>
+
                     </div>
                     <br />
                 </div>
             }
 
-
-            <div class="addpadding">
-                @Html.ActionLink("Investments List", "Index") | @Html.ActionLink("Dashboard", "Index", "Dashboard")
-            </div>
 
         </div>
     }
@@ -249,11 +258,13 @@
 
         function initialize() {
             load_categories();
-            addVolunteerHours();
             updateProjectsOut();
         }
 
         $(initialize);
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 }
 

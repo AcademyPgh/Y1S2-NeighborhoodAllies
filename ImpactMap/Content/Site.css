@@ -116,6 +116,11 @@ a href {
     border-radius: 5px;
 }
 
+.button:hover, a.button:hover{
+    background-color: #92C337;
+    color:white;
+}
+
 .buttonAlert{
     background-color: #d91b5c;
     margin-bottom: 25px;
@@ -135,6 +140,11 @@ a href {
 
 .dashHeader {
     border-bottom: solid 2px #0C7D8B;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-content:center;
+    
 
 }
 
@@ -161,8 +171,17 @@ a href {
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column */
-.dl-horizontal dt {
+
+.dl-horizontal{
+    margin-left: 20px;
+}
+
+.dl-horizontal dt, dl-horizontal dd {
     white-space: normal;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
 }
 
 .fa-exclamation {
@@ -379,7 +398,7 @@ inputWLabel {
 }
 
 .spaceDivs {
-    margin-top: 30px;
+    margin-top: 75px;
     margin-bottom: 50px;
 }
 
@@ -428,13 +447,19 @@ inputWLabel {
    margin: 0 5px;
 }
 
+.dashHeading{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: solid 2px #0C7D8B;
+    margin-bottom: 15px;
+    
+}
+
 
 .dash h2 {
-    border-bottom: solid 2px #0C7D8B;
-    /*background:#0C7D8B;
-    color:white;
-    padding-top:15px;*/
-    padding-bottom: 15px;
+    border-bottom: none;
 }
 
 form {
@@ -455,13 +480,23 @@ textarea{
 th {
     font-family: "Open Sans",sans-serif;
     font-size: medium;
-    font-weight: 300;
-    color: #6f6f6f;
+    font-weight: 600;
+    color:#ffffff;
+    /*color: #6f6f6f;*/
+    /*color: #000000;*/
 }
 
 .tts {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+tr:first-child{
+    background-color: #1d909c;
+}
+
+tr:nth-child(odd):not(:first-child){
+    background-color: #def7f9;
 }
 
 #type-selector {
@@ -506,6 +541,10 @@ span.removeMetric {
         padding: 5px 0;
     }
 
+    .dt{
+
+    }
+
 @media (min-width: 768px) {
     .navbar-right {
         padding-top: 10px;
@@ -514,4 +553,21 @@ span.removeMetric {
     .form-horizontal .control-label {
         text-align: left;
     }
+
+   
+}
+
+.inlineFormGroup{
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: row;
+    
+}
+
+.inlineFormGroup .form-group{
+    display: inline-block;
+}
+
+.inlineElement{
+    margin-left: 20px;
 }

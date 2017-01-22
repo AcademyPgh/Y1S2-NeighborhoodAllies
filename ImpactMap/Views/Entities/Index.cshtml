@@ -1,15 +1,25 @@
 ﻿@model IEnumerable<ImpactMap.Models.Entity>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Entities List";
 }
 
 <div class="container">
-    <h2>Index</h2>
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+        <div class="subNav">
+
+            <a href=@Url.Action("Create", "Entities")><i class="fa fa fa-plus-circle" aria-hidden="true" title="Create New Entity"></i></a>
+          
+        </div>
+
+
+    </div>
+
+    <hr />
+
+   
     <table class="table">
         <tr>
             <th>
@@ -31,14 +41,9 @@
                 @Html.DisplayNameFor(model => model.state)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.zip)
+               
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lng)
-            </th>
+            
             <th></th>
         </tr>
 
@@ -63,15 +68,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.state)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.zip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lng)
-                </td>
+               
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                     @Html.ActionLink("Details", "Details", new { id = item.ID }) |

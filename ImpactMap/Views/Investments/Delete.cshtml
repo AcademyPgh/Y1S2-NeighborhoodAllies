@@ -46,13 +46,6 @@
                 @Html.DisplayFor(model => model.isInKind)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.entityFrom)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.entityFrom.name)
-            </dd>
 
             <dt>
                 @Html.DisplayNameFor(model => model.projectFrom)
@@ -78,6 +71,14 @@
                 @Html.DisplayFor(model => model.projectTo.name)
             </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+
             
 
             
@@ -91,10 +92,10 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="addpadding">
+            
                 <input type="submit" value="Delete" class="button" />
                 @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", new { @class = "btn btn-default button buttonAlert" })
-            </div>
+         
 
            
            
