@@ -22,6 +22,9 @@ body {
 
 a {
     color: #0C7D8B;
+    font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight: 600;
 }
 
 a:hover {
@@ -484,6 +487,12 @@ th {
     color:#ffffff;
     /*color: #6f6f6f;*/
     /*color: #000000;*/
+}
+
+td {
+        font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight: 400;
 }
 
 .tts {
