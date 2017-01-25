@@ -104,6 +104,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Categories/CreateBase
+        [Authorize]
         public ActionResult CreateBase()
         {
             //Utils.Utility userUtil = new Utils.Utility();
@@ -144,7 +145,7 @@ namespace ImpactMap.Controllers
                     }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(category);

@@ -11,6 +11,7 @@ namespace ImpactMap.Models
     {
         public int ID { get; set; }
         [Display(Name = "Value of Grant")]
+        [Required]
         public string amount { get; set; }
         public int? entityFrom_ID { get; set; }
         public int? entityTo_ID { get; set; }
