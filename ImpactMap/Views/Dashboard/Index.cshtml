@@ -20,16 +20,35 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     @{
                         int i = 0;
-                        foreach (var project in Model.projects)
+                        if (Model.projects.Count > 0)
                         {
-                            if (project.investmentsIn.Count > 0 && project.report == null)
+
+                            foreach (var project in Model.projects)
                             {
-                                <li>@project.name needs a report!</li>
-                                @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
-                                i++;
+                                if (project.investmentsIn.Count > 0 && project.report == null)
+                                {
+                                    <li>@project.name needs a report!</li>
+                                    @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
+                                }
+                                else if (project.investmentsIn.Count > 0 && project.report != null)
+                                {
+                                    i++;
+                                }
+                                else if (project.investmentsIn.Count == 0)
+                                {
+                                    i++;
+                                }
+                            }
+                            if (i == Model.projects.Count)
+                            {
+                                <li>No current notifications.</li>
                             }
                         }
-                    }
+                        else if (Model.projects.Count == 0)
+                        {
+                            <li>No current notifications.</li>
+                        }
+                        }
                 </ul>
             </div>
         </div>
@@ -131,7 +150,7 @@
                                 }
                             </td>
                             <td>
-                                @Html.ActionLink("Details", "Details", "Investments", new { id = item.ID }, null)
+                                @Html.ActionLink("View", "Details", "Investments", new { id = item.ID }, null)
                             </td>
                         </tr>
 
@@ -218,15 +237,18 @@
                                     {
                                         @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
                                     }
-                                    else
+                                    else if (item.report == null && item.investmentsIn.Count > 0)
                                     {
                                         @Html.ActionLink("Create Report", "Create", "Reports", new { id = item.ID }, null)
                                         <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
                                     }
-
+                                    else if (item.report == null && item.investmentsIn.Count == 0)
+                                    {
+                                        <div>N/A</div>
+                                    }
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Details", "Details", "Projects", new { id = item.ID }, null)
+                                    @Html.ActionLink("View", "Details", "Projects", new { id = item.ID }, null)
                                 </td>
                             </tr>
                         }
