@@ -116,7 +116,7 @@ a href {
     border-radius: 5px;
 }
 
-.button:hover, a.button:hover{
+.button:hover, a.button:hover, .button:active, a.button:active{
     background-color: #92C337;
     color:white;
 }
@@ -182,6 +182,7 @@ a href {
     margin-top: 10px;
     margin-bottom: 10px;
     vertical-align: middle;
+    padding-left: 0;
 }
 
 .fa-exclamation {

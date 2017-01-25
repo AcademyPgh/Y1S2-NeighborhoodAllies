@@ -15,12 +15,14 @@ namespace ImpactMap.Controllers
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
         // GET: Metrics
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.metrics.ToList());
         }
 
         // GET: Metrics/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Metrics/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Metrics/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +82,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,categoryID,name,description")] Metric metric)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Metrics/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +113,7 @@ namespace ImpactMap.Controllers
         // POST: Metrics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Metric metric = db.metrics.Find(id);

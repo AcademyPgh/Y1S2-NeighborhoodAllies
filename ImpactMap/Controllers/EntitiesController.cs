@@ -20,6 +20,7 @@ namespace ImpactMap.Controllers
 
 
         // GET: Entities
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.entities.ToList());
@@ -41,6 +42,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Entities/Create
+        [Authorize]
         public ActionResult Create()
         {
             Utils.Utility userUtil = new Utils.Utility();
@@ -61,6 +63,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,name,description,address1,address2,city,state,zip,lat,lng")] Entity entity)
         {
             if (ModelState.IsValid)
@@ -109,6 +112,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Entities/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -128,6 +132,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,name,description,address1,address2,city,state,zip,lat,lng")] Entity entity)
         {
             Utils.Utility userUtil = new Utils.Utility();
@@ -142,12 +147,14 @@ namespace ImpactMap.Controllers
 
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
             return View(entity);
+            
         }
 
         // GET: Entities/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -165,6 +172,7 @@ namespace ImpactMap.Controllers
         // POST: Entities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Entity entity = db.entities.Find(id);
@@ -176,6 +184,7 @@ namespace ImpactMap.Controllers
 
         //It's my understanding that this ID is Investments.entityOut.ID which is chosen in the dropdown...
         //How are we sending it to this action? Should there be an ajax post function on change?
+        [Authorize]
         public ActionResult GetProjectsOut(int ID)
         {
             Entity recipient = db.entities.Find(ID);
@@ -189,6 +198,7 @@ namespace ImpactMap.Controllers
         }
 
         //This Action connects to ajax in the header (_Layout.cshtml) to show notifications
+        [Authorize]
         public ActionResult GetReportNotifs(int ID)
         {
             Entity currEntity = db.entities.Find(ID);
@@ -209,6 +219,7 @@ namespace ImpactMap.Controllers
             return Content(result, "application/json");
         }
         //Entity ID is needed to get the projects for the report notifications
+        [Authorize]
         public ActionResult GetCurrEntity()
         {
             Utils.Utility userUtil = new Utils.Utility();

@@ -23,15 +23,16 @@ namespace ImpactMap.Controllers
                 {"projectFrom", "The pool of funds from which the investment was made."},
                 {"entityTo", "The enitity to which the investment was made"},
                 {"projectTo", "The recipients pool of funds into which the investment was made."},
-                {"categories", "The categories and metrics you would like the recipient to report back on." },
+                {"categories", "The categories and metrics you would like the recipient to include in their report." },
                 {"ivmDescription", "A brief description of the investment (if in kind, the nature of the donation can be noted here)"},
 
             };
-    
 
-        
+
+
 
         // GET: Investments
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.Tooltips = toolTips;
@@ -42,6 +43,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Investments/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -58,6 +60,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Investments/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Tooltips = toolTips;
@@ -87,7 +90,8 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind,volunteerHours,projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories)
         {
             if (ModelState.IsValid)
             {
@@ -145,6 +149,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Investments/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -176,6 +181,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,projectFrom_ID,projectTo_ID")] Investment investment)
         {
 
@@ -191,6 +197,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Investments/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -209,6 +216,7 @@ namespace ImpactMap.Controllers
         // POST: Investments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Investment investment = db.investments.Find(id);

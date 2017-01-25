@@ -68,11 +68,11 @@
     <div class="spaceDivs">
         <div class="dashHeading">
             <h2>Investments Sent 
-            <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view investments to other organizations"></i>
+            <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view investments to other organizations.  Only the first five most recently investments are displayed.  To see the rest of your investments, use the View All Investments button."></i>
            </h2>
             
             <div class="buttonGroup">
-                @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
+            @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
 
             @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "button" })
 
@@ -106,7 +106,7 @@
                     </tr>
 
                     @*Displays the first five investments in the table*@
-                    @foreach (var item in Model.investmentsOut.Take(5))
+                    @foreach (var item in Model.investmentsOut.OrderByDescending(a => a.date).Take(5))
                 {
 
                         <tr>
@@ -154,7 +154,7 @@
     <div class="spaceDivs">   
         <div class="dashHeading">
             <h2>Projects 
-                <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view your organization's projects."></i>
+                <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view your organization's projects.  Only the five most recently added projects will be displayed.  To see all of your projects, use the View All Projects button."></i>
             </h2>
             <div class="buttonGroup">
             @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "button" })
@@ -196,21 +196,21 @@
                                 </td>
                                 <td>
 
-                                    @foreach (var thing in item.investmentsIn)
+                                    @foreach (var investment in item.investmentsIn)
                                     {
-                                        @Html.DisplayFor(modelItem => thing.entityFrom.name)<br />
+                                        @Html.DisplayFor(modelItem => investment.entityFrom.name)<br />
                                     }
                                 </td>
                                 <td>
-                                    @foreach (var thing in item.investmentsIn)
+                                    @foreach (var investment in item.investmentsIn)
                                     {
-                                        @thing.date.ToShortDateString()<br />
+                                        @investment.date.ToShortDateString()<br />
                                     }
                                 </td>
                                 <td>
-                                    @foreach (var thing in item.investmentsIn)
+                                    @foreach (var investment in item.investmentsIn)
                                     {
-                                        <span>$@Html.DisplayFor(modelItem => thing.amount)</span><br />
+                                        <span>$@Html.DisplayFor(modelItem => investment.amount)</span><br />
                                     }
                                 </td>
                                 <td>

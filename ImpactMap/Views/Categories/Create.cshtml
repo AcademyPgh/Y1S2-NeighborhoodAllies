@@ -10,6 +10,7 @@
         <h2>@ViewBag.Title</h2>
 
         <div class="subNav">
+            
             <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
             <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
         </div>
@@ -24,49 +25,42 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <label class="control-label col-md-2">Select Base Tag:</label>
-            <div class="col-md-10">
-                <div id="baseCatList">
-                    <select id="baseID" name="baseID"></select><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a base tag to associate your custom user tag with."></i>
-                    @Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="control-label col-md-2">New Tag</label>
-            <div class="col-md-10">
-                <label>Name</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Give your new tag a name."></i>
-                @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
+            <label class="control-label">Select Base Tag:</label> <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a base tag to associate your custom user tag with."></i>
+            <div id="baseCatList">
+                <select id="baseID" name="baseID" class="form-control"></select>
+                @*@Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")*@
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Metrics, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="displayMetrics">
-                </div>
-                <label>Enter Metric</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this category. For example, a metric for the category Food Insecurity would be Meals Served."></i>
-                <br />
-                <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
-                <input name="newMetrics" id="newMetrics" type="hidden" />
-            </div>
+            <label class="control-label">New Tag</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Give your new tag a name."></i>
+            @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div id="displayMetrics">
+            </div> 
+            <label for="metrics"class="control-label">Enter Metric</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this tag. For example, a metric for the tag Food Insecurity would be Meals Served."></i>
+            <br />
+            <input type="text" id="metrics"/> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+            <input name="newMetrics" id="newMetrics" type="hidden" />
+
+        </div>
+
+
+        <div class="form-group">
+            <div>
                 <input type="submit" value="Create" class="button" />
             </div>
         </div>
-
     </div>
+
+
 }
 
-<div class="linkcontainer">
-    @Html.ActionLink("Return to Dashboard", "Index", "Dashboard", null, new { @class = "link" })
-</div>
+
 
     </div>
 
@@ -96,7 +90,7 @@
                 function addMetrics() {
                     if ($('#metrics').val() != "") {
                         newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
-                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span><br>');//Adds the new metric to the display
+                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
                         $('#metrics').val("");//Clears the value of the input box to accept a new metric
                         $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
                         $('.removeMetric').click(function () { removeMetrics(this.id) });
