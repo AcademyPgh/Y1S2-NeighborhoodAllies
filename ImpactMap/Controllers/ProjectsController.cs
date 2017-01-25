@@ -23,6 +23,7 @@ namespace ImpactMap.Controllers
             };
 
         // GET: Projects
+        [Authorize]
         public ActionResult Index()
         {
 
@@ -33,6 +34,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -49,6 +51,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Tooltips = toolTips;
@@ -63,6 +66,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,name,description")] Project project)
         {
             if (ModelState.IsValid)
@@ -78,6 +82,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -98,6 +103,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,name,description")] Project project)
         {
  
@@ -111,6 +117,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             ViewBag.Tooltips = toolTips;
@@ -129,6 +136,7 @@ namespace ImpactMap.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.projects.Find(id);

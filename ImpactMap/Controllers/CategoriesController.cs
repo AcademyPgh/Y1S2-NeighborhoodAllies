@@ -23,6 +23,7 @@ namespace ImpactMap.Controllers
             };
 
         // GET: Categories
+        [Authorize]
         public ActionResult Index()
         {
             Utils.Utility userUtil = new Utils.Utility();
@@ -40,6 +41,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Categories/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -55,6 +57,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize]
         public ActionResult Create()
         {
             //Utils.Utility userUtil = new Utils.Utility();
@@ -71,6 +74,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics, int baseID)
         {
             if (ModelState.IsValid)
@@ -121,6 +125,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult CreateBase([Bind(Include = "ID,name")] Category category, Metric metric, string newMetrics)
         {
             if (ModelState.IsValid)
@@ -152,6 +157,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -171,6 +177,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove)
         {
             if (ModelState.IsValid)
@@ -246,6 +253,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -263,6 +271,7 @@ namespace ImpactMap.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.categories.Find(id);

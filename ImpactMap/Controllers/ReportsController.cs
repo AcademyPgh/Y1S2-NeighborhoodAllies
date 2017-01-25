@@ -15,6 +15,7 @@ namespace ImpactMap.Controllers
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
         // GET: Reports
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.reports.ToList());
@@ -36,6 +37,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Reports/Create
+        [Authorize]
         public ActionResult Create(int? ID)
         {
             
@@ -50,6 +52,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,completed,reportText,dueDate")] Report report, int project_ID, string metricIDs, string resultTexts)
         {
             if (ModelState.IsValid)
@@ -85,6 +88,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Reports/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -116,6 +120,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Reports/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -133,6 +138,7 @@ namespace ImpactMap.Controllers
         // POST: Reports/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Report report = db.reports.Find(id);

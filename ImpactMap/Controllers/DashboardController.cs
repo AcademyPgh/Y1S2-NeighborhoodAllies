@@ -14,6 +14,7 @@ namespace ImpactMap.Models
 
 
         // GET: Investments
+        [Authorize]
         public ActionResult Index()
         {
 

@@ -41,6 +41,7 @@
                     <th>Date</th>
                     <th>Donor</th>
                     <th>Value</th>
+                    <th>Report Status</th>
                 </tr>
 
                 @{foreach (var ivi in Model.investmentsIn)
@@ -57,6 +58,18 @@
 
                             <td>
                                 $@Html.DisplayFor(modelItem => ivi.amount)
+                            </td>
+
+                            <td>
+                                @if (Model.report != null)
+                                {
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = Model.report.ID }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Create Report", "Create", "Reports", new { id = Model.ID }, null)
+                                    <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                                }
                             </td>
 
                         </tr>
@@ -86,6 +99,7 @@
                     <th>Date</th>
                     <th>Recipient</th>
                     <th>Value</th>
+                    <th>Report Status</th>
                 </tr>
 
                 @{foreach (var ivo in Model.investmentsOut)
@@ -102,6 +116,18 @@
 
                             <td>
                                 $@Html.DisplayFor(modelItem => ivo.amount)
+                            </td>
+
+                            <td>
+                                @if (Model.investmentOut.projectTo.report != null)
+                                {
+                                    //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = Model.projectTo.report.ID }, null)
+                                }
+                                else
+                                {
+                                    <span>No report available.</span>
+                                }
                             </td>
 
                         </tr>
