@@ -40,10 +40,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.projectTo)
                 </th>
-
-
                 <th>
-
+                    @Html.DisplayNameFor(model => model.projectTo.report)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.categories)
                 </th>
             </tr>
@@ -83,6 +83,15 @@
 
                 <td>
                     @Html.DisplayFor(model => model.projectTo.name)
+                </td>
+
+                <td>
+                    @{ 
+                        if (Model.projectTo.report != null)
+                        {
+                            @Html.ActionLink("Report", )
+                        }
+                    }
                 </td>
 
                 <td>
