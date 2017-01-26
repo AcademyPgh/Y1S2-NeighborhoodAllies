@@ -119,10 +119,10 @@
                             </td>
 
                             <td>
-                                @if (Model.investmentOut.projectTo.report != null)
+                                @if (ivo.projectTo.report != null)
                                 {
                                     //string reportID = Convert.ToString(item.projectTo.report.ID);
-                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = Model.projectTo.report.ID }, null)
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = ivo.projectTo.report.ID }, null)
                                 }
                                 else
                                 {

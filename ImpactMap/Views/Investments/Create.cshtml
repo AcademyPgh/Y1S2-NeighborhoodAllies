@@ -29,8 +29,8 @@
                   
                         @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
                         <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
-                  
-                    @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                   
                     @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
                 </div>
                 @*Value field*@
@@ -39,7 +39,7 @@
                     <div>
                         @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label" })
                         <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["amount"]"></span>
-                        @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
+                        @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
                     </div>
 
@@ -143,6 +143,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryMask")
     <script>
         //selectedCategories is an array which is put into the hidden categories field and then sent to the controller
         selectedCategories = [];
@@ -220,6 +221,11 @@
         function initialize() {
             load_categories();
             updateProjectsOut();
+            addCurrencyMask();
+        }
+
+        function addCurrencyMask() {
+            $('#Investment_amount').mask('000,000,000,000.00', { reverse: true });
         }
 
         $(initialize);
