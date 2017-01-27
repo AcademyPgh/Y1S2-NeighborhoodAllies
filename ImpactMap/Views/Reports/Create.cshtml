@@ -15,16 +15,6 @@
         </div>
     </div>
 
-    <dl>
-        <dt>
-
-        </dt>
-
-        <dd>
-
-        </dd>
-    </dl>
-
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
     {
         @Html.AntiForgeryToken()
@@ -49,7 +39,8 @@
                 </div>
             </div>*@
 
-            <div>Please include information on the following metrics.</div>
+            <label>Please include information on the following metrics using the fields below.</label>
+            <br />
 
             <script>var idArray = []</script>
 
@@ -57,17 +48,19 @@
             {
                 foreach (var category in investment.categories)
                 {
-                    <div>Category:  @category.name</div>
+                    <label>@category.name</label>
                     foreach (var metric in category.metrics)
                     {
-                        <div>Metric:  @metric.name</div>
+                        <div class="resultMetrics">
+                            <label>@metric.name</label>
+                            <br />
+                            <input type="text" class="resultTextBox" name="resultText" />
+                            <br />
+                        </div>
 
                         <script>
-
                             idArray.push(@metric.ID)
                         </script>
-
-                        <input type="text" class="resultTextBox" name="resultText" />
                     }
                 }
             }

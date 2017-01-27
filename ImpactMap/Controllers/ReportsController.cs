@@ -81,7 +81,7 @@ namespace ImpactMap.Controllers
 
                 db.projects.Find(project_ID).report = report;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(report);

@@ -4,6 +4,8 @@
     ViewBag.Title = "Reports List";
 }
 
+@*I guess this is a page we don't need....?*@
+
 <div class="container">
 
     <div class="pageInfo">
@@ -20,13 +22,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.completed)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.reportText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dueDate)
             </th>
             <th></th>
         </tr>
@@ -35,13 +31,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.completed)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.reportText)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dueDate)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

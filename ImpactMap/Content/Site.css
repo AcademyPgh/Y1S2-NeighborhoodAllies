@@ -387,6 +387,15 @@ inputWLabel {
     font-family: Roboto;
 }
 
+.resultCatName {
+    display: inline;
+    margin-left: 10px;
+}
+
+.resultMetrics {
+    margin-left: 20px;
+}
+
 .removeMetric {
     line-height: 2em;
 }

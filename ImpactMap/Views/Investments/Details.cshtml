@@ -89,7 +89,11 @@
                     @{ 
                         if (Model.projectTo.report != null)
                         {
-                            @Html.ActionLink("Report", )
+                            @Html.ActionLink("Report", "Details", "Reports", new { id = Model.projectTo.report.ID })
+                        }
+                        else
+                        {
+                            <span>No report available.</span>
                         }
                     }
                 </td>
