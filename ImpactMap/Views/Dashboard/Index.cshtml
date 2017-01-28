@@ -106,7 +106,7 @@
             @if (Model.investmentsOut.Count != 0)
             {
                 <table class="table">
-                    <tr>
+                    <tr class="dashtr">
                         <th>
                             Investment Date
                         </th>
@@ -128,7 +128,7 @@
                     @foreach (var item in Model.investmentsOut.OrderByDescending(a => a.date).Take(5))
                 {
 
-                        <tr>
+                        <tr class="dashtr">
                             <td>
                                 @item.date.ToShortDateString()
                             </td>
@@ -186,7 +186,7 @@
             @if (Model.projects.Count != 0)
             {
                 <table class="table">
-                    <tr>
+                    <tr class="dashtr">
                         <th>
                             Project Name
                         </th>
@@ -209,7 +209,7 @@
                     @{
                         foreach (var item in Model.projects.Take(5))
                         {
-                            <tr>
+                            <tr class="dashtr">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.name)
                                 </td>

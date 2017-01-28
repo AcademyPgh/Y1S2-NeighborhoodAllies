@@ -510,11 +510,11 @@ td {
     margin-right: 10px;
 }
 
-tr:first-child{
+.dashtr:first-child{
     background-color: #1d909c;
 }
 
-tr:nth-child(odd):not(:first-child){
+.dashtr:nth-child(odd):not(:first-child){
     background-color: #def7f9;
 }
 

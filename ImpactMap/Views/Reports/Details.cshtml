@@ -16,19 +16,20 @@
     <div>
 
         <hr />
-        <dl class="dl-horizontal">
+        <table>
+            <tr>Metric Results</tr>
             @foreach (var metricResult in Model.metricResults)
             {
-                <dt>Metric Name: @Html.DisplayFor(model => metricResult.metric.name)</dt>
-                <dd>@Html.DisplayFor(model => metricResult.resultText)</dd>
+                <tr>
+                    <td>@Html.DisplayFor(model => metricResult.metric.name)</td>
+                    <td>@Html.DisplayFor(model => metricResult.resultText)</td>
+                </tr>
             }
-            <dt>
-                @Html.DisplayNameFor(model => model.reportText)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.reportText)
-            </dd>
-        </dl>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.reportText)</td>
+                <td>@Html.DisplayFor(model => model.reportText)</td>
+            </tr>
+        </table>
     </div>
     
 </div>
