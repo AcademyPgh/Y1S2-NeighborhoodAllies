@@ -449,6 +449,7 @@ inputWLabel {
     flex-direction:row;
     justify-content: space-between;
     align-items: flex-end;
+     /*border-bottom: solid 2px #0C7D8B;*/
 
 }
 
@@ -503,6 +504,14 @@ td {
         font-family: "Open Sans",sans-serif;
     font-size: medium;
     font-weight: 400;
+}
+
+.metricsTable th{
+    color: #1D909C;
+    font-weight: 600;
+    padding:5px 20px;
+    
+
 }
 
 .tts {
@@ -573,6 +582,10 @@ span.removeMetric {
         text-align: left;
     }
 
+   .dl-horizontal dd, .dl-horizontal dt {
+        margin-left: 20px;
+    }
+
    
 }
 
@@ -589,6 +602,16 @@ span.removeMetric {
 
 .inlineElement{
     margin-left: 20px;
+}
+
+.reportText{
+     -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
 }
 
 

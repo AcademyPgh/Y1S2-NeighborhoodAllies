@@ -28,12 +28,15 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Report report = db.reports.Find(id);
-            if (report == null)
+
+            ReportViewModel rvm = new ReportViewModel();
+            rvm.report = db.reports.Find(id);
+            rvm.project = db.projects.SingleOrDefault(project => project.report.ID == rvm.report.ID);
+            if (rvm.report == null)
             {
                 return HttpNotFound();
             }
-            return View(report);
+            return View(rvm);
         }
 
         // GET: Reports/Create

@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Models.Report
+﻿@model ImpactMap.Controllers.ReportViewModel
 @{
     ViewBag.Title = "Report Details";
 }
@@ -8,28 +8,94 @@
         <h2>@ViewBag.Title</h2>
 
         <div class="subNav">
-            <a href=@Url.Action("Edit", new { id = Model.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
+            <a href=@Url.Action("Edit", new { id = Model.report.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
             <a href=@Url.Action("Index", "Projects")><i class="fa fa-list-alt" aria-hidden="true" title="Reports List"></i></a>
             <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
         </div>
     </div>
-    <div>
 
-        <hr />
-        <table>
-            <tr>Metric Results</tr>
-            @foreach (var metricResult in Model.metricResults)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(model => metricResult.metric.name)</td>
-                    <td>@Html.DisplayFor(model => metricResult.resultText)</td>
-                </tr>
-            }
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.reportText)</td>
-                <td>@Html.DisplayFor(model => model.reportText)</td>
-            </tr>
-        </table>
+    <hr />
+
+    <div class="spaceDiv">
+    <dl class="dl-horizontal">
+        <dd>
+            <span class="orgName">@Html.DisplayFor(model => model.project.entity.name)</span>
+        </dd>
+
+        <dd>
+            Project: @Html.DisplayFor(model => model.project.name)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.project.description)
+        </dd>
+    </dl>
+
     </div>
-    
+
+
+
+<div class="container dash">
+    <div class="col-md-8">
+        <div class="dashHeading">
+            <h2>
+                Report
+            </h2>
+        </div>
+
+        <div class="reportText">
+            @Html.DisplayFor(model => model.report.reportText)
+        </div>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="dashHeading">
+            <h2>
+                Report Metrics
+            </h2>
+        </div>
+
+
+        @if (Model.report.metricResults.Count != 0)
+            {
+            <table class="metricsTable">
+                <tr>
+                    <th> Metric Results</th>
+                    <th></th>
+                </tr>
+
+
+
+
+                @foreach (var metricResult in Model.report.metricResults)
+                {
+                    <tr>
+                        <th>@Html.DisplayFor(model => metricResult.metric.name)</th>
+                        <td>@Html.DisplayFor(model => metricResult.resultText)</td>
+                    </tr>
+                }
+
+
+
+            </table>
+        }
+
+
+    </div>
 </div>
+
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4VlRpvKNloHrCwtMLKy_X2UQVhW_8L5Q&callback=initialize">
+    </script>
+    <script src="~/Scripts/googlemapsNEW.js"></script>
+
+   
+}

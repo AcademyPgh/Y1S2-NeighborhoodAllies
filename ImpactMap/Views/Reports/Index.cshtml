@@ -14,31 +14,213 @@
         </div>
     </div>
 
-    <hr/>
+    <hr />
+
+    <div class="dashHeading">
+        <h2>Reports Owed to My Organization</h2>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+
+                <th>
+                    Recipient
+                </th>
+
+                <th>
+                    Report Details
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        Amount
+                    </td>
+
+                    <td>
+                        Date
+                    </td>
+
+                    <td>
+                        Recipient
+                    </td>
+
+                    <td>
+                        View Report
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    
 
 
+
+    <div class="dashHeading">
+        <h2>Reports Owed to Investors</h2>
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.reportText)
+                Project
             </th>
-            <th></th>
+            <th>
+                Date
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Amount
+            </th>
+
+            <th>
+                Report Details
+            </th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.reportText)
+                    Project
                 </td>
+
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    Investor
                 </td>
+
+                <td>
+                    Date
+                </td>
+
+                <td>
+                    Amount
+                </td>
+
+                <td>
+                    View Report
+                </td>
+
             </tr>
         }
 
     </table>
 
+    <div class="dashHeading">
+        <h2>Reports Submitted to Investors</h2>
     </div>
+    <table class="table">
+        <tr>
+            <th>
+                Project
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Amount
+            </th>
+
+            <th>
+                Report Details
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    Project
+                </td>
+
+                <td>
+                    Investor
+                </td>
+
+                <td>
+                    Date
+                </td>
+
+                <td>
+                    Amount
+                </td>
+
+                <td>
+                    View Report
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    
+
+<div class="dashHeading">
+    <h2>Investment Reports</h2>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Project
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Date
+        </th>
+
+        <th>
+            Amount
+        </th>
+
+        <th>
+            Report Details
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                Project
+            </td>
+
+            <td>
+                Investor
+            </td>
+
+            <td>
+                Date
+            </td>
+
+            <td>
+                Amount
+            </td>
+
+            <td>
+                View Report
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+
+</div>
