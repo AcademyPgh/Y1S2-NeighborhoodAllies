@@ -31,121 +31,126 @@
     </div>
 
 
-    <h3>Incoming Investments</h3>
-    <div class="addpadding">
-        @if (Model.investmentsIn.Count != 0)
-        {
+    <div class="dashHeading">
+        <h2>
+            Incoming Investments
+        </h2>
+        </div>
+        <div class="addpadding">
+            @if (Model.investmentsIn.Count != 0)
+            {
 
-            <table class="table">
-                <tr>
-                    <th>Date</th>
-                    <th>Donor</th>
-                    <th>Value</th>
-                    <th>Report Status</th>
-                </tr>
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Donor</th>
+                        <th>Value</th>
+                        <th>Report Status</th>
+                    </tr>
 
-                @{foreach (var ivi in Model.investmentsIn)
+                    @{foreach (var ivi in Model.investmentsIn)
                 {
-                        <tr>
+                            <tr>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => ivi.date)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => ivi.date)
+                                </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => ivi.entityFrom.name)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => ivi.entityFrom.name)
+                                </td>
 
-                            <td>
-                                $@Html.DisplayFor(modelItem => ivi.amount)
-                            </td>
+                                <td>
+                                    $@Html.DisplayFor(modelItem => ivi.amount)
+                                </td>
 
-                            <td>
-                                @if (Model.report != null)
-                                {
-                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = Model.report.ID }, null)
-                                }
-                                else
-                                {
-                                    @Html.ActionLink("Create Report", "Create", "Reports", new { id = Model.ID }, null)
-                                    <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
-                                }
-                            </td>
+                                <td>
+                                    @if (Model.report != null)
+                                    {
+                                        @Html.ActionLink("View Report", "Details", "Reports", new { id = Model.report.ID }, null)
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Create Report", "Create", "Reports", new { id = Model.ID }, null)
+                                        <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                                    }
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    }
-                }
-
-            </table>
+                        }
                     }
 
-                    else
-                    {
-                        <p>This project has no incoming investments</p>
-                    }
-    </div>
+                </table>
+                        }
+
+                        else
+                        {
+                            <p>This project has no incoming investments</p>
+                        }
+        </div>
 
 
+    <div class="dashHeading">
+        <h2>Outgoing Investments</h2>
+        </div>
+        <div class="addpadding">
+            @if (Model.investmentsOut.Count != 0)
+            {
 
-    <h3>Outgoing Investments</h3>
-    <div class="addpadding">
-        @if (Model.investmentsOut.Count != 0)
-        {
+                <table class="table">
 
-            <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Recipient</th>
+                        <th>Value</th>
+                        <th>Report Status</th>
+                    </tr>
 
-                <tr>
-                    <th>Date</th>
-                    <th>Recipient</th>
-                    <th>Value</th>
-                    <th>Report Status</th>
-                </tr>
-
-                @{foreach (var ivo in Model.investmentsOut)
+                    @{foreach (var ivo in Model.investmentsOut)
                 {
-                        <tr>
+                            <tr>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => ivo.date)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => ivo.date)
+                                </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => ivo.entityTo.name)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => ivo.entityTo.name)
+                                </td>
 
-                            <td>
-                                $@Html.DisplayFor(modelItem => ivo.amount)
-                            </td>
+                                <td>
+                                    $@Html.DisplayFor(modelItem => ivo.amount)
+                                </td>
 
-                            <td>
-                                @if (ivo.projectTo.report != null)
-                                {
-                                    //string reportID = Convert.ToString(item.projectTo.report.ID);
-                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = ivo.projectTo.report.ID }, null)
-                                }
-                                else
-                                {
-                                    <span>No report available.</span>
-                                }
-                            </td>
+                                <td>
+                                    @if (ivo.projectTo.report != null)
+                                    {
+                                        //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                        @Html.ActionLink("View Report", "Details", "Reports", new { id = ivo.projectTo.report.ID }, null)
+                                    }
+                                    else
+                                    {
+                                        <span>No report available.</span>
+                                    }
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    }
-                }
-
-            </table>
+                        }
                     }
 
-                    else
-                    {
-                        <p>This project has no outgoing investments</p>
-                    }
+                </table>
+                        }
+
+                        else
+                        {
+                            <p>This project has no outgoing investments</p>
+                        }
+        </div>
+
+
+
+
+
     </div>
-
-
-
-
-
-</div>

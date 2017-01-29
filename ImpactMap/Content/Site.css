@@ -175,8 +175,8 @@ a href {
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column */
 
-.dl-horizontal{
-    margin-left: 20px;
+dl-horizontal {
+    margin-left: 0px;
 }
 
 .dl-horizontal dt, dl-horizontal dd {
@@ -510,11 +510,11 @@ td {
     margin-right: 10px;
 }
 
-.dashtr:first-child{
+tr:first-child{
     background-color: #1d909c;
 }
 
-.dashtr:nth-child(odd):not(:first-child){
+tr:nth-child(odd):not(:first-child){
     background-color: #def7f9;
 }
 

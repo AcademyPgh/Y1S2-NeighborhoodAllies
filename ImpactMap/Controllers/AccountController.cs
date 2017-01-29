@@ -57,6 +57,10 @@ namespace ImpactMap.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

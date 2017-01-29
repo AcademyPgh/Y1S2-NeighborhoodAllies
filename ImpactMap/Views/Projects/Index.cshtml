@@ -23,7 +23,7 @@
 
     <div class="addpadding">
         <table class="table addpadding">
-            <tr>
+            <tr class="dashtr">
                 <th>
                     @Html.DisplayNameFor(model => model.name)
                 </th>
@@ -47,7 +47,7 @@
 
                 foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="dashtr">
                         <td>
                             @Html.DisplayFor(modelItem => item.name)
                         </td>
