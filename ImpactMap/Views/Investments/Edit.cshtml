@@ -119,14 +119,43 @@
                             @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["categories"] })
                             <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
                             <div id="CatList">
+                               
+
+                                @*<script type="text/javascript">
+
+                                        var preCheckedCategories = [];
+
+                                         @foreach (var category in Model.Investment.categories)
+                                           {
+                                             
+                                            <text>
+                                                preCheckedCategories.push(category);
+                                            </text>
+                                           }
+                                </script>*@
+
                                 <ul>
+
                                     @foreach (var category in Model.Investment.categories)
                                     {
                                         if (Model.Investment.categories.Contains(category))
                                         {
-                                            <li class="cats" id='cat' @category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-check-square-o"></span> @category.name</li>
+                                            <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-check-square-o"></span> @category.name</li>
                                         }
                                     }
+
+
+                   
+
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        if (!Model.Investment.categories.Contains(category))
+                                        {
+                                            <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-square-o"></span> @category.name</li>
+                                        }
+                                    }
+
+
                                 </ul>
                             </div>
                             <input name="categories" id="categories" type="hidden" />
@@ -167,13 +196,16 @@
                 success: function (data) {
                     //$('#CatList').html('<ul>');
                     data.map(function (category) {
-                        $('#CatList ul').append('<li class="cats" id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+                        //if (preCheckedCategories.indexOf(category.ID) == -1)
+                        //$('#CatList ul').append('<li class="cats" id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
                         $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
                     });
                     //$('#CatList').append('</ul>');
                 }
             })
         }
+
+        
 
         //These are supposed to grab the categories the investment already has, but they aren't working for some reason
 
@@ -259,9 +291,10 @@
         $('#recipientSelect').change(updateProjectsOut);
 
         function initialize() {
-            load_categories();
+            //load_categories();
             updateProjectsOut();
             addCurrencyMask();
+            addToggle();
         }
 
         $(initialize);
