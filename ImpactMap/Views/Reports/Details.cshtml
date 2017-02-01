@@ -37,7 +37,7 @@
 
     <div class="container dash reportDiv">
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="dashHeading">
                 <h2>
                     Report
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-offset-1">
 
             <div class="dashHeading">
                 <h2>
@@ -70,7 +70,7 @@
                     {
                         <table class="metricsTable">
                             <tr>
-                                <th> Metric Results</th>
+                                <th> @category.name</th>
                                 <th></th>
                             </tr>
                             @foreach (var metric in category.metrics)
@@ -93,16 +93,10 @@
 
                             }
 
-                        @*</table>*@
-
-                            <hr />
+                      
+            </table>
                     }
                 }
-                           
-
-
-
-            </table>
             }
         </div>
 

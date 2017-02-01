@@ -518,12 +518,20 @@ td {
     font-weight: 400;
 }
 
+
+.metricsTable tr:first-of-type th {
+    color: white;
+}
 .metricsTable th{
     color: #1D909C;
     font-weight: 600;
     padding:5px 20px;
-    
+}
 
+.metricsTable{
+    width: 100%;
+    margin-bottom: 30px;
+    border: 3px solid darkgray;
 }
 
 .tts {
@@ -651,5 +659,7 @@ span.removeMetric {
 .dashHeader h2 i{
     padding-right: 15px;
 }
+
+
 
 
