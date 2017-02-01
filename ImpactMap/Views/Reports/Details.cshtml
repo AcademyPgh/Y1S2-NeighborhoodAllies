@@ -17,70 +17,93 @@
     <hr />
 
     <div class="spaceDiv">
-    <dl class="dl-horizontal">
-        <dd>
-            <span class="orgName">@Html.DisplayFor(model => model.project.entity.name)</span>
-        </dd>
+        <dl class="dl-horizontal">
+            <dd>
+                <span class="orgName">@Html.DisplayFor(model => model.project.entity.name)</span>
+            </dd>
 
-        <dd>
-            Project: @Html.DisplayFor(model => model.project.name)
-        </dd>
+            <dd>
+                Project: @Html.DisplayFor(model => model.project.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.project.description)
-        </dd>
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.project.description)
+            </dd>
+        </dl>
 
     </div>
 
 
 
-<div class="container dash reportDiv">
-  
-    <div class="col-md-8">
-        <div class="dashHeading">
-            <h2>
-                Report
-            </h2>
+    <div class="container dash reportDiv">
+
+        <div class="col-md-8">
+            <div class="dashHeading">
+                <h2>
+                    Report
+                </h2>
+            </div>
+
+            <div class="reportText">
+                @Html.DisplayFor(model => model.report.reportText)
+            </div>
         </div>
 
-        <div class="reportText">
-            @Html.DisplayFor(model => model.report.reportText)
-        </div>
-    </div>
+        <div class="col-md-4">
 
-    <div class="col-md-4">
-
-        <div class="dashHeading">
-            <h2>
-                Report Metrics
-            </h2>
-        </div>
+            <div class="dashHeading">
+                <h2>
+                    Report Metrics
+                </h2>
+            </div>
 
 
-        @if (Model.report.metricResults.Count != 0)
+            @if (Model.report.metricResults.Count != 0)
             {
-            <table class="metricsTable">
-                <tr>
-                    <th> Metric Results</th>
-                    <th></th>
-                </tr>
 
 
 
-
-                @foreach (var metricResult in Model.report.metricResults)
+                foreach (var investment in Model.project.investmentsIn)
                 {
-                    <tr>
-                        <th>@Html.DisplayFor(model => metricResult.metric.name)</th>
-                        <td>@Html.DisplayFor(model => metricResult.resultText)</td>
-                    </tr>
+
+                    foreach (var category in investment.categories)
+                    {
+                        <table class="metricsTable">
+                            <tr>
+                                <th> Metric Results</th>
+                                <th></th>
+                            </tr>
+                            @foreach (var metric in category.metrics)
+                            {
+                                <tr>
+                                    <th>@metric.name</th>
+                                    <td>
+                                        @foreach (var result in Model.report.metricResults)
+                                        {
+                                            if (result.metric == metric)
+                                            {
+                                                @result.resultText;
+                                            }
+                                        }
+
+
+                                    </td>
+                                </tr>
+
+
+                            }
+
+                        @*</table>*@
+
+                            <hr />
+                    }
                 }
+                           
 
 
 
             </table>
-        }
+            }
         </div>
 
     </div>
@@ -98,5 +121,5 @@
     </script>
     <script src="~/Scripts/googlemapsNEW.js"></script>
 
-   
+
 }
