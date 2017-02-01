@@ -461,6 +461,18 @@ inputWLabel {
    margin: 0 5px;
 }
 
+.pageInfo .fa-ellipsis-h{
+    color: white;
+    background-color: #1D909C;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.subNav i{
+    font-size: 1.25em;
+}
+
 .dashHeading{
     display:flex;
     flex-direction:row;
@@ -616,6 +628,10 @@ span.removeMetric {
 
 .reportDiv{
     padding-bottom: 40px;
+}
+
+.dashHeader h2 i{
+    padding-right: 15px;
 }
 
 
