@@ -22,63 +22,77 @@
 
 
     <div class="addpadding">
-        <table class="table addpadding">
-            <tr class="dashtr">
-                <th>
-                    @Html.DisplayNameFor(model => model.name)
-                </th>
+        <table id="projectList" class="table tablesorter addpadding">
+            <thead>
+                <tr class="dashtr">
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.description)
-                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.description)
+                    </th>
 
-                <th>
-                   Report Status
-                </th>
+                    <th>
+                        Report Status
+                    </th>
 
-                <th>
+                    <th class="noSortTH">
 
-                </th>
-            </tr>
+                    </th>
+                </tr>
+            </thead>
 
-
-            @if (Model != null)
+            <tbody>
+                @if (Model != null)
             {
 
                 foreach (var item in Model)
                 {
-                    <tr class="dashtr">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
+                        <tr class="dashtr">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.description)
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.description)
+                            </td>
 
-                        <td>
-                            @if (item.report != null)
-                            {
-                                
-                                @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
-                            }
-                            else
-                            {
-                               
-                                @Html.ActionLink("Report Due", "Create", "Reports", new { id = item.ID,  @class="alert" }, null)
-                                <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                        </td>
-                    </tr>
+                            <td>
+                                @if (item.report != null)
+                                {
 
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
+                                }
+                                else
+                                {
+
+                                    @Html.ActionLink("Report Due", "Create", "Reports", new { id = item.ID, @class = "alert" }, null)
+                                    <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                            </td>
+                        </tr>
+
+                    }
                 }
-            }
+
+            </tbody>
+
         </table>
 
     </div>
 
     </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryTableSorter")
+    <script>
+        $(document).ready(function () {
+            $("#projectList").tablesorter();
+        });
+    </script>
+}

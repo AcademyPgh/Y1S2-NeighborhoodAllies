@@ -531,12 +531,30 @@ td {
     margin-right: 10px;
 }
 
-tr:first-child{
+tr:first-child, th.header{
     background-color: #1d909c;
+    border-bottom: none;
 }
 
-tr:nth-child(odd):not(:first-child){
+tr:nth-child(odd):not(:first-child), table.tablesorter tr:first-of-type{
     background-color: #def7f9;
+}
+
+th.header:not(.noSortTH):after {
+    font-family: FontAwesome;
+    content: "\f0dc";
+    font-weight: normal;
+    padding-left:5px;
+}
+
+th.header.headerSortUp:after{
+    font-family:FontAwesome;
+    content: "\f0de";
+}
+
+th.header.headerSortDown:after{
+    font-family:FontAwesome;
+    content: "\f0dd";
 }
 
 #type-selector {

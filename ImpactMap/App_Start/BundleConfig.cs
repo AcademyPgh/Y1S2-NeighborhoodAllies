@@ -26,6 +26,9 @@ namespace ImpactMap
             bundles.Add(new ScriptBundle("~/bundles/jqueryMask").Include(
                      "~/Scripts/jquery.mask.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryTableSorter").Include(
+                    "~/Scripts/jquery.tablesorter.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

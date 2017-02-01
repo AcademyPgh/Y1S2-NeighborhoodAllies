@@ -19,95 +19,101 @@
     <div class="addpadding" style="max-width:1200px;">
        
         <br />
-        <table class="table">
-            <tr class="dashtr">
-                <th>
-                    @*@Html.DisplayNameFor(model => Model.investmentsOut.date)*@
-                    Date
-                </th>
-                <th>
-                    Value of Grant
-                    @*@Html.DisplayNameFor(model => model.amount)*@
-                </th>
-                <th>
-                    Recipient
-                    @*@Html.DisplayNameFor(model => model.entityTo)*@
-                </th>
-                <th>
-                    Project To
-                    @*@Html.DisplayNameFor(model => model.projectTo)*@
-                </th>
-                <th>
-                    In Kind
-                    @*@Html.DisplayNameFor(model => model.isInKind)*@
-                </th>
-                <th>
-                    Tags
-                    @*@Html.DisplayNameFor(model => model.categories)*@
-                </th>
-                <th>
-                    Reports
-                </th>
-                <th>
-
-                </th>
-
-            </tr>
-
-            @foreach (var item in Model.investmentsOut)
-            {
+        <table id="investmentTable"class="table tablesorter">
+            <thead>
                 <tr class="dashtr">
-                    <td>
-                        @item.date.ToString("MM/dd/yyyy")
-                    </td>
-                    <td>
-                        $@Html.DisplayFor(modelItem => item.amount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.entityTo.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.projectTo.name)
-                    </td>
-                    <td>
-                        @if (item.isInKind)
-                        {
-                            <span>Yes</span>
-                        }
+                    <th>
+                        @*@Html.DisplayNameFor(model => Model.investmentsOut.date)*@
+                        Date
+                    </th>
+                    <th>
+                        Value of Grant
+                        @*@Html.DisplayNameFor(model => model.amount)*@
+                    </th>
+                    <th>
+                        Recipient
+                        @*@Html.DisplayNameFor(model => model.entityTo)*@
+                    </th>
+                    <th>
+                        Project To
+                        @*@Html.DisplayNameFor(model => model.projectTo)*@
+                    </th>
+                    <th>
+                        In Kind
+                        @*@Html.DisplayNameFor(model => model.isInKind)*@
+                    </th>
+                    <th>
+                        Tags
+                        @*@Html.DisplayNameFor(model => model.categories)*@
+                    </th>
+                    <th class="noSortTH">
+                        Reports
+                    </th>
+                    <th class="noSortTH">
 
-                        else
-                        {
-                            <span>No</span>
-                        }
-                    </td>
-                    <td>
-                        <ul style="list-style-type:none;">
-                            @foreach (var category in item.categories)
-                            {
-                                //@Html.DisplayFor(model => category.name)
-                                <li>@category.name</li>
-                            }
-                        </ul>
-                    </td>
+                    </th>
 
-                    <td>
-                        @if (item.projectTo.report != null)
-                        {
-                            //string reportID = Convert.ToString(item.projectTo.report.ID);
-                            @Html.ActionLink("View Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
-                        }
-                        else
-                        {
-                            <span>No report available.</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
                 </tr>
-            }
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.investmentsOut)
+            {
+                    <tr class="dashtr">
+                        <td>
+                            @item.date.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            $@Html.DisplayFor(modelItem => item.amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.entityTo.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.projectTo.name)
+                        </td>
+                        <td>
+                            @if (item.isInKind)
+                            {
+                                <span>Yes</span>
+                            }
+
+                            else
+                            {
+                                <span>No</span>
+                            }
+                        </td>
+                        <td>
+                            <ul style="list-style-type:none;">
+                                @foreach (var category in item.categories)
+                                {
+                                    //@Html.DisplayFor(model => category.name)
+                                    <li>@category.name</li>
+                                }
+                            </ul>
+                        </td>
+
+                        <td>
+                            @if (item.projectTo.report != null)
+                            {
+                                //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                @Html.ActionLink("View Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
+                            }
+                            else
+                            {
+                                <span>No report available.</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
 
 
         </table>
@@ -116,4 +122,17 @@
     </div>
 
     </div>
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryTableSorter")
+    <script>
+        $(document).ready(function () {
+            $("#investmentTable").tablesorter();
+        });
+    </script>
+    }
+    
+
+
+
 
