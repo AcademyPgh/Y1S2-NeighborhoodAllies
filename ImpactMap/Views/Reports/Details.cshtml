@@ -68,6 +68,8 @@
 
                     foreach (var category in investment.categories)
                     {
+                        if (!category.isBase)
+                        {
                         <table class="metricsTable">
                             <tr>
                                 <th> @category.name</th>
@@ -95,6 +97,7 @@
 
                       
             </table>
+                        }
                     }
                 }
             }
