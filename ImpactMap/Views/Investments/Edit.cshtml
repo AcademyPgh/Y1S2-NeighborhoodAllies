@@ -60,9 +60,13 @@
                             @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["projectFrom"] })
                             <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectFrom"]"></span>
                             <select name="projectFrom_ID" class="form-control">
-                                @foreach (var project in Model.Projects)
+                                <option value=@Model.Investment.projectFrom.ID selected>@Model.Investment.projectFrom.name</option>
+                                @foreach (var project in Model.Investment.entityFrom.projects)
                                 {
-                                    <option value=@project.ID>@project.name</option>
+                                    if (project.ID != Model.Investment.projectFrom.ID)
+                                    {
+                                        <option value=@project.ID>@project.name</option>
+                                    }
                                 }
                             </select>
                             @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
@@ -158,7 +162,7 @@
 
         function load_categories() {
             $.ajax({
-                url: '/public/categories',
+                url: '/public/usercategories',
                 type: 'GET',
                 success: function (data) {
                     //$('#CatList').html('');

@@ -210,7 +210,9 @@ namespace ImpactMap.Controllers
                 if (investment != null)
                 {
                     //Modified entity state causes us to not be able to update connected categories
+                    Investment oldInv = db.investments.Find(ID);
                     Investment inv = db.investments.Find(ID);
+
 
                     inv.amount = investment.amount;        
                     inv.entityTo_ID = entityTo_ID;
@@ -222,6 +224,8 @@ namespace ImpactMap.Controllers
 
                     SaveInvestmentCategories(ID, categories.Split(','));
                     db.SaveChanges();
+
+                    UpdateProjectInvestments(projectTo_ID, projectFrom_ID, ID, oldInv);
                 }
 
                 return RedirectToAction("Index", "Dashboard");
@@ -230,6 +234,38 @@ namespace ImpactMap.Controllers
             return View(investment);
         }
 
+
+        private void UpdateProjectInvestments(int projectTo_ID, int projectFrom_ID, int ID, Investment oldInv)
+        {
+            //These if statements are analogous to if projectTo != null / if projectFrom != null
+            //If the investment has a projectTo, add this investment to that project's investmentsIn list
+                //Okay we need to send this the ID of the OLD projectTo_ID
+                int oldProjectTo_ID = oldInv.projectTo.ID;
+                //if the new ProjectTo is not the same as the old ProjectTo
+                if (projectTo_ID != oldProjectTo_ID)
+                {
+                    //Remove "all" items in the list of investmentsIn where the item = the old investment
+                    db.projects.Find(oldProjectTo_ID).investmentsIn.RemoveAll(item => item == oldInv);
+
+                    //Add the new version of the investment to the new projectTo's investmentsIn list
+                    db.projects.Find(projectTo_ID).investmentsIn.Add(db.investments.Find(ID));
+                    db.SaveChanges();
+                }
+            
+
+            //If the investment has a projectFrom, add this investment to that project's investmentsOut list
+                int oldProjectFrom_ID = oldInv.projectFrom.ID;
+                //If the projectFrom is changing
+                if (projectFrom_ID != oldProjectFrom_ID)
+                {
+                    //Remove the old investment from the old projectFrom's investmentsOut list
+                    db.projects.Find(oldProjectFrom_ID).investmentsOut.RemoveAll(item => item == oldInv);
+                    //Add the new investment to the new projectFrom's investmentsOut list
+                    db.projects.Find(projectFrom_ID).investmentsOut.Add(db.investments.Find(ID));
+                    db.SaveChanges();
+                }
+            }
+        
         private void SaveInvestmentCategories(int id, string[] CategoryIDs)
         {
             List<int> ids = new List<int>();
