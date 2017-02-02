@@ -158,23 +158,42 @@ namespace ImpactMap.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Utils.Utility userUtil = new Utils.Utility();
             InvestmentViewModel ivm = new InvestmentViewModel();
+            Utils.Utility userUtil = new Utils.Utility();
 
-            ivm.Entities = db.entities.ToList();
             ivm.Investment = db.investments.Find(id);
+            ivm.Entities = db.entities.ToList();
             ivm.Categories = db.categories.ToList();
-            //entityFrom is auto retrieved based on the user that's logged in
             ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
-            //projectsFrom is populated based on entityFrom's projects
             ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
+            ViewBag.InvestmentCategories = string.Join(",", ivm.Investment.categories.Select(c => c.ID));
 
             if (ivm.Investment == null)
             {
                 return HttpNotFound();
             }
+
+           
             return View(ivm);
         }
+
+        //Utils.Utility userUtil = new Utils.Utility();
+        //    InvestmentViewModel ivm = new InvestmentViewModel();
+
+        //    ivm.Entities = db.entities.ToList();
+        //    ivm.Investment = db.investments.Find(id);
+        //    ivm.Categories = db.categories.ToList();
+        //    //entityFrom is auto retrieved based on the user that's logged in
+        //    ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+        //    //projectsFrom is populated based on entityFrom's projects
+        //    ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
+
+        //    if (ivm.Investment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(ivm);
+        //}
 
         // POST: Investments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

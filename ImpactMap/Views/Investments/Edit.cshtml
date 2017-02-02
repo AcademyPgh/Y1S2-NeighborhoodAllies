@@ -119,41 +119,8 @@
                             @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label", @title = @ViewBag.Tooltips["categories"] })
                             <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
                             <div id="CatList">
-                               
+                               <ul>
 
-                                @*<script type="text/javascript">
-
-                                        var preCheckedCategories = [];
-
-                                         @foreach (var category in Model.Investment.categories)
-                                           {
-                                             
-                                            <text>
-                                                preCheckedCategories.push(category);
-                                            </text>
-                                           }
-                                </script>*@
-
-                                <ul>
-
-                                    @foreach (var category in Model.Investment.categories)
-                                    {
-                                        if (Model.Investment.categories.Contains(category))
-                                        {
-                                            <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-check-square-o"></span> @category.name</li>
-                                        }
-                                    }
-
-
-                   
-
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        if (!Model.Investment.categories.Contains(category))
-                                        {
-                                            <li class="cats" id='cat'@category.ID data-id=@category.ID><span id='catspan' @category.ID class="fa fa-square-o"></span> @category.name</li>
-                                        }
-                                    }
 
 
                                 </ul>
@@ -187,57 +154,31 @@
     @Scripts.Render("~/bundles/jqueryMask")
 
     <script>
+        selectedCategories = [@ViewBag.InvestmentCategories];
 
-        selectedCategories = [];
         function load_categories() {
             $.ajax({
                 url: '/public/categories',
                 type: 'GET',
                 success: function (data) {
-                    //$('#CatList').html('<ul>');
+                    //$('#CatList').html('');
                     data.map(function (category) {
-                        //if (preCheckedCategories.indexOf(category.ID) == -1)
-                        //$('#CatList ul').append('<li class="cats" id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + ' </li>');
                         $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                        if (selectedCategories.indexOf(category.ID) > -1)
+                        {
+                            $('#catspan' + category.ID).removeClass('fa fa-square-o');
+                            $('#catspan' + category.ID).addClass('fa fa-check-square-o');
+                        }
                     });
-                    //$('#CatList').append('</ul>');
+                   
+                    $('#CatList').append('</ul>');
                 }
             })
         }
 
         
 
-        //These are supposed to grab the categories the investment already has, but they aren't working for some reason
-
-        @*function load_old_categories() {
-            $.ajax({
-                url: '/public/currinvestmentcategories/' + @Model.Investment.ID + '/',
-                type: 'GET',
-                success: function (data) {
-                    //$('#CatList').html('<ul>');
-                    data.map(function (category) {
-                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-check-o"></span> ' + category.name + '</li>');
-                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
-                    });
-                    //$('#CatList').append('</ul>');
-                }
-            })
-        }
-
-        function load_other_categories() {
-            $.ajax({
-                url: '/public/noncurrinvestmentcategories/' + @Model.Investment.ID + '/',
-                type: 'GET',
-                success: function (data) {
-                    //$('#CatList').html('<ul>');
-                    data.map(function (category) {
-                        $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-check-o"></span> ' + category.name + '</li>');
-                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
-                    });
-                    //$('#CatList').append('</ul>');
-                }
-            })
-        }*@
 
         function toggle_category(id) {
             // if it is not there
@@ -291,10 +232,10 @@
         $('#recipientSelect').change(updateProjectsOut);
 
         function initialize() {
-            //load_categories();
+            load_categories();
             updateProjectsOut();
             addCurrencyMask();
-            addToggle();
+            
         }
 
         $(initialize);
