@@ -59,16 +59,19 @@
                             </td>
 
                             <td>
-                                @if (item.report != null)
-                                {
-
-                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
-                                }
-                                else
+                                @if (item.report == null && item.investmentsIn.Count > 0)
                                 {
 
                                     @Html.ActionLink("Report Due", "Create", "Reports", new { id = item.ID, @class = "alert" }, null)
                                     <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                                }
+                                else if (item.report == null && item.investmentsIn.Count == 0)
+                                {
+                                    <div>No report available.</div>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
                                 }
                             </td>
                             <td>
