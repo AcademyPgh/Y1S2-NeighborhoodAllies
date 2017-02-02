@@ -30,7 +30,7 @@ function initialize() {
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var pittsburgh = new google.maps.LatLng(40.421796, -79.994485);
-    mapOptions = { zoom: 13, mapTypeId: google.maps.MapTypeId.ROADMAP, center: pittsburgh }
+    mapOptions = { zoom: 11, mapTypeId: google.maps.MapTypeId.ROADMAP, center: pittsburgh }
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsDisplay.setMap(map);
 
@@ -61,8 +61,7 @@ function markerlocation(organizationid, address, organization, organizationabout
         '<div class="markercontents">' +
                 //'<div class="logoholder">' + '<img src=/logos/' + organizationid + '/serve style= "width: 100%">' +
                 //'</div>' +
-                '<div class="orgtitle">' + organization + '</div>' +
-                '<div class="aboutlink">' + '<a href=/entities/' + organizationid + '>' + 'Organization Page' + '</a>' + '</div>' +
+                '<div class="orgtitle"><div class="aboutlink"><a href=/entities/details/' + organizationid + '>' + organization + '</a></div></div>' +
                 '<div class="descripbox">Description:<br />' + organizationabout + '</div>' +
         '</div>'
         ;
