@@ -178,7 +178,9 @@
         }
 
         
-
+        function check_categories() {
+                $('#categories').val(selectedCategories.toString());
+        }
 
         function toggle_category(id) {
             // if it is not there
@@ -233,8 +235,8 @@
 
         function initialize() {
             load_categories();
-            updateProjectsOut();
             addCurrencyMask();
+            check_categories();
             
         }
 

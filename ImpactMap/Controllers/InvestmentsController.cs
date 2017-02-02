@@ -177,23 +177,25 @@ namespace ImpactMap.Controllers
             return View(ivm);
         }
 
-        //Utils.Utility userUtil = new Utils.Utility();
-        //    InvestmentViewModel ivm = new InvestmentViewModel();
+        
 
-        //    ivm.Entities = db.entities.ToList();
-        //    ivm.Investment = db.investments.Find(id);
-        //    ivm.Categories = db.categories.ToList();
-        //    //entityFrom is auto retrieved based on the user that's logged in
-        //    ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
-        //    //projectsFrom is populated based on entityFrom's projects
-        //    ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
-
-        //    if (ivm.Investment == null)
+        // POST: Investments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
+        //public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,projectFrom_ID,projectTo_ID")] Investment investment)
+        //{
+        //    if (ModelState.IsValid)
         //    {
-        //        return HttpNotFound();
+        //        db.Entry(investment).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
         //    }
-        //    return View(ivm);
+        //    return View(investment);
         //}
+
 
         // POST: Investments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -201,112 +203,69 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,date,isInKind,projectFrom_ID,projectTo_ID")] Investment investment)
+        public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories, int ID)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(investment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (investment != null)
+                {
+                    //Modified entity state causes us to not be able to update connected categories
+                    Investment inv = db.investments.Find(ID);
+
+                    inv.amount = investment.amount;        
+                    inv.entityTo_ID = entityTo_ID;
+                    inv.description = investment.description;
+                    inv.date = investment.date;
+                    inv.isInKind = investment.isInKind;
+                    inv.projectFrom_ID = projectFrom_ID;
+                    inv.projectTo_ID = projectTo_ID;
+
+                    SaveInvestmentCategories(ID, categories.Split(','));
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index", "Dashboard");
+
             }
             return View(investment);
         }
 
-        //// POST: Investments/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Authorize]
-        //public ActionResult Edit([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories, int? ID)
-        //{ 
+        private void SaveInvestmentCategories(int id, string[] CategoryIDs)
+        {
+            List<int> ids = new List<int>();
+            List<Category> categoriesToRemove = new List<Category>();
+            foreach (var cat in CategoryIDs)
+            {
+                int i;
+                if (int.TryParse(cat, out i))
+                {
+                    ids.Add(i);
+                }
+            }
 
-        //   if (ModelState.IsValid)
-        //    {
-        //        investment.ID = Convert.ToInt32(ID);
+            var investment = db.investments.Find(id);
+            foreach (var cat in investment.categories)
+            {
+                if (ids.Contains(cat.ID))
+                {
+                    // keep it, remove from the ids list
+                    ids.Remove(cat.ID);
+                }
+                else
+                {
 
-        //        //Utils.Utility gets currently logged in user's ID
-        //        Utils.Utility userUtil = new Utils.Utility();
-
-        //        //entityTo_ID gets sent in via the forms and then attached to the investment here
-        //        investment.entityTo = db.entities.Find(entityTo_ID);
-
-        //        //entityFrom uses UserID() from Utils/Utility.cs to get the entity linked to the currently logged in User
-        //        investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
-
-        //        //projectTo_ID and projectFrom_ID get sent in via the forms and then attached to the investment here
-        //        investment.projectTo = db.projects.Find(projectTo_ID);
-        //        investment.projectFrom = db.projects.Find(projectFrom_ID);
-
-        //        //"categories" is a comma-separated string of categories sent in via the forms 
-        //        //(a hidden input, using an ajax call to get the categories from the database)
-        //        //the string is split into an array, and then each one is added to the new investment's category list
-        //        if (categories != "" && categories != null)
-        //        {
-        //            investment.categories = new List<Category>();
-        //            foreach (var id in categories.Split(','))
-        //            {
-        //                investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
-        //            }
-        //        }
-
-        //        //finally we add the investment to the database and save the changes
-        //        Investment oldInv = db.investments.Find(investment.ID);
-
-
-        //        //These if statements are analogous to if projectTo != null / if projectFrom != null
-        //        //If the investment has a projectTo, add this investment to that project's investmentsIn list
-        //        if (projectTo_ID != 0)
-        //        {
-        //            //Okay we need to send this the ID of the OLD projectTo_ID
-        //            int oldProjectTo_ID = oldInv.projectTo.ID;
-        //            //if the new ProjectTo is not the same as the old ProjectTo
-        //            if (projectTo_ID != oldProjectTo_ID)
-        //            {
-        //                //Remove "all" items in the list of investmentsIn where the item = the old investment
-        //                db.projects.Find(oldProjectTo_ID).investmentsIn.RemoveAll(item => item == oldInv);
-
-        //                //Add the new version of the investment to the new projectTo's investmentsIn list
-        //                db.projects.Find(projectTo_ID).investmentsIn.Add(investment);
-        //                db.SaveChanges();
-        //            }
-        //            else
-        //            {
-        //                //go to the project and remove the old version of the investment
-        //                db.projects.Find(projectTo_ID).investmentsIn.RemoveAll(item => item == oldInv);
-        //                //add the new version of the investment
-        //                db.projects.Find(projectTo_ID).investmentsIn.Add(investment);
-        //            }
-        //        }
-
-        //        //If the investment has a projectFrom, add this investment to that project's investmentsOut list
-        //        if (projectFrom_ID != 0)
-        //        {
-        //            int oldProjectFrom_ID = oldInv.projectFrom.ID;
-        //            //If the projectFrom is changing
-        //            if (projectFrom_ID != oldProjectFrom_ID)
-        //            {
-        //                //Remove the old investment from the old projectFrom's investmentsOut list
-        //                db.projects.Find(oldProjectFrom_ID).investmentsOut.RemoveAll(item => item == oldInv);
-        //                //Add the new investment to the new projectFrom's investmentsOut list
-        //                db.projects.Find(projectFrom_ID).investmentsOut.Add(investment);
-        //                db.SaveChanges();
-        //            }
-        //            else
-        //            {
-        //                //Remove the old investment from the projectTo's investmentsOut list
-        //                db.projects.Find(projectTo_ID).investmentsOut.RemoveAll(item => item == oldInv);
-        //                //Add the new one
-        //                db.projects.Find(projectTo_ID).investmentsOut.Add(investment);
-        //            }
-        //        }
-
-        //        db.Entry(investment).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(investment);
-        //}
+                    categoriesToRemove.Add(cat);
+                }
+            }
+            foreach (var rmcat in categoriesToRemove)
+            {
+                investment.categories.Remove(rmcat);
+            }
+            foreach (var i in ids)
+            {
+                investment.categories.Add(db.categories.Find(i));
+            }
+        }
 
         // GET: Investments/Delete/5
         [Authorize]
