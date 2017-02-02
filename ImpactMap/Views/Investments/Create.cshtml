@@ -158,7 +158,7 @@
                 success: function (data) {
                     //$('#CatList').html('<ul>');
                     data.map(function (category) {
-                        if (category.isBase == false) {
+                        if (!category.isBase) {
                             $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
                             $('#cat' + category.ID).click(function () { toggle_category(category.ID + "," + category.baseID); });
                         }
