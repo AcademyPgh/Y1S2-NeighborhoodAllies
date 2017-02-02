@@ -150,7 +150,7 @@ namespace ImpactMap.Controllers
                     }
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("CreateBase", "Categories");
             }
 
             return View(category);
