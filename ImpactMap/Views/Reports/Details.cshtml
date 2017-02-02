@@ -15,8 +15,7 @@
     </div>
 
     <hr />
-
-    <div class="spaceDiv">
+    <div class="spaceDiv dbSpans">
         <dl class="dl-horizontal">
             <dd>
                 <span class="orgName">@Html.DisplayFor(model => model.project.entity.name)</span>
@@ -30,10 +29,9 @@
                 @Html.DisplayFor(model => model.project.description)
             </dd>
         </dl>
-
     </div>
 
-
+    <div id="map" class="dashMap"></div>
 
     <div class="container dash reportDiv">
 
@@ -118,5 +116,57 @@
     </script>
     <script src="~/Scripts/googlemapsNEW.js"></script>
 
+    <script>
 
+        initialize();
+
+        @{
+            string userLat = Model.project.entity.lat;
+            string userLng = Model.project.entity.lng;
+            string currentEntityAddress = Model.project.entity.address1 + "+" + Model.project.entity.address2 + "+" + Model.project.entity.city + "+" + Model.project.entity.state + "+" + Model.project.entity.zip + "+" + Model.project.entity.lat + "+" + Model.project.entity.lng;}
+
+            markerlocation(@Model.project.entity.ID, "@currentEntityAddress", "@Model.project.entity.name", "@Model.project.entity.description");
+            moveToCenter(@Model.project.entity.lat, @Model.project.entity.lng);
+
+            @foreach (var item in Model.project.investmentsOut)
+            {
+                string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
+                <text>
+                    console.log("@item.entityTo.name");
+                    markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
+
+                    var pathOut = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathOut,
+                        strokeColor: '#005E1C',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+
+            @foreach (var item in Model.project.investmentsIn)
+            {
+                string address = item.entityFrom.address1 + "+" + item.entityFrom.address2 + "+" + item.entityFrom.city + "+" + item.entityFrom.state + "+" + item.entityFrom.zip;
+                <text>
+                    console.log("@item.entityFrom.name");
+                    markerlocation(@item.entityFrom.ID, "@address", "@item.entityFrom.name", "@item.entityFrom.description");
+
+                    var pathIn = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityFrom.lat, lng: @item.entityFrom.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathIn,
+                        strokeColor: '#915EA6',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+
+
+
+    </script>
 }

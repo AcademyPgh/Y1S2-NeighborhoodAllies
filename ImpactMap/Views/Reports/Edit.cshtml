@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <h2><i class="fa fa-list-alt" aria-hidden="true"></i>@ViewBag.Title</h2>
+    <h2><i class="fa fa-pencil" aria-hidden="true"></i> @ViewBag.Title</h2>
 
     @using (Html.BeginForm())
     {
@@ -17,24 +17,6 @@
             @Html.HiddenFor(model => model.ID)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.project_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.project_ID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.project_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.completed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.completed)
-                        @Html.ValidationMessageFor(model => model.completed, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(model => model.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.reportText, new { htmlAttributes = new { @class = "form-control" } })
@@ -42,13 +24,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.dueDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.dueDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

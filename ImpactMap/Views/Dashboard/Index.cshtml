@@ -286,6 +286,7 @@
             markerlocation(@Model.ID, "@currentEntityAddress", "@Model.name", "@Model.description");
             moveToCenter(@Model.lat, @Model.lng);
 
+
             @foreach (var item in Model.investmentsOut)
             {
                 string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
