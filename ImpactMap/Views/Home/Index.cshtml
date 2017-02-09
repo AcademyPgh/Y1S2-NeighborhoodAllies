@@ -2,48 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>IMPACTMAP</h1>
-    <p class="lead">WELCAME TO OUR PROJECT ;)</p>
-</div>
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
 
-<div id="register" class="alert-danger" onclick="getRegister()">
-    Register
-</div>
-<div id="login" class="alert-danger" onclick="getLogin()">
-    Login
-</div>
+    <div class="jumbotron">
+        <h1>IMPACTMAP</h1>
+ 
+    </div>
 
-<div id="resultDiv"></div>
+    @*<div id="register" class="alert-danger" onclick="getRegister()">
+        Register
+    </div>
+    <div id="login" class="alert-danger" onclick="getLogin()">
+        Login
+    </div>*@
 
-@Html.Partial("_Map")
+    <div id="resultDiv"></div>
 
-<style>
-    #map {
-        height: 400px;
-        width: 100%;
-    }
-</style>
-<script>
-    function getRegister() {
-        $.ajax({
-            url: "/account/register/",
-            type: 'GET',
-            success: function(result) {
-                $("#resultDiv").html(result);
-            }
-        });
-    }
+    @Html.Partial("_Map")
 
-    function getLogin() {
-        $.ajax({
-            url: "/account/login/",
-            type: 'GET',
-            success: function (result) {
-                $("#resultDiv").html(result);
-            }
-        });
-    }
+    <script>
+        function getRegister() {
+            $.ajax({
+                url: "/account/register/",
+                type: 'GET',
+                success: function (result) {
+                    $("#resultDiv").html(result);
+                }
+            });
+        }
 
-
-</script>
+        function getLogin() {
+            $.ajax({
+                url: "/account/login/",
+                type: 'GET',
+                success: function (result) {
+                    $("#resultDiv").html(result);
+                }
+            });
+        }
+    </script>

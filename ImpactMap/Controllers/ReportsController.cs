@@ -15,6 +15,7 @@ namespace ImpactMap.Controllers
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
         // GET: Reports
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.reports.ToList());
@@ -27,18 +28,26 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Report report = db.reports.Find(id);
-            if (report == null)
+
+            ReportViewModel rvm = new ReportViewModel();
+            rvm.report = db.reports.Find(id);
+            rvm.project = db.projects.SingleOrDefault(project => project.report.ID == rvm.report.ID);
+            if (rvm.report == null)
             {
                 return HttpNotFound();
             }
-            return View(report);
+            return View(rvm);
         }
 
         // GET: Reports/Create
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Create(int? ID)
         {
-            return View();
+            
+            //ViewBag.ID = ID;
+            ReportViewModel rvm = new ReportViewModel();
+            rvm.project = db.projects.Find(ID);
+            return View(rvm);
         }
 
         // POST: Reports/Create
@@ -46,19 +55,43 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,project_ID,completed,reportText,dueDate")] Report report)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "ID,completed,reportText,dueDate")] Report report, int project_ID, string metricIDs, string resultTexts)
         {
             if (ModelState.IsValid)
             {
-                db.reports.Add(report);
+                report.dueDate = DateTime.Now;
+
+                string[] resultTextArray = resultTexts.Split(',');
+                int i = 0;
+
+
+                if (metricIDs != "")
+                {
+                    foreach (var metricID in metricIDs.Split(','))
+                    {
+                        int mID = Convert.ToInt32(metricID);
+                        MetricResult mr = new MetricResult();
+                        mr.report = report;
+                        mr.metric = db.metrics.Find(mID);
+                        mr.resultText = resultTextArray[i];
+                        i++;
+                        db.metricResults.Add(mr);
+                        db.SaveChanges();
+                    }
+
+                }
+
+                db.projects.Find(project_ID).report = report;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(report);
         }
 
         // GET: Reports/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +123,7 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Reports/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +141,7 @@ namespace ImpactMap.Controllers
         // POST: Reports/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Report report = db.reports.Find(id);
@@ -123,5 +158,11 @@ namespace ImpactMap.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public class ReportViewModel
+    {
+        public Project project { get; set; }
+        public Report report { get; set; }
     }
 }

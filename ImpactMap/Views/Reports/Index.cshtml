@@ -1,51 +1,226 @@
 ﻿@model IEnumerable<ImpactMap.Models.Report>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reports List";
 }
 
-<h2>Index</h2>
+<div class="container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <div class="pageInfo">
+        <h2><i class="fa fa-list-alt" aria-hidden="true"></i>@ViewBag.Title</h2>
+
+        <div class="subNav">
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="dashHeading">
+        <h2>Reports Owed to My Organization</h2>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Date
+                </th>
+
+                <th>
+                    Recipient
+                </th>
+
+                <th>
+                    Report Details
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        Amount
+                    </td>
+
+                    <td>
+                        Date
+                    </td>
+
+                    <td>
+                        Recipient
+                    </td>
+
+                    <td>
+                        View Report
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    
+
+
+
+    <div class="dashHeading">
+        <h2>Reports Owed to Investors</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Project
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Amount
+            </th>
+
+            <th>
+                Report Details
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    Project
+                </td>
+
+                <td>
+                    Investor
+                </td>
+
+                <td>
+                    Date
+                </td>
+
+                <td>
+                    Amount
+                </td>
+
+                <td>
+                    View Report
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+    <div class="dashHeading">
+        <h2>Reports Submitted to Investors</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Project
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Amount
+            </th>
+
+            <th>
+                Report Details
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    Project
+                </td>
+
+                <td>
+                    Investor
+                </td>
+
+                <td>
+                    Date
+                </td>
+
+                <td>
+                    Amount
+                </td>
+
+                <td>
+                    View Report
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    
+
+<div class="dashHeading">
+    <h2>Investment Reports</h2>
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.project_ID)
+            Project
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.completed)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.reportText)
+            Date
         </th>
+
         <th>
-            @Html.DisplayNameFor(model => model.dueDate)
+            Amount
         </th>
-        <th></th>
+
+        <th>
+            Report Details
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.project_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.completed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.reportText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dueDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                Project
+            </td>
+
+            <td>
+                Investor
+            </td>
+
+            <td>
+                Date
+            </td>
+
+            <td>
+                Amount
+            </td>
+
+            <td>
+                View Report
+            </td>
+
+        </tr>
+    }
 
 </table>
+
+
+
+</div>

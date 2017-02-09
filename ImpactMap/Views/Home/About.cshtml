@@ -1,7 +1,43 @@
-﻿@{
+﻿@model  IEnumerable<ImpactMap.Models.Entity>
+
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<button id="addButton">Add Line</button>
+<button id="removeButton">Remove Line</button>
+<input id="searchAddressField" />
+<div id="map"></div>
+
+@section Scripts {
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4VlRpvKNloHrCwtMLKy_X2UQVhW_8L5Q&callback=initialize">
+</script>
+<script src="~/Scripts/googlemapsNEW.js"></script>
+
+<script>    
+    initialize();
+
+    @foreach (var item in Model)
+    {
+
+        string address = item.address1 + "+" + item.address2 + "+" + item.city + "+" + item.state + "+" + item.zip;
+        <text>
+        console.log("@item.name");
+              
+
+        markerlocation(@item.ID, "@address", "@item.name", "@item.description");
+        </text>
+    }
+
+    createLine();
+    $('#addButton').click(addLine);
+    $('#removeButton').click(removeLine);
+    //document.getElementById("addButton").onclick(addLine);
+</script>
+}        
+
+
+
+

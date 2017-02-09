@@ -1,61 +1,133 @@
-﻿@model ImpactMap.Models.Report
+﻿@model ImpactMap.Controllers.ReportViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Report";
 }
 
-<h2>Create</h2>
+<div class="container">
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Report</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.project_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.project_ID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.project_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="subNav">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.completed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.completed)
-                    @Html.ValidationMessageFor(model => model.completed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.reportText, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.reportText, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.reportText, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dueDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dueDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dueDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <a href=@Url.Action("Index", "Reports")><i class="fa fa-list-alt" aria-hidden="true" title="Reports List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createReportForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <input name="project_ID"
+                       type="hidden"
+                       value="@Model.project.ID" />
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.report.reportText, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.EditorFor(model => model.report.reportText, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.report.reportText, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <label>Please include information on the following metrics using the fields below.</label>
+                <br />
+
+                <script>var idArray = []</script>
+
+                @foreach (var investment in Model.project.investmentsIn)
+                {
+                    foreach (var category in investment.categories)
+                    {
+                        <label>@category.name</label>
+                        foreach (var metric in category.metrics)
+                        {
+                            <div class="resultMetrics">
+                                <label>@metric.name</label>
+                                <br />
+                                <input type="text" class="resultTextBox form-control" name="resultText" />
+                                <br />
+                            </div>
+
+                            <script>
+                                idArray.push(@metric.ID)
+                            </script>
+                        }
+
+                        <hr />
+                    }
+                }
+
+
+                <input type="hidden" id="metricIDs" name="metricIDs" />
+                <input type="hidden" id="resultTexts" name="resultTexts" />
+
+                <div class="form-group">
+                    <div>
+                        <input type="button" id="saveButton" value="Save Report" class="button btn btn-default" />
+                        <input type="button" id="submitButton" value="Submit Report" class="button btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+
+            
+
+        </div>
+
+    }
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.report.completed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.report.completed)
+                    @Html.ValidationMessageFor(model => model.report.completed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function IDpush() {
+            $('#metricIDs').val(idArray.toString());
+        }
+
+        var resultTextArray = [];
+
+        $('#submitButton').click(function () {
+            $('.resultTextBox').each(function () {
+                resultTextArray.push($(this).val());
+            })
+            $('#resultTexts').val(resultTextArray.toString());
+            console.log("Hi");
+            $('#createReportForm').submit();
+        });
+
+        function resultTextPush() {
+            $('.resultTextBox').each(function () {
+                resultTextArray.push($(this).val());
+            })
+            $('#resultTexts').val(resultTextArray.toString());
+            console.log(resultTextArray.toString());
+        }
+
+        $(IDpush);
+    </script>
+
+}

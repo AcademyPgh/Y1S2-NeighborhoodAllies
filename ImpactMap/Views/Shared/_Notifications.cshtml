@@ -1,0 +1,13 @@
+﻿@model ImpactMap.Models.Entity
+
+<div>
+    @{ 
+        if (Model != null)
+        {
+            foreach (var project in Model.projects)
+            {
+            <div>@project.name</div>
+                }
+            }
+        }
+</div>

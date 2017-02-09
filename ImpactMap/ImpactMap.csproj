@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Geocoding, Version=3.6.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geocoding.net.3.6.0\lib\net40\Geocoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -211,46 +215,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612051830469_Initial.cs" />
-    <Compile Include="Migrations\201612051830469_Initial.Designer.cs">
-      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051834016_Initial1.cs" />
-    <Compile Include="Migrations\201612051834016_Initial1.Designer.cs">
-      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051912474_InvestmentDescription.cs" />
-    <Compile Include="Migrations\201612051912474_InvestmentDescription.Designer.cs">
-      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612051928349_MetricResult.cs" />
-    <Compile Include="Migrations\201612051928349_MetricResult.Designer.cs">
-      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061447481_FixApplicationDb.cs" />
-    <Compile Include="Migrations\201612061447481_FixApplicationDb.Designer.cs">
-      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061537340_UsersTableUpdated.cs" />
-    <Compile Include="Migrations\201612061537340_UsersTableUpdated.Designer.cs">
-      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061551532_IdentityModelFK.cs" />
-    <Compile Include="Migrations\201612061551532_IdentityModelFK.Designer.cs">
-      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.cs" />
-    <Compile Include="Migrations\201612061719325_InvestmentDbCheck.Designer.cs">
-      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061813237_DbFix.cs" />
-    <Compile Include="Migrations\201612061813237_DbFix.Designer.cs">
-      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612080221462_InvestmentsInOut.cs" />
-    <Compile Include="Migrations\201612080221462_InvestmentsInOut.Designer.cs">
-      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -270,8 +234,25 @@
     <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\favicons\android-chrome-192x192.png" />
+    <Content Include="Content\Images\favicons\android-chrome-384x384.png" />
+    <Content Include="Content\Images\favicons\apple-touch-icon.png" />
+    <Content Include="Content\browserconfig.xml" />
+    <Content Include="Content\Images\favicons\favicon-16x16.png" />
+    <Content Include="Content\Images\favicons\favicon-32x32.png" />
+    <Content Include="Content\Images\favicons\favicon.ico" />
+    <Content Include="Content\Images\Academy_pgh.png" />
+    <Content Include="Content\Images\browserconfig.xml" />
+    <Content Include="Content\Images\impact_map.png" />
+    <Content Include="Content\Images\loginbackground.jpg" />
+    <Content Include="Content\Images\mstile-150x150.png" />
+    <Content Include="Content\Images\NeighborhoodAllies_textonly.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\loginbg.jpg" />
+    <Content Include="Content\Images\safari-pinned-tab.svg" />
+    <Content Include="Content\mstile-150x150.png" />
+    <Content Include="Content\safari-pinned-tab.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -281,11 +262,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\manifest.json" />
+    <Content Include="Content\manifest.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\googlemaps.js" />
+    <Content Include="Scripts\googlemapsNEW.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -293,6 +280,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\testMap.js" />
+    <Content Include="Scripts\tether.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -367,11 +356,15 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_Map.cshtml" />
+    <Content Include="Views\Shared\_MetricsPartial.cshtml" />
+    <Content Include="Views\Categories\CreateBase.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Map\" />
     <Folder Include="Views\MetricResult\" />
+    <Folder Include="Views\Notification\" />
     <Folder Include="Views\Public\" />
   </ItemGroup>
   <ItemGroup>
@@ -381,38 +374,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612051830469_Initial.resx">
-      <DependentUpon>201612051830469_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051834016_Initial1.resx">
-      <DependentUpon>201612051834016_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051912474_InvestmentDescription.resx">
-      <DependentUpon>201612051912474_InvestmentDescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612051928349_MetricResult.resx">
-      <DependentUpon>201612051928349_MetricResult.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061447481_FixApplicationDb.resx">
-      <DependentUpon>201612061447481_FixApplicationDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061537340_UsersTableUpdated.resx">
-      <DependentUpon>201612061537340_UsersTableUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061551532_IdentityModelFK.resx">
-      <DependentUpon>201612061551532_IdentityModelFK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061719325_InvestmentDbCheck.resx">
-      <DependentUpon>201612061719325_InvestmentDbCheck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061813237_DbFix.resx">
-      <DependentUpon>201612061813237_DbFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612080221462_InvestmentsInOut.resx">
-      <DependentUpon>201612080221462_InvestmentsInOut.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -428,7 +389,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50600</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -1,19 +1,496 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
+  margin-bottom: 130px;
+  
+}
+
+.checkbox{
+    color:white;
+}
+
+
+.account {
+    background-image: url(/Content/Images/loginbg.jpg);
+    min-height:100%;
+}
+
+a {
+    color: #0C7D8B;
+    font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #7dced3;
+}
+
+.navbar-nav > li > a:hover{
+    background:transparent;
+    color:white;
+}
+
+.aboutlink {
+    padding: 10px;
+}
+
+
+.descripbox {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+dd {
+    font-family: 'Open Sans', sans-serif;
+    color: darkgray;
+    font-weight: 200;
+    font-size: 12pt;
+}
+
+.loginlink a {
+    color: white;
+}
+
+a href {
+    color: #0C7D8B;
+}
+
+.academylogo {
+    width: 50px;
+    height: 50px;
+}
+
+.metricName:after, .commaList:after {
+    content: ",";
+}
+
+.metricName:after, .comma:last-of-type:after {
+    content: "";
+}
+
+.moneydiv {
+    padding: 0px;
+    margin: 0px;
+}
+
+.addpadding {
+    padding-left: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    min-height: 350px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 5px;
+}
+
+.alert{
+    color: #d91b5c;
+    margin-bottom:0;
+    padding-top:0;
+    padding-bottom: 0;
+}
+
+/*most buttons*/
+.button {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 14pt;
+    font-weight: 200;
+    line-height: 100%;
+    color: #fff;
+    background-color: #0C7D8B;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.button:hover, a.button:hover, .button:active, a.button:active{
+    background-color: #92C337;
+    color:white;
+}
+
+.buttonAlert{
+    background-color: #d91b5c;
+    margin-bottom: 25px;
+}
+
+/*styles map*/
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dashHeader {
+    border-bottom: solid 2px #0C7D8B;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+    
+
+}
+
+.dash .dashHeader h2 {
+    border: none;
+}
+
+.dashHeader h2, .dashHeader .dropdown {
+    display: inline-block;
+}
+
+.dashNotifications {
+    display: inline-block;
+}
+
+.dbSpans {
+    min-height: 200px;
+    width: 32%;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
+   will truncate terms that are too long to fit in the left column */
+
+dl-horizontal {
+    margin-left: 0px;
+}
+
+.dl-horizontal dt, dl-horizontal dd {
     white-space: normal;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    padding-left: 0;
+}
+
+.fa-exclamation {
+    color: red;
+    font-size: 50pt;
+    vertical-align: middle;
+}
+
+.fa-file-o {
+    color: #0C7D8B;
+    font-size: 40pt;
+    vertical-align: middle;
+}
+
+.fa.fa-minus-circle {
+    padding-right: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #92C337;
+    padding: 15px;
+    height: 130px;
+}
+
+.footerText {
+    text-align: center;
+    color: #0C7D8B;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 8pt;
+}
+
+
+.navbar-brand h1 {
+    display: inline;
+    vertical-align: middle;
+}
+
+.navbar-brand {
+    max-width: 60%;
+}
+
+h1 {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 500;
+    font-size: 24pt;
+    padding-left: 20px;
+}
+
+h2 {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 400;
+    font-size: 18pt;
+    padding-left: 20px;
+}
+
+h3 {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 300;
+    font-size: 12pt;
+    padding-left: 20px;
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+    color: darkgray;
+    font-weight: 200;
+    font-size: 12pt;
+    padding-left: 20px;
+}
+
+.header {
+    margin: auto;
+    background-color: #92C337;
+    /*padding: 15px;
+    min-height:150px;*/
+    height: auto;
+}
+
+.hideFormField {
+    display: none;
+}
+
+.icons {
+    display: inline;
+    font-size: 30px;
+}
+
+#map {
+    height: 40vh;
+    width: 50%;
+    display: inline-block;
+}
+
+
+/*label for input inside input box/line*/
+inputWLabel {
+    border-radius: 3px;
+    background-color: #E7F2D3;
+    color: #0C7D8B;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 14pt;
+    line-height: 100%;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    /*Pull in CSS for designed text box*/
+}
+
+.labelz {
+    display: block;
+}
+
+.link {
+    font-family: 'Fjalla One', sans-serif;
+    color: #0C7D8B;
+    font-weight: 400;
+    font-size: 14pt;
+}
+
+.linkcontainer {
+    padding: 20px;
+}
+
+.logincontainer {
+    position: static;
+    padding: 15px;
+    margin-left: 20px;
+    width: 300px;
+    background-color: rgba(12, 125, 139, 0.85);
+}
+
+.noti-content {
+    position: fixed;
+    right: 100px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    top: 47px;
+    width: 250px;
+    display: none;
+    border: 1px solid #9E988B;
+}
+
+
+
+#notiContent {
+    max-height: 200px;
+    overflow: auto;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 20px;
+}
+
+.noti-top-arrow {
+    border-color: transparent;
+    border-bottom-color: #F5DEB3;
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    position: absolute;
+    right: 32px;
+    top: -8px;
+}
+
+.orgtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #92C337;
+    color: white;
+    margin: 1px;
+    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+    #pac-input:focus {
+        border-color: #4d90fe;
+    }
+
+.pac-container {
+    font-family: Roboto;
+}
+
+.resultCatName {
+    display: inline;
+    margin-left: 10px;
+}
+
+.resultMetrics {
+    margin-left: 20px;
+}
+
+.removeMetric {
+    line-height: 2em;
+}
+
+/*primarily used for buttons, but any non-text right align*/
+.rightAlignObject {
+    position: static;
+    object-position: right;
+}
+
+.showFormField {
+    display: block;
+}
+
+.spaceDivs {
+    margin-top: 75px;
+    margin-bottom: 50px;
+}
+
+.dashMap {
+    margin-top: 30px;
+    float: right;
+    border: 1px solid #92C337;
+}
+
+.orgName, .projName {
+    font-size: 24px;
+    color: black;
+    font-weight: 600;
+}
+
+.projInfo dd{
+    margin-left: 0;
+    padding-left: 20px;
+}
+
+.projInfo{
+    margin-bottom: 50px;
+}
+
+/*.container.dashInvestments{
+    border-bottom: 15px solid #92C337;
+     border-top: 15px solid #92C337;
+}
+
+.container.orgDashInfo{
+    margin-bottom:30px;
+}*/
+
+.pageInfo{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: flex-end;
+     /*border-bottom: solid 2px #0C7D8B;*/
+
+}
+
+.pageInfo h2{
+    margin-bottom: 0;
+}
+
+.pageInfo i{
+   margin: 0 5px;
+}
+
+.pageInfo .fa-ellipsis-h{
+    color: white;
+    background-color: #1D909C;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.subNav i{
+    font-size: 1.25em;
+}
+
+.dashHeading{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: solid 2px #0C7D8B;
+    margin-bottom: 15px;
+    
+}
+
+
+.dash h2 {
+    border-bottom: none;
+}
+
+form {
+    padding-left: 20px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -22,3 +499,168 @@ select,
 textarea {
     max-width: 280px;
 }
+
+textarea{
+    min-height: 200px;
+}
+
+th {
+    font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight: 600;
+    color:#ffffff;
+    /*color: #6f6f6f;*/
+    /*color: #000000;*/
+}
+
+td {
+        font-family: "Open Sans",sans-serif;
+    font-size: medium;
+    font-weight: 400;
+}
+
+
+.metricsTable tr:first-of-type th {
+    color: white;
+}
+.metricsTable th{
+    color: #1D909C;
+    font-weight: 600;
+    padding:5px 20px;
+}
+
+.metricsTable{
+    width: 100%;
+    margin-bottom: 30px;
+    border: 3px solid darkgray;
+}
+
+.tts {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+tr:first-child, th.header{
+    background-color: #1d909c;
+    border-bottom: none;
+}
+
+tr:nth-child(odd):not(:first-child), table.tablesorter tr:first-of-type{
+    background-color: #def7f9;
+}
+
+th.header:not(.noSortTH):after {
+    font-family: FontAwesome;
+    content: "\f0dc";
+    font-weight: normal;
+    padding-left:5px;
+}
+
+th.header.headerSortUp:after{
+    font-family:FontAwesome;
+    content: "\f0de";
+}
+
+th.header.headerSortDown:after{
+    font-family:FontAwesome;
+    content: "\f0dd";
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+    #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+span.metricName:after {
+    content: ",";
+}
+
+span.metricName:last-of-type:after {
+    content: "";
+}
+
+span.removeMetric {
+    display: block;
+}
+
+#CatList ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+    #CatList ul li {
+        padding: 5px 0;
+    }
+
+#baseCatList ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+    #baseCatList ul li {
+        padding: 5px 0;
+    }
+
+    .dt{
+
+    }
+
+@media (min-width: 768px) {
+    .navbar-right {
+        padding-top: 10px;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+
+   .dl-horizontal dd, .dl-horizontal dt {
+        margin-left: 20px;
+    }
+
+   
+}
+
+.inlineFormGroup{
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: row;
+    
+}
+
+.inlineFormGroup .form-group{
+    display: inline-block;
+}
+
+.inlineElement{
+    margin-left: 20px;
+}
+
+.reportText{
+     -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+}
+
+.reportDiv{
+    padding-bottom: 40px;
+}
+
+.dashHeader h2 i{
+    padding-right: 15px;
+}
+
+
+
+

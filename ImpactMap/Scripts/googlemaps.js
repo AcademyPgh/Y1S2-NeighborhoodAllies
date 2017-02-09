@@ -33,12 +33,12 @@ function initialize() {
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsDisplay.setMap(map);
 
-    if (document.getElementById("searchAddressField")) {
-        var input = document.getElementById('searchAddressField');
-        var options = { componentRestrictions: { country: 'us' } };
+    //if (document.getElementById("searchAddressField")) {
+    //    var input = document.getElementById('searchAddressField');
+    //    var options = { componentRestrictions: { country: 'us' } };
 
-        new google.maps.places.Autocomplete(input, options);
-    }
+    //    new google.maps.places.Autocomplete(input, options);
+    //}
 }
 
 //Handles marker placement, dynamic zoom, and on click functionality.

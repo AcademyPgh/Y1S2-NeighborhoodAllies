@@ -1,37 +1,135 @@
 ﻿@model ImpactMap.Models.Category
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Tags";
 }
 
-<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Category</h4>
+
+
+    <div class="form-horizontal container">
+        <div class="pageInfo">
+            <h2><i class="fa fa-list-alt" aria-hidden="true"></i>@ViewBag.Title</h2>
+
+            <div class="subNav">
+
+                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+                <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+            </div>
+        </div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            @*@Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label" })*@
+                <div id="displayMetrics">
+                    @{ if (Model.metrics.Count > 0)
+                        {
+                            foreach (var metric in Model.metrics)
+                            {
+                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
+                            }
+                        }
+                    }
+
+                </div>
+
+            <div class="form-group">
+                <label class="control-label">Enter Metric</label>
+                <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                <input name="newMetrics" id="newMetrics" type="hidden" />
             </div>
         </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
+        <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
+
+
+        <div class="addpadding">
+            <input type="submit" value="Save" class="button" />
+        </div>
+       
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            metricsToAdd = []; //Metrics to Add - Metrics not changed will not be added to this
+            metricsToRemove = []; //Metrics to Remove - may include both new and old metrics
+
+            //This Works
+            function addMetrics() {
+                if ($('#metrics').val() != "") {
+                    metricsToAdd.push($('#metrics').val()); //pushes the metric into the metricsToAdd array
+                    $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
+                    $('#metrics').val("");//Clears the value of the input box to accept a new metric
+                    $('#metricsToAdd').val(metricsToAdd.toString());//Converts newMetrics array to string and puts it into the hidden input
+                    $('.removeMetric').click(function () { removeMetrics(this.id) });
+                    console.log('Added: ' + metricsToAdd.toString());
+                    console.log($('#metricsToAdd').val());
+                }
+            };
+
+            //This works too!
+            function removeMetrics(id) {
+                if (metricsToAdd.indexOf(id) != -1) {
+                    var i = metricsToAdd.indexOf(id);
+                    metricsToAdd.splice(i, 1);
+                    $('#newMetrics').val(newMetrics.toString());
+                    console.log($('#newMetrics').val());
+                }
+
+                else {
+                    metricsToRemove.push(id);
+                    $('#metricsToRemove').val(metricsToRemove.toString());//Converts metricsToRemove array to string and puts it into the hidden input
+                    console.log($('#metricsToRemove').val());
+                }
+                $('#' + id).remove();
+                console.log('Removed:' + metricsToRemove.toString());
+                console.log('Added: ' + metricsToAdd.toString());
+            };
+
+
+
+            $('#addMetric').click(addMetrics);
+            $('.removeMetric').click(function () { removeMetrics(this.id) });
+
+
+            //TODO This does not work
+            $(document).ready(function () {
+                $(window).keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        $('#metrics').keypress(function (e) {
+                            var key = e.which;
+                            if (key == 13)  // the enter key code
+
+                            {
+                                addMetrics();
+                            }
+
+                        });
+
+                    }
+                })
+            })
+
+
+        </script>
+    }
+                        }
+
+

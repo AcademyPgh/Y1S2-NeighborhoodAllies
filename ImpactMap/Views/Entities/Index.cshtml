@@ -1,81 +1,81 @@
 ﻿@model IEnumerable<ImpactMap.Models.Entity>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Entities List";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="pageInfo">
+        <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lng)
-        </th>
-        <th></th>
-    </tr>
+        <div class="subNav">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lng)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+            <a href=@Url.Action("Create", "Entities")><i class="fa fa fa-plus-circle" aria-hidden="true" title="Create New Entity"></i></a>
+          
+        </div>
 
-</table>
+
+    </div>
+
+    <hr />
+
+   
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+               
+            </th>
+            
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

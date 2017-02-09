@@ -1,82 +1,114 @@
 ﻿@model ImpactMap.Models.Investment
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Investment Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="pageInfo">
+        <h2><i class="fa fa-file-text-o" aria-hidden="true"></i>@ViewBag.Title</h2>
+        <div class="subNav">
+            <a href=@Url.Action("Edit", new { id = Model.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
+            <a href=@Url.Action("Index", "Investments")><i class="fa fa-list-alt" aria-hidden="true" title="Investment List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
+    <div>
+        <hr />
+        <table class="table">
+            <tr class="dashtr">
+                <th>
+                    @Html.DisplayNameFor(model => model.date)
+                </th>
 
-<div>
-    <h4>Investment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.amount)
-        </dt>
+                <th>
+                    @Html.DisplayNameFor(model => model.amount)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.amount)
-        </dd>
+                <th>
+                    @Html.DisplayNameFor(model => model.isInKind)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.entityFrom_ID)
-        </dt>
+                <th>
+                    @Html.DisplayNameFor(model => model.projectFrom)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.entityFrom_ID)
-        </dd>
+                <th>
+                    @Html.DisplayNameFor(model => model.entityTo)
+                </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.entityTo_ID)
-        </dt>
+                <th>
+                    @Html.DisplayNameFor(model => model.projectTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.projectTo.report)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.categories)
+                </th>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.entityTo_ID)
-        </dd>
+            <tr class="dashtr">
+                <td>
+                    @Html.DisplayFor(model => model.date)
+                </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.amount)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
+                <td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isInKind)
-        </dt>
+                    @if (Model.isInKind)
+            {
+                        <span>Yes</span>
+                    }
 
-        <dd>
-            @Html.DisplayFor(model => model.isInKind)
-        </dd>
+                    else
+                    {
+                        <span>No</span>
+                    }
+                    @*@Html.DisplayFor(model => model.isInKind)*@
+                </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.volunteerHours)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.projectFrom.name)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.volunteerHours)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectFrom_ID)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.entityTo.name)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.projectFrom_ID)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.projectTo_ID)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.projectTo.name)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.projectTo_ID)
-        </dd>
+                <td>
+                    @{ 
+                        if (Model.projectTo.report != null)
+                        {
+                            @Html.ActionLink("Report", "Details", "Reports", new { id = Model.projectTo.report.ID })
+                        }
+                        else
+                        {
+                            <span>No report available.</span>
+                        }
+                    }
+                </td>
 
-    </dl>
+                <td>
+                    @{foreach (var cat in Model.categories)
+                        {
+                            <span class="commaList">@cat.name</span>
+                        }
+                    }
+                </td>
+
+            </tr>
+    
+        </table>
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

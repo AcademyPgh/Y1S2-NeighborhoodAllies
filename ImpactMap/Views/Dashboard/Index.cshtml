@@ -1,112 +1,331 @@
-﻿@model ImpactMap.Models.DashboardViewModel
+﻿@model ImpactMap.Models.Entity
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
+    //List<ImpactMap.Models.Project> Projects = Model.projects;
 }
 
-<style>
-    #map {
-        height: 400px;
-        width: 100%;
-    }
-</style>
+@*Html.Partial("_Notifications", Model)*@
 
-<h1>Dashboard</h1>
-
-@if (Model.Investments != null)
-{
-<h2>Investments Sent</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.entityTo.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.categories)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Investment.projectTo.report)
-        </th>
-    </tr>
-
-        @foreach (var item in Model.Investments)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.entityTo.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categories)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.projectTo.report)
-            </td>
-        </tr>
-        }
-    }
-    </table>
-}
-@if (Model.Projects != null)
-{
-    <h2>My Projects</h2>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Project.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Investment.date)
-            </th>
-            <th>
-                Donating @Html.DisplayNameFor(model => model.Investment.entityFrom.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Investment.amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Investment.projectTo.report)
-            </th>
-        </tr>
-            @foreach (var item in Model.Projects)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @foreach (var thing in item.investmentsIn)
+<div class="container dash">
+    <div style="vertical-align: top;">
+        <div class="dashHeader">
+            <h2><i class="fa fa-tachometer" aria-hidden="true"></i>@Model.name Dashboard</h2>
+            @*Notifications dropdown*@
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    @{
+                        int i = 0;
+                        if (Model.projects.Count > 0)
                         {
-                            @Html.DisplayFor(modelItem => thing.date)
+
+                            foreach (var project in Model.projects)
+                            {
+                                if (project.investmentsIn.Count > 0 && project.report == null)
+                                {
+                                    <li>@project.name needs a report!</li>
+                                    @Html.ActionLink("Create Report", "Create", "Reports", new { id = project.ID }, null)
+                                }
+                                else if (project.investmentsIn.Count > 0 && project.report != null)
+                                {
+                                    i++;
+                                }
+                                else if (project.investmentsIn.Count == 0)
+                                {
+                                    i++;
+                                }
+                            }
+                            if (i == Model.projects.Count)
+                            {
+                                <li>No current notifications.</li>
+                            }
                         }
-                    </td>
-                    <td>
-                        @foreach (var thing in item.investmentsIn)
+                        else if (Model.projects.Count == 0)
                         {
-                            @Html.DisplayFor(modelItem => thing.entityFrom.name)
-                        }                
-                    </td>
-                    <td>
-                        @foreach (var thing in item.investmentsIn)
-                        {
-                            @Html.DisplayFor(modelItem => thing.amount)
-                        }                    
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.report)
-                    </td>
-                </tr>
+                            <li>No current notifications.</li>
+                        }
+                        }
+                </ul>
+            </div>
+        </div>
+        <div class="spaceDivs dbSpans">
+
+            <dt class="dl-horizontal">
+                <dd>
+                    <span class="orgName">@Html.DisplayFor(model => model.name)</span>
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.address1)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.address2)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state)   @Html.DisplayFor(model => model.zip)
+                </dd>
+                <br />
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
+
+                @Html.ActionLink("Edit Your Organization", "Edit", "Entities", new { id = Model.ID }, new { @class = "addpadding button" })
+
+        </div>
+        <div id="map" class="dashMap"></div>
+    </div>
+</div>
+
+
+<div class="container dash">
+    <div class="spaceDivs">
+        <div class="dashHeading">
+            <h2>Investments Sent 
+            <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view investments to other organizations.  Only the first five most recently investments are displayed.  To see the rest of your investments, use the View All Investments button."></i>
+           </h2>
+            
+            <div class="buttonGroup">
+            @Html.ActionLink("Create New Investment", "Create", "Investments", "Investments", new { @class = "button" })
+
+            @Html.ActionLink("View All Investments", "Index", "Investments", "Investments", new { @class = "button" })
+
+            @Html.ActionLink("View Investment Tags", "Index", "Categories", "Categories", new { @class = "button" })
+        </div>
+        </div>
+
+        <div class="addpadding">
+
+           
+
+            @if (Model.investmentsOut.Count != 0)
+            {
+                <table class="table">
+                    <tr class="dashtr">
+                        <th>
+                            Investment Date
+                        </th>
+                        <th>
+                            Value
+                        </th>
+                        <th>
+                            Recipient
+                        </th>
+                        <th>
+                            Reports
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                    </tr>
+
+                    @*Displays the first five investments in the table*@
+                    @foreach (var item in Model.investmentsOut.OrderByDescending(a => a.date).Take(5))
+                {
+
+                        <tr class="dashtr">
+                            <td>
+                                @item.date.ToShortDateString()
+                            </td>
+                            <td>
+                                <p>$@Html.DisplayFor(modelItem => item.amount)</p>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.entityTo.name)
+                            </td>
+                            <td>
+                                @if (item.projectTo.report != null)
+                                {
+                                    //string reportID = Convert.ToString(item.projectTo.report.ID);
+                                    @Html.ActionLink("View Report", "Details", "Reports", new { id = item.projectTo.report.ID }, null)
+                                }
+                                else
+                                {
+                                    <span>No report available.</span>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("View", "Details", "Investments", new { id = item.ID }, null)
+                            </td>
+                        </tr>
+
+                    }
+
+
+                </table>
             }
-    </table>
-    }
+            else
+            {
+                <dd>You Currently Have No Investments</dd>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="container dash">
+
+    <div class="spaceDivs">   
+        <div class="dashHeading">
+            <h2>Projects 
+                <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Here you can create and view your organization's projects.  Only the five most recently added projects will be displayed.  To see all of your projects, use the View All Projects button."></i>
+            </h2>
+            <div class="buttonGroup">
+            @Html.ActionLink("Create New Project", "Create", "Projects", "Projects", new { @class = "button" })
+            @Html.ActionLink("View All Projects", "Index", "Projects", "Projects", new { @class = "button" })
+               </div>
+         </div> 
+        
+         <div class="addpadding">
+
+            @if (Model.projects.Count != 0)
+            {
+                <table class="table">
+                    <tr class="dashtr">
+                        <th>
+                            Project Name
+                        </th>
+                        <th>
+                            Investor
+                        </th>
+                        <th>
+                            Investment Date
+                        </th>
+                        <th>
+                            Investment Value
+                        </th>
+                        <th>
+                            Report
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                    </tr>
+                    @{
+                        foreach (var item in Model.projects.Take(5))
+                        {
+                            <tr class="dashtr">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+
+                                    @foreach (var investment in item.investmentsIn)
+                                    {
+                                        @Html.DisplayFor(modelItem => investment.entityFrom.name)<br />
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var investment in item.investmentsIn)
+                                    {
+                                        @investment.date.ToShortDateString()<br />
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var investment in item.investmentsIn)
+                                    {
+                                        <span>$@Html.DisplayFor(modelItem => investment.amount)</span><br />
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.report != null)
+                                    {
+                                        @Html.ActionLink("View Report", "Details", "Reports", new { id = item.report.ID }, null)
+                                    }
+                                    else if (item.report == null && item.investmentsIn.Count > 0)
+                                    {
+                                        @Html.ActionLink("Create Report", "Create", "Reports", new { id = item.ID }, null)
+                                        <i class="fa fa-exclamation-circle alert" aria-hidden="true"></i>
+                                    }
+                                    else if (item.report == null && item.investmentsIn.Count == 0)
+                                    {
+                                        <div>N/A</div>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("View", "Details", "Projects", new { id = item.ID }, null)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+                        }
+                        else
+                        {
+                            <p>You currently have no projects.</p>
+                        }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4VlRpvKNloHrCwtMLKy_X2UQVhW_8L5Q&callback=initialize">
+    </script>
+    <script src="~/Scripts/googlemapsNEW.js"></script>
+
+    <script>
+
+        initialize();
+
+        @{
+            string userLat = Model.lat;
+            string userLng = Model.lng;
+            string currentEntityAddress = Model.address1 + "+" + Model.address2 + "+" + Model.city + "+" + Model.state + "+" + Model.zip + "+" + Model.lat + "+" + Model.lng;}
+
+            markerlocation(@Model.ID, "@currentEntityAddress", "@Model.name", "@Model.description");
+            moveToCenter(@Model.lat, @Model.lng);
+
+
+            @foreach (var item in Model.investmentsOut)
+            {
+                string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
+                <text>
+                    console.log("@item.entityTo.name");
+                    markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
+
+                    var pathOut = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathOut,
+                        strokeColor: '#005E1C',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+            
+            @foreach (var item in Model.investmentsIn)
+            {
+                string address = item.entityFrom.address1 + "+" + item.entityFrom.address2 + "+" + item.entityFrom.city + "+" + item.entityFrom.state + "+" + item.entityFrom.zip;
+                <text>
+                    console.log("@item.entityFrom.name");
+                    markerlocation(@item.entityFrom.ID, "@address", "@item.entityFrom.name", "@item.entityFrom.description");
+
+                    var pathIn = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityFrom.lat, lng: @item.entityFrom.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathIn,
+                        strokeColor: '#915EA6',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+
+
+
+    </script>
+}

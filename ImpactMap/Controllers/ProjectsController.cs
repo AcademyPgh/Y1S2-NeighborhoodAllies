@@ -14,15 +14,30 @@ namespace ImpactMap.Controllers
     {
         private ImpactMapDbContext db = new ImpactMapDbContext();
 
+        //This holds the toolTips for Projects Forms
+        private Dictionary<string, string> toolTips = new Dictionary<string, string>()
+            {
+                {"name", "The name of the project" },
+                {"projDescription", "A brief description of the project" }
+
+            };
+
         // GET: Projects
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.projects.ToList());
+
+            ViewBag.Tooltips = toolTips;
+            Utils.Utility uu = new Utils.Utility();
+            var entity = db.users.Find(uu.UserID(User)).entity;
+            return View(entity.projects.ToList());
         }
 
         // GET: Projects/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,8 +51,10 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize]
         public ActionResult Create()
         {
+            ViewBag.Tooltips = toolTips;
             ProjectViewModel pvm = new ProjectViewModel();
             pvm.Project = new Models.Project();
             pvm.Entities = db.entities.ToList();
@@ -49,6 +66,7 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,name,description")] Project project)
         {
             if (ModelState.IsValid)
@@ -57,17 +75,17 @@ namespace ImpactMap.Controllers
                 project.entity = db.users.Find(userUtil.UserID(User)).entity;
                 db.projects.Add(project);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             return View(project);
         }
 
-
-
         // GET: Projects/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -85,8 +103,10 @@ namespace ImpactMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,name,description")] Project project)
         {
+ 
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;
@@ -97,8 +117,10 @@ namespace ImpactMap.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
+            ViewBag.Tooltips = toolTips;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +136,7 @@ namespace ImpactMap.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.projects.Find(id);

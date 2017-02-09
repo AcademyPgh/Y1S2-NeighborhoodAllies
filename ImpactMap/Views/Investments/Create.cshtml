@@ -1,143 +1,169 @@
 ﻿@model ImpactMap.Controllers.InvestmentViewModel
-
-
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Investment";
+
 }
+@*Investments create form*@
+<div class="container">
+    <div class="pageInfo">
 
-<h2>Create Investment</h2>
+        <h2><i class="fa fa-plus-circle" aria-hidden="true"></i>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Investment</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "number", @min = "0.01", @step = "0.01", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
-            </div>
+        <div class="subNav">
+            <a href=@Url.Action("Index", "Investments")><i class="fa fa-list-alt" aria-hidden="true" title="Investments List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
         </div>
 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="entityTo_ID" id="recipientSelect">
-                    @foreach (var entity in Model.Entities)
-                    {
-                        <option value=@entity.ID>@entity.name</option>
-                    }
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.categories, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="CatList"></div>
-                <input name="categories" id="categories" type="hidden" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Investment.isInKind)
-                    @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group hideFormField" id="VolunteerContainer">
-            @Html.LabelFor(model => model.Investment.volunteerHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Investment.volunteerHours, new { htmlAttributes = new { @type = "number", @step = "1", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Investment.volunteerHours, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <!--->Needs to populate only projects from the signed in entity-->
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="projectFrom_ID">
-                    <option value="0">No Project Selected</option>
-                    @foreach (var project in Model.Projects)
-                    {
-                        <option value=@project.ID>@project.name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="projectTo_ID" id="ProjectToDropdown">
-                </select>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createInvestmentForm" }))
+    {
+        @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="col-md-6">
+                @*Date field*@
+                <div class="form-group">
+                  
+                        @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
+                        <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
+                        @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                   
+                    @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
+                </div>
+                @*Value field*@
+
+                <div class="form-group inlineFormGroup">
+                    <div>
+                        @Html.LabelFor(model => model.Investment.amount, htmlAttributes: new { @class = "control-label" })
+                        <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["amount"]"></span>
+                        @Html.EditorFor(model => model.Investment.amount, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Investment.amount, "", new { @class = "text-danger" })
+                    </div>
+
+                    @*In Kind checkbox - Marks the donation as inKind*@
+                    <div class="inlineElement">
+                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label"})
+                        <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["inKind"]"></span>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Investment.isInKind)
+                            @Html.ValidationMessageFor(model => model.Investment.isInKind, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                @*ProjectFrom dropdown populates based on current entity, sent in via the Entities/Create GET action*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label"})
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectFrom"]"></span>
+
+                    <select name="projectFrom_ID" class="form-control">
+                        <option value="0">No Project Selected</option>
+                        @foreach (var project in Model.Projects)
+                        {
+                            <option value=@project.ID>@project.name</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
+
+                </div>
+                @*EntityTo dropdown -- when this dropdown changes it sends its value to the javascript below to update the projectTo dropdown*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label"})
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["entityTo"]"></span>
+
+                    <select name="entityTo_ID" id="recipientSelect" class="form-control">
+                        @foreach (var entity in Model.Entities)
+                        {
+                            <option value=@entity.ID>@entity.name</option>
+                        }
+                    </select>
+
+                </div>
+                @*ProjectTo dropdown populates based on the EntityTo selected above*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label"})
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectTo"]"></span>
+                    <select name="projectTo_ID" id="ProjectToDropdown" class="form-control"></select>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                @*Description input form*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Investment.description, htmlAttributes: new { @class = "control-label" })
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["ivmDescription"]"></span>
+
+
+                    @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
+
+
+                </div>
+
+                @*Categories list with checkboxes - populates using an ajax call (load_categories) below*@
+                <div class="form-group">
+                    <label title=@ViewBag.Tooltips["categories"]>Investment Tags</label>
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
+                    <div class="col-md-10">
+                        <div id="CatList">
+                            <ul></ul>
+                        </div>
+                        @*Hidden input field that javascript below adds stuff to, this is sent to the controller*@
+                        <input name="categories" id="categories" type="hidden" />
+                        @*@Html.ActionLink("Add New Tag", "Create", "Categories")*@
+
+
+                        <div class="form-group">
+                            <div>
+                                <input type="button" id="submitButton" value="Create" class="button btn-default" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <br />
+        </div>
+    }
+
 </div>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/bundles/jqueryMask")
     <script>
-
+        //selectedCategories is an array which is put into the hidden categories field and then sent to the controller
         selectedCategories = [];
+
+        //this ajax call goes over to public/usercategories and snatches up the categories in the system
+        //it then puts the ones that are NOT base categories into the categories checkbox area
+        //when they are clicked, it triggers toggle_category
         function load_categories() {
             $.ajax({
-                url: '/public/categories',
+                url: '/public/usercategories',
                 type: 'GET',
                 success: function (data) {
-                    $('#CatList').html('<ul>');
+                    //$('#CatList').html('<ul>');
                     data.map(function (category) {
-                        $('#CatList').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
-                        $('#cat' + category.ID).click(function () { toggle_category(category.ID); });
+                        if (!category.isBase) {
+                            $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
+                            $('#cat' + category.ID).click(function () { toggle_category(category.ID + "," + category.baseID); });
+                        }
                     });
-                    $('#CatList').append('</ul>');
+                    //$('#CatList').append('</ul>');
                 }
             })
         }
@@ -148,7 +174,6 @@
             // add the checkmark to the category
             if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
                 selectedCategories.push(id);
-                
                 $('#categories').val(selectedCategories.toString());
                 console.log($('#categories').val())
                 $('#catspan' + id).removeClass('fa fa-square-o');
@@ -169,47 +194,43 @@
             }
         }
 
-        //Cause the Volunteer Hours input box to show if In Kind checkbox is checked
-        function addVolunteerHours() {
-            $('#Investment_isInKind').click(function () {
-                if ($('#VolunteerContainer').hasClass('hideFormField')) {
-                    $('#VolunteerContainer').removeClass('hideFormField')
-                    $('#VolunteerContainer').addClass('showFormField')
-                }
-                else {
-                    $('#VolunteerContainer').removeClass('showFormField')
-                    $('#VolunteerContainer').addClass('hideFormField')
-                }
-            });
-        }
 
-        
+        //When the submit button is clicked, it
+        $('#submitButton').click(function () {
+            $('#createInvestmentForm').submit();
+        });
 
-   
+        //This does an ajax call to populate the projectTo dropdown whenever the entityTo dropdown changes
         function updateProjectsOut() {
             $.ajax({
                 url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
                 type: 'get',
                 success: function (data) {
-                    var html = ' <option value="0">No Project Selected</option>';
+                    var html = '';
                     data.map(function (project) {
                         //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
                         html += '<option value=' + project.ID + '>' + project.name + '</option>'
-                        
                     });
                     $('#ProjectToDropdown').html(html);
                 }
             });
         };
-
         $('#recipientSelect').change(updateProjectsOut);
 
+        //These functions need to run on when the page loads, so they're collected into one function and then run on page load
         function initialize() {
             load_categories();
-            addVolunteerHours();
             updateProjectsOut();
+            addCurrencyMask();
+        }
+
+        function addCurrencyMask() {
+            $('#Investment_amount').mask('000,000,000,000.00', { reverse: true });
         }
 
         $(initialize);
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 }

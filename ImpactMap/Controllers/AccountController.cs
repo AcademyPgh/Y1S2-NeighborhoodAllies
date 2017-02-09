@@ -57,6 +57,10 @@ namespace ImpactMap.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -79,7 +83,7 @@ namespace ImpactMap.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Create", "Entities");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -163,7 +167,7 @@ namespace ImpactMap.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Dashboard", new { area = "" });
+                    return RedirectToAction("Create", "Entities", new { area = "" });
                 }
                 AddErrors(result);
             }
@@ -392,7 +396,7 @@ namespace ImpactMap.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

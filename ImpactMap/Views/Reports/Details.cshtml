@@ -1,50 +1,172 @@
-﻿@model ImpactMap.Models.Report
-
+﻿@model ImpactMap.Controllers.ReportViewModel
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Report Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="pageInfo">
+        <h2><i class="fa fa-file-text-o" aria-hidden="true"></i>@ViewBag.Title</h2>
 
-<div>
-    <h4>Report</h4>
+        <div class="subNav">
+            <a href=@Url.Action("Edit", new { id = Model.report.ID })><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a>
+            <a href=@Url.Action("Index", "Projects")><i class="fa fa-list-alt" aria-hidden="true" title="Reports List"></i></a>
+            <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
+        </div>
+    </div>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.project_ID)
-        </dt>
+    <div class="spaceDiv dbSpans">
+        <dl class="dl-horizontal">
+            <dd>
+                <span class="orgName">@Html.DisplayFor(model => model.project.entity.name)</span>
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.project_ID)
-        </dd>
+            <dd>
+                Project: @Html.DisplayFor(model => model.project.name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.completed)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.project.description)
+            </dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.completed)
-        </dd>
+    <div id="map" class="dashMap"></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.reportText)
-        </dt>
+    <div class="container dash reportDiv">
 
-        <dd>
-            @Html.DisplayFor(model => model.reportText)
-        </dd>
+        <div class="col-md-7">
+            <div class="dashHeading">
+                <h2>
+                    Report
+                </h2>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dueDate)
-        </dt>
+            <div class="reportText">
+                @Html.DisplayFor(model => model.report.reportText)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.dueDate)
-        </dd>
+        <div class="col-md-4 col-md-offset-1">
 
-    </dl>
+            <div class="dashHeading">
+                <h2>
+                    Report Metrics
+                </h2>
+            </div>
+
+
+            @if (Model.report.metricResults.Count != 0)
+            {
+
+
+
+                foreach (var investment in Model.project.investmentsIn)
+                {
+
+                    foreach (var category in investment.categories)
+                    {
+                        if (!category.isBase)
+                        {
+                        <table class="metricsTable">
+                            <tr>
+                                <th> @category.name</th>
+                                <th></th>
+                            </tr>
+                            @foreach (var metric in category.metrics)
+                            {
+                                <tr>
+                                    <th>@metric.name</th>
+                                    <td>
+                                        @foreach (var result in Model.report.metricResults)
+                                        {
+                                            if (result.metric == metric)
+                                            {
+                                                @result.resultText;
+                                            }
+                                        }
+
+
+                                    </td>
+                                </tr>
+
+
+                            }
+
+                      
+            </table>
+                        }
+                    }
+                }
+            }
+        </div>
+
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4VlRpvKNloHrCwtMLKy_X2UQVhW_8L5Q&callback=initialize">
+    </script>
+    <script src="~/Scripts/googlemapsNEW.js"></script>
+
+    <script>
+
+        initialize();
+
+        @{
+            string userLat = Model.project.entity.lat;
+            string userLng = Model.project.entity.lng;
+            string currentEntityAddress = Model.project.entity.address1 + "+" + Model.project.entity.address2 + "+" + Model.project.entity.city + "+" + Model.project.entity.state + "+" + Model.project.entity.zip + "+" + Model.project.entity.lat + "+" + Model.project.entity.lng;}
+
+            markerlocation(@Model.project.entity.ID, "@currentEntityAddress", "@Model.project.entity.name", "@Model.project.entity.description");
+            moveToCenter(@Model.project.entity.lat, @Model.project.entity.lng);
+
+            @foreach (var item in Model.project.investmentsOut)
+            {
+                string address = item.entityTo.address1 + "+" + item.entityTo.address2 + "+" + item.entityTo.city + "+" + item.entityTo.state + "+" + item.entityTo.zip;
+                <text>
+                    console.log("@item.entityTo.name");
+                    markerlocation(@item.entityTo.ID, "@address", "@item.entityTo.name", "@item.entityTo.description");
+
+                    var pathOut = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityTo.lat, lng: @item.entityTo.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathOut,
+                        strokeColor: '#005E1C',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+
+            @foreach (var item in Model.project.investmentsIn)
+            {
+                string address = item.entityFrom.address1 + "+" + item.entityFrom.address2 + "+" + item.entityFrom.city + "+" + item.entityFrom.state + "+" + item.entityFrom.zip;
+                <text>
+                    console.log("@item.entityFrom.name");
+                    markerlocation(@item.entityFrom.ID, "@address", "@item.entityFrom.name", "@item.entityFrom.description");
+
+                    var pathIn = [{ lat: @userLat, lng: @userLng }, { lat: @item.entityFrom.lat, lng: @item.entityFrom.lng }];
+
+                    var line = new google.maps.Polyline({
+                        path: pathIn,
+                        strokeColor: '#915EA6',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                </text>
+            }
+
+
+
+    </script>
+}
