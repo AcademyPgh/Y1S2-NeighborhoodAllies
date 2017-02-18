@@ -44,7 +44,7 @@ function initialize() {
 //Handles marker placement, dynamic zoom, and on click functionality.
 function markerlocation(organizationid, address, organization, organizationabout) {
     y = 0;
-    $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&organization=' + organization + '&organizationabout=' + organization + '&sensor=false', null, function (data) {
+    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&organization=' + organization + '&organizationabout=' + organization + '&sensor=false', null, function (data) {
         var addresslocation = data.results[0].geometry.location;
         var latlng = new google.maps.LatLng(addresslocation.lat, addresslocation.lng);
         var marker = new google.maps.Marker({
