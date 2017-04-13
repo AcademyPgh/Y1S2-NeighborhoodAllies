@@ -20,7 +20,7 @@ Meet our team:
 
 # Development Workflow
 
-We began building the Impact Map over the last two weeks of our session at Academy Pittsburgh: the first week was spent gathering requirements, planning and wireframing; subsequent weeks consist of building and testing the application.
+We began building the Impact Map over the last two weeks of our session at Academy Pittsburgh: the first week was spent gathering requirements, planning and wireframing; subsequent weeks consist of building and testing the application.  Impact Map was developed using C# / MVC with Entity Framework, Bootstrap, HTML, CSS and jQuery.
 
 # Credits
 
