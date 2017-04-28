@@ -1,7 +1,7 @@
 ﻿@model ImpactMap.Models.Category
 
 @{
-    ViewBag.Title = "Edit Tags";
+    ViewBag.Title = "Edit Organizational Funding Category";
 }
 
 
@@ -17,7 +17,7 @@
 
             <div class="subNav">
 
-                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Funding Catagories List"></i></a>
                 <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
             </div>
         </div>
@@ -25,42 +25,53 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-        </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label" })*@
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Organizational Funding Category</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Create an Organizational Funding Category"></i>
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", id="newCategory" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label" })*@
+
+
+                <div class="form-group">
+                    <label for="metrics" class="control-label">Add Metrics</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
+                    <br />
+                    <input type="text" id="metrics" class="form-control metric" placeholder="Add a New Metric" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                    <input name="newMetrics" id="newMetrics" type="hidden" />
+                </div>
+            </div>
+
+            <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
+            <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
+
+
+            <div class="addpadding">
+                <input type="submit" value="Save" class="button" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="categoryDisplay">
+                <h2>@Model.name</h2>
                 <div id="displayMetrics">
                     @{ if (Model.metrics.Count > 0)
                         {
                             foreach (var metric in Model.metrics)
                             {
-                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
+                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true" title="Remove this Metric"></i>@metric.name</span>
                             }
                         }
                     }
 
                 </div>
-
-            <div class="form-group">
-                <label class="control-label">Enter Metric</label>
-                <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
-                <input name="newMetrics" id="newMetrics" type="hidden" />
             </div>
+
         </div>
-
-        <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
-        <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
-
-
-        <div class="addpadding">
-            <input type="submit" value="Save" class="button" />
         </div>
        
-    </div>
 
 
     @section Scripts {
@@ -103,7 +114,11 @@
             };
 
 
+            function categoryDisplay() {
+                $("#categoryDisplay>h2").html($('#newCategory').val());
+            };
 
+            $('#newCategory').blur(categoryDisplay);
             $('#addMetric').click(addMetrics);
             $('.removeMetric').click(function () { removeMetrics(this.id) });
 

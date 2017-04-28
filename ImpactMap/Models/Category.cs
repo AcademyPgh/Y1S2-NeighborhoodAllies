@@ -9,7 +9,7 @@ namespace ImpactMap.Models
     public class Category
     {
         public int ID { get; set; }
-        [Display(Name = "Tag")]
+        [Display(Name = "Funding Category")]
         public string name { get; set; }
         public bool isBase { get; set; }
         //ID of the entity owning a user category, will be null if it's a base category

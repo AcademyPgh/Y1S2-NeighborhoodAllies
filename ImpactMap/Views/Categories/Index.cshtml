@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ImpactMap.Models.Category>
+﻿s@model IEnumerable<ImpactMap.Models.Category>
 
 @{
-    ViewBag.Title = "Tags List";
+    ViewBag.Title = "Organizational Funding Categories";
 }
 
 <div class="container">
@@ -20,6 +20,9 @@
 
     <table class="table">
         <tr>
+            <th>
+                Program Area
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>

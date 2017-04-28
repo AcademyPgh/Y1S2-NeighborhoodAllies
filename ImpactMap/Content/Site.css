@@ -14,7 +14,6 @@ body {
     color:white;
 }
 
-
 .account {
     background-image: url(/Content/Images/loginbg.jpg);
     min-height:100%;
@@ -519,6 +518,9 @@ td {
     font-weight: 400;
 }
 
+.form-control.metric{
+    display: inline-block;
+}
 
 .metricsTable tr:first-of-type th {
     color: white;
@@ -588,6 +590,10 @@ span.metricName:last-of-type:after {
 
 span.removeMetric {
     display: block;
+}
+
+#categoryDisplay>h2{
+    padding-left: 0;
 }
 
 #CatList ul {
