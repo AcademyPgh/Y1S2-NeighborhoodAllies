@@ -30,7 +30,7 @@
             <label class="control-label">Program Area</label> <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a program area"></i>
             <div id="baseCatList">
                 <select id="baseID" name="baseID" class="form-control"></select>
-                @*@Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")*@
+                
             </div>
         </div>
 
@@ -97,8 +97,9 @@
                     })
                 }
 
-                //This Works
+                
                 function addMetrics() {
+                   
                     if ($('#metrics').val() != "") {
                         newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
                         $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
@@ -110,13 +111,15 @@
                     }
                 };
 
-                //This works too!
+                
                 function removeMetrics(id) {
-                    var i = newMetrics.indexOf(id); //How do I know which one to remove since there is no id?
-                    newMetrics.splice(i, 1);
-                    $('#newMetrics').val(newMetrics.toString());
-                    $('#' + id).remove();
-                    console.log('Removed:' + newMetrics.toString());
+                    if (newMetrics.indexOf(id) != -1) {
+                        var i = newMetrics.indexOf(id);
+                        newMetrics.splice(i, 1);
+                        $('#newMetrics').val(newMetrics.toString());
+                        $('#' + id).remove();
+                        console.log('Removed:' + newMetrics.toString());
+                    }
                 };
 
                 function categoryDisplay() {
@@ -125,26 +128,14 @@
 
                 $('#newCategory').blur(categoryDisplay);
                 $('#addMetric').click(addMetrics);
+                $('.removeMetric').click(function () { removeMetrics(this.id) });
 
-
-                //TODO This does not work
-                $(document).ready(function () {
-                    $(window).keydown(function (event) {
-                        if (event.keyCode == 13) {
-                            event.preventDefault();
-                            $('#metrics').keypress(function (e) {
-                                var key = e.which;
-                                if (key == 13)  // the enter key code
-
-                                {
-                                    addMetrics();
-                                }
-
-                            });
-
-                        }
-                    })
-                })
+                $('#metrics').keypress(function (event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        addMetrics();
+                    }
+                });
 
                 $(load_baseCategories);
                 $(function () {

@@ -222,7 +222,6 @@
                 success: function (data) {
                     var html = '';
                     data.map(function (project) {
-                        //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
                         html += '<option value=' + project.ID + '>' + project.name + '</option>'
 
                     });
