@@ -1,4 +1,4 @@
-﻿@model ImpactMap.Models.Category
+﻿@model ImpactMap.Controllers.CategoryViewModel
 
 @{
     ViewBag.Title = "Edit Organizational Funding Category";
@@ -23,7 +23,7 @@
         </div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Category.ID)
 
 
         <div class="col-md-6">
@@ -31,16 +31,29 @@
             <div class="form-group">
                 <label class="control-label">Program Area</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a program area"></i>
                 <div id="baseCatList">
-                    <select id="baseID" name="baseID" class="form-control"></select>
-                   
+                    <select id="baseID" name="baseID" class="form-control">
+                        @foreach (var baseCat in Model.BaseCategories)
+                        {
+                            if (baseCat.ID == Model.Category.baseID)
+                            {
+                                <option value=@baseCat.ID id=@baseCat.ID selected>@baseCat.name</option>
+                            }
+
+                            else
+                            {
+                                <option value=@baseCat.ID id=@baseCat.ID>@baseCat.name</option>
+                            }
+                        }
+                       
+                    </select>
                 </div>
             </div>
 
 
             <div class="form-group">
                 <label class="control-label">Organizational Funding Category</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Create an Organizational Funding Category"></i>
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", id = "newCategory" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control", id = "newCategory" } })
+                @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
             </div>
 
 
@@ -64,11 +77,11 @@
         </div>
         <div class="col-md-6">
             <div id="categoryDisplay">
-                <h2>@Model.name</h2>
+                <h2>@Model.Category.name</h2>
                 <div id="displayMetrics">
-                    @{ if (Model.metrics.Count > 0)
+                    @{ if (Model.Category.metrics.Count > 0)
                         {
-                            foreach (var metric in Model.metrics)
+                            foreach (var metric in Model.Category.metrics)
                             {
                                 <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true" title="Remove this Metric"></i>@metric.name</span>
                             }
@@ -91,24 +104,24 @@
                 metricsToRemove = []; //Metrics to Remove - may include both new and old metrics
 
 
-                function load_baseCategories() {
-                    $.ajax({
-                        url: '/public/categories',
-                        type: 'GET',
-                        success: function (data) {
-                            data.map(function (baseCategory) {
-                                if (baseCategory.isBase == true) {
-                                    if (baseCategory.ID = category.baseID) {
-                                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + ' selected>' + category.name + '</option>')
-                                    }
-                                    else {
-                                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + '>' + category.name + '</option>')
-                                    }
-                                }
-                            });
-                        }
-                    })
-                }
+                //function load_baseCategories() {
+                //    $.ajax({
+                //        url: '/public/categories',
+                //        type: 'GET',
+                //        success: function (data) {
+                //            data.map(function (baseCategory) {
+                //                if (baseCategory.isBase == true) {
+                //                    if (baseCategory.ID = category.baseID) {
+                //                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + ' selected>' + category.name + '</option>')
+                //                    }
+                //                    else {
+                //                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + '>' + category.name + '</option>')
+                //                    }
+                //                }
+                //            });
+                //        }
+                //    })
+                //}
 
                 //This Works
                 function addMetrics() {

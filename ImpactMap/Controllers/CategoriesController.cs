@@ -164,13 +164,44 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.categories.Find(id);
-            if (category == null)
+            //Category category = db.categories.Find(id);
+            //if (category == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(category);
+
+
+            CategoryViewModel cvm = new CategoryViewModel();
+            Utils.Utility userUtil = new Utils.Utility();
+
+            //public Metric Metrics { get; set; }
+            //public Category Category { get; set; }
+            //public List<Category> BaseCategories { get; set; }
+            //public List<Entity> Entities { get; set; }
+
+            cvm.Category = db.categories.Find(id);
+            cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
+           
+            //ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
+            //ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
+    
+
+            if (cvm.Category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
-        }
+
+
+            return View(cvm);
+        
+
+
+
+
+
+
+    }
 
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -296,6 +327,7 @@ namespace ImpactMap.Controllers
     {
         public Metric Metrics { get; set; }
         public Category Category { get; set; }
+        public List<Category> BaseCategories { get; set; }
         public List<Entity> Entities { get; set; }
 
     }
