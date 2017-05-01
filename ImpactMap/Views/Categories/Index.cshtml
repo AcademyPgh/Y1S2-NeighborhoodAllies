@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ImpactMap.Models.Category>
+﻿@*@model IEnumerable<ImpactMap.Models.Category>*@
+@model ImpactMap.Controllers.CategoryViewModel
 
 @{
     ViewBag.Title = "Organizational Funding Categories";
@@ -18,36 +19,51 @@
 
     <hr />
 
-    <table class="table">
+    <table id="categoriesTable" class="table tablesorter">
+        <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+                Program Area
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.metrics)
-
+               Organizational Funding Tag
             </th>
-            <th>
+            <th class="noSortTH">
+                Metrics
+            </th>
+            <th class="noSortTH">
 
             </th>
         </tr>
-
-        @foreach (var item in Model)
-        {
-            if (item.isBase == true)
+            </thead>
+        <tbody>
+            @foreach (var category in Model.UserCategories)
             {
-                int baseID = item.ID;
-                <tr>
-                    <td>
-                        Base Tag: @item.name
-                    </td>
-                    <td>
 
-                        @if (item.metrics.Count != 0)
+                <tr>
+                    @foreach (var baseCat in Model.BaseCategories)
                     {
 
-                        foreach (var metric in item.metrics)
+                        if (baseCat.ID == category.baseID)
                         {
+                            <td class="tableBaseTag">
+                                @baseCat.name
+                            </td>
+                        }
+
+                    }
+
+                    <td>
+                        @category.name
+                    </td>
+
+                    <td>
+
+                        @if (category.metrics.Count != 0)
+                        {
+
+                            foreach (var metric in category.metrics)
+                            {
                                 <span class="metricName">@metric.name</span>
                             }
                         }
@@ -58,47 +74,25 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        @Html.ActionLink("Edit", "Edit", new { id = category.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = category.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = category.ID })
                     </td>
                 </tr>
-
-                foreach (var subItem in Model)
-                {
-                    if (subItem.baseID == baseID)
-                    {
-                        <tr>
-                            <td>
-                                <span class="glyphicon glyphicon-tag"></span>
-                                @subItem.name
-                            </td>
-                            <td>
-
-                                @if (subItem.metrics.Count != 0)
-                                {
-
-                                    foreach (var metric in subItem.metrics)
-                                    {
-                                        <span class="metricName">@metric.name</span>
-                                    }
-                                }
-                                else
-                                {
-                                    <span>No Metrics Available</span>
-                                }
-                            </td>
-
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = subItem.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = subItem.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = subItem.ID })
-                            </td>
-                        </tr>
-                    }
-                }
             }
-        }
+        </tbody>
 
+
+         
     </table>
    
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryTableSorter")
+    <script>
+        $(document).ready(function () {
+            $("#categoriesTable").tablesorter();
+        });
+    </script>
+}

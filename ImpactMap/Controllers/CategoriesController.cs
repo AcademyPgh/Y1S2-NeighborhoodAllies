@@ -28,16 +28,20 @@ namespace ImpactMap.Controllers
         {
             Utils.Utility userUtil = new Utils.Utility();
             int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
-            List<Category> userCategories = new List<Category>();
+
+            CategoryViewModel cvm = new CategoryViewModel();
+            cvm.UserCategories = new List<Category>();
+            //List<Category> userCategories = new List<Category>();
             foreach (var category in db.categories)
             {
-                if (category.isBase == true || category.entityID == entityID)
+                if (category.entityID == entityID)
                 {
-                    userCategories.Add(category);
+                    cvm.UserCategories.Add(category);
                 }
             }
+            cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
             //List<Category> categories = db.categories.ToList();
-            return View(userCategories);
+            return View(cvm);
         }
 
         // GET: Categories/Details/5
@@ -209,12 +213,14 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove)
+        public ActionResult Edit([Bind(Include = "ID,name")] int baseID, Category category, Metric metric, string metricsToAdd, string metricsToRemove)
         {
             if (ModelState.IsValid)
             {
                 Category cat = db.categories.Find(category.ID);
                 cat.name = category.name;
+
+                cat.baseID = baseID;
 
                 if (metricsToAdd != "")
                 {
@@ -327,6 +333,7 @@ namespace ImpactMap.Controllers
     {
         public Metric Metrics { get; set; }
         public Category Category { get; set; }
+        public List<Category> UserCategories { get; set; }
         public List<Category> BaseCategories { get; set; }
         public List<Entity> Entities { get; set; }
 
