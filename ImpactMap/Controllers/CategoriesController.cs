@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -42,6 +43,19 @@ namespace ImpactMap.Controllers
             cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
             //List<Category> categories = db.categories.ToList();
             return View(cvm);
+        }
+
+        [Authorize]
+        public ActionResult GetCategoryMetrics(int ID)
+        {
+            Category category = db.categories.Find(ID);
+            List<Metric> categoryMetrics = category.metrics.ToList();
+            var result = JsonConvert.SerializeObject(categoryMetrics, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
         }
 
         // GET: Categories/Details/5
@@ -168,29 +182,14 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Category category = db.categories.Find(id);
-            //if (category == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(category);
-
+           
 
             CategoryViewModel cvm = new CategoryViewModel();
             Utils.Utility userUtil = new Utils.Utility();
 
-            //public Metric Metrics { get; set; }
-            //public Category Category { get; set; }
-            //public List<Category> BaseCategories { get; set; }
-            //public List<Entity> Entities { get; set; }
-
             cvm.Category = db.categories.Find(id);
             cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
-           
-            //ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
-            //ivm.Projects = db.projects.Where(i => i.entity.ID == ivm.Investment.entityFrom.ID).ToList();
-    
-
+     
             if (cvm.Category == null)
             {
                 return HttpNotFound();

@@ -66,6 +66,8 @@ namespace ImpactMap.Controllers
             ViewBag.Tooltips = toolTips;
             //Utils.Utility gets the ID of the user that's logged in
             Utils.Utility userUtil = new Utils.Utility();
+            int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
+
             //Uses InvestmentViewModel which is at the bottom of this file
             InvestmentViewModel ivm = new InvestmentViewModel();
             
@@ -75,8 +77,15 @@ namespace ImpactMap.Controllers
             ivm.Investment = new Models.Investment();
             //sets the default investment date to the current date
             ivm.Investment.date = DateTime.Now;
-            //pulling in all the categories in the system
-            ivm.Categories = db.categories.ToList();
+            //pulling all of the current entity's categories
+            ivm.Categories = new List<Category>();
+            foreach (var category in db.categories)
+            {
+                if (category.entityID == entityID)
+                {
+                    ivm.Categories.Add(category);
+                }
+            }
             //entityFrom is retrieved based on the user that's logged in
             ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
             //projectsFrom is populated based on entityFrom's projects
