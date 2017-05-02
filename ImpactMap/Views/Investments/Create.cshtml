@@ -26,11 +26,11 @@
             <div class="col-md-4">
                 @*Date field*@
                 <div class="form-group">
-                  
-                        @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
-                        <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
-                        @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                   
+
+                    @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
+                    <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
+                    @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+
                     @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
                 </div>
                 @*Value field*@
@@ -45,7 +45,7 @@
 
                     @*In Kind checkbox - Marks the donation as inKind*@
                     <div class="inlineElement">
-                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label"})
+                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label" })
                         <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["inKind"]"></span>
                         <div class="checkbox">
                             @Html.EditorFor(model => model.Investment.isInKind)
@@ -59,7 +59,7 @@
 
                 @*ProjectFrom dropdown populates based on current entity, sent in via the Entities/Create GET action*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectFrom"]"></span>
 
                     <select name="projectFrom_ID" class="form-control">
@@ -74,7 +74,7 @@
                 </div>
                 @*EntityTo dropdown -- when this dropdown changes it sends its value to the javascript below to update the projectTo dropdown*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["entityTo"]"></span>
 
                     <select name="entityTo_ID" id="recipientSelect" class="form-control">
@@ -87,7 +87,7 @@
                 </div>
                 @*ProjectTo dropdown populates based on the EntityTo selected above*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectTo"]"></span>
                     <select name="projectTo_ID" id="ProjectToDropdown" class="form-control"></select>
 
@@ -106,7 +106,7 @@
                     @Html.EditorFor(model => model.Investment.description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Investment.description, "", new { @class = "text-danger" })
 
-                   
+
                 </div>
 
                 <div class="form-group">
@@ -116,44 +116,43 @@
                     <select id="categorySelect" class="form-control">
                         @foreach (var category in Model.Categories)
                         {
-                            <option id=@category.ID data-id=@category.ID value=@category.ID>@category.name</option>
+                            <option id=@category.ID data-id=@category.ID value=@category.ID data-name=@category.name>@category.name</option>
                         }
                     </select>
                     @*Hidden input field that javascript below adds stuff to, this is sent to the controller*@
-                    <input name="categories" id="categories" type="hidden" />                 
+                    <input name="categories" id="categories" type="hidden" />
                 </div>
 
                 <div class="form-group">
                     <label title="Choose the metrics you wish to add">Choose the Associated Metrics</label>
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
-                    <select id="metricSelect" class="form-control">
-                       
-                    </select>
-                    
-                    
-                    <input name="metrics" id="metrics" type="hidden" />   
+                    <select id="metricSelect" multiple class="form-control"></select>
+
+
+                    <input name="investmentMetrics" id="investmentMetrics" type="hidden" />
                 </div>
+
+                <input type="button" id="catMetButton" value="Add To Investment" class="button btn-default" />
 
 
             </div>
 
             <div class="col-md-4">
 
-                @*Categories list with dropdown menu*@
-               
+                <div id="displayCatMetrics"></div>
 
-                        <div class="form-group">
-                            <div>
-                                <input type="button" id="submitButton" value="Create" class="button btn-default" />
-                            </div>
-                        </div>
-
+                <div class="form-group">
+                    <div>
+                        <input type="button" id="submitButton" value="Create" class="button btn-default" />
                     </div>
                 </div>
 
+            </div>
+        </div>
 
 
-          
+
+
     }
 
 </div>
@@ -164,8 +163,9 @@
     <script>
         //selectedCategories is an array which is put into the hidden categories field and then sent to the controller
         selectedCategories = [];
+        selectedMetrics = [];
 
-        
+
 
         //function toggle_category(id) {
         //    // if it is not there
@@ -199,6 +199,80 @@
             $('#createInvestmentForm').submit();
         });
 
+        //When the Add To Investment Button is pressed, it displays the current category and metric choices
+        $('#catMetButton').click(displayCategories);
+
+        function displayCategories() {
+            categoryID = $('#categorySelect').val();
+
+            if (selectedCategories.indexOf(categoryID) == -1) {
+                $('#displayCatMetrics').append(
+                    '<div id="catID_' + categoryID + '">' +
+                    '<h4> <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name") + '</h4>' +
+                    '<ul></ul>' + 
+                    '</div>');
+                selectedCategories.push(categoryID);
+                console.log('selectedCategories = ' + selectedCategories);
+            }
+
+            displayMetrics(categoryID);
+        }
+
+        function displayMetrics(categoryID) {
+            metricsArray = $('#metricSelect').val();
+            $.each(metricsArray, function (key, metricValue) {
+                metricInformation = metricValue.split('.');
+                console.log(metricInformation);
+                if (selectedMetrics.indexOf(metricInformation[0]) == -1) {
+                    $('#displayCatMetrics div#catID_' + categoryID + ' ul').append(
+                       '<li class="removeMetric" id="metID_' + metricInformation[0] + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + metricInformation[1] + '</li>'
+                    )
+
+                    selectedMetrics.push(metricInformation[0]);
+                }
+                $('#investmentMetrics').val(selectedMetrics.toString());
+                $('.removeMetric').click(function () { removeMetrics(this.id) });
+                console.log(selectedMetrics);
+            })
+        };
+
+        //Removes individual Metrics
+        function removeMetrics(id) {
+            $metricID = id.split("_");
+            if (selectedMetrics.indexOf($metricID[1]) != -1) {
+                var i = selectedMetrics.indexOf($metricID[1]);
+                selectedMetrics.splice(i, 1);
+                $('#investmentMetrics').val(selectedMetrics.toString());
+                $('#' + id).remove();
+                console.log("Remove metric happened");
+            }
+        };
+
+        //Removes a category and all selected metrics
+        function removeCategory(id) {
+          
+            $('#' + id + ' .removeMetric').each(function () {
+                selectedMetrics.splice(this.id, 1);
+            });
+
+            $('#investmentMetrics').val(selectedMetrics.toString());
+ 
+            console.log('ID in ' + id);
+            $categoryID = id.split("_");
+            console.log('in index' + selectedCategories.indexOf($categoryID[1]));
+            if (selectedCategories.indexOf($categoryID[1]) != -1) {
+                var j = selectedCategories.indexOf($categoryID[1].toString());
+                selectedCategories.splice(j, 1);
+                $('#investmentCategories').val(selectedMetrics.toString());
+                console.log($('#' + id));
+                $('#' + id).remove();
+            }
+
+            console.log("Remove Category Happened");
+            
+            
+            };
+
         //This does an ajax call to populate the projectTo dropdown whenever the entityTo dropdown changes
         function updateProjectsOut() {
             $.ajax({
@@ -224,7 +298,7 @@
                 success: function (data) {
                     var html = '';
                     data.map(function (metric) {
-                        html += '<option value=' + metric.ID + '>' + metric.name + '</option>'
+                        html += '<option value="' + metric.ID + '.' + metric.name +'">' + metric.name + '</option>'
                     });
                     $('#metricSelect').html(html);
                 }
@@ -238,13 +312,17 @@
             addCurrencyMask();
         }
 
+        
+        $('.removeMetric').click(function () { removeMetrics(this.id) });
+        $('.removeCategory').click(function () { removeCategory(this.id) });
+
         function addCurrencyMask() {
             $('#Investment_amount').mask('000,000,000,000.00', { reverse: true });
         }
 
         $(initialize);
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip(); 
         })
     </script>
 }
