@@ -100,7 +100,7 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories, string investmentMetrics)
         {
             if (ModelState.IsValid)
             {
@@ -117,8 +117,8 @@ namespace ImpactMap.Controllers
                 investment.projectTo = db.projects.Find(projectTo_ID);
                 investment.projectFrom = db.projects.Find(projectFrom_ID);
                 
-                //"categories" is a comma-separated string of categories sent in via the forms 
-                //(a hidden input, using an ajax call to get the categories from the database)
+                //"selectedCategories" is a comma-separated string of categories sent in via the forms 
+                //(a hidden input)
                 //the string is split into an array, and then each one is added to the new investment's category list
                 if (categories != "" && categories != null)
                 {
@@ -126,6 +126,18 @@ namespace ImpactMap.Controllers
                     foreach (var id in categories.Split(','))
                     {
                         investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
+                    }
+                }
+
+                //"selectedMetrics" is a comma-separated string of categories sent in via the forms 
+                //(a hidden input)
+                //the string is split into an array, and then each one is added to the new investment's category list
+                if (investmentMetrics != "" && investmentMetrics != null)
+                {
+                    investment.metrics = new List<Metric>();
+                    foreach (var id in investmentMetrics.Split(','))
+                    {
+                        investment.metrics.Add(db.metrics.Find(Convert.ToInt32(id)));
                     }
                 }
 

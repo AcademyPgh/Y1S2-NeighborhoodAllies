@@ -143,7 +143,7 @@
 
                 <div class="form-group">
                     <div>
-                        <input type="button" id="submitButton" value="Create" class="button btn-default" />
+                        <input type="button" id="submitButton" value="Create Investment" class="button btn-default" />
                     </div>
                 </div>
 
@@ -183,12 +183,13 @@
 
             if (selectedCategories.indexOf(categoryID) == -1) {
                 $('#displayCatMetrics').append(
-                    '<div id="catID_' + categoryID + '" class="removeCategory">' +
-                    '<h4> <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name") + '</h4>' +
+                    '<div id="catID_' + categoryID + '">' +
+                    '<h4 class="removeCategory" data-catID ="' + categoryID + '" > <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name") + '</h4>' +
                     '<ul></ul>' + 
                     '</div>');
                 selectedCategories.push(categoryID);
-                $('.removeCategory').click(function () { removeCategory(this.id) });
+                $('#categories').val(selectedCategories.toString());
+                $('.removeCategory').click(function () { removeCategory($(this).attr('data-catID')) });
                 console.log('selectedCategories = ' + selectedCategories);
             }
 
@@ -202,7 +203,7 @@
                 console.log(metricInformation);
                 if (selectedMetrics.indexOf(metricInformation[0]) == -1) {
                     $('#displayCatMetrics div#catID_' + categoryID + ' ul').append(
-                       '<li class="removeMetric" id="metID_' + metricInformation[0] + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + metricInformation[1] + '</li>'
+                       '<li class="removeMetric" id="metID_' + metricInformation[0] + '" data-cat="' + categoryID + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + metricInformation[1] + '</li>'
                     )
 
                     selectedMetrics.push(metricInformation[0]);
@@ -226,23 +227,26 @@
         };
 
         //Removes a category and all selected metrics
-        function removeCategory(id) {
-          
-            $('#' + id + ' .removeMetric').each(function () {
-                selectedMetrics.splice(this.id, 1);
+        function removeCategory(catID) {
+            console.log('catID' + catID);
+            console.log('selected' + selectedCategories.toString());
+            $('*[data-cat="' + catID + '"]').each(function () {
+                metricID = this.id.split('_');
+                var i = selectedMetrics.indexOf(metricID[1].toString());
+                selectedMetrics.splice(i, 1);
             });
 
             $('#investmentMetrics').val(selectedMetrics.toString());
  
-            console.log('ID in ' + id);
-            $categoryID = id.split("_");
-            console.log('in index' + selectedCategories.indexOf($categoryID[1]));
-            if (selectedCategories.indexOf($categoryID[1]) != -1) {
-                var j = selectedCategories.indexOf($categoryID[1].toString());
+          
+           
+            console.log('in index' + selectedCategories.indexOf(catID));
+            if (selectedCategories.indexOf(catID) != -1) {
+                var j = selectedCategories.indexOf(catID.toString());
                 selectedCategories.splice(j, 1);
                 $('#investmentCategories').val(selectedMetrics.toString());
-                console.log($('#' + id));
-                $('#' + id).remove();
+                console.log($('#' + catID));
+                $('#catID_' + catID).remove();
             }
 
             console.log("Remove Category Happened");
@@ -291,7 +295,7 @@
 
         
         $('.removeMetric').click(function () { removeMetrics(this.id) });
-        $('.removeCategory').click(function () { removeCategory(this.id) });
+        $('.removeCategory').click(function () { $this = this; removeCategory($(this).attr('data-catID')) });
        
 
         function addCurrencyMask() {

@@ -51,7 +51,7 @@
                         if (category.isBase != true)
                         {
                         <label>@category.name</label>
-                            foreach (var metric in category.metrics)
+                            foreach (var metric in investment.metrics)
                             {
                             <div class="resultMetrics">
                                 <label>@metric.name</label>
@@ -69,6 +69,8 @@
                         }
                     }
                 }
+
+               
 
 
                 <input type="hidden" id="metricIDs" name="metricIDs" />
