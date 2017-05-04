@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201705041732573_initial.Designer.cs">
       <DependentUpon>201705041732573_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705041738276_tagsandcategories.cs" />
+    <Compile Include="Migrations\201705041738276_tagsandcategories.Designer.cs">
+      <DependentUpon>201705041738276_tagsandcategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -382,6 +386,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705041732573_initial.resx">
       <DependentUpon>201705041732573_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041738276_tagsandcategories.resx">
+      <DependentUpon>201705041738276_tagsandcategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

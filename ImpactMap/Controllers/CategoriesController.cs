@@ -154,19 +154,19 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                if (newMetrics != "")
-                {
-                    foreach (var metricName in newMetrics.Split(','))
-                    {
-                        metric.name = metricName;
-                        metric.categoryID = catID;
-                        db.metrics.Add(metric);
-                        db.SaveChanges();
-                        Category currentCategory = db.categories.Find(catID);
-                        currentCategory.metrics.Add(metric);
-                        db.SaveChanges();
-                    }
-                }
+                //if (newMetrics != "")
+                //{
+                //    foreach (var metricName in newMetrics.Split(','))
+                //    {
+                //        metric.name = metricName;
+                //        metric.categoryID = catID;
+                //        db.metrics.Add(metric);
+                //        db.SaveChanges();
+                //        Category currentCategory = db.categories.Find(catID);
+                //        currentCategory.metrics.Add(metric);
+                //        db.SaveChanges();
+                //    }
+                //}
 
                 return RedirectToAction("CreateBase", "Categories");
             }
@@ -212,7 +212,7 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "ID,name")] int baseID, Category category, Metric metric, string metricsToAdd, string metricsToRemove)
+        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove, int baseID)
         {
             if (ModelState.IsValid)
             {

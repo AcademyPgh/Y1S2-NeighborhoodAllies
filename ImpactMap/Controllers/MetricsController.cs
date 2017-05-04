@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -20,6 +21,30 @@ namespace ImpactMap.Controllers
         {
             return View(db.metrics.ToList());
         }
+
+
+        //POST Metrics/AddNewMetric
+        
+        [Authorize]
+        public ActionResult AddNewMetric(int categoryID, string metricName) { 
+        
+            Metric metric = new Metric();
+
+            metric.name = metricName;
+            Category currentCategory = db.categories.Find(categoryID);
+            currentCategory.metrics.Add(metric);
+            db.SaveChanges();
+
+            var result = JsonConvert.SerializeObject(metric, Formatting.None,
+                 new JsonSerializerSettings
+                 {
+                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                 });
+            return Content(result, "application/json");
+
+
+        }
+        
 
         // GET: Metrics/Details/5
         [Authorize]
