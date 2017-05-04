@@ -73,8 +73,10 @@
                                 <th> @category.name</th>
                                 <th></th>
                             </tr>
-                            @foreach (var metric in category.metrics)
+                            @foreach (var metric in investment.metrics)
                             {
+                                if (metric.categoryID == category.ID)
+                                {
                                 <tr>
                                     <th>@metric.name</th>
                                     <td>
@@ -89,11 +91,12 @@
 
                                     </td>
                                 </tr>
+                                }
 
 
                             }
 
-                      
+
             </table>
                         }
                     }

@@ -16,6 +16,7 @@
     <div>
         <hr />
         <table class="table">
+            <thead>x
             <tr class="dashtr">
                 <th>
                     @Html.DisplayNameFor(model => model.date)
@@ -43,10 +44,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.projectTo.report)
                 </th>
-                <th>
+                <th class="noSortTH">
                     @Html.DisplayNameFor(model => model.categories)
                 </th>
             </tr>
+            </thead>
 
             <tr class="dashtr">
                 <td>
@@ -112,3 +114,12 @@
     </div>
 
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryTableSorter")
+    <script>
+        $(document).ready(function () {
+            $("#investmentTable").tablesorter();
+        });
+    </script>
+}

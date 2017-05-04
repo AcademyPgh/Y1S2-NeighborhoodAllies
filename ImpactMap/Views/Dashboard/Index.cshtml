@@ -186,26 +186,28 @@
             @if (Model.projects.Count != 0)
             {
                 <table class="table">
-                    <tr class="dashtr">
-                        <th>
-                            Project Name
-                        </th>
-                        <th>
-                            Investor
-                        </th>
-                        <th>
-                            Investment Date
-                        </th>
-                        <th>
-                            Investment Value
-                        </th>
-                        <th>
-                            Report
-                        </th>
-                        <th>
-                            Details
-                        </th>
-                    </tr>
+                    <thead>
+                        <tr class="dashtr">
+                            <th>
+                                Project Name
+                            </th>
+                            <th>
+                                Investor
+                            </th>
+                            <th>
+                                Investment Date
+                            </th>
+                            <th>
+                                Investment Value
+                            </th>
+                            <th>
+                                Report
+                            </th>
+                            <th class="noSortTH">
+                                Details
+                            </th>
+                        </tr>
+                    </thead>
                     @{
                         foreach (var item in Model.projects.Take(5))
                         {
