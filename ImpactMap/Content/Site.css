@@ -10,10 +10,39 @@ body {
   
 }
 
+.investment-form{
+    position: relative;
+}
+
+.investment-form h4, #categoryDisplay h4{
+    padding-left: 0;
+    color: black;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.investment-form h5, #categoryDisplay h5{
+    font-weight: 600
+}
+
+.baseParagraph{
+    padding-left: 20px;
+}
+
+
+#displayCatMetrics, #categoryDisplay{
+    border: 1px gray solid;
+    border-radius: 5px;
+    padding:  5px 10px;
+}
+
+.no-bullets{
+    list-style: none;
+}
+
 .checkbox{
     color:white;
 }
-
 
 .account {
     background-image: url(/Content/Images/loginbg.jpg);
@@ -119,6 +148,15 @@ a href {
     border-radius: 5px;
 }
 
+/*.investment-form{
+    border-left: 2px gray solid;
+    height: 100%;
+}
+
+.investment-form:first-of-type {
+        border-left: none;
+ }*/
+
 .button:hover, a.button:hover, .button:active, a.button:active{
     background-color: #92C337;
     color:white;
@@ -127,6 +165,15 @@ a href {
 .buttonAlert{
     background-color: #d91b5c;
     margin-bottom: 25px;
+}
+
+.buttonGray{
+    background-color: gray;
+}
+
+.button-bottom{
+    position: absolute;
+    bottom: 0;
 }
 
 /*styles map*/
@@ -484,7 +531,6 @@ inputWLabel {
     
 }
 
-
 .dash h2 {
     border-bottom: none;
 }
@@ -519,6 +565,9 @@ td {
     font-weight: 400;
 }
 
+.form-control.metric{
+    display: inline-block;
+}
 
 .metricsTable tr:first-of-type th {
     color: white;
@@ -588,6 +637,10 @@ span.metricName:last-of-type:after {
 
 span.removeMetric {
     display: block;
+}
+
+#categoryDisplay>h2{
+    padding-left: 0;
 }
 
 #CatList ul {

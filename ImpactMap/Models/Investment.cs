@@ -32,6 +32,7 @@ namespace ImpactMap.Models
         public string volunteerHours { get; set; }
         [Display(Name = "Tags")]
         public virtual List<Category> categories { get; set; }
+        public virtual List<Metric> metrics { get; set; }
         public int? projectFrom_ID { get; set; }
         public int? projectTo_ID { get; set; }
         [Display(Name = "Project To")]

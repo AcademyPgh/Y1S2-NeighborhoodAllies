@@ -1,7 +1,7 @@
 ﻿@model ImpactMap.Controllers.CategoryViewModel
 
 @{
-    ViewBag.Title = "Create Tags";
+    ViewBag.Title = "Create Organizational Funding Categories";
 }
 
 <div class="container">
@@ -24,37 +24,51 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <label class="control-label">Select Base Tag:</label> <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a base tag to associate your custom user tag with."></i>
+
+        <div class="col-md-6">
+           <div class="form-group">
+            <label class="control-label">Program Area</label> <i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a program area"></i>
             <div id="baseCatList">
                 <select id="baseID" name="baseID" class="form-control"></select>
-                @*@Html.ActionLink("Add New Base Tag", "CreateBase", "Categories")*@
+                
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label">New Tag</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Give your new tag a name."></i>
-            @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label">Organizational Funding Category</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Create an Organizational Funding Category"></i>
+            @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control", id="newCategory"} })
             @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="form-group">
-            <div id="displayMetrics">
-            </div> 
-            <label for="metrics"class="control-label">Enter Metric</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this tag. For example, a metric for the tag Food Insecurity would be Meals Served."></i>
+            <label for="metrics"class="control-label">Add Metrics</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
             <br />
-            <input type="text" id="metrics"/> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+            <input type="text" id="metrics" placeholder="Add a New Metric" class="form-control metric"/> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
             <input name="newMetrics" id="newMetrics" type="hidden" />
 
         </div>
 
-
-        <div class="form-group">
-            <div>
-                <input type="submit" value="Create" class="button" />
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Create" class="button" />
+                </div>
             </div>
-        </div>
+
+            </div>
+
+        <div class="col-md-4">
+            <div id="categoryDisplay">
+                <h4>New Category/Metrics </h4>
+                <h5></h5>
+            <div id="displayMetrics">
+              
+            </div>
+            </div>
+            </div>
+
+
+       
     </div>
 
 
@@ -86,50 +100,47 @@
                     })
                 }
 
-                //This Works
+                
                 function addMetrics() {
+                   
                     if ($('#metrics').val() != "") {
                         newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
-                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
+                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val().replace(/ /g,"_") + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
                         $('#metrics').val("");//Clears the value of the input box to accept a new metric
                         $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
                         $('.removeMetric').click(function () { removeMetrics(this.id) });
                         console.log($('#newMetrics').val())
+                        $('#metrics').focus();
                     }
                 };
 
-                //This works too!
+                
                 function removeMetrics(id) {
-                    var i = newMetrics.indexOf(id); //How do I know which one to remove since there is no id?
-                    newMetrics.splice(i, 1);
-                    $('#newMetrics').val(newMetrics.toString());
-                    $('#' + id).remove();
-                    console.log('Removed:' + newMetrics.toString());
+                    idString = id.replace(/_/g, " ");
+                    if (newMetrics.indexOf(idString) != -1) {
+                        var i = newMetrics.indexOf(idString);
+                        newMetrics.splice(i, 1);
+                        $('#newMetrics').val(newMetrics.toString());
+                        console.log($('#' + id));
+                        $('#' + id).remove();
+                        console.log('Removed:' + newMetrics.toString());
+                    }
                 };
 
+                function categoryDisplay() {
+                    $("#categoryDisplay>h5").html('Category: ' +  $('#newCategory').val());
+                };
 
-
+                $('#newCategory').blur(categoryDisplay);
                 $('#addMetric').click(addMetrics);
+                $('.removeMetric').click(function () { removeMetrics(this.id) });
 
-
-                //TODO This does not work
-                $(document).ready(function () {
-                    $(window).keydown(function (event) {
-                        if (event.keyCode == 13) {
-                            event.preventDefault();
-                            $('#metrics').keypress(function (e) {
-                                var key = e.which;
-                                if (key == 13)  // the enter key code
-
-                                {
-                                    addMetrics();
-                                }
-
-                            });
-
-                        }
-                    })
-                })
+                $('#metrics').keypress(function (event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        addMetrics();
+                    }
+                });
 
                 $(load_baseCategories);
                 $(function () {

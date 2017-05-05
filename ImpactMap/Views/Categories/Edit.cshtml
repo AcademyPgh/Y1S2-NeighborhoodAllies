@@ -1,7 +1,7 @@
-﻿@model ImpactMap.Models.Category
+﻿@model ImpactMap.Controllers.CategoryViewModel
 
 @{
-    ViewBag.Title = "Edit Tags";
+    ViewBag.Title = "Edit Organizational Funding Category";
 }
 
 
@@ -17,119 +17,166 @@
 
             <div class="subNav">
 
-                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Tags List"></i></a>
+                <a href=@Url.Action("Index", "Categories")><i class="fa fa-list-alt" aria-hidden="true" title="Funding Catagories List"></i></a>
                 <a href=@Url.Action("Index", "Dashboard")><i class="fa fa-tachometer" aria-hidden="true" title="Return to Dashboard"></i></a>
             </div>
         </div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Category.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-        </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.metrics, htmlAttributes: new { @class = "control-label" })*@
-                <div id="displayMetrics">
-                    @{ if (Model.metrics.Count > 0)
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label class="control-label">Program Area</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Select a program area"></i>
+                <div id="baseCatList">
+                    <select id="baseID" name="baseID" class="form-control">
+                        @foreach (var baseCat in Model.BaseCategories)
                         {
-                            foreach (var metric in Model.metrics)
+                            if (baseCat.ID == Model.Category.baseID)
                             {
-                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true"></i>@metric.name</span>
+                                <option value=@baseCat.ID id=@baseCat.ID selected>@baseCat.name</option>
+                            }
+
+                            else
+                            {
+                                <option value=@baseCat.ID id=@baseCat.ID>@baseCat.name</option>
+                            }
+                        }
+                       
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Organizational Funding Category</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Create an Organizational Funding Category"></i>
+                @Html.EditorFor(model => model.Category.name, new { htmlAttributes = new { @class = "form-control", id = "newCategory" } })
+                @Html.ValidationMessageFor(model => model.Category.name, "", new { @class = "text-danger" })
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="metrics" class="control-label">Add Metrics</label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
+                <br />
+                <input type="text" id="metrics" class="form-control metric" placeholder="Add a New Metric" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                <input name="newMetrics" id="newMetrics" type="hidden" />
+            </div>
+
+
+            <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
+            <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
+
+
+            <div class="addpadding">
+                <input type="submit" value="Save" class="button" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="categoryDisplay">
+                <h2>@Model.Category.name</h2>
+                <div id="displayMetrics">
+                    @{ if (Model.Category.metrics.Count > 0)
+                        {
+                            foreach (var metric in Model.Category.metrics)
+                            {
+                                <span class="removeMetric" id="@metric.ID"><i class="fa fa-minus-circle" aria-hidden="true" title="Remove this Metric"></i>@metric.name</span>
                             }
                         }
                     }
 
                 </div>
-
-            <div class="form-group">
-                <label class="control-label">Enter Metric</label>
-                <input type="text" id="metrics" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
-                <input name="newMetrics" id="newMetrics" type="hidden" />
             </div>
+
         </div>
-
-        <input name="metricsToAdd" id="metricsToAdd" type="hidden" />
-        <input name="metricsToRemove" id="metricsToRemove" type="hidden" />
-
-
-        <div class="addpadding">
-            <input type="submit" value="Save" class="button" />
-        </div>
-       
     </div>
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
 
-        <script>
-            metricsToAdd = []; //Metrics to Add - Metrics not changed will not be added to this
-            metricsToRemove = []; //Metrics to Remove - may include both new and old metrics
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
-            //This Works
-            function addMetrics() {
-                if ($('#metrics').val() != "") {
-                    metricsToAdd.push($('#metrics').val()); //pushes the metric into the metricsToAdd array
-                    $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
-                    $('#metrics').val("");//Clears the value of the input box to accept a new metric
-                    $('#metricsToAdd').val(metricsToAdd.toString());//Converts newMetrics array to string and puts it into the hidden input
-                    $('.removeMetric').click(function () { removeMetrics(this.id) });
-                    console.log('Added: ' + metricsToAdd.toString());
-                    console.log($('#metricsToAdd').val());
-                }
-            };
-
-            //This works too!
-            function removeMetrics(id) {
-                if (metricsToAdd.indexOf(id) != -1) {
-                    var i = metricsToAdd.indexOf(id);
-                    metricsToAdd.splice(i, 1);
-                    $('#newMetrics').val(newMetrics.toString());
-                    console.log($('#newMetrics').val());
-                }
-
-                else {
-                    metricsToRemove.push(id);
-                    $('#metricsToRemove').val(metricsToRemove.toString());//Converts metricsToRemove array to string and puts it into the hidden input
-                    console.log($('#metricsToRemove').val());
-                }
-                $('#' + id).remove();
-                console.log('Removed:' + metricsToRemove.toString());
-                console.log('Added: ' + metricsToAdd.toString());
-            };
+            <script>
+                metricsToAdd = []; //Metrics to Add - Metrics not changed will not be added to this
+                metricsToRemove = []; //Metrics to Remove - may include both new and old metrics
 
 
+                //function load_baseCategories() {
+                //    $.ajax({
+                //        url: '/public/categories',
+                //        type: 'GET',
+                //        success: function (data) {
+                //            data.map(function (baseCategory) {
+                //                if (baseCategory.isBase == true) {
+                //                    if (baseCategory.ID = category.baseID) {
+                //                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + ' selected>' + category.name + '</option>')
+                //                    }
+                //                    else {
+                //                        $('#baseID').append('<option id="cat' + category.ID + '" value=' + category.ID + '>' + category.name + '</option>')
+                //                    }
+                //                }
+                //            });
+                //        }
+                //    })
+                //}
 
-            $('#addMetric').click(addMetrics);
-            $('.removeMetric').click(function () { removeMetrics(this.id) });
-
-
-            //TODO This does not work
-            $(document).ready(function () {
-                $(window).keydown(function (event) {
-                    if (event.keyCode == 13) {
-                        event.preventDefault();
-                        $('#metrics').keypress(function (e) {
-                            var key = e.which;
-                            if (key == 13)  // the enter key code
-
-                            {
-                                addMetrics();
-                            }
-
-                        });
-
+                //This Works
+                function addMetrics() {
+                    if ($('#metrics').val() != "") {
+                        metricsToAdd.push($('#metrics').val()); //pushes the metric into the metricsToAdd array
+                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
+                        $('#metrics').val("");//Clears the value of the input box to accept a new metric
+                        $('#metricsToAdd').val(metricsToAdd.toString());//Converts newMetrics array to string and puts it into the hidden input
+                        $('.removeMetric').click(function () { removeMetrics(this.id) });
+                        console.log('Added: ' + metricsToAdd.toString());
+                        console.log($('#metricsToAdd').val());
                     }
-                })
-            })
+                };
+
+                //This works too!
+                function removeMetrics(id) {
+                    if (metricsToAdd.indexOf(id) != -1) {
+                        var i = metricsToAdd.indexOf(id);
+                        metricsToAdd.splice(i, 1);
+                        $('#newMetrics').val(newMetrics.toString());
+                        console.log($('#newMetrics').val());
+                    }
+
+                    else {
+                        metricsToRemove.push(id);
+                        $('#metricsToRemove').val(metricsToRemove.toString());//Converts metricsToRemove array to string and puts it into the hidden input
+                        console.log($('#metricsToRemove').val());
+                    }
+                    $('#' + id).remove();
+                    console.log('Removed:' + metricsToRemove.toString());
+                    console.log('Added: ' + metricsToAdd.toString());
+                };
 
 
-        </script>
-    }
+                function categoryDisplay() {
+                    $("#categoryDisplay>h2").html($('#newCategory').val());
+                };
+
+                $('#newCategory').blur(categoryDisplay);
+                $('#addMetric').click(addMetrics);
+                $('.removeMetric').click(function () { removeMetrics(this.id) });
+
+
+                $('#metrics').keypress(function (event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        addMetrics();
+                    }
+                });
+
+                $(load_baseCategories);
+
+
+            </script>
+        }
                         }
 
 

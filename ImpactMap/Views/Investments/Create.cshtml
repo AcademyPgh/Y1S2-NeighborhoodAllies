@@ -23,14 +23,14 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="col-md-6">
+            <div class="col-md-4 investment-form">
                 @*Date field*@
                 <div class="form-group">
-                  
-                        @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
-                        <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
-                        @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-                   
+
+                    @Html.LabelFor(model => model.Investment.date, htmlAttributes: new { @class = "control-label" })
+                    <span class="fa fa-question-circle tts hint" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["date"]"></span>
+                    @Html.EditorFor(model => model.Investment.date, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+
                     @Html.ValidationMessageFor(model => model.Investment.date, "", new { @class = "text-danger" })
                 </div>
                 @*Value field*@
@@ -45,7 +45,7 @@
 
                     @*In Kind checkbox - Marks the donation as inKind*@
                     <div class="inlineElement">
-                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label"})
+                        @Html.LabelFor(model => model.Investment.isInKind, htmlAttributes: new { @class = "control-label" })
                         <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["inKind"]"></span>
                         <div class="checkbox">
                             @Html.EditorFor(model => model.Investment.isInKind)
@@ -59,14 +59,14 @@
 
                 @*ProjectFrom dropdown populates based on current entity, sent in via the Entities/Create GET action*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.projectFrom, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectFrom"]"></span>
 
                     <select name="projectFrom_ID" class="form-control">
                         <option value="0">No Project Selected</option>
                         @foreach (var project in Model.Projects)
                         {
-                            <option value=@project.ID>@project.name</option>
+                        <option value=@project.ID>@project.name</option>
                         }
                     </select>
                     @Html.ValidationMessageFor(model => model.Investment.projectFrom_ID, "", new { @class = "text-danger" })
@@ -74,28 +74,25 @@
                 </div>
                 @*EntityTo dropdown -- when this dropdown changes it sends its value to the javascript below to update the projectTo dropdown*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.entityTo, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["entityTo"]"></span>
 
                     <select name="entityTo_ID" id="recipientSelect" class="form-control">
                         @foreach (var entity in Model.Entities)
                         {
-                            <option value=@entity.ID>@entity.name</option>
+                        <option value=@entity.ID>@entity.name</option>
                         }
                     </select>
 
                 </div>
                 @*ProjectTo dropdown populates based on the EntityTo selected above*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label"})
+                    @Html.LabelFor(model => model.Investment.projectTo, htmlAttributes: new { @class = "control-label" })
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["projectTo"]"></span>
                     <select name="projectTo_ID" id="ProjectToDropdown" class="form-control"></select>
 
                 </div>
 
-            </div>
-
-            <div class="col-md-6">
 
                 @*Description input form*@
                 <div class="form-group">
@@ -109,128 +106,255 @@
 
                 </div>
 
-                @*Categories list with checkboxes - populates using an ajax call (load_categories) below*@
+            </div>
+
+            <div class="col-md-4 investment-form">
+                <div>
+                    <h4>Investment Categories and Metrics</h4>
+                    <p>Choose which categories and metrics you would like the recipient to report on. You may also add new metrics to the chosen category.</p>
+                    <p>A list of the categories and metrics you have selected will appear on the right.</p>
+                </div>
+                <hr />
                 <div class="form-group">
-                    <label title=@ViewBag.Tooltips["categories"]>Investment Tags</label>
+                    <label title=@ViewBag.Tooltips["categories"]>Choose an Organizational Funding Category</label>
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
-                    <div class="col-md-10">
-                        <div id="CatList">
-                            <ul></ul>
-                        </div>
-                        @*Hidden input field that javascript below adds stuff to, this is sent to the controller*@
-                        <input name="categories" id="categories" type="hidden" />
-                        @*@Html.ActionLink("Add New Tag", "Create", "Categories")*@
+                    <br />
+                    <select id="categorySelect" class="form-control">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option id=@category.ID data-id=@category.ID value=@category.ID data-name=@category.name.Replace(" ", "_")>@category.name</option>
+                        }
+                    </select>
+                    @*Hidden input field that javascript below adds stuff to, this is sent to the controller*@
+                    <input name="categories" id="categories" type="hidden" />
+                </div>
 
-
-                        <div class="form-group">
-                            <div>
-                                <input type="button" id="submitButton" value="Create" class="button btn-default" />
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="form-group">
+                    <label title="Choose the metrics you wish to add">Choose the Associated Metrics</label>
+                    <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
+                    <select id="metricSelect" multiple class="form-control"></select>
                 </div>
 
 
+                <input name="investmentMetrics" id="investmentMetrics" type="hidden" />
+          
+
+            <input type="button" id="catMetButton" value="Add Selections to Investment" class="button buttonGray" />
+
+                <hr />
+                @*This will allow the user to add a new metric on the spot*@
+               
+                <div class="form-group">
+                    <label for="metrics" class="control-label">Add A New Metric to the Selection List </label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
+                    <br />
+                    <input type="text" id="metrics" placeholder="Add a New Metric" class="form-control metric" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                </div>
+
+
+        </div>
+
+            <div class="col-md-4 investment-form">
+
+                <div id="displayCatMetrics">
+                    <h4>Report Categories and Metrics</h4>
+                    <p id="initialText"> You currently have no categories or metrics associated with this investment</p>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <input type="button" id="submitButton" value="Create Investment" class="button btn-default" />
+                    </div>
+                </div>
 
             </div>
-
-            <br />
         </div>
+
+
+
+
     }
 
-</div>
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jqueryMask")
-    <script>
-        //selectedCategories is an array which is put into the hidden categories field and then sent to the controller
-        selectedCategories = [];
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jqueryMask")
+        <script>
+            //selectedCategories is an array which is put into the hidden categories field and then sent to the controller
+            selectedCategories = [];
+            selectedMetrics = [];
 
-        //this ajax call goes over to public/usercategories and snatches up the categories in the system
-        //it then puts the ones that are NOT base categories into the categories checkbox area
-        //when they are clicked, it triggers toggle_category
-        function load_categories() {
-            $.ajax({
-                url: '/public/usercategories',
-                type: 'GET',
-                success: function (data) {
-                    //$('#CatList').html('<ul>');
-                    data.map(function (category) {
-                        if (!category.isBase) {
-                            $('#CatList ul').append('<li id="cat' + category.ID + '" data-id=' + category.ID + '><span id="catspan' + category.ID + '" class="fa fa-square-o"></span> ' + category.name + '</li>');
-                            $('#cat' + category.ID).click(function () { toggle_category(category.ID + "," + category.baseID); });
-                        }
-                    });
-                    //$('#CatList').append('</ul>');
+
+
+
+
+
+            //When the submit button is clicked, it submits the form
+            $('#submitButton').click(function () {
+                $('#createInvestmentForm').submit();
+            });
+
+            //When the Add To Investment Button is pressed, it displays the current category and metric choices
+            $('#catMetButton').click(displayCategories);
+
+            function add_NewMetric(categoryID, metricName) {
+                $.ajax({
+                    url: '/Metrics/AddNewMetric',
+                    data: {
+                        categoryID: categoryID,
+                        metricName: metricName,
+                        __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()
+                    },
+                    type: 'POST',
+                    success: function (data) {
+                        $('#metricSelect').prepend('<option value="' + data.ID + '.' + data.name + '">' + data.name + '</option>'),
+                        $('#displayCatMetrics div#catID_' + categoryID + ' ul').append(
+                       '<li class="removeMetric" id="metID_' + data.ID + '" data-cat="' + categoryID + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + data.name + '</li>'),
+                         $('#metrics').val("");
+
+                    },
+                    failure: function (data) {
+                        console.log(data);
+                    }
+                })
+            };
+
+            function displayCategories() {
+                categoryID = $('#categorySelect').val();
+
+                if (selectedCategories.indexOf(categoryID) == -1) {
+                    $('#initialText').remove();
+                    $('#displayCatMetrics').append(
+                        '<div id="catID_' + categoryID + '">' +
+                        '<h5 class="removeCategory" data-catID ="' + categoryID + '" > <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Category" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name").replace(/_/g, " ") + '</h5>' +
+                        '<ul class="no-bullets"></ul>' +
+                        '</div>');
+                    selectedCategories.push(categoryID);
+                    $('#categories').val(selectedCategories.toString());
+                    $('.removeCategory').click(function () { removeCategory($(this).attr('data-catID')) });
+                    console.log('selectedCategories = ' + selectedCategories);
                 }
-            })
-        }
 
-        function toggle_category(id) {
-            // if it is not there
-            // add the hidden input element
-            // add the checkmark to the category
-            if (!$('#catspan' + id).hasClass('fa fa-check-square-o')) {
-                selectedCategories.push(id);
-                $('#categories').val(selectedCategories.toString());
-                console.log($('#categories').val())
-                $('#catspan' + id).removeClass('fa fa-square-o');
-                $('#catspan' + id).addClass('fa fa-check-square-o');
+                displayMetrics(categoryID);
             }
-            else {
 
-                // if it is there
-                // remove the hidden input element
-                // remove the checkmark on the category
-                var i = selectedCategories.indexOf(id);
-                selectedCategories.splice(i, 1);
-                $('#categories').val(selectedCategories.toString());
-                $('#catadd' + id).remove();
-                $('#catspan' + id).removeClass('fa fa-check-square-o');
-                $('#catspan' + id).addClass('fa fa-square-o');
+            function displayMetrics(categoryID) {
+                metricsArray = $('#metricSelect').val();
+                $.each(metricsArray, function (key, metricValue) {
+                    metricInformation = metricValue.split('.');
+                    console.log(metricInformation);
+                    if (selectedMetrics.indexOf(metricInformation[0]) == -1) {
+                        $('#displayCatMetrics div#catID_' + categoryID + ' ul').append(
+                           '<li class="removeMetric" id="metID_' + metricInformation[0] + '" data-cat="' + categoryID + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + metricInformation[1] + '</li>'
+                        )
 
+                        selectedMetrics.push(metricInformation[0]);
+                    }
+                    $('#investmentMetrics').val(selectedMetrics.toString());
+                    $('.removeMetric').click(function () { removeMetrics(this.id) });
+                    console.log(selectedMetrics);
+                })
+            };
+
+            //Removes individual Metrics
+            function removeMetrics(id) {
+                $metricID = id.split("_");
+                if (selectedMetrics.indexOf($metricID[1]) != -1) {
+                    var i = selectedMetrics.indexOf($metricID[1]);
+                    selectedMetrics.splice(i, 1);
+                    $('#investmentMetrics').val(selectedMetrics.toString());
+                    $('#' + id).remove();
+                    console.log("Remove metric happened");
+                }
+            };
+
+            //Removes a category and all selected metrics
+            function removeCategory(catID) {
+                console.log('catID' + catID);
+                console.log('selected' + selectedCategories.toString());
+                $('*[data-cat="' + catID + '"]').each(function () {
+                    metricID = this.id.split('_');
+                    var i = selectedMetrics.indexOf(metricID[1].toString());
+                    selectedMetrics.splice(i, 1);
+                });
+
+                $('#investmentMetrics').val(selectedMetrics.toString());
+
+
+
+                console.log('in index' + selectedCategories.indexOf(catID));
+                if (selectedCategories.indexOf(catID) != -1) {
+                    var j = selectedCategories.indexOf(catID.toString());
+                    selectedCategories.splice(j, 1);
+                    $('#investmentCategories').val(selectedMetrics.toString());
+                    console.log($('#' + catID));
+                    $('#catID_' + catID).remove();
+                }
+
+                console.log("Remove Category Happened");
+
+
+            };
+
+            //This does an ajax call to populate the projectTo dropdown whenever the entityTo dropdown changes
+            function updateProjectsOut() {
+                $.ajax({
+                    url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
+                    type: 'get',
+                    success: function (data) {
+                        var html = '';
+                        data.map(function (project) {
+                            //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
+                            html += '<option value=' + project.ID + '>' + project.name + '</option>'
+                        });
+                        $('#ProjectToDropdown').html(html);
+                    }
+                });
+            };
+            $('#recipientSelect').change(updateProjectsOut);
+
+            //This does an ajax call to populate the metrics dropdown whenever the category dropdown changes
+            function updateCategoryMetrics() {
+                $.ajax({
+                    url: '/Categories/GetCategoryMetrics/' + $('#categorySelect').val() + '/',
+                    type: 'get',
+                    success: function (data) {
+                        var html = '';
+                        data.map(function (metric) {
+                            html += '<option value="' + metric.ID + '.' + metric.name + '">' + metric.name + '</option>'
+                        });
+                        $('#metricSelect').html(html);
+                    }
+                });
+            };
+            $('#categorySelect').change(updateCategoryMetrics);
+
+            //These functions need to run on when the page loads, so they're collected into one function and then run on page load
+            function initialize() {
+                updateCategoryMetrics();
+                updateProjectsOut();
+                addCurrencyMask();
             }
-        }
 
 
-        //When the submit button is clicked, it
-        $('#submitButton').click(function () {
-            $('#createInvestmentForm').submit();
-        });
-
-        //This does an ajax call to populate the projectTo dropdown whenever the entityTo dropdown changes
-        function updateProjectsOut() {
-            $.ajax({
-                url: '/Entities/GetProjectsOut/' + $('#recipientSelect').val() + '/',
-                type: 'get',
-                success: function (data) {
-                    var html = '';
-                    data.map(function (project) {
-                        //html += '<li>' + replayEvent.DisplayName + '<span data-id=' + replayEvent.Id + ' class="DeleteButton btn btn-primary">Delete</span></li>'
-                        html += '<option value=' + project.ID + '>' + project.name + '</option>'
-                    });
-                    $('#ProjectToDropdown').html(html);
+            $('.removeMetric').click(function () { removeMetrics(this.id) });
+            $('.removeCategory').click(function () { $this = this; removeCategory($(this).attr('data-catID')) });
+            $('#addMetric').click(() => { add_NewMetric(parseInt($('#categorySelect').val()), $('#metrics').val()) });
+            $('#metrics').keypress(function (event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    add_NewMetric(parseInt($('#categorySelect').val()), $('#metrics').val());
                 }
             });
-        };
-        $('#recipientSelect').change(updateProjectsOut);
 
-        //These functions need to run on when the page loads, so they're collected into one function and then run on page load
-        function initialize() {
-            load_categories();
-            updateProjectsOut();
-            addCurrencyMask();
-        }
 
-        function addCurrencyMask() {
-            $('#Investment_amount').mask('000,000,000,000.00', { reverse: true });
-        }
+            function addCurrencyMask() {
+                $('#Investment_amount').mask('000,000,000,000.00', { reverse: true });
+            }
 
-        $(initialize);
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-}
+            $(initialize);
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+        </script>
+    }

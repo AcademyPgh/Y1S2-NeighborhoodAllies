@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ImpactMap.Models;
+using Newtonsoft.Json;
 
 namespace ImpactMap.Controllers
 {
@@ -28,16 +29,33 @@ namespace ImpactMap.Controllers
         {
             Utils.Utility userUtil = new Utils.Utility();
             int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
-            List<Category> userCategories = new List<Category>();
+
+            CategoryViewModel cvm = new CategoryViewModel();
+            cvm.UserCategories = new List<Category>();
+            //List<Category> userCategories = new List<Category>();
             foreach (var category in db.categories)
             {
-                if (category.isBase == true || category.entityID == entityID)
+                if (category.entityID == entityID)
                 {
-                    userCategories.Add(category);
+                    cvm.UserCategories.Add(category);
                 }
             }
+            cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
             //List<Category> categories = db.categories.ToList();
-            return View(userCategories);
+            return View(cvm);
+        }
+
+        [Authorize]
+        public ActionResult GetCategoryMetrics(int ID)
+        {
+            Category category = db.categories.Find(ID);
+            List<Metric> categoryMetrics = category.metrics.ToList();
+            var result = JsonConvert.SerializeObject(categoryMetrics, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+            return Content(result, "application/json");
         }
 
         // GET: Categories/Details/5
@@ -136,19 +154,19 @@ namespace ImpactMap.Controllers
                 db.SaveChanges();
                 var catID = category.ID;
 
-                if (newMetrics != "")
-                {
-                    foreach (var metricName in newMetrics.Split(','))
-                    {
-                        metric.name = metricName;
-                        metric.categoryID = catID;
-                        db.metrics.Add(metric);
-                        db.SaveChanges();
-                        Category currentCategory = db.categories.Find(catID);
-                        currentCategory.metrics.Add(metric);
-                        db.SaveChanges();
-                    }
-                }
+                //if (newMetrics != "")
+                //{
+                //    foreach (var metricName in newMetrics.Split(','))
+                //    {
+                //        metric.name = metricName;
+                //        metric.categoryID = catID;
+                //        db.metrics.Add(metric);
+                //        db.SaveChanges();
+                //        Category currentCategory = db.categories.Find(catID);
+                //        currentCategory.metrics.Add(metric);
+                //        db.SaveChanges();
+                //    }
+                //}
 
                 return RedirectToAction("CreateBase", "Categories");
             }
@@ -164,13 +182,29 @@ namespace ImpactMap.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.categories.Find(id);
-            if (category == null)
+           
+
+            CategoryViewModel cvm = new CategoryViewModel();
+            Utils.Utility userUtil = new Utils.Utility();
+
+            cvm.Category = db.categories.Find(id);
+            cvm.BaseCategories = db.categories.Where(bcat => bcat.isBase == true).ToList();
+     
+            if (cvm.Category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
-        }
+
+
+            return View(cvm);
+        
+
+
+
+
+
+
+    }
 
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -178,12 +212,14 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove)
+        public ActionResult Edit([Bind(Include = "ID,name")] Category category, Metric metric, string metricsToAdd, string metricsToRemove, int baseID)
         {
             if (ModelState.IsValid)
             {
                 Category cat = db.categories.Find(category.ID);
                 cat.name = category.name;
+
+                cat.baseID = baseID;
 
                 if (metricsToAdd != "")
                 {
@@ -296,6 +332,8 @@ namespace ImpactMap.Controllers
     {
         public Metric Metrics { get; set; }
         public Category Category { get; set; }
+        public List<Category> UserCategories { get; set; }
+        public List<Category> BaseCategories { get; set; }
         public List<Entity> Entities { get; set; }
 
     }

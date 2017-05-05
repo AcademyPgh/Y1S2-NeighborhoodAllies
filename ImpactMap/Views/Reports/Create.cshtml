@@ -48,9 +48,11 @@
                 {
                     foreach (var category in investment.categories)
                     {
-                        <label>@category.name</label>
-                        foreach (var metric in category.metrics)
+                        if (category.isBase != true)
                         {
+                        <label>@category.name</label>
+                            foreach (var metric in investment.metrics)
+                            {
                             <div class="resultMetrics">
                                 <label>@metric.name</label>
                                 <br />
@@ -61,11 +63,14 @@
                             <script>
                                 idArray.push(@metric.ID)
                             </script>
-                        }
+                            }
 
                         <hr />
+                        }
                     }
                 }
+
+               
 
 
                 <input type="hidden" id="metricIDs" name="metricIDs" />
@@ -73,7 +78,7 @@
 
                 <div class="form-group">
                     <div>
-                        <input type="button" id="saveButton" value="Save Report" class="button btn btn-default" />
+                        @*<input type="button" id="saveButton" value="Save Report" class="button btn btn-default" />*@
                         <input type="button" id="submitButton" value="Submit Report" class="button btn btn-default" />
                     </div>
                 </div>

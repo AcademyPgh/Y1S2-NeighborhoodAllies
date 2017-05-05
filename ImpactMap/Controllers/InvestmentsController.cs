@@ -66,6 +66,8 @@ namespace ImpactMap.Controllers
             ViewBag.Tooltips = toolTips;
             //Utils.Utility gets the ID of the user that's logged in
             Utils.Utility userUtil = new Utils.Utility();
+            int entityID = db.users.Find(userUtil.UserID(User)).entity.ID;
+
             //Uses InvestmentViewModel which is at the bottom of this file
             InvestmentViewModel ivm = new InvestmentViewModel();
             
@@ -75,8 +77,15 @@ namespace ImpactMap.Controllers
             ivm.Investment = new Models.Investment();
             //sets the default investment date to the current date
             ivm.Investment.date = DateTime.Now;
-            //pulling in all the categories in the system
-            ivm.Categories = db.categories.ToList();
+            //pulling all of the current entity's categories
+            ivm.Categories = new List<Category>();
+            foreach (var category in db.categories)
+            {
+                if (category.entityID == entityID)
+                {
+                    ivm.Categories.Add(category);
+                }
+            }
             //entityFrom is retrieved based on the user that's logged in
             ivm.Investment.entityFrom = db.users.Find(userUtil.UserID(User)).entity;
             //projectsFrom is populated based on entityFrom's projects
@@ -91,7 +100,7 @@ namespace ImpactMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories)
+        public ActionResult Create([Bind(Include = "ID,amount,entityFrom_ID,entityTo_ID,description,date,isInKind, projectFrom_ID,projectTo_ID")] Investment investment, int entityTo_ID, int projectTo_ID, int projectFrom_ID, string categories, string investmentMetrics)
         {
             if (ModelState.IsValid)
             {
@@ -108,8 +117,8 @@ namespace ImpactMap.Controllers
                 investment.projectTo = db.projects.Find(projectTo_ID);
                 investment.projectFrom = db.projects.Find(projectFrom_ID);
                 
-                //"categories" is a comma-separated string of categories sent in via the forms 
-                //(a hidden input, using an ajax call to get the categories from the database)
+                //"selectedCategories" is a comma-separated string of categories sent in via the forms 
+                //(a hidden input)
                 //the string is split into an array, and then each one is added to the new investment's category list
                 if (categories != "" && categories != null)
                 {
@@ -117,6 +126,18 @@ namespace ImpactMap.Controllers
                     foreach (var id in categories.Split(','))
                     {
                         investment.categories.Add(db.categories.Find(Convert.ToInt32(id)));
+                    }
+                }
+
+                //"selectedMetrics" is a comma-separated string of categories sent in via the forms 
+                //(a hidden input)
+                //the string is split into an array, and then each one is added to the new investment's category list
+                if (investmentMetrics != "" && investmentMetrics != null)
+                {
+                    investment.metrics = new List<Metric>();
+                    foreach (var id in investmentMetrics.Split(','))
+                    {
+                        investment.metrics.Add(db.metrics.Find(Convert.ToInt32(id)));
                     }
                 }
 
