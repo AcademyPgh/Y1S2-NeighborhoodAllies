@@ -57,10 +57,13 @@
 
             </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div id="categoryDisplay">
-                <h2></h2>
-            <div id="displayMetrics"></div>
+                <h4>New Category/Metrics </h4>
+                <h5></h5>
+            <div id="displayMetrics">
+              
+            </div>
             </div>
             </div>
 
@@ -102,7 +105,7 @@
                    
                     if ($('#metrics').val() != "") {
                         newMetrics.push($('#metrics').val()); //pushes the metric into the newMetrics array
-                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val() + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
+                        $('#displayMetrics').append('<span class="removeMetric" id="' + $('#metrics').val().replace(/ /g,"_") + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + $('#metrics').val() + '</span>');//Adds the new metric to the display
                         $('#metrics').val("");//Clears the value of the input box to accept a new metric
                         $('#newMetrics').val(newMetrics.toString());//Converts newMetrics array to string and puts it into the hidden input
                         $('.removeMetric').click(function () { removeMetrics(this.id) });
@@ -113,17 +116,19 @@
 
                 
                 function removeMetrics(id) {
-                    if (newMetrics.indexOf(id) != -1) {
-                        var i = newMetrics.indexOf(id);
+                    idString = id.replace(/_/g, " ");
+                    if (newMetrics.indexOf(idString) != -1) {
+                        var i = newMetrics.indexOf(idString);
                         newMetrics.splice(i, 1);
                         $('#newMetrics').val(newMetrics.toString());
+                        console.log($('#' + id));
                         $('#' + id).remove();
                         console.log('Removed:' + newMetrics.toString());
                     }
                 };
 
                 function categoryDisplay() {
-                    $("#categoryDisplay>h2").html($('#newCategory').val());
+                    $("#categoryDisplay>h5").html('Category: ' +  $('#newCategory').val());
                 };
 
                 $('#newCategory').blur(categoryDisplay);

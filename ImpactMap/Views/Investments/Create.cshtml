@@ -116,7 +116,7 @@
                 </div>
                 <hr />
                 <div class="form-group">
-                    <label title=@ViewBag.Tooltips["categories"]>Choose a Category</label>
+                    <label title=@ViewBag.Tooltips["categories"]>Choose an Organizational Funding Category</label>
                     <span class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="@ViewBag.Tooltips["categories"]"></span>
                     <br />
                     <select id="categorySelect" class="form-control">
@@ -135,18 +135,20 @@
                     <select id="metricSelect" multiple class="form-control"></select>
                 </div>
 
-                @*This will allow the user to add a new metric on the spot*@
-                <div class="form-group">
-                    <label for="metrics" class="control-label">Add A New Metric </label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
-                    <br />
-                    <input type="text" id="metrics" placeholder="Add a New Metric" class="form-control metric" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
-                </div>
-
 
                 <input name="investmentMetrics" id="investmentMetrics" type="hidden" />
           
 
-            <input type="button" id="catMetButton" value="Add Categories/Metrics" class="button buttonGray" />
+            <input type="button" id="catMetButton" value="Add Selections to Investment" class="button buttonGray" />
+
+                <hr />
+                @*This will allow the user to add a new metric on the spot*@
+               
+                <div class="form-group">
+                    <label for="metrics" class="control-label">Add A New Metric to the Selection List </label><i class="fa fa-question-circle tts" data-toggle="tooltip" data-placement="right" title="Add relevant metrics to this funding category. For example, a metric for the funding category 'Food Insecurity' would be 'Number of Meals Served.'"></i>
+                    <br />
+                    <input type="text" id="metrics" placeholder="Add a New Metric" class="form-control metric" /> <i class="fa fa-plus-circle" aria-hidden="true" id="addMetric"></i><br>
+                </div>
 
 
         </div>
@@ -205,12 +207,10 @@
                     },
                     type: 'POST',
                     success: function (data) {
-                        $('#metricSelect').prepend('<option value="' + data.ID + '_' + data.name + '">' + data.name + '</option>'),
+                        $('#metricSelect').prepend('<option value="' + data.ID + '.' + data.name + '">' + data.name + '</option>'),
                         $('#displayCatMetrics div#catID_' + categoryID + ' ul').append(
                        '<li class="removeMetric" id="metID_' + data.ID + '" data-cat="' + categoryID + '"><i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Metric"></i>' + data.name + '</li>'),
-                         $('#metrics').val(""),
-                        selectedMetrics.push(data.name),
-                        $('#investmentMetrics').val(selectedMetrics.toString());
+                         $('#metrics').val("");
 
                     },
                     failure: function (data) {
@@ -332,6 +332,7 @@
             //These functions need to run on when the page loads, so they're collected into one function and then run on page load
             function initialize() {
                 updateCategoryMetrics();
+                updateProjectsOut();
                 addCurrencyMask();
             }
 

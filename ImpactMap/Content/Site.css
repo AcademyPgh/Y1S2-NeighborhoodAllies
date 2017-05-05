@@ -14,14 +14,14 @@ body {
     position: relative;
 }
 
-.investment-form h4{
+.investment-form h4, #categoryDisplay h4{
     padding-left: 0;
     color: black;
     font-weight: 600;
     padding-bottom: 10px;
 }
 
-.investment-form h5{
+.investment-form h5, #categoryDisplay h5{
     font-weight: 600
 }
 
@@ -30,7 +30,7 @@ body {
 }
 
 
-#displayCatMetrics{
+#displayCatMetrics, #categoryDisplay{
     border: 1px gray solid;
     border-radius: 5px;
     padding:  5px 10px;
