@@ -122,7 +122,7 @@
                     <select id="categorySelect" class="form-control">
                         @foreach (var category in Model.Categories)
                         {
-                            <option id=@category.ID data-id=@category.ID value=@category.ID data-name=@category.name>@category.name</option>
+                            <option id=@category.ID data-id=@category.ID value=@category.ID data-name=@category.name.Replace(" ", "_")>@category.name</option>
                         }
                     </select>
                     @*Hidden input field that javascript below adds stuff to, this is sent to the controller*@
@@ -226,7 +226,7 @@
                     $('#initialText').remove();
                     $('#displayCatMetrics').append(
                         '<div id="catID_' + categoryID + '">' +
-                        '<h5 class="removeCategory" data-catID ="' + categoryID + '" > <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Category" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name") + '</h5>' +
+                        '<h5 class="removeCategory" data-catID ="' + categoryID + '" > <i class="fa fa-minus-circle" aria-hidden="true" title="Click to Remove this Category" class="removeCategory"></i>' + $('#categorySelect option:selected').attr("data-name").replace(/_/g, " ") + '</h5>' +
                         '<ul class="no-bullets"></ul>' +
                         '</div>');
                     selectedCategories.push(categoryID);
