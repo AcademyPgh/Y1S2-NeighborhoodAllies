@@ -7,132 +7,132 @@ namespace ImpactMap.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Categories",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        isBase = c.Boolean(nullable: false),
-                        entityID = c.Int(),
-                        baseID = c.Int(),
-                        Investment_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Investments", t => t.Investment_ID)
-                .Index(t => t.Investment_ID);
+            //CreateTable(
+            //    "dbo.Categories",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            name = c.String(),
+            //            isBase = c.Boolean(nullable: false),
+            //            entityID = c.Int(),
+            //            baseID = c.Int(),
+            //            Investment_ID = c.Int(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Investments", t => t.Investment_ID)
+            //    .Index(t => t.Investment_ID);
             
-            CreateTable(
-                "dbo.Metrics",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        categoryID = c.Int(nullable: false),
-                        name = c.String(),
-                        description = c.String(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Categories", t => t.categoryID, cascadeDelete: true)
-                .Index(t => t.categoryID);
+            //CreateTable(
+            //    "dbo.Metrics",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            categoryID = c.Int(nullable: false),
+            //            name = c.String(),
+            //            description = c.String(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Categories", t => t.categoryID, cascadeDelete: true)
+            //    .Index(t => t.categoryID);
             
-            CreateTable(
-                "dbo.Entities",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        description = c.String(),
-                        logoURL = c.String(),
-                        address1 = c.String(),
-                        address2 = c.String(),
-                        city = c.String(),
-                        state = c.String(),
-                        zip = c.String(),
-                        lat = c.String(),
-                        lng = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
+            //CreateTable(
+            //    "dbo.Entities",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            name = c.String(),
+            //            description = c.String(),
+            //            logoURL = c.String(),
+            //            address1 = c.String(),
+            //            address2 = c.String(),
+            //            city = c.String(),
+            //            state = c.String(),
+            //            zip = c.String(),
+            //            lat = c.String(),
+            //            lng = c.String(),
+            //        })
+            //    .PrimaryKey(t => t.ID);
             
-            CreateTable(
-                "dbo.Investments",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        amount = c.String(nullable: false),
-                        entityFrom_ID = c.Int(),
-                        entityTo_ID = c.Int(),
-                        date = c.DateTime(nullable: false),
-                        isInKind = c.Boolean(nullable: false),
-                        volunteerHours = c.String(),
-                        projectFrom_ID = c.Int(),
-                        projectTo_ID = c.Int(),
-                        description = c.String(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Entities", t => t.entityFrom_ID)
-                .ForeignKey("dbo.Entities", t => t.entityTo_ID)
-                .ForeignKey("dbo.Projects", t => t.projectFrom_ID)
-                .ForeignKey("dbo.Projects", t => t.projectTo_ID)
-                .Index(t => t.entityFrom_ID)
-                .Index(t => t.entityTo_ID)
-                .Index(t => t.projectFrom_ID)
-                .Index(t => t.projectTo_ID);
+            //CreateTable(
+            //    "dbo.Investments",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            amount = c.String(nullable: false),
+            //            entityFrom_ID = c.Int(),
+            //            entityTo_ID = c.Int(),
+            //            date = c.DateTime(nullable: false),
+            //            isInKind = c.Boolean(nullable: false),
+            //            volunteerHours = c.String(),
+            //            projectFrom_ID = c.Int(),
+            //            projectTo_ID = c.Int(),
+            //            description = c.String(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Entities", t => t.entityFrom_ID)
+            //    .ForeignKey("dbo.Entities", t => t.entityTo_ID)
+            //    .ForeignKey("dbo.Projects", t => t.projectFrom_ID)
+            //    .ForeignKey("dbo.Projects", t => t.projectTo_ID)
+            //    .Index(t => t.entityFrom_ID)
+            //    .Index(t => t.entityTo_ID)
+            //    .Index(t => t.projectFrom_ID)
+            //    .Index(t => t.projectTo_ID);
             
-            CreateTable(
-                "dbo.Projects",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        description = c.String(),
-                        entity_ID = c.Int(),
-                        report_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Entities", t => t.entity_ID)
-                .ForeignKey("dbo.Reports", t => t.report_ID)
-                .Index(t => t.entity_ID)
-                .Index(t => t.report_ID);
+            //CreateTable(
+            //    "dbo.Projects",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            name = c.String(),
+            //            description = c.String(),
+            //            entity_ID = c.Int(),
+            //            report_ID = c.Int(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Entities", t => t.entity_ID)
+            //    .ForeignKey("dbo.Reports", t => t.report_ID)
+            //    .Index(t => t.entity_ID)
+            //    .Index(t => t.report_ID);
             
-            CreateTable(
-                "dbo.Reports",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        name = c.String(),
-                        completed = c.Boolean(nullable: false),
-                        reportText = c.String(),
-                        dueDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
+            //CreateTable(
+            //    "dbo.Reports",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            name = c.String(),
+            //            completed = c.Boolean(nullable: false),
+            //            reportText = c.String(),
+            //            dueDate = c.DateTime(nullable: false),
+            //        })
+            //    .PrimaryKey(t => t.ID);
             
-            CreateTable(
-                "dbo.MetricResults",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        resultText = c.String(),
-                        metric_ID = c.Int(),
-                        report_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Metrics", t => t.metric_ID)
-                .ForeignKey("dbo.Reports", t => t.report_ID)
-                .Index(t => t.metric_ID)
-                .Index(t => t.report_ID);
+            //CreateTable(
+            //    "dbo.MetricResults",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            resultText = c.String(),
+            //            metric_ID = c.Int(),
+            //            report_ID = c.Int(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Metrics", t => t.metric_ID)
+            //    .ForeignKey("dbo.Reports", t => t.report_ID)
+            //    .Index(t => t.metric_ID)
+            //    .Index(t => t.report_ID);
             
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        userModelGuid = c.Guid(nullable: false),
-                        userModelName = c.String(),
-                        entity_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Entities", t => t.entity_ID)
-                .Index(t => t.entity_ID);
+            //CreateTable(
+            //    "dbo.Users",
+            //    c => new
+            //        {
+            //            ID = c.Int(nullable: false, identity: true),
+            //            userModelGuid = c.Guid(nullable: false),
+            //            userModelName = c.String(),
+            //            entity_ID = c.Int(),
+            //        })
+            //    .PrimaryKey(t => t.ID)
+            //    .ForeignKey("dbo.Entities", t => t.entity_ID)
+            //    .Index(t => t.entity_ID);
             
         }
         
